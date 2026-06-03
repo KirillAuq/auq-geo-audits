@@ -1,0 +1,293 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treasury4 GEO Audit, brand-only, by AUQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-text: #000000; --c-text-dark: #ffffff; --c-bg: #ffffff; --c-dark: #010120;
+    --c-magenta: #ef2cc1; --c-orange: #fc4c02; --c-lavender: #bdbbff;
+    --c-border-light: rgba(0, 0, 0, 0.08); --c-border-dark: rgba(255, 255, 255, 0.12);
+    --c-fill-light: rgba(0, 0, 0, 0.04); --c-fill-dark: rgba(255, 255, 255, 0.06);
+    --c-muted-light: rgba(0, 0, 0, 0.55); --c-muted-dark: rgba(255, 255, 255, 0.65);
+    --shadow: 0 4px 10px rgba(1, 1, 32, 0.10); --shadow-lg: 0 12px 32px rgba(1, 1, 32, 0.10);
+    --r-sharp: 4px; --r-comfort: 8px;
+    --f-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --f-mono: "JetBrains Mono", "PP Neue Montreal Mono", Georgia, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--f-display); font-size: 16px; font-weight: 400; line-height: 1.30; letter-spacing: -0.16px; color: var(--c-text); background: var(--c-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  .display { font-size: 80px; font-weight: 500; line-height: 0.95; letter-spacing: -2.4px; }
+  h1 { font-size: 56px; font-weight: 500; line-height: 1.05; letter-spacing: -1.68px; }
+  h2 { font-size: 40px; font-weight: 500; line-height: 1.10; letter-spacing: -0.8px; }
+  h3 { font-size: 22px; font-weight: 500; line-height: 1.20; letter-spacing: -0.22px; }
+  h4 { font-size: 18px; font-weight: 500; line-height: 1.30; letter-spacing: -0.18px; }
+  p { font-size: 16px; line-height: 1.45; letter-spacing: -0.16px; }
+  p.lede { font-size: 22px; line-height: 1.35; letter-spacing: -0.22px; font-weight: 400; }
+  .caption { font-size: 13px; line-height: 1.40; color: var(--c-muted-light); }
+  .mono-label { font-family: var(--f-mono); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); display: inline-block; }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 100px 0; border-top: 1px solid var(--c-border-light); }
+  .section:first-of-type { border-top: none; }
+  .section-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; max-width: 820px; }
+  nav.topnav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); background: rgba(255,255,255,0.75); border-bottom: 1px solid var(--c-border-light); }
+  nav.topnav .container { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
+  .brand { font-family: var(--f-display); font-weight: 500; font-size: 18px; letter-spacing: -0.18px; display: flex; align-items: center; gap: 10px; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); }
+  nav.topnav .right { display: flex; align-items: center; gap: 24px; }
+  nav.topnav .right a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; }
+  nav.topnav .right a:hover { opacity: 0.6; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--c-dark); color: var(--c-text-dark); padding: 10px 18px; border-radius: var(--r-sharp); font-size: 14px; letter-spacing: -0.14px; font-weight: 500; text-decoration: none; transition: transform 0.15s ease; }
+  .btn-cta:hover { transform: translateY(-1px); }
+  .hero { position: relative; overflow: hidden; padding: 88px 0 96px; }
+  .hero::before, .hero::after { content: ""; position: absolute; pointer-events: none; filter: blur(60px); z-index: 0; }
+  .hero::before { width: 720px; height: 720px; top: -200px; right: -180px; background: radial-gradient(circle at 30% 30%, rgba(239, 44, 193, 0.32) 0%, transparent 60%), radial-gradient(circle at 70% 70%, rgba(189, 187, 255, 0.55) 0%, transparent 65%); border-radius: 50%; }
+  .hero::after { width: 560px; height: 560px; top: 60px; left: -140px; background: radial-gradient(circle at 40% 60%, rgba(189, 187, 255, 0.50) 0%, transparent 65%), radial-gradient(circle at 80% 30%, rgba(252, 76, 2, 0.16) 0%, transparent 60%); border-radius: 50%; }
+  .hero .container { position: relative; z-index: 1; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 6px 12px; border-radius: var(--r-sharp); background: rgba(255,255,255,0.7); border: 1px solid var(--c-border-light); backdrop-filter: blur(8px); margin-bottom: 32px; }
+  .hero .eyebrow .pill { width: 6px; height: 6px; border-radius: 50%; background: var(--c-magenta); }
+  .hero .display { margin-bottom: 28px; max-width: 14ch; }
+  .hero p.lede { max-width: 64ch; color: rgba(0,0,0,0.75); margin-bottom: 40px; }
+  .hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 32px; max-width: 980px; margin-bottom: 56px; }
+  .hero .meta .row { display: flex; gap: 10px; align-items: baseline; }
+  .hero .meta .k { font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); white-space: nowrap; }
+  .hero .meta .v { font-size: 14px; letter-spacing: -0.14px; color: var(--c-text); }
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .stat-card { background: rgba(255,255,255,0.92); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; box-shadow: var(--shadow); backdrop-filter: blur(8px); display: flex; flex-direction: column; gap: 10px; }
+  .stat-card .num { font-size: 56px; font-weight: 500; line-height: 0.95; letter-spacing: -1.68px; }
+  .stat-card .num.accent { background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat-card .num.good { color: #097a3f; }
+  .stat-card .num.warn { color: var(--c-orange); }
+  .stat-card .lbl { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .stat-card .sub { font-size: 14px; line-height: 1.4; letter-spacing: -0.14px; color: var(--c-muted-light); }
+  .card { background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 32px; box-shadow: var(--shadow); }
+  .card .mono-label { margin-bottom: 14px; }
+  .card h3 { margin-bottom: 10px; }
+  .card p { color: rgba(0,0,0,0.78); }
+  .card.flat { box-shadow: none; }
+  .dark .card { background: rgba(255,255,255,0.04); border-color: var(--c-border-dark); color: var(--c-text-dark); box-shadow: none; }
+  .dark .card p { color: rgba(255,255,255,0.78); }
+  .tbl-wrap { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); overflow: hidden; background: var(--c-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; letter-spacing: -0.14px; }
+  thead th { background: var(--c-dark); color: var(--c-text-dark); text-align: left; padding: 14px 18px; font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; border-bottom: 1px solid var(--c-border-dark); }
+  tbody td { padding: 14px 18px; border-top: 1px solid var(--c-border-light); vertical-align: top; color: var(--c-text); }
+  tbody tr:nth-child(even) td { background: rgba(0,0,0,0.025); }
+  tbody td.num { font-variant-numeric: tabular-nums; font-weight: 500; }
+  tbody td.center { text-align: center; }
+  td.no { color: var(--c-orange); font-weight: 500; }
+  td.yes { color: #097a3f; font-weight: 500; }
+  .dark .tbl-wrap { border-color: var(--c-border-dark); background: rgba(255,255,255,0.02); }
+  .dark thead th { background: rgba(255,255,255,0.08); color: var(--c-text-dark); }
+  .dark tbody td { color: var(--c-text-dark); border-top-color: var(--c-border-dark); }
+  .dark tbody tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  blockquote { border-left: 3px solid var(--c-dark); padding: 4px 0 4px 20px; margin: 14px 0; font-style: italic; font-size: 17px; line-height: 1.45; letter-spacing: -0.17px; color: rgba(0,0,0,0.82); }
+  .dark blockquote { border-left-color: var(--c-lavender); color: rgba(255,255,255,0.85); }
+  blockquote .src { display: block; font-style: normal; margin-top: 8px; font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .dark blockquote .src { color: var(--c-muted-dark); }
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .move { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }
+  .move .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .move h3 { margin: 0; font-size: 20px; letter-spacing: -0.20px; }
+  .move p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .sprint { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); }
+  .sprint .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .sprint h3 { margin: 8px 0 12px; font-size: 20px; letter-spacing: -0.20px; }
+  .sprint ul { list-style: none; padding: 0; margin: 0; }
+  .sprint li { padding: 10px 0; border-top: 1px solid var(--c-border-light); font-size: 15px; line-height: 1.45; letter-spacing: -0.15px; display: flex; gap: 12px; align-items: flex-start; }
+  .sprint li:first-child { border-top: none; }
+  .sprint li::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--c-dark); border-radius: 2px; margin-top: 8px; }
+  .dark-zone { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0; position: relative; overflow: hidden; }
+  .dark-zone::before { content: ""; position: absolute; width: 600px; height: 600px; top: -100px; right: -150px; background: radial-gradient(circle at 40% 40%, rgba(189, 187, 255, 0.18) 0%, transparent 60%); border-radius: 50%; filter: blur(80px); pointer-events: none; }
+  .dark-zone .container { position: relative; z-index: 1; }
+  .dark-zone h2 { color: var(--c-text-dark); }
+  .dark-zone p { color: rgba(255,255,255,0.75); }
+  .dark { color: var(--c-text-dark); }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .score-block { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 40px; box-shadow: var(--shadow); margin-top: 24px; }
+  .score-block .num-side { display: flex; flex-direction: column; justify-content: center; gap: 12px; border-right: 1px solid var(--c-border-light); padding-right: 32px; }
+  .score-block .big { font-size: 120px; line-height: 0.9; letter-spacing: -3.6px; font-weight: 500; background: linear-gradient(135deg, var(--c-magenta) 0%, var(--c-lavender) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .score-block .band { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(189,187,255,0.20); border: 1px solid rgba(189,187,255,0.4); border-radius: var(--r-sharp); font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: #5a55c9; width: max-content; }
+  .score-block .scale { display: flex; gap: 4px; margin-top: 12px; }
+  .score-block .scale .seg { flex: 1; height: 6px; border-radius: 2px; background: rgba(0,0,0,0.08); }
+  .score-block .scale .seg.on { background: linear-gradient(90deg, var(--c-magenta), var(--c-lavender)); }
+  .score-block .scale-lbl { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .score-block .components ul { list-style: none; padding: 0; margin: 0; }
+  .score-block .components li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--c-border-light); font-size: 14px; letter-spacing: -0.14px; }
+  .score-block .components li:first-child { border-top: none; }
+  .score-block .components .lbl { color: rgba(0,0,0,0.75); }
+  .score-block .components .val { font-family: var(--f-mono); font-weight: 500; }
+  .findings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  .finding { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; background: var(--c-bg); }
+  .finding .num { font-family: var(--f-mono); font-size: 32px; font-weight: 500; letter-spacing: -0.5px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+  .finding p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.18); border-radius: var(--r-sharp); font-size: 13px; letter-spacing: -0.13px; color: var(--c-text); }
+  .descriptors { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .desc-pill { padding: 6px 12px; background: var(--c-fill-light); border: 1px solid var(--c-border-light); border-radius: var(--r-sharp); font-size: 13px; font-weight: 500; letter-spacing: -0.13px; }
+  .desc-pill.absent { background: rgba(252, 76, 2, 0.06); border-color: rgba(252, 76, 2, 0.18); color: var(--c-orange); text-decoration: line-through; text-decoration-color: rgba(252, 76, 2, 0.4); }
+  .desc-pill.present { background: rgba(9,122,63,0.06); border-color: rgba(9,122,63,0.18); color: #097a3f; }
+  footer.big-footer { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0 48px; position: relative; overflow: hidden; }
+  footer.big-footer::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at top left, rgba(189,187,255,0.10) 0%, transparent 50%); pointer-events: none; }
+  footer.big-footer .container { position: relative; z-index: 1; }
+  footer.big-footer .word { font-family: var(--f-display); font-weight: 500; font-size: clamp(80px, 14vw, 200px); line-height: 0.85; letter-spacing: -6px; background: linear-gradient(180deg, #ffffff 0%, rgba(189,187,255,0.4) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 40px; }
+  footer.big-footer .meta-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--c-border-dark); padding-top: 28px; flex-wrap: wrap; gap: 20px; }
+  footer.big-footer .meta-row .left, footer.big-footer .meta-row .right { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-dark); }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .stack-sm > * + * { margin-top: 14px; }
+  .stack-md > * + * { margin-top: 20px; }
+  .muted { color: var(--c-muted-light); }
+  .dark .muted { color: var(--c-muted-dark); }
+  .split-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .split-quotes .card .mono-label { color: var(--c-magenta); }
+  .callout { border: 1px solid rgba(252,76,2,0.30); background: rgba(252,76,2,0.04); border-radius: var(--r-comfort); padding: 24px; margin-top: 24px; }
+  .callout .mono-label { color: var(--c-orange); margin-bottom: 8px; }
+  .callout.good { border-color: rgba(9,122,63,0.30); background: rgba(9,122,63,0.04); }
+  .callout.good .mono-label { color: #097a3f; }
+  .glossary { border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.06); border-radius: var(--r-comfort); padding: 28px; margin-top: 24px; }
+  .glossary .mono-label { color: #5a55c9; margin-bottom: 14px; }
+  .glossary dl { display: grid; grid-template-columns: 180px 1fr; gap: 12px 20px; font-size: 14px; line-height: 1.5; }
+  .glossary dt { font-weight: 500; color: var(--c-text); }
+  .glossary dd { color: rgba(0,0,0,0.72); }
+  @media (max-width: 991px) {
+    .display { font-size: 64px; letter-spacing: -1.92px; }
+    h1 { font-size: 44px; letter-spacing: -1.32px; }
+    h2 { font-size: 32px; letter-spacing: -0.64px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .score-block { grid-template-columns: 1fr; }
+    .score-block .num-side { border-right: none; border-bottom: 1px solid var(--c-border-light); padding-right: 0; padding-bottom: 24px; }
+    .split-quotes { grid-template-columns: 1fr; }
+    .findings { grid-template-columns: 1fr; }
+    .glossary dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .glossary dt { margin-top: 10px; }
+  }
+  @media (max-width: 640px) {
+    .display { font-size: 48px; letter-spacing: -1.44px; }
+    h2 { font-size: 26px; letter-spacing: -0.52px; }
+    .section { padding: 64px 0; }
+    .stats-bar { grid-template-columns: 1fr; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    nav.topnav .right a:not(.btn-cta) { display: none; }
+    .container { padding: 0 20px; }
+    .stat-card .num { font-size: 44px; letter-spacing: -1.32px; }
+    .score-block .big { font-size: 88px; letter-spacing: -2.6px; }
+  }
+</style></head><body><nav class="topnav"><div class="container"><div class="brand">AUQ</div><div class="right mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</div></div></nav>
+
+<section class="hero"><div class="container">
+  <div class="eyebrow"><span class="pill"></span><span class="mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</span></div>
+  <h1 class="display">Treasury4.</h1>
+  <p class="lede">A look at how Treasury4 is described, positioned, and quoted inside Google's AI Overviews, the AI answer box at the top of search results, and where the brand shows up versus goes missing.</p>
+  <div class="meta">
+    <div class="row"><span class="k">Site</span><span class="v">treasury4.com</span></div>
+    <div class="row"><span class="k">Where we looked</span><span class="v">Google AI Overviews, US</span></div>
+    <div class="row"><span class="k">Questions tested</span><span class="v">33 brand, category, and competitor queries</span></div>
+    <div class="row"><span class="k">Prepared</span><span class="v">June 3, 2026 &nbsp;·&nbsp; by AUQ</span></div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-card"><div class="lbl">AI Visibility Score</div><div class="num accent">18</div><div class="sub">out of 100. Critical band. The brand has near-zero visibility in Google AI Overviews for category-level queries. AIO recognizes the brand by name only in funding-news contexts. Immediate structural content and entity work is required.</div></div><div class="stat-card"><div class="lbl">Verified AI Overview citations</div><div class="num good">0</div><div class="sub">Treasury4's brand is cited in 0 of the 13 AI-answer queries we tested.</div></div><div class="stat-card"><div class="lbl">AI answer trigger rate</div><div class="num ">39%</div><div class="sub">Google's AI answer box fires on 13 of 33 tracked queries.</div></div><div class="stat-card"><div class="lbl">Citation rate when AI answers</div><div class="num ">0%</div><div class="sub">Share of AI-answer queries where the brand is actually quoted.</div></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">EXECUTIVE SUMMARY</span>
+    <h2>Treasury4 scores 18 of 100 for AI Overview visibility. The work is closing the citation and identity gaps.</h2></div>
+  <div class="grid grid-2" style="gap:32px;">
+    <div class="stack-md">
+      <p class="lede">The brand has near-zero visibility in Google AI Overviews for category-level queries. AIO recognizes the brand by name only in funding-news contexts. Immediate structural content and entity work is required.</p>
+      <p>AI answers fire on 39% of tracked queries, yet Treasury4 is quoted in only 0% of them. When it does appear, it sits N/A - no category-query citations recorded.</p>
+    </div>
+    <div class="score-block"><div class="num-side">
+      <div class="mono-label">AI Visibility Score</div><div class="big">18</div>
+      <div class="band"><span>Critical band</span></div>
+      <div class="scale"><div class="seg on"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+      <div class="scale-lbl"><span>Barely</span><span>Low</span><span>Competitive</span><span>Dominant</span></div>
+    </div>
+    <div class="components"><div class="mono-label" style="margin-bottom:14px;">What's in the score</div><ul><li><span class="lbl">Inclusion in category answers</span><span class="val">0 / 100</span></li><li><span class="lbl">How often AI answers appear</span><span class="val">40 / 100</span></li><li><span class="lbl">How AI describes the brand</span><span class="val">20 / 100</span></li><li><span class="lbl">Topic coverage breadth</span><span class="val">25 / 100</span></li><li><span class="lbl">Your pages being quoted</span><span class="val">10 / 100</span></li></ul></div></div>
+  </div>
+  <div class="section-head" style="margin-top:48px;"><span class="mono-label">THREE FINDINGS THAT MATTER</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>The brand is missing from most of AI-answer queries</h3><p>Treasury4 appears in AIO response text on 3 branded funding queries only (washington-based treasury4 series/20m). These are effectively zero-volume queries with no category intent. The brand has a 0% citation rate on all non-branded category queries despite ranking on 13 AIO-triggered keywords.</p></div><div class="finding"><div class="num">02</div><h3>AI misreads the category</h3><p>AIO does not place Treasury4 in the treasury management software category when answering category queries. It surfaces the brand only as a funded startup, not as a software solution provider.</p></div></div>
+  <div class="section-head" style="margin-top:40px;"><span class="mono-label">TOP THREE MOVES</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>Restructure the cash reconciliation blog post as a definitional, step-by-step explainer matching AIO citation format</h3><p>Impact High  ·  effort Low  ·  Days 1-14</p></div><div class="finding"><div class="num">02</div><h3>Create structured, AIO-optimized content targeting cash management software and cash management system queries where AIO already triggers</h3><p>Impact High  ·  effort Medium  ·  Days 1-30</p></div><div class="finding"><div class="num">03</div><h3>Publish an entity-rich pillar page on AI-powered treasury management to anchor the brand in that core category term</h3><p>Impact High  ·  effort Medium  ·  Days 15-45</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">CONTENT AND ENTITY COVERAGE</span>
+    <h2>The topics that matter to the brand, and where it shows up in AI answers today.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:48%">Topic</th><th>Presence in AI answers</th><th>Buyer intent</th></tr></thead><tbody><tr><td>Treasury KPIs</td><td class="">Partial</td><td>solution-aware, vendor evaluation</td></tr><tr><td>Cash analytics</td><td class="">Partial</td><td>solution-aware, product discovery</td></tr><tr><td>Cash reconciliation</td><td class="">Partial</td><td>solution-aware, process education</td></tr><tr><td>Treasury cash flow forecasting</td><td class="">Partial</td><td>solution-aware, capability research</td></tr><tr><td>Cash management system</td><td class="no">Invisible</td><td>solution-aware, high-volume category</td></tr><tr><td>Cash management software</td><td class="no">Invisible</td><td>solution-aware, high-volume category</td></tr><tr><td>AI-powered treasury management</td><td class="no">Invisible</td><td>solution-aware, core brand positioning</td></tr><tr><td>Legal entity management for treasury</td><td class="no">Invisible</td><td>solution-aware, Entity4 use case</td></tr><tr><td>Bank account management software</td><td class="no">Invisible</td><td>solution-aware, Entity4 use case</td></tr><tr><td>Treasury workstation software</td><td class="no">Invisible</td><td>solution-aware, vendor comparison</td></tr><tr><td>Treasury workstation vendors</td><td class="no">Invisible</td><td>alternatives, comparison-stage</td></tr><tr><td>How to improve cash visibility</td><td class="no">Invisible</td><td>problem-aware</td></tr><tr><td>How to reduce manual treasury work</td><td class="no">Invisible</td><td>problem-aware</td></tr><tr><td>Treasury management software alternatives</td><td class="no">Invisible</td><td>alternatives-and-comparison</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:32px;"><div class="mono-label">Buyer-journey coverage</div>
+    <div><p><strong>Problem Aware.</strong> Weak. Treasury4 has no AIO presence on problem-framing queries such as how to improve cash visibility or how to reduce manual treasury work.</p><p><strong>Solution Aware.</strong> Partial. Brand ranks organically on several software and workstation queries but does not appear in AIO answers for any of them.</p><p><strong>Alternatives.</strong> Absent. No citation or mention in AIO for any alternatives or comparison queries.</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">IDENTITY IN AI OVERVIEWS</span>
+    <h2>How the brand describes itself, and how Google's AI describes it.</h2></div>
+  <div class="split-quotes">
+    <div class="card"><div class="mono-label">What the brand says about itself</div>
+      <h3>AI-native treasury management software</h3>
+      <blockquote>AI-native treasury management software. Connects banks, ERPs, and investment portals via direct API. Products: Cash4 for real-time cash visibility and forecasting; Entity4 for legal entity, bank account, and FBAR/KYC management.<span class="src">treasury4.com, 2026</span></blockquote>
+      <p>Differentiators it leads with: AI transaction categorization, Direct bank API connections (JPMorgan, Citi, HSBC, Wells Fargo, BofA), Real-time cash positioning across entities and currencies, Cash flow forecasting at bank account level, ERP and investment portal integration (ICD, BlackRock, Morgan Stanley), Sigma BI dashboards and treasury reporting, FBAR filing automation and KYC tracking, Bank fee analytics, eBAM capabilities via TreasuryGo acquisition, Practitioner-founded leadership (George Zinn, ex-Microsoft 24-year treasurer).</p>
+    </div>
+    <div class="card"><div class="mono-label">What Google's AI says</div>
+      <h3>Enterprise fintech / cash analytics startup</h3>
+      <blockquote>An enterprise fintech offering API-led, cloud-based data analytics tools for global cash management and legal entity data.</blockquote><blockquote>A Washington-based funded startup recognized in the context of its funding round, not as a software solution provider.</blockquote>
+    </div>
+  </div>
+  <div class="callout good"><div class="mono-label">The core gap</div><div>AIO does not place Treasury4 in the treasury management software category when answering category queries. It surfaces the brand only as a funded startup, not as a software solution provider.</div></div>
+  <div class="grid grid-2" style="margin-top:32px;">
+    <div><div class="mono-label">Words AI uses for the brand</div><div class="descriptors"><span class="desc-pill present">Global cash management recognized via Cash4 product</span><span class="desc-pill present">Legal entity data management recognized via Entity4 product</span><span class="desc-pill present">API-led connectivity acknowledged</span><span class="desc-pill present">Cloud-based deployment acknowledged</span></div></div>
+    <div><div class="mono-label">The brand's own pillars that AI omits</div><div class="descriptors"><span class="desc-pill">AI-native differentiator entirely absent from AIO responses</span><span class="desc-pill">Direct bank API connections not mentioned</span><span class="desc-pill">Real-time cash positioning and forecasting not surfaced</span><span class="desc-pill">ERP and investment portal integrations invisible</span><span class="desc-pill">George Zinn practitioner credentials not mentioned</span><span class="desc-pill">Multi-entity, multi-currency scope not conveyed</span><span class="desc-pill">FBAR automation, KYC, and bank fee analytics not surfaced</span><span class="desc-pill">AIO cites Ed Barrie as a founder but his current affiliation is unverified in site content</span></div></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">AI OVERVIEW PERFORMANCE</span>
+    <h2>Where the brand shows up in Google's AI, and the high-value queries it is missing.</h2></div>
+  <div class="stats-bar"><div class="stat-card"><div class="lbl">Tracked keywords</div><div class="num">33</div><div class="sub">Brand, category, and comparison queries analyzed.</div></div><div class="stat-card"><div class="lbl">AI answers fired</div><div class="num">13</div><div class="sub">39% of tracked queries trigger an AI Overview.</div></div><div class="stat-card"><div class="lbl">Times brand cited</div><div class="num">0</div><div class="sub">0% citation rate when AI answers.</div></div><div class="stat-card"><div class="lbl">Total brand mentions</div><div class="num">3</div><div class="sub">Across all observed AI responses.</div></div></div>
+  <div style="margin-top:40px;"><div class="section-head"><span class="mono-label">HIGH-VALUE QUERIES WHERE THE BRAND RANKS BUT IS NOT QUOTED</span></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:42%">Query</th><th>Volume</th><th>Organic rank</th><th>What happens</th></tr></thead><tbody><tr><td>cash management system</td><td>700/mo</td><td>#31</td><td>Highest-volume AIO-triggered keyword in the set. Treasury4 ranks page 3+. Not cited in AIO.</td></tr><tr><td>cash management software</td><td>600/mo</td><td>#44</td><td>High-volume core category term. Treasury4 not ranking competitively or cited in AIO.</td></tr><tr><td>cash reconciliations</td><td>623/mo</td><td>#11</td><td>AIO triggered and cites HighRadius, Ledge, and DebtBook. Treasury4 has a blog post on this topic but is not cited.</td></tr><tr><td>treasury kpis</td><td>100/mo</td><td>#9</td><td>Treasury4 ranks position 9 with a dedicated post. Not included in AIO answer.</td></tr><tr><td>treasury workstation vendors</td><td>60/mo</td><td>#3</td><td>Ranks position 3 but no AIO trigger yet. High-intent comparison query with strong organic foothold.</td></tr></tbody></table></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">WHERE GOOGLE'S AI GETS ITS ANSWERS</span>
+    <h2>The sources Google's AI cites in this category, and what it tells you about earning citations.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Domain AI cites</th><th>Pages</th><th>Context</th></tr></thead><tbody><tr><td>highradius.com</td><td>Cited for definitional and process content. Large, established B2B fintech content provider.</td><td>cash reconciliation query</td></tr><tr><td>ledge.co</td><td>Cash management and reconciliation platform. Cited for reconciliation automation content. Direct category competitor.</td><td>cash reconciliation query</td></tr><tr><td>debtbook.com</td><td>Public finance software. Cited for educational reconciliation content.</td><td>cash reconciliation query</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:28px;"><div class="mono-label">Reading</div><div>AIO is pulling structured how-to and definitional content from competitor domains. Treasury4's cash reconciliation blog post exists but is not structured as a definitive explainer with clear steps, definitions, or structured headers that AIO prefers to cite. Zero treasury4.com pages were cited by AIO across all 33 tracked queries.</div></div>
+</div></section>
+
+<section class="dark-zone dark"><div class="container">
+  <div class="section-head"><span class="mono-label">AI-REVEALED PEERS</span>
+    <h2>The competitive set drawn by Google's AI itself. Observed, not chosen.</h2></div>
+  <p class="lede">All three peers were discovered through AIO citation observation, not through brand-provided competitor lists.</p>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:26%">Peer</th><th>How AI frames it</th></tr></thead><tbody><tr><td>HighRadius</td><td>Cited in cash reconciliation AIO result. Large, established B2B fintech with strong educational treasury content.</td></tr><tr><td>Ledge</td><td>Cited in cash reconciliation AIO result. Cash management platform and direct category peer cited for reconciliation automation content.</td></tr><tr><td>DebtBook</td><td>Cited in cash reconciliation AIO result. Public finance and cash management software cited for educational content.</td></tr></tbody></table></div>
+  <div class="card" style="margin-top:28px;"><div class="mono-label">Key observation</div><div>These three domains form the de facto AIO competitive set as observed from tracked query data. None were provided as inputs. Treasury4 must earn AIO citation in the same queries where these brands currently appear.</div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">30-DAY PRIORITY MOVES</span>
+    <h2>The highest-leverage moves, ranked by impact against effort.</h2></div>
+  <div class="grid grid-2"><div class="move"><div class="num">Move 01 &nbsp;·&nbsp; Days 1-14</div><h3>Restructure the cash reconciliation blog post as a definitional, step-by-step explainer matching AIO citation format</h3><p>Impact High &nbsp;·&nbsp; effort Low.</p></div><div class="move"><div class="num">Move 02 &nbsp;·&nbsp; Days 1-30</div><h3>Create structured, AIO-optimized content targeting cash management software and cash management system queries where AIO already triggers</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 03 &nbsp;·&nbsp; Days 15-45</div><h3>Publish an entity-rich pillar page on AI-powered treasury management to anchor the brand in that core category term</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 04 &nbsp;·&nbsp; Days 1-14</div><h3>Add FAQ and HowTo structured data schema to product pages so AIO can extract structured answers</h3><p>Impact Medium &nbsp;·&nbsp; effort Low.</p></div><div class="move"><div class="num">Move 05 &nbsp;·&nbsp; Days 30-60</div><h3>Develop content surfacing George Zinn (ex-Microsoft 24-year treasurer) and practitioner credentials to build entity authority around Treasury4</h3><p>Impact Medium &nbsp;·&nbsp; effort Medium.</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">90-DAY ROADMAP</span><h2>Three sprints from first wins to compounding category presence.</h2></div>
+  <div class="grid grid-3"><div class="sprint"><div class="num">Month 1 &nbsp;·&nbsp; Days 1 to 30</div><ul><li>Audit and restructure cash reconciliation blog post with clear step-by-step format, defined terms, and structured headers to match AIO citation patterns</li><li>Add FAQ and HowTo schema markup to Cash4 and Entity4 product pages</li><li>Draft and publish a new pillar page targeting 'cash management software' with definitional and comparison content</li><li>Verify and correct founding team entity data (Ed Barrie affiliation) across all public-facing pages and structured data</li></ul></div><div class="sprint"><div class="num">Month 2 &nbsp;·&nbsp; Days 31 to 60</div><ul><li>Publish an AI-powered treasury management hub page anchoring the brand's core differentiator in AIO-surfaced language</li><li>Create a George Zinn thought leadership page and bio content that builds entity authority and links treasury expertise to Treasury4</li><li>Develop a 'cash management system' explainer page targeting the highest-volume AIO-triggered keyword (700 monthly searches)</li><li>Build internal linking structure connecting Cash4, Entity4, and all supporting blog content into a coherent topic cluster</li></ul></div><div class="sprint"><div class="num">Month 3 &nbsp;·&nbsp; Days 61 to 90</div><ul><li>Publish comparison and alternatives content for treasury workstation software and treasury workstation vendors queries (positions 3 and 8 with no AIO trigger yet)</li><li>Create Entity4-specific content targeting legal entity management for treasury and bank account management software queries</li><li>Develop problem-aware content addressing cash visibility and manual treasury workflows to fill buyer journey gaps</li><li>Review all published sprint content for AIO citation pickup and iterate on structure, headers, and schema based on observed results</li></ul></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">SUCCESS METRICS</span><h2>What we measure, and the 90-day targets.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Metric</th><th>Baseline</th><th>90-day target</th><th>Cadence</th></tr></thead><tbody><tr><td>AIO citation rate on category queries</td><td>0% (0 of 33 tracked keywords)</td><td>At least 3 category-query AIO citations</td><td>Weekly</td></tr><tr><td>treasury4.com pages cited as AIO sources</td><td>0 pages cited</td><td>At least 2 treasury4.com pages appearing as AIO cited sources</td><td>Weekly</td></tr><tr><td>Organic ranking on cash management software</td><td>Position 44</td><td>Position 20 or better</td><td>Bi-weekly</td></tr><tr><td>Organic ranking on cash management system</td><td>Position 31</td><td>Position 15 or better</td><td>Bi-weekly</td></tr><tr><td>AIO response text mentions in non-branded queries</td><td>0 mentions (3 existing mentions are branded funding queries only)</td><td>At least 2 non-branded category mentions</td><td>Weekly</td></tr></tbody></table></div>
+</div></section>
+
+<footer><div class="container">
+  <div class="word">treasury4.</div>
+  <div class="meta-row">
+    <div class="left">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY &nbsp;·&nbsp; JUNE 3, 2026</div>
+    <div class="right">PREPARED BY AUQ &nbsp;·&nbsp; ANALYTICS@AUQ.IO</div>
+  </div>
+</div></footer></body></html>
