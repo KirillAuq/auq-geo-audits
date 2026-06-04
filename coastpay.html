@@ -1,0 +1,293 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coast GEO Audit, brand-only, by AUQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-text: #000000; --c-text-dark: #ffffff; --c-bg: #ffffff; --c-dark: #010120;
+    --c-magenta: #ef2cc1; --c-orange: #fc4c02; --c-lavender: #bdbbff;
+    --c-border-light: rgba(0, 0, 0, 0.08); --c-border-dark: rgba(255, 255, 255, 0.12);
+    --c-fill-light: rgba(0, 0, 0, 0.04); --c-fill-dark: rgba(255, 255, 255, 0.06);
+    --c-muted-light: rgba(0, 0, 0, 0.55); --c-muted-dark: rgba(255, 255, 255, 0.65);
+    --shadow: 0 4px 10px rgba(1, 1, 32, 0.10); --shadow-lg: 0 12px 32px rgba(1, 1, 32, 0.10);
+    --r-sharp: 4px; --r-comfort: 8px;
+    --f-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --f-mono: "JetBrains Mono", "PP Neue Montreal Mono", Georgia, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--f-display); font-size: 16px; font-weight: 400; line-height: 1.30; letter-spacing: -0.16px; color: var(--c-text); background: var(--c-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  .display { font-size: 80px; font-weight: 500; line-height: 0.95; letter-spacing: -2.4px; }
+  h1 { font-size: 56px; font-weight: 500; line-height: 1.05; letter-spacing: -1.68px; }
+  h2 { font-size: 40px; font-weight: 500; line-height: 1.10; letter-spacing: -0.8px; }
+  h3 { font-size: 22px; font-weight: 500; line-height: 1.20; letter-spacing: -0.22px; }
+  h4 { font-size: 18px; font-weight: 500; line-height: 1.30; letter-spacing: -0.18px; }
+  p { font-size: 16px; line-height: 1.45; letter-spacing: -0.16px; }
+  p.lede { font-size: 22px; line-height: 1.35; letter-spacing: -0.22px; font-weight: 400; }
+  .caption { font-size: 13px; line-height: 1.40; color: var(--c-muted-light); }
+  .mono-label { font-family: var(--f-mono); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); display: inline-block; }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 100px 0; border-top: 1px solid var(--c-border-light); }
+  .section:first-of-type { border-top: none; }
+  .section-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; max-width: 820px; }
+  nav.topnav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); background: rgba(255,255,255,0.75); border-bottom: 1px solid var(--c-border-light); }
+  nav.topnav .container { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
+  .brand { font-family: var(--f-display); font-weight: 500; font-size: 18px; letter-spacing: -0.18px; display: flex; align-items: center; gap: 10px; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); }
+  nav.topnav .right { display: flex; align-items: center; gap: 24px; }
+  nav.topnav .right a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; }
+  nav.topnav .right a:hover { opacity: 0.6; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--c-dark); color: var(--c-text-dark); padding: 10px 18px; border-radius: var(--r-sharp); font-size: 14px; letter-spacing: -0.14px; font-weight: 500; text-decoration: none; transition: transform 0.15s ease; }
+  .btn-cta:hover { transform: translateY(-1px); }
+  .hero { position: relative; overflow: hidden; padding: 88px 0 96px; }
+  .hero::before, .hero::after { content: ""; position: absolute; pointer-events: none; filter: blur(60px); z-index: 0; }
+  .hero::before { width: 720px; height: 720px; top: -200px; right: -180px; background: radial-gradient(circle at 30% 30%, rgba(239, 44, 193, 0.32) 0%, transparent 60%), radial-gradient(circle at 70% 70%, rgba(189, 187, 255, 0.55) 0%, transparent 65%); border-radius: 50%; }
+  .hero::after { width: 560px; height: 560px; top: 60px; left: -140px; background: radial-gradient(circle at 40% 60%, rgba(189, 187, 255, 0.50) 0%, transparent 65%), radial-gradient(circle at 80% 30%, rgba(252, 76, 2, 0.16) 0%, transparent 60%); border-radius: 50%; }
+  .hero .container { position: relative; z-index: 1; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 6px 12px; border-radius: var(--r-sharp); background: rgba(255,255,255,0.7); border: 1px solid var(--c-border-light); backdrop-filter: blur(8px); margin-bottom: 32px; }
+  .hero .eyebrow .pill { width: 6px; height: 6px; border-radius: 50%; background: var(--c-magenta); }
+  .hero .display { margin-bottom: 28px; max-width: 14ch; }
+  .hero p.lede { max-width: 64ch; color: rgba(0,0,0,0.75); margin-bottom: 40px; }
+  .hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 32px; max-width: 980px; margin-bottom: 56px; }
+  .hero .meta .row { display: flex; gap: 10px; align-items: baseline; }
+  .hero .meta .k { font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); white-space: nowrap; }
+  .hero .meta .v { font-size: 14px; letter-spacing: -0.14px; color: var(--c-text); }
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .stat-card { background: rgba(255,255,255,0.92); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; box-shadow: var(--shadow); backdrop-filter: blur(8px); display: flex; flex-direction: column; gap: 10px; }
+  .stat-card .num { font-size: 56px; font-weight: 500; line-height: 0.95; letter-spacing: -1.68px; }
+  .stat-card .num.accent { background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat-card .num.good { color: #097a3f; }
+  .stat-card .num.warn { color: var(--c-orange); }
+  .stat-card .lbl { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .stat-card .sub { font-size: 14px; line-height: 1.4; letter-spacing: -0.14px; color: var(--c-muted-light); }
+  .card { background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 32px; box-shadow: var(--shadow); }
+  .card .mono-label { margin-bottom: 14px; }
+  .card h3 { margin-bottom: 10px; }
+  .card p { color: rgba(0,0,0,0.78); }
+  .card.flat { box-shadow: none; }
+  .dark .card { background: rgba(255,255,255,0.04); border-color: var(--c-border-dark); color: var(--c-text-dark); box-shadow: none; }
+  .dark .card p { color: rgba(255,255,255,0.78); }
+  .tbl-wrap { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); overflow: hidden; background: var(--c-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; letter-spacing: -0.14px; }
+  thead th { background: var(--c-dark); color: var(--c-text-dark); text-align: left; padding: 14px 18px; font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; border-bottom: 1px solid var(--c-border-dark); }
+  tbody td { padding: 14px 18px; border-top: 1px solid var(--c-border-light); vertical-align: top; color: var(--c-text); }
+  tbody tr:nth-child(even) td { background: rgba(0,0,0,0.025); }
+  tbody td.num { font-variant-numeric: tabular-nums; font-weight: 500; }
+  tbody td.center { text-align: center; }
+  td.no { color: var(--c-orange); font-weight: 500; }
+  td.yes { color: #097a3f; font-weight: 500; }
+  .dark .tbl-wrap { border-color: var(--c-border-dark); background: rgba(255,255,255,0.02); }
+  .dark thead th { background: rgba(255,255,255,0.08); color: var(--c-text-dark); }
+  .dark tbody td { color: var(--c-text-dark); border-top-color: var(--c-border-dark); }
+  .dark tbody tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  blockquote { border-left: 3px solid var(--c-dark); padding: 4px 0 4px 20px; margin: 14px 0; font-style: italic; font-size: 17px; line-height: 1.45; letter-spacing: -0.17px; color: rgba(0,0,0,0.82); }
+  .dark blockquote { border-left-color: var(--c-lavender); color: rgba(255,255,255,0.85); }
+  blockquote .src { display: block; font-style: normal; margin-top: 8px; font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .dark blockquote .src { color: var(--c-muted-dark); }
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .move { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }
+  .move .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .move h3 { margin: 0; font-size: 20px; letter-spacing: -0.20px; }
+  .move p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .sprint { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); }
+  .sprint .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .sprint h3 { margin: 8px 0 12px; font-size: 20px; letter-spacing: -0.20px; }
+  .sprint ul { list-style: none; padding: 0; margin: 0; }
+  .sprint li { padding: 10px 0; border-top: 1px solid var(--c-border-light); font-size: 15px; line-height: 1.45; letter-spacing: -0.15px; display: flex; gap: 12px; align-items: flex-start; }
+  .sprint li:first-child { border-top: none; }
+  .sprint li::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--c-dark); border-radius: 2px; margin-top: 8px; }
+  .dark-zone { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0; position: relative; overflow: hidden; }
+  .dark-zone::before { content: ""; position: absolute; width: 600px; height: 600px; top: -100px; right: -150px; background: radial-gradient(circle at 40% 40%, rgba(189, 187, 255, 0.18) 0%, transparent 60%); border-radius: 50%; filter: blur(80px); pointer-events: none; }
+  .dark-zone .container { position: relative; z-index: 1; }
+  .dark-zone h2 { color: var(--c-text-dark); }
+  .dark-zone p { color: rgba(255,255,255,0.75); }
+  .dark { color: var(--c-text-dark); }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .score-block { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 40px; box-shadow: var(--shadow); margin-top: 24px; }
+  .score-block .num-side { display: flex; flex-direction: column; justify-content: center; gap: 12px; border-right: 1px solid var(--c-border-light); padding-right: 32px; }
+  .score-block .big { font-size: 120px; line-height: 0.9; letter-spacing: -3.6px; font-weight: 500; background: linear-gradient(135deg, var(--c-magenta) 0%, var(--c-lavender) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .score-block .band { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(189,187,255,0.20); border: 1px solid rgba(189,187,255,0.4); border-radius: var(--r-sharp); font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: #5a55c9; width: max-content; }
+  .score-block .scale { display: flex; gap: 4px; margin-top: 12px; }
+  .score-block .scale .seg { flex: 1; height: 6px; border-radius: 2px; background: rgba(0,0,0,0.08); }
+  .score-block .scale .seg.on { background: linear-gradient(90deg, var(--c-magenta), var(--c-lavender)); }
+  .score-block .scale-lbl { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .score-block .components ul { list-style: none; padding: 0; margin: 0; }
+  .score-block .components li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--c-border-light); font-size: 14px; letter-spacing: -0.14px; }
+  .score-block .components li:first-child { border-top: none; }
+  .score-block .components .lbl { color: rgba(0,0,0,0.75); }
+  .score-block .components .val { font-family: var(--f-mono); font-weight: 500; }
+  .findings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  .finding { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; background: var(--c-bg); }
+  .finding .num { font-family: var(--f-mono); font-size: 32px; font-weight: 500; letter-spacing: -0.5px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+  .finding p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.18); border-radius: var(--r-sharp); font-size: 13px; letter-spacing: -0.13px; color: var(--c-text); }
+  .descriptors { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .desc-pill { padding: 6px 12px; background: var(--c-fill-light); border: 1px solid var(--c-border-light); border-radius: var(--r-sharp); font-size: 13px; font-weight: 500; letter-spacing: -0.13px; }
+  .desc-pill.absent { background: rgba(252, 76, 2, 0.06); border-color: rgba(252, 76, 2, 0.18); color: var(--c-orange); text-decoration: line-through; text-decoration-color: rgba(252, 76, 2, 0.4); }
+  .desc-pill.present { background: rgba(9,122,63,0.06); border-color: rgba(9,122,63,0.18); color: #097a3f; }
+  footer.big-footer { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0 48px; position: relative; overflow: hidden; }
+  footer.big-footer::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at top left, rgba(189,187,255,0.10) 0%, transparent 50%); pointer-events: none; }
+  footer.big-footer .container { position: relative; z-index: 1; }
+  footer.big-footer .word { font-family: var(--f-display); font-weight: 500; font-size: clamp(80px, 14vw, 200px); line-height: 0.85; letter-spacing: -6px; background: linear-gradient(180deg, #ffffff 0%, rgba(189,187,255,0.4) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 40px; }
+  footer.big-footer .meta-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--c-border-dark); padding-top: 28px; flex-wrap: wrap; gap: 20px; }
+  footer.big-footer .meta-row .left, footer.big-footer .meta-row .right { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-dark); }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .stack-sm > * + * { margin-top: 14px; }
+  .stack-md > * + * { margin-top: 20px; }
+  .muted { color: var(--c-muted-light); }
+  .dark .muted { color: var(--c-muted-dark); }
+  .split-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .split-quotes .card .mono-label { color: var(--c-magenta); }
+  .callout { border: 1px solid rgba(252,76,2,0.30); background: rgba(252,76,2,0.04); border-radius: var(--r-comfort); padding: 24px; margin-top: 24px; }
+  .callout .mono-label { color: var(--c-orange); margin-bottom: 8px; }
+  .callout.good { border-color: rgba(9,122,63,0.30); background: rgba(9,122,63,0.04); }
+  .callout.good .mono-label { color: #097a3f; }
+  .glossary { border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.06); border-radius: var(--r-comfort); padding: 28px; margin-top: 24px; }
+  .glossary .mono-label { color: #5a55c9; margin-bottom: 14px; }
+  .glossary dl { display: grid; grid-template-columns: 180px 1fr; gap: 12px 20px; font-size: 14px; line-height: 1.5; }
+  .glossary dt { font-weight: 500; color: var(--c-text); }
+  .glossary dd { color: rgba(0,0,0,0.72); }
+  @media (max-width: 991px) {
+    .display { font-size: 64px; letter-spacing: -1.92px; }
+    h1 { font-size: 44px; letter-spacing: -1.32px; }
+    h2 { font-size: 32px; letter-spacing: -0.64px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .score-block { grid-template-columns: 1fr; }
+    .score-block .num-side { border-right: none; border-bottom: 1px solid var(--c-border-light); padding-right: 0; padding-bottom: 24px; }
+    .split-quotes { grid-template-columns: 1fr; }
+    .findings { grid-template-columns: 1fr; }
+    .glossary dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .glossary dt { margin-top: 10px; }
+  }
+  @media (max-width: 640px) {
+    .display { font-size: 48px; letter-spacing: -1.44px; }
+    h2 { font-size: 26px; letter-spacing: -0.52px; }
+    .section { padding: 64px 0; }
+    .stats-bar { grid-template-columns: 1fr; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    nav.topnav .right a:not(.btn-cta) { display: none; }
+    .container { padding: 0 20px; }
+    .stat-card .num { font-size: 44px; letter-spacing: -1.32px; }
+    .score-block .big { font-size: 88px; letter-spacing: -2.6px; }
+  }
+</style></head><body><nav class="topnav"><div class="container"><div class="brand">AUQ</div><div class="right mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</div></div></nav>
+
+<section class="hero"><div class="container">
+  <div class="eyebrow"><span class="pill"></span><span class="mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</span></div>
+  <h1 class="display">Coast.</h1>
+  <p class="lede">A look at how Coast is described, positioned, and quoted inside Google's AI Overviews, the AI answer box at the top of search results, and where the brand shows up versus goes missing.</p>
+  <div class="meta">
+    <div class="row"><span class="k">Site</span><span class="v">coastpay.com</span></div>
+    <div class="row"><span class="k">Where we looked</span><span class="v">Google AI Overviews, US</span></div>
+    <div class="row"><span class="k">Questions tested</span><span class="v">40 brand, category, and competitor queries</span></div>
+    <div class="row"><span class="k">Prepared</span><span class="v">June 3, 2026 &nbsp;·&nbsp; by AUQ</span></div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-card"><div class="lbl">AI Visibility Score</div><div class="num accent">22</div><div class="sub">out of 100. Minimal AIO Presence band. The brand appears in AIO on a narrow slice of queries. Core category terms and bottom-funnel queries do not return Coast citations. Significant GEO investment is needed.</div></div><div class="stat-card"><div class="lbl">Verified AI Overview citations</div><div class="num good">5</div><div class="sub">Coast's brand is cited in 5 of the 17 AI-answer queries we tested.</div></div><div class="stat-card"><div class="lbl">AI answer trigger rate</div><div class="num ">42.5%</div><div class="sub">Google's AI answer box fires on 17 of 40 tracked queries.</div></div><div class="stat-card"><div class="lbl">Citation rate when AI answers</div><div class="num ">12.5%</div><div class="sub">Share of AI-answer queries where the brand is actually quoted.</div></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">EXECUTIVE SUMMARY</span>
+    <h2>Coast scores 22 of 100 for AI Overview visibility. The work is closing the citation and identity gaps.</h2></div>
+  <div class="grid grid-2" style="gap:32px;">
+    <div class="stack-md">
+      <p class="lede">The brand appears in AIO on a narrow slice of queries. Core category terms and bottom-funnel queries do not return Coast citations. Significant GEO investment is needed.</p>
+      <p>AI answers fire on 42.5% of tracked queries, yet Coast is quoted in only 12.5% of them. When it does appear, it sits Secondary (position 2 of 3+ in list) on 'fuel card ein only' query.</p>
+    </div>
+    <div class="score-block"><div class="num-side">
+      <div class="mono-label">AI Visibility Score</div><div class="big">22</div>
+      <div class="band"><span>Minimal AIO Presence band</span></div>
+      <div class="scale"><div class="seg on"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+      <div class="scale-lbl"><span>Barely</span><span>Low</span><span>Competitive</span><span>Dominant</span></div>
+    </div>
+    <div class="components"><div class="mono-label" style="margin-bottom:14px;">What's in the score</div><ul><li><span class="lbl">How often AI answers appear</span><span class="val">43 / 100</span></li><li><span class="lbl">How AI cites your brand</span><span class="val">12 / 100</span></li><li><span class="lbl">How AI describes the brand</span><span class="val">15 / 100</span></li><li><span class="lbl">Topic coverage breadth</span><span class="val">20 / 100</span></li><li><span class="lbl">Quality of placement when cited</span><span class="val">30 / 100</span></li><li><span class="lbl">Your brand entity breadth</span><span class="val">10 / 100</span></li></ul></div></div>
+  </div>
+  <div class="section-head" style="margin-top:48px;"><span class="mono-label">THREE FINDINGS THAT MATTER</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>The brand is missing from most of AI-answer queries</h3><p>Coast is confirmed cited on only one query ('fuel card ein only') in one captured AIO response. Among 40 tracked keywords, AIO triggers on 17 queries but Coast is cited on only 5 of those (12.5% inclusion rate). The single confirmed citation is on the blog page coastpay.com/blog/fuel-cards-ein-only/, positioned second behind AtoB.</p></div><div class="finding"><div class="num">02</div><h3>AI misreads the category</h3><p>AIO sees Coast as a narrow EIN-only fuel card competitor. The broader expense management platform, fraud controls, vertical specializations, transparent pricing, and field-service-specific positioning are entirely invisible. This misalignment costs Coast citations on high-volume 'best fleet cards' and 'fleet expense management' queries where the full product suite is the relevant answer.</p></div></div>
+  <div class="section-head" style="margin-top:40px;"><span class="mono-label">TOP THREE MOVES</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>Create and optimize 6-8 high-intent landing pages for highest-volume AIO gaps (fleet fuel cards, instant approval, fleet cards for small business)</h3><p>Impact High  ·  effort Medium  ·  30 days</p></div><div class="finding"><div class="num">02</div><h3>Rebuild homepage and product pages with explicit product entity markup (Field Cards, Corporate Cards, Expense Management Platform) in schema.org; link to owned queries</h3><p>Impact High  ·  effort Medium  ·  30 days</p></div><div class="finding"><div class="num">03</div><h3>Develop comparison and best-of content targeting 'best fleet cards' queries with primary positioning on fraud guarantee and GPS controls</h3><p>Impact High  ·  effort Medium  ·  45 days</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">CONTENT AND ENTITY COVERAGE</span>
+    <h2>The topics that matter to the brand, and where it shows up in AI answers today.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:48%">Topic</th><th>Presence in AI answers</th><th>Buyer intent</th></tr></thead><tbody><tr><td>EIN-only fuel cards</td><td class="yes">Owned</td><td>solution-aware, buying signals present</td></tr><tr><td>Fuel system maintenance</td><td class="yes">Owned</td><td>informational, search volume 500</td></tr><tr><td>Best fleet fuel cards</td><td class="">Partial</td><td>buying intent, rank 2 organic, AIO present but Coast not cited</td></tr><tr><td>Best fleet cards</td><td class="">Partial</td><td>buying intent, rank 3 organic, AIO present but Coast not cited</td></tr><tr><td>Cheapest fuel cards</td><td class="">Partial</td><td>price-sensitive buying, rank 2 organic, AIO present but Coast not cited</td></tr><tr><td>Business gas card no personal guarantee</td><td class="">Partial</td><td>differentiator-focused, rank 3 organic</td></tr><tr><td>Fleet expense management software</td><td class="no">Invisible</td><td>core product, no AIO presence</td></tr><tr><td>Fuel card fraud prevention</td><td class="no">Invisible</td><td>Coast has $25k guarantee, feature is AIO-relevant but not cited</td></tr><tr><td>Fleet cards by vertical</td><td class="no">Invisible</td><td>HVAC, landscaping, construction; no vertical-specific AIO presence detected</td></tr><tr><td>Fleet card GPS controls</td><td class="no">Invisible</td><td>feature exists on-site, not attributed in AIO</td></tr><tr><td>Apply for fuel card instant approval</td><td class="no">Invisible</td><td>bottom-funnel, rank 10 organic, AIO triggers but Coast not included</td></tr><tr><td>Fleet maintenance management</td><td class="no">Invisible</td><td>blog post exists, rank 7 organic, AIO triggers, not cited</td></tr><tr><td>Corporate cards for small business</td><td class="no">Invisible</td><td>product exists, no AIO signals</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:32px;"><div class="mono-label">Buyer-journey coverage</div>
+    <div><p><strong>Problem Aware.</strong> Present on informational queries (fuel system cost, commercial vehicles) but positioned as traffic bait, not solution messaging. Content answers questions but does not lead to Coast as the solution.</p><p><strong>Solution Aware.</strong> Weak and fragmented. Best-of and comparison queries have AIO presence but Coast is not cited. Strong organic rankings on 'best fleet cards' do not convert to AIO inclusion.</p><p><strong>Alternatives.</strong> Only cited on EIN-only queries, the narrowest segment. Absent from 'best fleet card' and 'apply for fuel card' queries where buyers are ready to choose and comparing alternatives.</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">IDENTITY IN AI OVERVIEWS</span>
+    <h2>How the brand describes itself, and how Google's AI describes it.</h2></div>
+  <div class="split-quotes">
+    <div class="card"><div class="mono-label">What the brand says about itself</div>
+      <h3>Fleet and fuel card plus corporate expense management platform</h3>
+      <blockquote>The smartest card for fuel, field, and office expenses<span class="src">coastpay.com, 2026</span></blockquote>
+      <p>Differentiators it leads with: No personal guarantee required, Flat $4 per active user per month transparent pricing, 3-9 cents per gallon rebates at 30,000+ stations, 1% cash back on non-gas purchases, $25,000 fuel fraud guarantee, GPS and tank-data controls to block suspicious transactions, 100% US-based customer support, Works everywhere Visa is accepted, Average $30,000 annual savings per fleet.</p>
+    </div>
+    <div class="card"><div class="mono-label">What Google's AI says</div>
+      <h3>Business fuel card requiring EIN only (no personal guarantee)</h3>
+      <blockquote>Secondary option behind AtoB in EIN-only fuel card results</blockquote><blockquote>No personal guarantee</blockquote>
+    </div>
+  </div>
+  <div class="callout good"><div class="mono-label">The core gap</div><div>AIO sees Coast as a narrow EIN-only fuel card competitor. The broader expense management platform, fraud controls, vertical specializations, transparent pricing, and field-service-specific positioning are entirely invisible. This misalignment costs Coast citations on high-volume 'best fleet cards' and 'fleet expense management' queries where the full product suite is the relevant answer.</div></div>
+  <div class="grid grid-2" style="margin-top:32px;">
+    <div><div class="mono-label">Words AI uses for the brand</div><div class="descriptors"><span class="desc-pill present">Correctly identified as no personal guarantee option, a key differentiator</span><span class="desc-pill present">EIN-only application process is accurate and relevant to niche audience</span></div></div>
+    <div><div class="mono-label">The brand's own pillars that AI omits</div><div class="descriptors"><span class="desc-pill">Expense management platform (core value prop, completely absent from AIO)</span><span class="desc-pill">Corporate cards for non-fuel spend (product line, invisible in AIO)</span><span class="desc-pill">Field cards (product line, not attributed)</span><span class="desc-pill">GPS-linked spend controls (fraud prevention feature, not associated)</span><span class="desc-pill">$25,000 fraud guarantee (unique security claim, not cited)</span><span class="desc-pill">Vertical focus and specialization (HVAC, landscaping, construction, pest control, solar, transportation; no vertical positioning)</span><span class="desc-pill">Flat transparent pricing model ($4/user/month; AIO does not convey pricing advantage)</span><span class="desc-pill">Telematics and fuel data integrations (advanced feature, not captured)</span></div></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">AI OVERVIEW PERFORMANCE</span>
+    <h2>Where the brand shows up in Google's AI, and the high-value queries it is missing.</h2></div>
+  <div class="stats-bar"><div class="stat-card"><div class="lbl">Tracked keywords</div><div class="num">40</div><div class="sub">Brand, category, and comparison queries analyzed.</div></div><div class="stat-card"><div class="lbl">AI answers fired</div><div class="num">17</div><div class="sub">42.5% of tracked queries trigger an AI Overview.</div></div><div class="stat-card"><div class="lbl">Times brand cited</div><div class="num">5</div><div class="sub">12.5% citation rate when AI answers.</div></div><div class="stat-card"><div class="lbl">Total brand mentions</div><div class="num">1</div><div class="sub">Across all observed AI responses.</div></div></div>
+  <div style="margin-top:40px;"><div class="section-head"><span class="mono-label">HIGH-VALUE QUERIES WHERE THE BRAND RANKS BUT IS NOT QUOTED</span></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:42%">Query</th><th>Volume</th><th>Organic rank</th><th>What happens</th></tr></thead><tbody><tr><td>fleet fuel cards</td><td>1700</td><td>#Organic rank 10, AIO present but Coast not cited</td><td>Highest-volume gap. Coast has strong organic presence but not included in AIO recommendation set.</td></tr><tr><td>apply for gas card instant approval</td><td>1300</td><td>#Organic rank 11, AIO present but Coast not cited</td><td>Bottom-funnel high-intent query. AIO triggers but Coast missing from consideration set.</td></tr><tr><td>apply for fuel card</td><td>800</td><td>#Organic rank 10, AIO triggers</td><td>Immediate action query. Coast ranks well but not cited by AIO.</td></tr><tr><td>best fleet fuel cards</td><td>300</td><td>#Organic rank 2, AIO present but Coast not cited</td><td>High-intent comparison. Top 3 organic ranking but no AIO inclusion.</td></tr><tr><td>best fleet cards</td><td>300</td><td>#Organic rank 3, AIO present but Coast not cited</td><td>Broad category query. Strong organic but not attributed in AIO.</td></tr><tr><td>business gas card no personal guarantee</td><td>200</td><td>#Organic rank 3</td><td>Differentiator-focused query. Coast should own this but no AIO citation detected.</td></tr><tr><td>cheapest fuel cards</td><td>200</td><td>#Organic rank 2, AIO present but Coast not cited</td><td>Pricing-focused query. Top 2 organic rank but not cited in AIO.</td></tr></tbody></table></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">WHERE GOOGLE'S AI GETS ITS ANSWERS</span>
+    <h2>The sources Google's AI cites in this category, and what it tells you about earning citations.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Domain AI cites</th><th>Pages</th><th>Context</th></tr></thead><tbody><tr><td>www.atob.com</td><td>Unknown (AtoB homepage or product page)</td><td>Primary recommended option on 'fuel card ein only' query, positioned ahead of Coast</td></tr><tr><td>fairfigure.com</td><td>Unknown (likely comparison or review page)</td><td>Third-party review and comparison site cited alongside Coast on EIN-only fuel card query</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:28px;"><div class="mono-label">Reading</div><div>Coast owns one AIO citation on its narrowest, lowest-volume defensible query. The broader fleet and expense management categories are dominated by WEX, Fleetcor, and AtoB, which do not cite Coast. Third-party review sites (fairfigure.com) are cited as neutral arbiters, suggesting Coast needs stronger third-party positioning and testimonials.</div></div>
+</div></section>
+
+<section class="dark-zone dark"><div class="container">
+  <div class="section-head"><span class="mono-label">AI-REVEALED PEERS</span>
+    <h2>The competitive set drawn by Google's AI itself. Observed, not chosen.</h2></div>
+  <p class="lede">Confirmed peers are from one captured AIO response. Inferred peers are based on Coast's organic keyword strategy and content benchmarking.</p>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:26%">Peer</th><th>How AI frames it</th></tr></thead><tbody><tr><td>AtoB</td><td>Listed as primary recommendation ahead of Coast on 'fuel card ein only' query. AIO describes AtoB as requiring no credit check or personal guarantee. Occupies #1 position in the recommendation set.</td></tr><tr><td>P-Fleet</td><td>Listed third in the same EIN-only response, behind Coast. Limited data availability from captured response.</td></tr><tr><td>WEX</td><td>Incumbent fleet card network. Inferred as likely AIO peer on 'best fleet fuel cards' and category comparison queries based on market position.</td></tr><tr><td>Fleetcor / Corpay</td><td>Largest fleet card provider globally. Inferred as expected to appear on high-volume category queries and best-of lists.</td></tr><tr><td>Fuelman</td><td>Referenced in Coast's own comparison content. Inferred as likely AIO competitor on category and comparison queries.</td></tr></tbody></table></div>
+  <div class="card" style="margin-top:28px;"><div class="mono-label">Key observation</div><div>AtoB holds the #1 position on Coast's strongest AIO query. Coast's brand is trapped in a narrow EIN-only niche when it should compete across the entire fleet and expense management category.</div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">30-DAY PRIORITY MOVES</span>
+    <h2>The highest-leverage moves, ranked by impact against effort.</h2></div>
+  <div class="grid grid-2"><div class="move"><div class="num">Move 01 &nbsp;·&nbsp; 30 days</div><h3>Create and optimize 6-8 high-intent landing pages for highest-volume AIO gaps (fleet fuel cards, instant approval, fleet cards for small business)</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 02 &nbsp;·&nbsp; 30 days</div><h3>Rebuild homepage and product pages with explicit product entity markup (Field Cards, Corporate Cards, Expense Management Platform) in schema.org; link to owned queries</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 03 &nbsp;·&nbsp; 45 days</div><h3>Develop comparison and best-of content targeting 'best fleet cards' queries with primary positioning on fraud guarantee and GPS controls</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 04 &nbsp;·&nbsp; 45 days</div><h3>Create vertical-specific landing pages (HVAC, plumbing, landscaping, construction) with customer testimonials and savings proof points</h3><p>Impact Medium &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 05 &nbsp;·&nbsp; 30 days</div><h3>Build feature-focused content (GPS controls, fraud guarantee, transparent pricing) with structured data to compete for AIO inclusion on security and control queries</h3><p>Impact Medium &nbsp;·&nbsp; effort Low.</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">90-DAY ROADMAP</span><h2>Three sprints from first wins to compounding category presence.</h2></div>
+  <div class="grid grid-3"><div class="sprint"><div class="num">Month 1 &nbsp;·&nbsp; Days 1 to 30</div><ul><li>Audit all Coast product pages and homepage for entity clarity (Field Cards, Corporate Cards, Expense Management Platform missing)</li><li>Implement product entity schema.org markup across core product pages</li><li>Create landing pages for 4 highest-volume gaps: 'best fleet fuel cards', 'apply for fuel card instant approval', 'fleet cards for small business', 'cheapest fuel cards'</li><li>Build feature comparison content emphasizing fraud guarantee and GPS controls with structured data</li><li>Baseline all 40 tracked keywords in Brand Radar and establish weekly tracking cadence</li></ul></div><div class="sprint"><div class="num">Month 2 &nbsp;·&nbsp; Days 31 to 60</div><ul><li>Launch 3 vertical-specific landing pages (HVAC, plumbing, landscaping) with customer testimonials and savings proof points</li><li>Optimize existing 'best fleet fuel cards' and 'best fleet cards' pages for AIO citation with fresh data and customer evidence</li><li>Create dedicated fraud prevention and security controls content targeting 'fleet card fraud prevention' and related queries</li><li>Expand EIN-only fuel card content to include all product entities (Field Cards, Corporate Cards) as related solutions</li><li>Monitor AIO appearance on new content; refine schema markup based on performance</li></ul></div><div class="sprint"><div class="num">Month 3 &nbsp;·&nbsp; Days 61 to 90</div><ul><li>Build comprehensive fleet expense management software positioning page to capture 'fleet expense management' AIO gap</li><li>Develop bottom-funnel application-focused content ('apply for fuel card', 'instant approval') with friction reduction messaging</li><li>Create comparative best-of content ('cheapest fuel cards', 'fleet cards no personal guarantee') with transparent pricing and savings calculations</li><li>Implement review/testimonial schema across all customer proof points to increase entity association strength</li><li>Conduct mid-90-day analysis of top leverage moves ROI and adjust content/optimization strategy for remaining gaps</li></ul></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">SUCCESS METRICS</span><h2>What we measure, and the 90-day targets.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Metric</th><th>Baseline</th><th>90-day target</th><th>Cadence</th></tr></thead><tbody><tr><td>AIO trigger rate across 40 tracked keywords</td><td>42.5%</td><td>50%</td><td>Weekly</td></tr><tr><td>AIO inclusion rate (Coast cited when AIO triggers)</td><td>12.5%</td><td>25%</td><td>Weekly</td></tr><tr><td>Confirmed Coast citations in AIO</td><td>1 page (EIN-only query)</td><td>5+ pages across 5+ query clusters</td><td>Bi-weekly</td></tr><tr><td>AIO mentions of expense management platform or fraud guarantee features</td><td>0</td><td>2+</td><td>Bi-weekly</td></tr><tr><td>Average organic rank on high-value gaps (fleet fuel cards, best fleet cards, instant approval)</td><td>Top 10</td><td>Top 5</td><td>Weekly</td></tr></tbody></table></div>
+</div></section>
+
+<footer><div class="container">
+  <div class="word">coast.</div>
+  <div class="meta-row">
+    <div class="left">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY &nbsp;·&nbsp; JUNE 3, 2026</div>
+    <div class="right">PREPARED BY AUQ &nbsp;·&nbsp; ANALYTICS@AUQ.IO</div>
+  </div>
+</div></footer></body></html>
