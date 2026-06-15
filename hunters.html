@@ -1,0 +1,293 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hunters GEO Audit, brand-only, by AUQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-text: #000000; --c-text-dark: #ffffff; --c-bg: #ffffff; --c-dark: #010120;
+    --c-magenta: #ef2cc1; --c-orange: #fc4c02; --c-lavender: #bdbbff;
+    --c-border-light: rgba(0, 0, 0, 0.08); --c-border-dark: rgba(255, 255, 255, 0.12);
+    --c-fill-light: rgba(0, 0, 0, 0.04); --c-fill-dark: rgba(255, 255, 255, 0.06);
+    --c-muted-light: rgba(0, 0, 0, 0.55); --c-muted-dark: rgba(255, 255, 255, 0.65);
+    --shadow: 0 4px 10px rgba(1, 1, 32, 0.10); --shadow-lg: 0 12px 32px rgba(1, 1, 32, 0.10);
+    --r-sharp: 4px; --r-comfort: 8px;
+    --f-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --f-mono: "JetBrains Mono", "PP Neue Montreal Mono", Georgia, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--f-display); font-size: 16px; font-weight: 400; line-height: 1.30; letter-spacing: -0.16px; color: var(--c-text); background: var(--c-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  .display { font-size: 80px; font-weight: 500; line-height: 0.95; letter-spacing: -2.4px; }
+  h1 { font-size: 56px; font-weight: 500; line-height: 1.05; letter-spacing: -1.68px; }
+  h2 { font-size: 40px; font-weight: 500; line-height: 1.10; letter-spacing: -0.8px; }
+  h3 { font-size: 22px; font-weight: 500; line-height: 1.20; letter-spacing: -0.22px; }
+  h4 { font-size: 18px; font-weight: 500; line-height: 1.30; letter-spacing: -0.18px; }
+  p { font-size: 16px; line-height: 1.45; letter-spacing: -0.16px; }
+  p.lede { font-size: 22px; line-height: 1.35; letter-spacing: -0.22px; font-weight: 400; }
+  .caption { font-size: 13px; line-height: 1.40; color: var(--c-muted-light); }
+  .mono-label { font-family: var(--f-mono); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); display: inline-block; }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 100px 0; border-top: 1px solid var(--c-border-light); }
+  .section:first-of-type { border-top: none; }
+  .section-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; max-width: 820px; }
+  nav.topnav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); background: rgba(255,255,255,0.75); border-bottom: 1px solid var(--c-border-light); }
+  nav.topnav .container { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
+  .brand { font-family: var(--f-display); font-weight: 500; font-size: 18px; letter-spacing: -0.18px; display: flex; align-items: center; gap: 10px; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); }
+  nav.topnav .right { display: flex; align-items: center; gap: 24px; }
+  nav.topnav .right a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; }
+  nav.topnav .right a:hover { opacity: 0.6; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--c-dark); color: var(--c-text-dark); padding: 10px 18px; border-radius: var(--r-sharp); font-size: 14px; letter-spacing: -0.14px; font-weight: 500; text-decoration: none; transition: transform 0.15s ease; }
+  .btn-cta:hover { transform: translateY(-1px); }
+  .hero { position: relative; overflow: hidden; padding: 88px 0 96px; }
+  .hero::before, .hero::after { content: ""; position: absolute; pointer-events: none; filter: blur(60px); z-index: 0; }
+  .hero::before { width: 720px; height: 720px; top: -200px; right: -180px; background: radial-gradient(circle at 30% 30%, rgba(239, 44, 193, 0.32) 0%, transparent 60%), radial-gradient(circle at 70% 70%, rgba(189, 187, 255, 0.55) 0%, transparent 65%); border-radius: 50%; }
+  .hero::after { width: 560px; height: 560px; top: 60px; left: -140px; background: radial-gradient(circle at 40% 60%, rgba(189, 187, 255, 0.50) 0%, transparent 65%), radial-gradient(circle at 80% 30%, rgba(252, 76, 2, 0.16) 0%, transparent 60%); border-radius: 50%; }
+  .hero .container { position: relative; z-index: 1; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 6px 12px; border-radius: var(--r-sharp); background: rgba(255,255,255,0.7); border: 1px solid var(--c-border-light); backdrop-filter: blur(8px); margin-bottom: 32px; }
+  .hero .eyebrow .pill { width: 6px; height: 6px; border-radius: 50%; background: var(--c-magenta); }
+  .hero .display { margin-bottom: 28px; max-width: 14ch; }
+  .hero p.lede { max-width: 64ch; color: rgba(0,0,0,0.75); margin-bottom: 40px; }
+  .hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 32px; max-width: 980px; margin-bottom: 56px; }
+  .hero .meta .row { display: flex; gap: 10px; align-items: baseline; }
+  .hero .meta .k { font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); white-space: nowrap; }
+  .hero .meta .v { font-size: 14px; letter-spacing: -0.14px; color: var(--c-text); }
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .stat-card { background: rgba(255,255,255,0.92); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; box-shadow: var(--shadow); backdrop-filter: blur(8px); display: flex; flex-direction: column; gap: 10px; }
+  .stat-card .num { font-size: 56px; font-weight: 500; line-height: 0.95; letter-spacing: -1.68px; }
+  .stat-card .num.accent { background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat-card .num.good { color: #097a3f; }
+  .stat-card .num.warn { color: var(--c-orange); }
+  .stat-card .lbl { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .stat-card .sub { font-size: 14px; line-height: 1.4; letter-spacing: -0.14px; color: var(--c-muted-light); }
+  .card { background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 32px; box-shadow: var(--shadow); }
+  .card .mono-label { margin-bottom: 14px; }
+  .card h3 { margin-bottom: 10px; }
+  .card p { color: rgba(0,0,0,0.78); }
+  .card.flat { box-shadow: none; }
+  .dark .card { background: rgba(255,255,255,0.04); border-color: var(--c-border-dark); color: var(--c-text-dark); box-shadow: none; }
+  .dark .card p { color: rgba(255,255,255,0.78); }
+  .tbl-wrap { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); overflow: hidden; background: var(--c-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; letter-spacing: -0.14px; }
+  thead th { background: var(--c-dark); color: var(--c-text-dark); text-align: left; padding: 14px 18px; font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; border-bottom: 1px solid var(--c-border-dark); }
+  tbody td { padding: 14px 18px; border-top: 1px solid var(--c-border-light); vertical-align: top; color: var(--c-text); }
+  tbody tr:nth-child(even) td { background: rgba(0,0,0,0.025); }
+  tbody td.num { font-variant-numeric: tabular-nums; font-weight: 500; }
+  tbody td.center { text-align: center; }
+  td.no { color: var(--c-orange); font-weight: 500; }
+  td.yes { color: #097a3f; font-weight: 500; }
+  .dark .tbl-wrap { border-color: var(--c-border-dark); background: rgba(255,255,255,0.02); }
+  .dark thead th { background: rgba(255,255,255,0.08); color: var(--c-text-dark); }
+  .dark tbody td { color: var(--c-text-dark); border-top-color: var(--c-border-dark); }
+  .dark tbody tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  blockquote { border-left: 3px solid var(--c-dark); padding: 4px 0 4px 20px; margin: 14px 0; font-style: italic; font-size: 17px; line-height: 1.45; letter-spacing: -0.17px; color: rgba(0,0,0,0.82); }
+  .dark blockquote { border-left-color: var(--c-lavender); color: rgba(255,255,255,0.85); }
+  blockquote .src { display: block; font-style: normal; margin-top: 8px; font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .dark blockquote .src { color: var(--c-muted-dark); }
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .move { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }
+  .move .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .move h3 { margin: 0; font-size: 20px; letter-spacing: -0.20px; }
+  .move p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .sprint { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); }
+  .sprint .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .sprint h3 { margin: 8px 0 12px; font-size: 20px; letter-spacing: -0.20px; }
+  .sprint ul { list-style: none; padding: 0; margin: 0; }
+  .sprint li { padding: 10px 0; border-top: 1px solid var(--c-border-light); font-size: 15px; line-height: 1.45; letter-spacing: -0.15px; display: flex; gap: 12px; align-items: flex-start; }
+  .sprint li:first-child { border-top: none; }
+  .sprint li::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--c-dark); border-radius: 2px; margin-top: 8px; }
+  .dark-zone { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0; position: relative; overflow: hidden; }
+  .dark-zone::before { content: ""; position: absolute; width: 600px; height: 600px; top: -100px; right: -150px; background: radial-gradient(circle at 40% 40%, rgba(189, 187, 255, 0.18) 0%, transparent 60%); border-radius: 50%; filter: blur(80px); pointer-events: none; }
+  .dark-zone .container { position: relative; z-index: 1; }
+  .dark-zone h2 { color: var(--c-text-dark); }
+  .dark-zone p { color: rgba(255,255,255,0.75); }
+  .dark { color: var(--c-text-dark); }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .score-block { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 40px; box-shadow: var(--shadow); margin-top: 24px; }
+  .score-block .num-side { display: flex; flex-direction: column; justify-content: center; gap: 12px; border-right: 1px solid var(--c-border-light); padding-right: 32px; }
+  .score-block .big { font-size: 120px; line-height: 0.9; letter-spacing: -3.6px; font-weight: 500; background: linear-gradient(135deg, var(--c-magenta) 0%, var(--c-lavender) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .score-block .band { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(189,187,255,0.20); border: 1px solid rgba(189,187,255,0.4); border-radius: var(--r-sharp); font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: #5a55c9; width: max-content; }
+  .score-block .scale { display: flex; gap: 4px; margin-top: 12px; }
+  .score-block .scale .seg { flex: 1; height: 6px; border-radius: 2px; background: rgba(0,0,0,0.08); }
+  .score-block .scale .seg.on { background: linear-gradient(90deg, var(--c-magenta), var(--c-lavender)); }
+  .score-block .scale-lbl { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .score-block .components ul { list-style: none; padding: 0; margin: 0; }
+  .score-block .components li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--c-border-light); font-size: 14px; letter-spacing: -0.14px; }
+  .score-block .components li:first-child { border-top: none; }
+  .score-block .components .lbl { color: rgba(0,0,0,0.75); }
+  .score-block .components .val { font-family: var(--f-mono); font-weight: 500; }
+  .findings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  .finding { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; background: var(--c-bg); }
+  .finding .num { font-family: var(--f-mono); font-size: 32px; font-weight: 500; letter-spacing: -0.5px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+  .finding p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.18); border-radius: var(--r-sharp); font-size: 13px; letter-spacing: -0.13px; color: var(--c-text); }
+  .descriptors { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .desc-pill { padding: 6px 12px; background: var(--c-fill-light); border: 1px solid var(--c-border-light); border-radius: var(--r-sharp); font-size: 13px; font-weight: 500; letter-spacing: -0.13px; }
+  .desc-pill.absent { background: rgba(252, 76, 2, 0.06); border-color: rgba(252, 76, 2, 0.18); color: var(--c-orange); text-decoration: line-through; text-decoration-color: rgba(252, 76, 2, 0.4); }
+  .desc-pill.present { background: rgba(9,122,63,0.06); border-color: rgba(9,122,63,0.18); color: #097a3f; }
+  footer.big-footer { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0 48px; position: relative; overflow: hidden; }
+  footer.big-footer::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at top left, rgba(189,187,255,0.10) 0%, transparent 50%); pointer-events: none; }
+  footer.big-footer .container { position: relative; z-index: 1; }
+  footer.big-footer .word { font-family: var(--f-display); font-weight: 500; font-size: clamp(80px, 14vw, 200px); line-height: 0.85; letter-spacing: -6px; background: linear-gradient(180deg, #ffffff 0%, rgba(189,187,255,0.4) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 40px; }
+  footer.big-footer .meta-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--c-border-dark); padding-top: 28px; flex-wrap: wrap; gap: 20px; }
+  footer.big-footer .meta-row .left, footer.big-footer .meta-row .right { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-dark); }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .stack-sm > * + * { margin-top: 14px; }
+  .stack-md > * + * { margin-top: 20px; }
+  .muted { color: var(--c-muted-light); }
+  .dark .muted { color: var(--c-muted-dark); }
+  .split-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .split-quotes .card .mono-label { color: var(--c-magenta); }
+  .callout { border: 1px solid rgba(252,76,2,0.30); background: rgba(252,76,2,0.04); border-radius: var(--r-comfort); padding: 24px; margin-top: 24px; }
+  .callout .mono-label { color: var(--c-orange); margin-bottom: 8px; }
+  .callout.good { border-color: rgba(9,122,63,0.30); background: rgba(9,122,63,0.04); }
+  .callout.good .mono-label { color: #097a3f; }
+  .glossary { border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.06); border-radius: var(--r-comfort); padding: 28px; margin-top: 24px; }
+  .glossary .mono-label { color: #5a55c9; margin-bottom: 14px; }
+  .glossary dl { display: grid; grid-template-columns: 180px 1fr; gap: 12px 20px; font-size: 14px; line-height: 1.5; }
+  .glossary dt { font-weight: 500; color: var(--c-text); }
+  .glossary dd { color: rgba(0,0,0,0.72); }
+  @media (max-width: 991px) {
+    .display { font-size: 64px; letter-spacing: -1.92px; }
+    h1 { font-size: 44px; letter-spacing: -1.32px; }
+    h2 { font-size: 32px; letter-spacing: -0.64px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .score-block { grid-template-columns: 1fr; }
+    .score-block .num-side { border-right: none; border-bottom: 1px solid var(--c-border-light); padding-right: 0; padding-bottom: 24px; }
+    .split-quotes { grid-template-columns: 1fr; }
+    .findings { grid-template-columns: 1fr; }
+    .glossary dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .glossary dt { margin-top: 10px; }
+  }
+  @media (max-width: 640px) {
+    .display { font-size: 48px; letter-spacing: -1.44px; }
+    h2 { font-size: 26px; letter-spacing: -0.52px; }
+    .section { padding: 64px 0; }
+    .stats-bar { grid-template-columns: 1fr; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    nav.topnav .right a:not(.btn-cta) { display: none; }
+    .container { padding: 0 20px; }
+    .stat-card .num { font-size: 44px; letter-spacing: -1.32px; }
+    .score-block .big { font-size: 88px; letter-spacing: -2.6px; }
+  }
+</style></head><body><nav class="topnav"><div class="container"><div class="brand">AUQ</div><div class="right mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</div></div></nav>
+
+<section class="hero"><div class="container">
+  <div class="eyebrow"><span class="pill"></span><span class="mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</span></div>
+  <h1 class="display">Hunters.</h1>
+  <p class="lede">A look at how Hunters is described, positioned, and quoted inside Google's AI Overviews, the AI answer box at the top of search results, and where the brand shows up versus goes missing.</p>
+  <div class="meta">
+    <div class="row"><span class="k">Site</span><span class="v">hunters.ai</span></div>
+    <div class="row"><span class="k">Where we looked</span><span class="v">Google AI Overviews, US</span></div>
+    <div class="row"><span class="k">Questions tested</span><span class="v">40 brand, category, and competitor queries</span></div>
+    <div class="row"><span class="k">Prepared</span><span class="v">June 15, 2026 &nbsp;·&nbsp; by AUQ</span></div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-card"><div class="lbl">AI Visibility Score</div><div class="num accent">8</div><div class="sub">out of 100. Critical band. The brand has effectively no established presence in Google AI Overviews for its target category. Immediate structural action is required.</div></div><div class="stat-card"><div class="lbl">Verified AI Overview citations</div><div class="num good">1</div><div class="sub">Hunters's brand is cited in 1 of the 12 AI-answer queries we tested.</div></div><div class="stat-card"><div class="lbl">AI answer trigger rate</div><div class="num ">30%</div><div class="sub">Google's AI answer box fires on 12 of 40 tracked queries.</div></div><div class="stat-card"><div class="lbl">Citation rate when AI answers</div><div class="num ">2.5%</div><div class="sub">Share of AI-answer queries where the brand is actually quoted.</div></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">EXECUTIVE SUMMARY</span>
+    <h2>Hunters scores 8 of 100 for AI Overview visibility. The work is closing the citation and identity gaps.</h2></div>
+  <div class="grid grid-2" style="gap:32px;">
+    <div class="stack-md">
+      <p class="lede">The brand has effectively no established presence in Google AI Overviews for its target category. Immediate structural action is required.</p>
+      <p>AI answers fire on undefined of tracked queries, yet Hunters is quoted in only 2.5% of them. When it does appear, it sits Unknown. Only 1 citation recorded; position data not available in current data set..</p>
+    </div>
+    <div class="score-block"><div class="num-side">
+      <div class="mono-label">AI Visibility Score</div><div class="big">8</div>
+      <div class="band"><span>Critical band</span></div>
+      <div class="scale"><div class="seg on"></div><div class="seg"></div><div class="seg"></div><div class="seg"></div></div>
+      <div class="scale-lbl"><span>Barely</span><span>Low</span><span>Competitive</span><span>Dominant</span></div>
+    </div>
+    <div class="components"><div class="mono-label" style="margin-bottom:14px;">What's in the score</div><ul><li><span class="lbl">How often AI answers appear</span><span class="val">18 / 100</span></li><li><span class="lbl">Quality of placement when cited</span><span class="val">3 / 100</span></li><li><span class="lbl">How AI describes the brand</span><span class="val">5 / 100</span></li><li><span class="lbl">Topic coverage breadth</span><span class="val">4 / 100</span></li><li><span class="lbl">Your pages being quoted</span><span class="val">10 / 100</span></li></ul></div></div>
+  </div>
+  <div class="section-head" style="margin-top:48px;"><span class="mono-label">THREE FINDINGS THAT MATTER</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>The brand is missing from most of AI-answer queries</h3><p>AIO triggers on 30% of tracked keywords, which is a reasonable baseline trigger rate for this category. However, the triggers are almost all on non-cybersecurity 'hunters' queries, not SIEM or SOC queries. Hunters is cited in only 1 of 40 tracked queries, a citation rate of 2.5%. Zero hunters.ai pages appear in the cited pages list. The single AIO citation is likely incidental, not category-driven. All 20 top cited pages in the AIO data belong to unrelated domains. None are hunters.ai pages. Top cited page is a PubMed article about HIV.</p></div><div class="finding"><div class="num">02</div><h3>AI misreads the category</h3><p>Critical. The entity collision between the common noun 'hunters' and the brand 'Hunters.ai' is severe. AIO has no established identity for Hunters as a cybersecurity brand. The brand self-identifies as a next-gen SIEM for small SOC teams, but AIO does not reflect this identity at all. This is not a factual error but a fundamental entity disambiguation failure at the platform level.</p></div></div>
+  <div class="section-head" style="margin-top:40px;"><span class="mono-label">TOP THREE MOVES</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>Build category-specific pillar content targeting SIEM buyer journey stages (problem-aware, solution-aware, alternatives). Create 5-7 authoritative guides addressing 'alert fatigue solutions', 'SIEM for small teams comparison', 'AI-powered SOC automation' to establish topical authority in the category.</h3><p>Impact High  ·  effort High  ·  60-90 days</p></div><div class="finding"><div class="num">02</div><h3>Establish entity disambiguation through schema markup, internal linking strategy, and brand mention consolidation. Tag all Hunters.ai brand pages with Organization and Product schema. Create a dedicated brand disambiguation page that signals cybersecurity category association to search engines and AIO.</h3><p>Impact High  ·  effort Medium  ·  14-30 days</p></div><div class="finding"><div class="num">03</div><h3>Secure 3-5 cybersecurity domain citations through analyst partnerships (pitch Gartner, GigaOm, Forrester for inclusion), industry publication features, and SIEM category reviews. Build externally-visible authority signals that AIO can detect and reference.</h3><p>Impact High  ·  effort High  ·  30-60 days</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">CONTENT AND ENTITY COVERAGE</span>
+    <h2>The topics that matter to the brand, and where it shows up in AI answers today.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:48%">Topic</th><th>Presence in AI answers</th><th>Buyer intent</th></tr></thead><tbody><tr><td>Next-gen SIEM</td><td class="no">Invisible</td><td>SIEM category awareness</td></tr><tr><td>AI-powered SIEM</td><td class="no">Invisible</td><td>product category</td></tr><tr><td>SOC automation</td><td class="no">Invisible</td><td>buyer problem</td></tr><tr><td>Alert triage automation</td><td class="no">Invisible</td><td>buyer problem</td></tr><tr><td>Detection and response platforms</td><td class="no">Invisible</td><td>buyer solution</td></tr><tr><td>UEBA</td><td class="no">Invisible</td><td>product capability</td></tr><tr><td>SIEM for small teams</td><td class="no">Invisible</td><td>target audience</td></tr><tr><td>Cloud-native SIEM</td><td class="no">Invisible</td><td>product positioning</td></tr><tr><td>MSSP security platforms</td><td class="no">Invisible</td><td>vertical market</td></tr><tr><td>Snowflake security integration</td><td class="no">Invisible</td><td>technology partnership</td></tr><tr><td>AWS security operations</td><td class="no">Invisible</td><td>technology partnership</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:32px;"><div class="mono-label">Buyer-journey coverage</div>
+    <div><p><strong>Problem Aware.</strong> Hunters does not appear in AIO for problem-aware queries such as 'how to reduce alert fatigue' or 'SOC team overloaded with alerts'. The brand has zero visibility in the problem recognition stage of the buyer journey.</p><p><strong>Solution Aware.</strong> Hunters does not appear in AIO for solution-aware queries such as 'best SIEM for small teams' or 'AI SIEM platform'. The brand is completely invisible in the solution consideration stage.</p><p><strong>Alternatives.</strong> Hunters does not appear in AIO for alternatives or comparison queries. It is not present as a reference point in any detected comparison answer. The brand is absent from competitive positioning within the category.</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">IDENTITY IN AI OVERVIEWS</span>
+    <h2>How the brand describes itself, and how Google's AI describes it.</h2></div>
+  <div class="split-quotes">
+    <div class="card"><div class="mono-label">What the brand says about itself</div>
+      <h3>Next-generation SIEM / SOC automation platform</h3>
+      <blockquote>AI-driven next-gen SIEM for small SecOps teams. Automated detection, investigation, and response in a single SOC platform.<span class="src">hunters.ai, 2026</span></blockquote>
+      <p>Differentiators it leads with: AI-powered alert triage and investigation, Pre-built always-on detections (UEBA, Identity, Endpoint, Cloud), Automated scoring, correlation, and enrichment, Designed for small security teams, Snowflake and AWS native integrations, MSSP support, Team Axon managed detection service, Pathfinder AI co-pilot, No detection engineering required.</p>
+    </div>
+    <div class="card"><div class="mono-label">What Google's AI says</div>
+      <h3>NOT ESTABLISHED. The brand name 'Hunters' is a common English word. Google AIO associates it with hunting (wildlife, sport), bounty hunters, the TV series, and K-pop content. No cybersecurity category association is detectable in the AIO data returned.</h3>
+      <blockquote>Hunters associated with hunting (wildlife, sport)</blockquote><blockquote>Hunters associated with bounty hunters</blockquote>
+    </div>
+  </div>
+  <div class="callout good"><div class="mono-label">The core gap</div><div>Critical. The entity collision between the common noun 'hunters' and the brand 'Hunters.ai' is severe. AIO has no established identity for Hunters as a cybersecurity brand. The brand self-identifies as a next-gen SIEM for small SOC teams, but AIO does not reflect this identity at all. This is not a factual error but a fundamental entity disambiguation failure at the platform level.</div></div>
+  <div class="grid grid-2" style="margin-top:32px;">
+    <div><div class="mono-label">Words AI uses for the brand</div><div class="descriptors"><span class="desc-pill present">Strong common-noun entity recognition (but undifferentiated from other 'hunters' meanings)</span></div></div>
+    <div><div class="mono-label">The brand's own pillars that AI omits</div><div class="descriptors"><span class="desc-pill">Zero cybersecurity category association in AIO</span><span class="desc-pill">No SOC automation or SIEM positioning in AIO descriptions</span><span class="desc-pill">No mention of AI-powered alert triage or investigation capabilities</span><span class="desc-pill">No recognition of target audience (small SOC teams, MSSPs)</span><span class="desc-pill">Complete absence from buyer journey for SIEM, cloud-native SIEM, and SOC automation queries</span></div></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">AI OVERVIEW PERFORMANCE</span>
+    <h2>Where the brand shows up in Google's AI, and the high-value queries it is missing.</h2></div>
+  <div class="stats-bar"><div class="stat-card"><div class="lbl">Tracked keywords</div><div class="num">40</div><div class="sub">Brand, category, and comparison queries analyzed.</div></div><div class="stat-card"><div class="lbl">AI answers fired</div><div class="num">12</div><div class="sub">undefined of tracked queries trigger an AI Overview.</div></div><div class="stat-card"><div class="lbl">Times brand cited</div><div class="num">1</div><div class="sub">2.5% citation rate when AI answers.</div></div><div class="stat-card"><div class="lbl">Total brand mentions</div><div class="num">43413</div><div class="sub">Across all observed AI responses.</div></div></div>
+  <div style="margin-top:40px;"><div class="section-head"><span class="mono-label">HIGH-VALUE QUERIES WHERE THE BRAND RANKS BUT IS NOT QUOTED</span></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:42%">Query</th><th>Volume</th><th>Organic rank</th><th>What happens</th></tr></thead><tbody><tr><td>best SIEM for small teams</td><td>High</td><td>#Not appearing in AIO</td><td>Solution-aware query where Hunters.ai should appear but is completely absent</td></tr><tr><td>AI SIEM platform</td><td>High</td><td>#Not appearing in AIO</td><td>Core product category query with no Hunters.ai presence</td></tr><tr><td>alert fatigue reduction</td><td>Medium</td><td>#Not appearing in AIO</td><td>Problem-aware query addressing key value proposition, brand missing</td></tr><tr><td>SOC automation platform</td><td>High</td><td>#Not appearing in AIO</td><td>Core use case query with no Hunters.ai visibility</td></tr><tr><td>cloud-native SIEM</td><td>Medium</td><td>#Not appearing in AIO</td><td>Category positioning query addressing Hunters.ai differentiator (Snowflake/AWS native), brand absent</td></tr></tbody></table></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">WHERE GOOGLE'S AI GETS ITS ANSWERS</span>
+    <h2>The sources Google's AI cites in this category, and what it tells you about earning citations.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Domain AI cites</th><th>Pages</th><th>Context</th></tr></thead><tbody><tr><td>www.reddit.com</td><td>7766</td><td>General discussion. Not cybersecurity-specific.</td></tr><tr><td>www.youtube.com</td><td>8608</td><td>Video content. Not cybersecurity-specific.</td></tr><tr><td>en.wikipedia.org</td><td>2270</td><td>Encyclopedia entries. Hunters TV series and wildlife entries dominant.</td></tr><tr><td>www.facebook.com</td><td>4100</td><td>Social content. Not cybersecurity-specific.</td></tr><tr><td>www.quora.com</td><td>1425</td><td>Q&amp;A. Not cybersecurity-specific.</td></tr><tr><td>a-z-animals.com</td><td>292</td><td>Animal encyclopedia. Confirms wildlife-query dominance.</td></tr><tr><td>www.britannica.com</td><td>198</td><td>Encyclopedia. Not cybersecurity-specific.</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:28px;"><div class="mono-label">Reading</div><div>The entire citation landscape for 'hunters' queries is non-cybersecurity. No cybersecurity publication, analyst site, or review platform appears in the top cited domains. This confirms the entity collision problem is broad and systemic. The brand has no external authority signals that AIO can draw on from the cybersecurity industry. Zero cybersecurity domains appear in the AIO citation landscape for 'hunters' queries, indicating complete absence of third-party validation in the category.</div></div>
+</div></section>
+
+<section class="dark-zone dark"><div class="container">
+  <div class="section-head"><span class="mono-label">AI-REVEALED PEERS</span>
+    <h2>The competitive set drawn by Google's AI itself. Observed, not chosen.</h2></div>
+  <p class="lede">The organic keyword data suggests adjacency to Splunk (Cortex XDR ranking), Microsoft Sentinel, and other SIEM vendors, but these are inferred from keyword co-occurrence, not AIO responses. Likely category peers based on SIEM market context: Splunk, Microsoft Sentinel, IBM QRadar, Sumo Logic, Exabeam. However, these names are inferred from category knowledge, not from observed AIO data and should be validated through direct AIO competitor query analysis.</p>
+  
+  <div class="card" style="margin-top:28px;"><div class="mono-label">Key observation</div><div>No AIO-revealed peers were identified because Hunters.ai does not appear in category queries. When AIO answers SIEM or SOC automation queries, it does not cite Hunters. Peers in those responses could not be extracted from this data set.</div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">30-DAY PRIORITY MOVES</span>
+    <h2>The highest-leverage moves, ranked by impact against effort.</h2></div>
+  <div class="grid grid-2"><div class="move"><div class="num">Move 01 &nbsp;·&nbsp; 60-90 days</div><h3>Build category-specific pillar content targeting SIEM buyer journey stages (problem-aware, solution-aware, alternatives). Create 5-7 authoritative guides addressing 'alert fatigue solutions', 'SIEM for small teams comparison', 'AI-powered SOC automation' to establish topical authority in the category.</h3><p>Impact High &nbsp;·&nbsp; effort High.</p></div><div class="move"><div class="num">Move 02 &nbsp;·&nbsp; 14-30 days</div><h3>Establish entity disambiguation through schema markup, internal linking strategy, and brand mention consolidation. Tag all Hunters.ai brand pages with Organization and Product schema. Create a dedicated brand disambiguation page that signals cybersecurity category association to search engines and AIO.</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 03 &nbsp;·&nbsp; 30-60 days</div><h3>Secure 3-5 cybersecurity domain citations through analyst partnerships (pitch Gartner, GigaOm, Forrester for inclusion), industry publication features, and SIEM category reviews. Build externally-visible authority signals that AIO can detect and reference.</h3><p>Impact High &nbsp;·&nbsp; effort High.</p></div><div class="move"><div class="num">Move 04 &nbsp;·&nbsp; 14-30 days</div><h3>Audit and optimize top 10 organic pages for AIO visibility. Ensure integration documentation pages link back to product category pages and comparison content. Create 'See also' sections that position Hunters.ai against SIEM category alternatives.</h3><p>Impact Medium &nbsp;·&nbsp; effort Medium.</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">90-DAY ROADMAP</span><h2>Three sprints from first wins to compounding category presence.</h2></div>
+  <div class="grid grid-3"><div class="sprint"><div class="num">Month 1 &nbsp;·&nbsp; Days 1 to 30</div><ul><li>Audit and tag all brand pages with Organization and Product schema markup to establish category entity signals.</li><li>Create dedicated 'Hunters.ai for SIEM' disambiguation and category positioning page.</li><li>Conduct competitive AIO content audit on top 5 SIEM competitors to identify category content patterns.</li><li>Initiate analyst partnership outreach (Gartner, GigaOm, Forrester SIEM reviews).</li><li>Optimize top 3 organic integration documentation pages with internal links to product category pages.</li></ul></div><div class="sprint"><div class="num">Month 2 &nbsp;·&nbsp; Days 31 to 60</div><ul><li>Publish 2-3 pillar content pieces addressing 'alert fatigue solutions', 'SOC automation platforms', and 'SIEM for small teams' to establish buyer journey coverage.</li><li>Secure 1-2 analyst mentions or industry publication features mentioning Hunters.ai as SIEM vendor.</li><li>Build internal linking strategy connecting integration docs to category and comparison content.</li><li>Create 'Hunters.ai vs [competitor]' comparison pages for 3-4 key SIEM platforms.</li><li>Develop schema markup for comparison pages and category content.</li></ul></div><div class="sprint"><div class="num">Month 3 &nbsp;·&nbsp; Days 61 to 90</div><ul><li>Publish remaining 2-3 pillar content pieces covering SIEM category, cloud-native SIEM, MSSP platforms.</li><li>Refine brand entity signals based on early AIO trigger data and adjust content strategy.</li><li>Secure 1-2 additional cybersecurity domain citations or reviews mentioning Hunters.ai.</li><li>Conduct comprehensive content gap analysis and refine owned topic strategy based on AIO response patterns.</li><li>Analyze and report on AIO citation rate, trigger rate, and owned page citation metrics.</li></ul></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">SUCCESS METRICS</span><h2>What we measure, and the 90-day targets.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Metric</th><th>Baseline</th><th>90-day target</th><th>Cadence</th></tr></thead><tbody><tr><td>AIO citation rate across tracked SIEM category keywords</td><td>2.5% (1 of 40 tracked keywords)</td><td>12-15% (5-6 of 40 tracked keywords)</td><td>Bi-weekly</td></tr><tr><td>Hunters.ai owned pages cited in AIO responses</td><td>0 pages</td><td>2-3 owned pages cited across category queries</td><td>Bi-weekly</td></tr><tr><td>AIO trigger rate on core SIEM category queries</td><td>30% across all 'hunters' queries; 0% on SIEM-specific queries</td><td>25% on SIEM category queries (up from near-zero)</td><td>Bi-weekly</td></tr><tr><td>Brand identity clarity in AIO responses</td><td>No cybersecurity category association detected</td><td>Hunters.ai explicitly identified as 'AI-driven SIEM platform' in 3+ category responses</td><td>Monthly</td></tr><tr><td>External cybersecurity domain citations mentioning Hunters</td><td>0 cybersecurity domains in AIO citation landscape</td><td>2-3 analyst or industry publication domains citing Hunters.ai</td><td>Monthly</td></tr></tbody></table></div>
+</div></section>
+
+<footer><div class="container">
+  <div class="word">hunters.</div>
+  <div class="meta-row">
+    <div class="left">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY &nbsp;·&nbsp; JUNE 15, 2026</div>
+    <div class="right">PREPARED BY AUQ &nbsp;·&nbsp; ANALYTICS@AUQ.IO</div>
+  </div>
+</div></footer></body></html>
