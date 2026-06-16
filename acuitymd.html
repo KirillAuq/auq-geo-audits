@@ -1,841 +1,293 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GEO Audit. Acuitymd</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <style>
-:root{
-  --c-ink:#010120;--c-bg:#ffffff;--c-paper:#f6f6f9;
-  --c-magenta:#ef2cc1;--c-orange:#fc4c02;--c-lavender:#bdbbff;--c-indigo:#5a55c9;--c-green:#097a3f;
-  --c-border:rgba(1,1,32,.10);--c-muted:rgba(1,1,32,.58);
-  --shadow:0 4px 14px rgba(1,1,32,.07);--shadow-lg:0 16px 40px rgba(1,1,32,.10);
-  --r:14px;--r-sm:7px;
-  --f-display:"Inter","Helvetica Neue",Arial,sans-serif;
-  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--f-display);font-size:16px;line-height:1.5;letter-spacing:-.011em;color:var(--c-ink);background:var(--c-paper);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AcuityMD GEO Audit, brand-only, by AUQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --c-text: #000000; --c-text-dark: #ffffff; --c-bg: #ffffff; --c-dark: #010120;
+    --c-magenta: #ef2cc1; --c-orange: #fc4c02; --c-lavender: #bdbbff;
+    --c-border-light: rgba(0, 0, 0, 0.08); --c-border-dark: rgba(255, 255, 255, 0.12);
+    --c-fill-light: rgba(0, 0, 0, 0.04); --c-fill-dark: rgba(255, 255, 255, 0.06);
+    --c-muted-light: rgba(0, 0, 0, 0.55); --c-muted-dark: rgba(255, 255, 255, 0.65);
+    --shadow: 0 4px 10px rgba(1, 1, 32, 0.10); --shadow-lg: 0 12px 32px rgba(1, 1, 32, 0.10);
+    --r-sharp: 4px; --r-comfort: 8px;
+    --f-display: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --f-mono: "JetBrains Mono", "PP Neue Montreal Mono", Georgia, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--f-display); font-size: 16px; font-weight: 400; line-height: 1.30; letter-spacing: -0.16px; color: var(--c-text); background: var(--c-bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  .display { font-size: 80px; font-weight: 500; line-height: 0.95; letter-spacing: -2.4px; }
+  h1 { font-size: 56px; font-weight: 500; line-height: 1.05; letter-spacing: -1.68px; }
+  h2 { font-size: 40px; font-weight: 500; line-height: 1.10; letter-spacing: -0.8px; }
+  h3 { font-size: 22px; font-weight: 500; line-height: 1.20; letter-spacing: -0.22px; }
+  h4 { font-size: 18px; font-weight: 500; line-height: 1.30; letter-spacing: -0.18px; }
+  p { font-size: 16px; line-height: 1.45; letter-spacing: -0.16px; }
+  p.lede { font-size: 22px; line-height: 1.35; letter-spacing: -0.22px; font-weight: 400; }
+  .caption { font-size: 13px; line-height: 1.40; color: var(--c-muted-light); }
+  .mono-label { font-family: var(--f-mono); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); display: inline-block; }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 100px 0; border-top: 1px solid var(--c-border-light); }
+  .section:first-of-type { border-top: none; }
+  .section-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; max-width: 820px; }
+  nav.topnav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); background: rgba(255,255,255,0.75); border-bottom: 1px solid var(--c-border-light); }
+  nav.topnav .container { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
+  .brand { font-family: var(--f-display); font-weight: 500; font-size: 18px; letter-spacing: -0.18px; display: flex; align-items: center; gap: 10px; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); }
+  nav.topnav .right { display: flex; align-items: center; gap: 24px; }
+  nav.topnav .right a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; }
+  nav.topnav .right a:hover { opacity: 0.6; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--c-dark); color: var(--c-text-dark); padding: 10px 18px; border-radius: var(--r-sharp); font-size: 14px; letter-spacing: -0.14px; font-weight: 500; text-decoration: none; transition: transform 0.15s ease; }
+  .btn-cta:hover { transform: translateY(-1px); }
+  .hero { position: relative; overflow: hidden; padding: 88px 0 96px; }
+  .hero::before, .hero::after { content: ""; position: absolute; pointer-events: none; filter: blur(60px); z-index: 0; }
+  .hero::before { width: 720px; height: 720px; top: -200px; right: -180px; background: radial-gradient(circle at 30% 30%, rgba(239, 44, 193, 0.32) 0%, transparent 60%), radial-gradient(circle at 70% 70%, rgba(189, 187, 255, 0.55) 0%, transparent 65%); border-radius: 50%; }
+  .hero::after { width: 560px; height: 560px; top: 60px; left: -140px; background: radial-gradient(circle at 40% 60%, rgba(189, 187, 255, 0.50) 0%, transparent 65%), radial-gradient(circle at 80% 30%, rgba(252, 76, 2, 0.16) 0%, transparent 60%); border-radius: 50%; }
+  .hero .container { position: relative; z-index: 1; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 6px 12px; border-radius: var(--r-sharp); background: rgba(255,255,255,0.7); border: 1px solid var(--c-border-light); backdrop-filter: blur(8px); margin-bottom: 32px; }
+  .hero .eyebrow .pill { width: 6px; height: 6px; border-radius: 50%; background: var(--c-magenta); }
+  .hero .display { margin-bottom: 28px; max-width: 14ch; }
+  .hero p.lede { max-width: 64ch; color: rgba(0,0,0,0.75); margin-bottom: 40px; }
+  .hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 32px; max-width: 980px; margin-bottom: 56px; }
+  .hero .meta .row { display: flex; gap: 10px; align-items: baseline; }
+  .hero .meta .k { font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); white-space: nowrap; }
+  .hero .meta .v { font-size: 14px; letter-spacing: -0.14px; color: var(--c-text); }
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .stat-card { background: rgba(255,255,255,0.92); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; box-shadow: var(--shadow); backdrop-filter: blur(8px); display: flex; flex-direction: column; gap: 10px; }
+  .stat-card .num { font-size: 56px; font-weight: 500; line-height: 0.95; letter-spacing: -1.68px; }
+  .stat-card .num.accent { background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat-card .num.good { color: #097a3f; }
+  .stat-card .num.warn { color: var(--c-orange); }
+  .stat-card .lbl { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .stat-card .sub { font-size: 14px; line-height: 1.4; letter-spacing: -0.14px; color: var(--c-muted-light); }
+  .card { background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 32px; box-shadow: var(--shadow); }
+  .card .mono-label { margin-bottom: 14px; }
+  .card h3 { margin-bottom: 10px; }
+  .card p { color: rgba(0,0,0,0.78); }
+  .card.flat { box-shadow: none; }
+  .dark .card { background: rgba(255,255,255,0.04); border-color: var(--c-border-dark); color: var(--c-text-dark); box-shadow: none; }
+  .dark .card p { color: rgba(255,255,255,0.78); }
+  .tbl-wrap { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); overflow: hidden; background: var(--c-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; letter-spacing: -0.14px; }
+  thead th { background: var(--c-dark); color: var(--c-text-dark); text-align: left; padding: 14px 18px; font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; border-bottom: 1px solid var(--c-border-dark); }
+  tbody td { padding: 14px 18px; border-top: 1px solid var(--c-border-light); vertical-align: top; color: var(--c-text); }
+  tbody tr:nth-child(even) td { background: rgba(0,0,0,0.025); }
+  tbody td.num { font-variant-numeric: tabular-nums; font-weight: 500; }
+  tbody td.center { text-align: center; }
+  td.no { color: var(--c-orange); font-weight: 500; }
+  td.yes { color: #097a3f; font-weight: 500; }
+  .dark .tbl-wrap { border-color: var(--c-border-dark); background: rgba(255,255,255,0.02); }
+  .dark thead th { background: rgba(255,255,255,0.08); color: var(--c-text-dark); }
+  .dark tbody td { color: var(--c-text-dark); border-top-color: var(--c-border-dark); }
+  .dark tbody tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  blockquote { border-left: 3px solid var(--c-dark); padding: 4px 0 4px 20px; margin: 14px 0; font-style: italic; font-size: 17px; line-height: 1.45; letter-spacing: -0.17px; color: rgba(0,0,0,0.82); }
+  .dark blockquote { border-left-color: var(--c-lavender); color: rgba(255,255,255,0.85); }
+  blockquote .src { display: block; font-style: normal; margin-top: 8px; font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .dark blockquote .src { color: var(--c-muted-dark); }
+  .grid { display: grid; gap: 24px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .move { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; }
+  .move .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .move h3 { margin: 0; font-size: 20px; letter-spacing: -0.20px; }
+  .move p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .sprint { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 28px; background: var(--c-bg); box-shadow: var(--shadow); }
+  .sprint .num { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-light); }
+  .sprint h3 { margin: 8px 0 12px; font-size: 20px; letter-spacing: -0.20px; }
+  .sprint ul { list-style: none; padding: 0; margin: 0; }
+  .sprint li { padding: 10px 0; border-top: 1px solid var(--c-border-light); font-size: 15px; line-height: 1.45; letter-spacing: -0.15px; display: flex; gap: 12px; align-items: flex-start; }
+  .sprint li:first-child { border-top: none; }
+  .sprint li::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--c-dark); border-radius: 2px; margin-top: 8px; }
+  .dark-zone { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0; position: relative; overflow: hidden; }
+  .dark-zone::before { content: ""; position: absolute; width: 600px; height: 600px; top: -100px; right: -150px; background: radial-gradient(circle at 40% 40%, rgba(189, 187, 255, 0.18) 0%, transparent 60%); border-radius: 50%; filter: blur(80px); pointer-events: none; }
+  .dark-zone .container { position: relative; z-index: 1; }
+  .dark-zone h2 { color: var(--c-text-dark); }
+  .dark-zone p { color: rgba(255,255,255,0.75); }
+  .dark { color: var(--c-text-dark); }
+  .dark .mono-label { color: var(--c-muted-dark); }
+  .score-block { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; background: var(--c-bg); border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 40px; box-shadow: var(--shadow); margin-top: 24px; }
+  .score-block .num-side { display: flex; flex-direction: column; justify-content: center; gap: 12px; border-right: 1px solid var(--c-border-light); padding-right: 32px; }
+  .score-block .big { font-size: 120px; line-height: 0.9; letter-spacing: -3.6px; font-weight: 500; background: linear-gradient(135deg, var(--c-magenta) 0%, var(--c-lavender) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .score-block .band { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(189,187,255,0.20); border: 1px solid rgba(189,187,255,0.4); border-radius: var(--r-sharp); font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: #5a55c9; width: max-content; }
+  .score-block .scale { display: flex; gap: 4px; margin-top: 12px; }
+  .score-block .scale .seg { flex: 1; height: 6px; border-radius: 2px; background: rgba(0,0,0,0.08); }
+  .score-block .scale .seg.on { background: linear-gradient(90deg, var(--c-magenta), var(--c-lavender)); }
+  .score-block .scale-lbl { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--f-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.10em; color: var(--c-muted-light); }
+  .score-block .components ul { list-style: none; padding: 0; margin: 0; }
+  .score-block .components li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--c-border-light); font-size: 14px; letter-spacing: -0.14px; }
+  .score-block .components li:first-child { border-top: none; }
+  .score-block .components .lbl { color: rgba(0,0,0,0.75); }
+  .score-block .components .val { font-family: var(--f-mono); font-weight: 500; }
+  .findings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+  .finding { border: 1px solid var(--c-border-light); border-radius: var(--r-comfort); padding: 24px; background: var(--c-bg); }
+  .finding .num { font-family: var(--f-mono); font-size: 32px; font-weight: 500; letter-spacing: -0.5px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+  .finding p { color: rgba(0,0,0,0.78); font-size: 15px; line-height: 1.45; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip { display: inline-flex; align-items: center; padding: 8px 14px; border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.18); border-radius: var(--r-sharp); font-size: 13px; letter-spacing: -0.13px; color: var(--c-text); }
+  .descriptors { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .desc-pill { padding: 6px 12px; background: var(--c-fill-light); border: 1px solid var(--c-border-light); border-radius: var(--r-sharp); font-size: 13px; font-weight: 500; letter-spacing: -0.13px; }
+  .desc-pill.absent { background: rgba(252, 76, 2, 0.06); border-color: rgba(252, 76, 2, 0.18); color: var(--c-orange); text-decoration: line-through; text-decoration-color: rgba(252, 76, 2, 0.4); }
+  .desc-pill.present { background: rgba(9,122,63,0.06); border-color: rgba(9,122,63,0.18); color: #097a3f; }
+  footer.big-footer { background: var(--c-dark); color: var(--c-text-dark); padding: 120px 0 48px; position: relative; overflow: hidden; }
+  footer.big-footer::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at top left, rgba(189,187,255,0.10) 0%, transparent 50%); pointer-events: none; }
+  footer.big-footer .container { position: relative; z-index: 1; }
+  footer.big-footer .word { font-family: var(--f-display); font-weight: 500; font-size: clamp(80px, 14vw, 200px); line-height: 0.85; letter-spacing: -6px; background: linear-gradient(180deg, #ffffff 0%, rgba(189,187,255,0.4) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 40px; }
+  footer.big-footer .meta-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--c-border-dark); padding-top: 28px; flex-wrap: wrap; gap: 20px; }
+  footer.big-footer .meta-row .left, footer.big-footer .meta-row .right { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--c-muted-dark); }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .stack-sm > * + * { margin-top: 14px; }
+  .stack-md > * + * { margin-top: 20px; }
+  .muted { color: var(--c-muted-light); }
+  .dark .muted { color: var(--c-muted-dark); }
+  .split-quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .split-quotes .card .mono-label { color: var(--c-magenta); }
+  .callout { border: 1px solid rgba(252,76,2,0.30); background: rgba(252,76,2,0.04); border-radius: var(--r-comfort); padding: 24px; margin-top: 24px; }
+  .callout .mono-label { color: var(--c-orange); margin-bottom: 8px; }
+  .callout.good { border-color: rgba(9,122,63,0.30); background: rgba(9,122,63,0.04); }
+  .callout.good .mono-label { color: #097a3f; }
+  .glossary { border: 1px solid var(--c-border-light); background: rgba(189,187,255,0.06); border-radius: var(--r-comfort); padding: 28px; margin-top: 24px; }
+  .glossary .mono-label { color: #5a55c9; margin-bottom: 14px; }
+  .glossary dl { display: grid; grid-template-columns: 180px 1fr; gap: 12px 20px; font-size: 14px; line-height: 1.5; }
+  .glossary dt { font-weight: 500; color: var(--c-text); }
+  .glossary dd { color: rgba(0,0,0,0.72); }
+  @media (max-width: 991px) {
+    .display { font-size: 64px; letter-spacing: -1.92px; }
+    h1 { font-size: 44px; letter-spacing: -1.32px; }
+    h2 { font-size: 32px; letter-spacing: -0.64px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .score-block { grid-template-columns: 1fr; }
+    .score-block .num-side { border-right: none; border-bottom: 1px solid var(--c-border-light); padding-right: 0; padding-bottom: 24px; }
+    .split-quotes { grid-template-columns: 1fr; }
+    .findings { grid-template-columns: 1fr; }
+    .glossary dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .glossary dt { margin-top: 10px; }
+  }
+  @media (max-width: 640px) {
+    .display { font-size: 48px; letter-spacing: -1.44px; }
+    h2 { font-size: 26px; letter-spacing: -0.52px; }
+    .section { padding: 64px 0; }
+    .stats-bar { grid-template-columns: 1fr; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    nav.topnav .right a:not(.btn-cta) { display: none; }
+    .container { padding: 0 20px; }
+    .stat-card .num { font-size: 44px; letter-spacing: -1.32px; }
+    .score-block .big { font-size: 88px; letter-spacing: -2.6px; }
+  }
+</style></head><body><nav class="topnav"><div class="container"><div class="brand">AUQ</div><div class="right mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</div></div></nav>
 
-.container,.report-container{max-width:940px;margin:0 auto;padding:0 24px}
-.report-page .report-container{margin:44px auto;padding:0 24px 90px}
-.back-link{display:inline-block;margin-bottom:18px;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--c-muted);text-decoration:none}
-.back-link:hover{color:var(--c-magenta)}
-.report-meta,.muted.report-meta{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--c-muted);margin-bottom:22px}
-.muted{color:var(--c-muted)}
-
-.report-body{display:flex;flex-direction:column;gap:22px}
-
-/* cards */
-.card,.report-body>section{background:var(--c-bg);border:1px solid var(--c-border);border-radius:var(--r);padding:38px;box-shadow:var(--shadow)}
-
-/* title block (dark, gradient wash) */
-.title-block{background:var(--c-ink);color:#fff;border:none;position:relative;overflow:hidden}
-.title-block::before{content:"";position:absolute;width:560px;height:560px;top:-240px;right:-170px;background:radial-gradient(circle at 30% 30%,rgba(239,44,193,.40),transparent 60%),radial-gradient(circle at 70% 70%,rgba(189,187,255,.45),transparent 65%);filter:blur(55px);pointer-events:none}
-.title-block>*{position:relative;z-index:1}
-.title-block h1{color:#fff;margin-bottom:24px;max-width:22ch}
-
-/* meta rows: .meta-grid/.meta-item and .meta-list/li */
-.meta-grid,.meta-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px 28px;padding:0;margin:0}
-.meta-item,.meta-list li{font-family:var(--f-mono);font-size:12px;letter-spacing:.01em;color:rgba(255,255,255,.74);line-height:1.5;margin:0}
-
-/* headings + text */
-h1{font-size:40px;font-weight:600;line-height:1.05;letter-spacing:-.03em}
-h2{font-size:26px;font-weight:600;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
-h3{font-size:17px;font-weight:600;line-height:1.3;letter-spacing:-.01em;margin:22px 0 10px}
-p{font-size:15.5px;line-height:1.62;color:rgba(1,1,32,.82);margin-bottom:12px}
-p:last-child{margin-bottom:0}
-strong{font-weight:600}
-a{color:var(--c-indigo)}
-
-/* score callouts — both observed variants */
-.score-callout,.geo-score-callout{display:flex;align-items:center;flex-wrap:wrap;gap:10px 28px;background:linear-gradient(135deg,rgba(239,44,193,.05),rgba(189,187,255,.12));border:1px solid var(--c-border);border-radius:var(--r);padding:28px 32px;margin:20px 0 24px}
-.score-number,.score-value{font-size:92px;font-weight:600;line-height:.9;letter-spacing:-.04em;background:linear-gradient(135deg,var(--c-magenta),var(--c-lavender));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;flex:none}
-/* variant A: .score-label is a div with band <strong> + note <p> */
-.score-callout .score-label{display:flex;flex-direction:column;gap:8px}
-.score-callout .score-label strong{font-family:var(--f-mono);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--c-indigo);background:rgba(189,187,255,.22);border:1px solid rgba(189,187,255,.45);border-radius:var(--r-sm);padding:6px 12px;width:max-content}
-.score-callout .score-label p{font-size:14px;color:var(--c-muted);margin:0}
-/* variant B: span label + value + note, stacked */
-.geo-score-callout{flex-direction:column;align-items:flex-start;gap:6px}
-.geo-score-callout .score-label{font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--c-muted);order:1}
-.geo-score-callout .score-value{order:2}
-.geo-score-callout .score-note{font-size:14px;color:var(--c-muted);order:3;max-width:72ch}
-
-/* findings + moves: .findings-list, .moves-list, .findings>ul, .top-moves>ul */
-.findings-list,.moves-list,.findings>ul,.top-moves>ul{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:14px}
-.findings-list li,.moves-list li,.findings>ul>li,.top-moves>ul>li{border:1px solid var(--c-border);border-radius:var(--r-sm);padding:18px 20px;background:var(--c-bg);font-size:15px;line-height:1.55;box-shadow:var(--shadow);margin:0}
-.findings-list li strong,.moves-list li strong,.findings li strong,.top-moves li strong{display:block;margin-bottom:5px;color:var(--c-ink)}
-
-/* generic lists */
-ul:not(.findings-list):not(.moves-list):not(.meta-list){padding-left:20px;margin:10px 0}
-ul:not(.findings-list):not(.moves-list):not(.meta-list) li{margin:6px 0;font-size:15px;line-height:1.55}
-
-/* tables */
-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;border:1px solid var(--c-border);border-radius:var(--r-sm);overflow:hidden}
-thead th{background:var(--c-ink);color:#fff;text-align:left;padding:12px 14px;font-family:var(--f-mono);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em}
-tbody td{padding:11px 14px;border-top:1px solid var(--c-border);vertical-align:top;line-height:1.45}
-tbody tr:nth-child(even) td{background:rgba(1,1,32,.025)}
-
-/* quotes, warnings, fallback */
-blockquote{border-left:3px solid var(--c-magenta);padding:6px 0 6px 20px;margin:14px 0;font-style:italic;font-size:16px;line-height:1.5;color:rgba(1,1,32,.82)}
-.report-warnings{border-color:rgba(252,76,2,.3);background:rgba(252,76,2,.05)}
-.memory-dump{white-space:pre-wrap;font-family:var(--f-mono);font-size:12px;background:rgba(1,1,32,.04);padding:14px;border-radius:var(--r-sm);overflow-x:auto}
-
-@media(max-width:640px){
-  .card,.report-body>section{padding:24px}
-  h1{font-size:30px}h2{font-size:22px}
-  .score-callout{flex-direction:column;align-items:flex-start;gap:14px}
-  .score-number,.score-value{font-size:70px}
-}</style>
-  </head>
-  <body class="report-page">
-    <main class="container report-container">
-      <a class="back-link" href="/app">← Run another audit</a>
-      <p class="muted report-meta">Run 5820dfe68ff4d30e · acuitymd.com</p>
-      <article class="report-body"><header class="card title-block">
-  <h1>AcuityMD. Brand-Only Positioning Diagnostic</h1>
-  <div class="meta-grid">
-    <span class="meta-item">Domain. acuitymd.com</span>
-    <span class="meta-item">Report date. June 16, 2026</span>
-    <span class="meta-item">Scope. 40 tracked keywords across brand, category, and alternatives query layers</span>
-    <span class="meta-item">Data source. Search-intelligence data and live AIO response capture</span>
-    <span class="meta-item">Classification. Confidential client report</span>
+<section class="hero"><div class="container">
+  <div class="eyebrow"><span class="pill"></span><span class="mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</span></div>
+  <h1 class="display">AcuityMD.</h1>
+  <p class="lede">A look at how AcuityMD is described, positioned, and quoted inside Google's AI Overviews, the AI answer box at the top of search results, and where the brand shows up versus goes missing.</p>
+  <div class="meta">
+    <div class="row"><span class="k">Site</span><span class="v">acuitymd.com</span></div>
+    <div class="row"><span class="k">Where we looked</span><span class="v">Google AI Overviews, US</span></div>
+    <div class="row"><span class="k">Questions tested</span><span class="v">40 brand, category, and competitor queries</span></div>
+    <div class="row"><span class="k">Prepared</span><span class="v">June 16, 2026 &nbsp;·&nbsp; by AUQ</span></div>
   </div>
-</header>
+  <div class="stats-bar">
+    <div class="stat-card"><div class="lbl">AI Visibility Score</div><div class="num accent">28</div><div class="sub">out of 100. Critical band. Brand has minimal intentional AIO presence. Citations are incidental, not authoritative. Core product positioning is absent from AIO entirely.</div></div><div class="stat-card"><div class="lbl">Verified AI Overview citations</div><div class="num good">3</div><div class="sub">AcuityMD's brand is cited in 3 of the 31 AI-answer queries we tested.</div></div><div class="stat-card"><div class="lbl">AI answer trigger rate</div><div class="num ">77.5%</div><div class="sub">Google's AI answer box fires on 31 of 40 tracked queries.</div></div><div class="stat-card"><div class="lbl">Citation rate when AI answers</div><div class="num "></div><div class="sub">Share of AI-answer queries where the brand is actually quoted.</div></div>
+  </div>
+</div></section>
 
-<section class="card executive-summary">
-  <h2>Executive Summary</h2>
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">EXECUTIVE SUMMARY</span>
+    <h2>AcuityMD scores 28 of 100 for AI Overview visibility. The work is closing the citation and identity gaps.</h2></div>
+  <div class="grid grid-2" style="gap:32px;">
+    <div class="stack-md">
+      <p class="lede">Brand has minimal intentional AIO presence. Citations are incidental, not authoritative. Core product positioning is absent from AIO entirely.</p>
+      <p>AI answers fire on 77.5% of tracked queries, yet AcuityMD is quoted in only undefined of them. When it does appear, it sits Named as one of multiple tools in list-style answers, not as primary recommendation.</p>
+    </div>
+    <div class="score-block"><div class="num-side">
+      <div class="mono-label">AI Visibility Score</div><div class="big">28</div>
+      <div class="band"><span>Critical band</span></div>
+      <div class="scale"><div class="seg on"></div><div class="seg on"></div><div class="seg"></div><div class="seg"></div></div>
+      <div class="scale-lbl"><span>Barely</span><span>Low</span><span>Competitive</span><span>Dominant</span></div>
+    </div>
+    <div class="components"><div class="mono-label" style="margin-bottom:14px;">What's in the score</div><ul><li><span class="lbl">How often AI answers appear</span><span class="val">78 / 100</span></li><li><span class="lbl">Quality of placement when cited</span><span class="val">10 / 100</span></li><li><span class="lbl">How AI describes the brand</span><span class="val">20 / 100</span></li><li><span class="lbl">Topic coverage breadth</span><span class="val">15 / 100</span></li><li><span class="lbl">Your pages being quoted</span><span class="val">10 / 100</span></li><li><span class="lbl">Inclusion in category answers</span><span class="val">40 / 100</span></li></ul></div></div>
+  </div>
+  <div class="section-head" style="margin-top:48px;"><span class="mono-label">THREE FINDINGS THAT MATTER</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>The brand is missing from most of AI-answer queries</h3><p>Brand appears across DRG coding, medical sales software, and startup investment contexts. Only one page cited (DRG blog). Core product pages absent from all AIO responses.</p></div><div class="finding"><div class="num">02</div><h3>AI misreads the category</h3><p>Significant. AIO frames AcuityMD as a billing/DRG reference or generic medical sales CRM, missing the full-stack intelligence platform and AI-powered insights positioning.</p></div></div>
+  <div class="section-head" style="margin-top:40px;"><span class="mono-label">TOP THREE MOVES</span></div>
+  <div class="findings"><div class="finding"><div class="num">01</div><h3>Create GEO-optimized product pages for core platform modules (Care Journeys, Contracts, Forecasting, Markets) with structured schema markup</h3><p>Impact High  ·  effort Medium  ·  30-45 days</p></div><div class="finding"><div class="num">02</div><h3>Build authority through third-party credibility: pursue analyst coverage (Gartner, Forrester) and software review platform listings (G2, Capterra, TrustRadius)</h3><p>Impact High  ·  effort High  ·  60-90 days</p></div><div class="finding"><div class="num">03</div><h3>Establish AcuityAI as a distinct AI-powered entity with its own GEO-optimized content hub and external citations</h3><p>Impact High  ·  effort Medium  ·  45-60 days</p></div></div>
+</div></section>
 
-  <div class="score-callout">
-    <div class="score-number">28</div>
-    <div class="score-label">
-      <strong>GEO Score. Critical</strong>
-      <p>Brand has minimal intentional AIO presence. Citations are incidental, not authoritative. Core product positioning is absent from AIO entirely.</p>
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">CONTENT AND ENTITY COVERAGE</span>
+    <h2>The topics that matter to the brand, and where it shows up in AI answers today.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:48%">Topic</th><th>Presence in AI answers</th><th>Buyer intent</th></tr></thead><tbody><tr><td>DRG codes and billing</td><td class="yes">Owned</td><td>strong citation, off-topic to core positioning</td></tr><tr><td>Medical sales software category</td><td class="yes">Owned</td><td>appears in list</td></tr><tr><td>How to get into medical device sales</td><td class="">Partial</td><td>ranks #7 organically, AIO trigger present, not cited</td></tr><tr><td>Marketing strategy for medical devices</td><td class="">Partial</td><td>ranks #3 organically, AIO trigger present, not cited</td></tr><tr><td>Medical sales territory management</td><td class="">Partial</td><td>ranks organically, AIO trigger present, not cited</td></tr><tr><td>Best CRM for medical device companies</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>MedTech commercial intelligence platform</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>MedTech sales enablement</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>Medical device market sizing</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>Physician targeting software</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>Medical device forecasting tools</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>Best software for MedTech startups</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>Care Journeys patient-level targeting</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>Contracts management for MedTech</td><td class="no">Invisible</td><td>solution-aware</td></tr><tr><td>AcuityAI capabilities and AI-powered insights</td><td class="no">Invisible</td><td>solution-aware</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:32px;"><div class="mono-label">Buyer-journey coverage</div>
+    <div><p><strong>Problem Aware.</strong> Queries like 'how to identify high-value physician accounts' and 'how to manage a medical sales territory' trigger AIO but do not surface AcuityMD as a solution</p><p><strong>Solution Aware.</strong> Queries like 'best medical device CRM' and 'medical device sales software' trigger AIO. AcuityMD appears only in brief list context, not as primary recommendation or full capability description</p><p><strong>Alternatives.</strong> No AIO response observed for 'alternatives to AcuityMD' or '[brand] vs' queries. AIO does not trigger on pure competitive alternatives queries for this brand</p></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">IDENTITY IN AI OVERVIEWS</span>
+    <h2>How the brand describes itself, and how Google's AI describes it.</h2></div>
+  <div class="split-quotes">
+    <div class="card"><div class="mono-label">What the brand says about itself</div>
+      <h3>MedTech Commercial Intelligence Platform</h3>
+      <blockquote>MedTech intelligence platform combining real-world healthcare data, AI-powered insights, and commercial workflows serving 400-plus MedTech companies from pre-commercial startups to global enterprises<span class="src">acuitymd.com, 2026</span></blockquote>
+      <p>Differentiators it leads with: Real-world healthcare data integration, AI-powered insights layer (AcuityAI), Care Journeys patient-level targeting module, Contracts management for MedTech, Market segmentation and forecasting, Pre-commercial to enterprise positioning.</p>
+    </div>
+    <div class="card"><div class="mono-label">What Google's AI says</div>
+      <h3>Medical sales CRM and DRG content reference tool</h3>
+      <blockquote>Medical sales CRM with NPI data access</blockquote><blockquote>Territory management tool for high-value account targeting</blockquote>
     </div>
   </div>
+  <div class="callout good"><div class="mono-label">The core gap</div><div>Significant. AIO frames AcuityMD as a billing/DRG reference or generic medical sales CRM, missing the full-stack intelligence platform and AI-powered insights positioning.</div></div>
+  <div class="grid grid-2" style="margin-top:32px;">
+    <div><div class="mono-label">Words AI uses for the brand</div><div class="descriptors"><span class="desc-pill present">Recognized as a specialized medical sales tool</span><span class="desc-pill present">Forbes recognition in startup context</span><span class="desc-pill present">Named example in medical sales software category</span></div></div>
+    <div><div class="mono-label">The brand's own pillars that AI omits</div><div class="descriptors"><span class="desc-pill">Care Journeys module completely invisible</span><span class="desc-pill">Contracts module not mentioned</span><span class="desc-pill">Forecasting and Markets modules absent</span><span class="desc-pill">AcuityAI (core AI capability) not recognized as distinct entity</span><span class="desc-pill">Pipeline management not mentioned</span><span class="desc-pill">Payer mix and procedure volume data not attributed</span><span class="desc-pill">Real-world healthcare data integration not highlighted</span><span class="desc-pill">Enterprise positioning overshadowed by startup framing</span></div></div>
+  </div>
+</div></section>
 
-  <p>AcuityMD holds strong organic rankings and earns a Forbes startup recognition that surfaces in AI-generated responses. However, the brand's only AIO-cited page is a blog post about DRG coding, which causes AI systems to frame the brand as a billing reference tool rather than a MedTech intelligence platform.</p>
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">AI OVERVIEW PERFORMANCE</span>
+    <h2>Where the brand shows up in Google's AI, and the high-value queries it is missing.</h2></div>
+  <div class="stats-bar"><div class="stat-card"><div class="lbl">Tracked keywords</div><div class="num">40</div><div class="sub">Brand, category, and comparison queries analyzed.</div></div><div class="stat-card"><div class="lbl">AI answers fired</div><div class="num">31</div><div class="sub">77.5% of tracked queries trigger an AI Overview.</div></div><div class="stat-card"><div class="lbl">Times brand cited</div><div class="num">3</div><div class="sub">undefined citation rate when AI answers.</div></div><div class="stat-card"><div class="lbl">Total brand mentions</div><div class="num">22</div><div class="sub">Across all observed AI responses.</div></div></div>
+  <div style="margin-top:40px;"><div class="section-head"><span class="mono-label">HIGH-VALUE QUERIES WHERE THE BRAND RANKS BUT IS NOT QUOTED</span></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:42%">Query</th><th>Volume</th><th>Organic rank</th><th>What happens</th></tr></thead><tbody><tr><td>Best CRM for medical device companies</td><td>High intent, solution-aware</td><td>#Not appearing in tracked AIO triggers</td><td>Direct product category query with zero AIO presence</td></tr><tr><td>Medical device sales software</td><td>High intent, solution-aware</td><td>#AIO triggers but AcuityMD appears only in brief list</td><td>Partial presence; competing with Salesforce Health Cloud and RepMove</td></tr><tr><td>How to identify high-value physician accounts</td><td>Medium intent, problem-aware</td><td>#AIO triggers but AcuityMD not cited</td><td>Core use case but invisible in AIO problem-aware queries</td></tr><tr><td>MedTech commercial intelligence platform</td><td>Medium-high intent, core category</td><td>#No AIO trigger observed</td><td>Brand's primary positioning entirely missing from AIO category definition</td></tr><tr><td>Care Journeys patient targeting</td><td>Low-medium intent, solution-aware</td><td>#No AIO trigger observed</td><td>Core product module invisible to AIO</td></tr></tbody></table></div></div>
+</div></section>
 
-  <p>Across 31 AIO-triggered queries, AcuityMD appears as a cited source in just 3, a 9.7% citation rate well below category norms for a software brand with this traffic profile. Key product areas including AcuityAI, Care Journeys, Contracts, Forecasting, and physician targeting are invisible to AI systems entirely.</p>
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">WHERE GOOGLE'S AI GETS ITS ANSWERS</span>
+    <h2>The sources Google's AI cites in this category, and what it tells you about earning citations.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Domain AI cites</th><th>Pages</th><th>Context</th></tr></thead><tbody><tr><td>evidence.care</td><td></td><td>DRG coding content</td></tr><tr><td>reddit.com</td><td></td><td>Medical coding and medical sales career discussions</td></tr><tr><td>repmove.app</td><td></td><td>Medical sales software list</td></tr><tr><td>indeed.com</td><td></td><td>Healthcare career content</td></tr><tr><td>rasmussen.edu</td><td></td><td>Nursing and care setting definitions</td></tr><tr><td>aapc.com</td><td></td><td>Medical coding reference</td></tr><tr><td>forbes.com</td><td>Next Billion-Dollar Startups recognition</td><td>Next Billion-Dollar Startups list</td></tr><tr><td>linkedin.com</td><td></td><td>Job listings</td></tr><tr><td>startengine.com</td><td></td><td>Startup investment context</td></tr><tr><td>bostonscientific.com</td><td></td><td>Health tech employer list</td></tr></tbody></table></div>
+  <div class="callout good" style="margin-top:28px;"><div class="mono-label">Reading</div><div>AcuityMD's AIO footprint is dominated by blog and editorial content with no software review or analyst domain citations. This limits credibility signals for product-level AIO citations and makes the brand appear as a content reference rather than a category authority.</div></div>
+</div></section>
 
-  <p>The identity gap is the most urgent problem. AI systems currently place AcuityMD in three unrelated categories and attribute none of its core platform capabilities. Closing this gap requires deliberate content and credibility work, but the brand's existing organic footprint means progress can come quickly.</p>
+<section class="dark-zone dark"><div class="container">
+  <div class="section-head"><span class="mono-label">AI-REVEALED PEERS</span>
+    <h2>The competitive set drawn by Google's AI itself. Observed, not chosen.</h2></div>
+  <p class="lede">Peers observed from AIO responses where AcuityMD was cited alongside or excluded in favor of these entities.</p>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:26%">Peer</th><th>How AI frames it</th></tr></thead><tbody><tr><td>RepMove</td><td>Cited directly alongside AcuityMD in medical sales software AIO response. Appears in 1 AIO response as a cited page. Direct overlap on medical sales software category queries.</td></tr><tr><td>Salesforce Health Cloud</td><td>Named in medical sales software AIO response as peer option for MedTech sales teams. Broad CRM incumbent with stronger AIO identity.</td></tr><tr><td>Tempus AI</td><td>Named in health tech companies response ahead of AcuityMD. Occupies stronger AIO identity as AI-driven health data company, not a direct competitor but reinforces AcuityMD's weak AI differentiation.</td></tr><tr><td>Medtronic</td><td>Named as employer in health tech alongside AcuityMD. Category association with MedTech reinforces weak differentiation from device OEMs.</td></tr></tbody></table></div>
+  <div class="card" style="margin-top:28px;"><div class="mono-label">Key observation</div><div>Peers are fragmented across sales software and health tech categories. No dominant single competitor emerges from AIO, but Salesforce Health Cloud and RepMove occupy stronger AIO presence in medical sales software category queries.</div></div>
+</div></section>
 
-  <h3>Three Findings That Matter</h3>
-  <ul class="findings-list">
-    <li><strong>Misidentified in AIO.</strong> AI systems describe AcuityMD as a DRG coding resource and a generic medical sales CRM. The platform's actual positioning as a full-stack MedTech intelligence solution with real-world healthcare data and AI-powered insights does not appear in any observed AIO response.</li>
-    <li><strong>Product pages earn zero AIO citations.</strong> The platform page, targeting, contracts, forecasting, and AcuityAI pages have no AIO presence whatsoever. Every citation the brand receives traces back to a single blog post on an off-topic subject.</li>
-    <li><strong>External credibility signals are thin.</strong> Forbes provides one strong third-party mention, but no analyst coverage, software review domains, or peer-recognition sources appear in the AIO citation landscape alongside the brand.</li>
-  </ul>
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">30-DAY PRIORITY MOVES</span>
+    <h2>The highest-leverage moves, ranked by impact against effort.</h2></div>
+  <div class="grid grid-2"><div class="move"><div class="num">Move 01 &nbsp;·&nbsp; 30-45 days</div><h3>Create GEO-optimized product pages for core platform modules (Care Journeys, Contracts, Forecasting, Markets) with structured schema markup</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 02 &nbsp;·&nbsp; 60-90 days</div><h3>Build authority through third-party credibility: pursue analyst coverage (Gartner, Forrester) and software review platform listings (G2, Capterra, TrustRadius)</h3><p>Impact High &nbsp;·&nbsp; effort High.</p></div><div class="move"><div class="num">Move 03 &nbsp;·&nbsp; 45-60 days</div><h3>Establish AcuityAI as a distinct AI-powered entity with its own GEO-optimized content hub and external citations</h3><p>Impact High &nbsp;·&nbsp; effort Medium.</p></div><div class="move"><div class="num">Move 04 &nbsp;·&nbsp; 14-21 days</div><h3>Amplify existing Forbes recognition through linking, social signals, and secondary mentions in product documentation</h3><p>Impact Medium &nbsp;·&nbsp; effort Low.</p></div><div class="move"><div class="num">Move 05 &nbsp;·&nbsp; 14-21 days</div><h3>Redirect DRG coding blog traffic toward product pages via related-content blocks and internal linking strategy</h3><p>Impact Medium &nbsp;·&nbsp; effort Low.</p></div></div>
+</div></section>
 
-  <h3>Top Three Moves</h3>
-  <ol class="moves-list">
-    <li><strong>Build GEO-optimized product pages.</strong> Create structured, AI-readable content for the platform, AcuityAI, targeting, and contracts pages so product-level queries begin returning AcuityMD as a cited source rather than a blog reference.</li>
-    <li><strong>Expand the external credibility footprint.</strong> Pursue analyst coverage and software review domain listings to add third-party citation sources that reinforce product credibility inside AIO responses.</li>
-    <li><strong>Claim the solution-aware query layer.</strong> Develop focused content for high-intent queries such as best CRM for medical device companies and physician targeting software, where AIO triggers but AcuityMD is currently absent.</li>
-  </ol>
-</section>
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">90-DAY ROADMAP</span><h2>Three sprints from first wins to compounding category presence.</h2></div>
+  <div class="grid grid-3"><div class="sprint"><div class="num">Month 1 &nbsp;·&nbsp; Days 1 to 30</div><ul><li>Audit and GEO-optimize the DRG coding blog post with internal links to platform pages and structured schema</li><li>Create 3-4 solution-focused landing pages: Care Journeys targeting module, Contracts management, Forecasting capabilities, Real-world healthcare data integration</li><li>Establish target list for analyst outreach (Gartner, Forrester, IDC) with talking points on MedTech AI and real-world data differentiation</li><li>Amplify Forbes Next Billion-Dollar Startups mention through social media, press releases, and product page backlinks</li></ul></div><div class="sprint"><div class="num">Month 2 &nbsp;·&nbsp; Days 31 to 60</div><ul><li>Pitch product and solution pages to software review platforms (G2, Capterra, TrustRadius) with comprehensive feature mapping and customer reviews</li><li>Publish 3-4 thought-leadership articles positioning AcuityAI as a distinct entity: AI-powered insights, market segmentation, physician targeting intelligence</li><li>Execute analyst relations outreach and webinars; secure at least one analyst mention or report preview</li><li>Internal linking and related-content strategy: connect DRG blog to platform pages via contextual recommendations</li></ul></div><div class="sprint"><div class="num">Month 3 &nbsp;·&nbsp; Days 61 to 90</div><ul><li>Monitor AIO trigger patterns for newly created product pages and adjust content based on citation feedback</li><li>Launch AcuityAI micro-site or dedicated hub with GEO-focused content on AI-powered medical device market insights</li><li>Secure and publish 1-2 analyst report mentions or review platform verified customer badges</li><li>Conduct full AIO landscape re-audit to measure identity shift, citation rate uplift, and topic coverage expansion</li></ul></div></div>
+</div></section>
 
-<section class="card">
-  <h2>Identity in AIO</h2>
-  <p>This section compares how AcuityMD defines itself against how AI Overviews currently frame the brand. The gap between these two pictures is the core identity problem to solve.</p>
+<section class="section"><div class="container">
+  <div class="section-head"><span class="mono-label">SUCCESS METRICS</span><h2>What we measure, and the 90-day targets.</h2></div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:34%">Metric</th><th>Baseline</th><th>90-day target</th><th>Cadence</th></tr></thead><tbody><tr><td>AIO Citation Rate</td><td>9.7%</td><td>18-22%</td><td>Weekly tracking of cited pages across tracked keywords</td></tr><tr><td>Product Page AIO Citations</td><td>0 pages cited</td><td>3-4 distinct product pages appearing in AIO responses</td><td>Weekly spot checks on core product keyword triggers</td></tr><tr><td>AIO Identity Match</td><td>20% (DRG and sales CRM framing)</td><td>65-75% (MedTech intelligence platform positioning)</td><td>Bi-weekly audit of AIO descriptions across 10-15 key queries</td></tr><tr><td>Topic Coverage Expansion</td><td>2 owned topics</td><td>6-8 owned or co-owned topics covering platform capabilities and buyer journey stages</td><td>Monthly content mapping against tracked keywords</td></tr><tr><td>External Credibility Domains in AIO</td><td>1 (Forbes)</td><td>3-4 (analyst, review platform, or peer recognition domains)</td><td>Monthly audit of external citations in observed AIO responses</td></tr></tbody></table></div>
+</div></section>
 
-  <h3>What the Brand Says</h3>
-  <blockquote>
-    "AcuityMD is the MedTech intelligence platform that combines real-world healthcare data, AI-powered insights, and intuitive commercial workflows. Trusted by 400-plus MedTech companies, from pre-commercial startups to global enterprises."
-  </blockquote>
-
-  <h3>What AIO Says</h3>
-  <blockquote>
-    <strong>In DRG coding responses.</strong> AcuityMD appears as a cited source for hospital billing education, listed alongside medical coding references and payer policy documents. The product itself is never described.
-  </blockquote>
-  <blockquote>
-    <strong>In medical sales software responses.</strong> AcuityMD is named in a list alongside RepMove and Salesforce Health Cloud. AIO describes it as a tool for "targeting high-value accounts, mapping territories, and accessing NPI data."
-  </blockquote>
-  <blockquote>
-    <strong>In startup investment responses.</strong> AcuityMD is labeled "medtech" and grouped with fintech and robotics startups. No product description or commercial use case is provided in any observed response.
-  </blockquote>
-
-  <h3>AIO Category Placement</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>AIO Category Assigned</th>
-        <th>Source of Placement</th>
-        <th>Accuracy vs. Brand Positioning</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Hospital billing and DRG reference</td>
-        <td>DRG blog post cited 3 times</td>
-        <td>Incorrect. Reflects blog content, not the product.</td>
-      </tr>
-      <tr>
-        <td>Medical sales software and CRM</td>
-        <td>Cited in medical sales software list response</td>
-        <td>Partially correct. Closest match but omits intelligence platform framing.</td>
-      </tr>
-      <tr>
-        <td>High-growth startup</td>
-        <td>Forbes Next Billion-Dollar Startups list</td>
-        <td>Incidental. Category is investor context, not product category.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Recurring Descriptors in AIO</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Descriptor Observed</th>
-        <th>Context</th>
-        <th>Reflects Brand Intent</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Specialized (medical sales)</td>
-        <td>Medical sales software list</td>
-        <td>Partially. Omits AI and real-world data layer.</td>
-      </tr>
-      <tr>
-        <td>Top startup (Forbes context)</td>
-        <td>Investment and startup responses</td>
-        <td>No. Credibility signal only, no product meaning.</td>
-      </tr>
-      <tr>
-        <td>MedTech-focused</td>
-        <td>Startup and health tech employer responses</td>
-        <td>Minimally. Sector label without commercial specificity.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Framing Issues</h3>
-  <p>AIO treats AcuityMD as a DRG content resource in its most-cited responses. This directly misrepresents a commercial intelligence platform as a billing education tool.</p>
-  <p>Five core product capabilities are completely absent from all observed AIO responses. These include AcuityAI, Care Journeys, Contracts, Forecasting, and real-world healthcare data integration.</p>
-  <p>AIO positions AcuityMD as one item in a peer list, never as a category lead. The brand's own framing as the MedTech intelligence platform does not appear in any observed AI Overview response.</p>
-</section>
-
-<section class="card">
-  <h2>AIO Performance</h2>
-
-  <p>AcuityMD was tracked across 40 keywords to measure its presence in AI-generated search responses. The brand triggers AI overviews at a strong rate, but its own pages are cited in fewer than 1 in 10 of those responses.</p>
-
-  <h3>Trigger and Inclusion Metrics</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Metric</th>
-        <th>Value</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Tracked keywords</td>
-        <td>40</td>
-        <td>Covering brand, category, and alternatives queries</td>
-      </tr>
-      <tr>
-        <td>Keywords triggering an AI overview</td>
-        <td>31 (77.5%)</td>
-        <td>Strong trigger rate driven by blog-topic query categories</td>
-      </tr>
-      <tr>
-        <td>AI overviews citing AcuityMD</td>
-        <td>3 (9.7%)</td>
-        <td>Well below expected rate for a software brand with this traffic profile</td>
-      </tr>
-      <tr>
-        <td>Total AI overview mentions (all responses)</td>
-        <td>22</td>
-        <td>Includes incidental name mentions, not only citations</td>
-      </tr>
-      <tr>
-        <td>Unique brand pages cited</td>
-        <td>1</td>
-        <td>A single DRG coding blog post accounts for all citations</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Citation Context. Standalone vs. Co-mentioned</h3>
-  <blockquote>
-    AcuityMD does not appear as a standalone primary recommendation in any observed AI overview. In all three citation instances, the brand is listed alongside other tools (RepMove, Salesforce Health Cloud) or within a startup ranking list. This list-style placement signals incidental mention, not category authority.
-  </blockquote>
-
-  <h3>High-Value Keywords with AI Overviews. Not Cited</h3>
-  <p>The following keywords trigger AI overviews and rank organically for AcuityMD, yet the brand is absent from every corresponding AI-generated response. These represent the most immediate citation opportunities.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Keyword</th>
-        <th>Search Volume</th>
-        <th>Organic Position</th>
-        <th>Relevance to Brand</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>how to get into medical device sales</td>
-        <td>1,200</td>
-        <td>7</td>
-        <td>Core audience entry point</td>
-      </tr>
-      <tr>
-        <td>marketing strategy for medical devices</td>
-        <td>200</td>
-        <td>3</td>
-        <td>Direct commercial strategy topic</td>
-      </tr>
-      <tr>
-        <td>how to manage a sales territory</td>
-        <td>200</td>
-        <td>5</td>
-        <td>Maps to Territories product module</td>
-      </tr>
-      <tr>
-        <td>customer relationship management database</td>
-        <td>250</td>
-        <td>8</td>
-        <td>Adjacent CRM category, product-relevant</td>
-      </tr>
-      <tr>
-        <td>drg code</td>
-        <td>300</td>
-        <td>5</td>
-        <td>Existing blog authority, not converting to AIO</td>
-      </tr>
-      <tr>
-        <td>drg coding</td>
-        <td>300</td>
-        <td>8</td>
-        <td>Existing blog authority, not converting to AIO</td>
-      </tr>
-      <tr>
-        <td>what is a drg code</td>
-        <td>150</td>
-        <td>4</td>
-        <td>Existing blog content, citation gap</td>
-      </tr>
-      <tr>
-        <td>how to get into medical sales</td>
-        <td>1,400</td>
-        <td>14</td>
-        <td>Core audience, high volume opportunity</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Citation Footprint. Own Pages in AI Overviews</h3>
-  <p>Only one AcuityMD-owned URL has been cited in any observed AI overview. No product, platform, or solution pages appear in any AI overview source list.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Page URL</th>
-        <th>AI Overview Appearances</th>
-        <th>Query Context</th>
-        <th>Page Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>acuitymd.com/resources/blog/what-are-drg-codes-what-are-they-used-for</td>
-        <td>3</td>
-        <td>DRG coding and billing education queries</td>
-        <td>Blog post. off-product topic</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <blockquote>
-    Pages with zero AI overview citations include the platform overview, all five product modules (Care Journeys, Contracts, Markets, Targeting, Forecasting), the AcuityAI page, and all use-case landing pages. The brand's commercial identity is entirely absent from its current AI overview citation footprint.
-  </blockquote>
-</section>
-
-<section class="card">
-  <h2>Content and Entity Coverage</h2>
-
-  <p>AcuityMD holds AIO citations in only two topic clusters, both peripheral to its core product. Eight or more product-level topics and all five category-defining entities remain invisible to AI-generated responses.</p>
-
-  <h3>Topic Cluster Status</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Topic Cluster</th>
-        <th>AIO Status</th>
-        <th>Citation Type</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>DRG codes and DRG coding</td>
-        <td>Owned</td>
-        <td>Brand page cited</td>
-        <td>Cited for billing education content, not product capability. Wrong category for brand positioning.</td>
-      </tr>
-      <tr>
-        <td>Medical sales software</td>
-        <td>Owned</td>
-        <td>Named in list</td>
-        <td>Appears alongside RepMove and Salesforce Health Cloud. Not framed as a primary recommendation.</td>
-      </tr>
-      <tr>
-        <td>How to get into medical device sales</td>
-        <td>Partial</td>
-        <td>Not cited</td>
-        <td>Ranks position 7 organically. AIO triggers on this query but does not surface AcuityMD.</td>
-      </tr>
-      <tr>
-        <td>Marketing strategy for medical devices</td>
-        <td>Partial</td>
-        <td>Not cited</td>
-        <td>Ranks position 3 organically. AIO triggers but brand receives no citation.</td>
-      </tr>
-      <tr>
-        <td>Medical sales territory management</td>
-        <td>Partial</td>
-        <td>Not cited</td>
-        <td>Organic ranking present. AIO trigger confirmed but brand is absent from the response.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Invisible Topics</h3>
-  <p>The following product-level and category-defining topics trigger AIO responses but return zero AcuityMD citations. These represent the highest-priority content gaps for GEO improvement.</p>
-  <ul>
-    <li>Best CRM for medical device companies</li>
-    <li>MedTech commercial intelligence platform</li>
-    <li>MedTech sales enablement software</li>
-    <li>Medical device market sizing tools</li>
-    <li>Physician targeting software</li>
-    <li>Medical device sales forecasting tools</li>
-    <li>Best software for MedTech startups</li>
-    <li>Care Journeys (patient-level targeting)</li>
-    <li>Contracts management for MedTech</li>
-    <li>AcuityAI capabilities</li>
-  </ul>
-
-  <h3>Category-Defining Entities Missing from AIO</h3>
-  <p>These five entities form the semantic core of AcuityMD's actual product. None appear in any observed AIO response attributed to the brand.</p>
-  <ul>
-    <li>Physician targeting</li>
-    <li>Real-world healthcare data</li>
-    <li>MedTech commercial intelligence</li>
-    <li>Medical device market segmentation</li>
-    <li>Contract compliance for MedTech</li>
-  </ul>
-
-  <h3>Buyer Journey Coverage</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Journey Stage</th>
-        <th>Example Queries</th>
-        <th>AIO Triggers</th>
-        <th>AcuityMD Cited</th>
-        <th>Gap Assessment</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Problem Aware</td>
-        <td>How to identify high-value physician accounts; how to manage a medical sales territory</td>
-        <td>Yes</td>
-        <td>No</td>
-        <td>AIO triggers confirm buyer intent is present. Brand content does not connect the problem to the platform.</td>
-      </tr>
-      <tr>
-        <td>Solution Aware</td>
-        <td>Best medical device CRM; medical device sales software</td>
-        <td>Yes</td>
-        <td>Partial. listed once</td>
-        <td>Brand appears in one list-style response only. No product pages, use-case pages, or feature content are cited.</td>
-      </tr>
-      <tr>
-        <td>Alternatives and Comparison</td>
-        <td>Alternatives to AcuityMD; AcuityMD vs competitors</td>
-        <td>No</td>
-        <td>No</td>
-        <td>AIO does not trigger on pure alternatives queries for this brand. Brand has no observed presence at the decision stage.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <blockquote>
-    The brand's organic rankings confirm it produces content that reaches MedTech buyers at multiple journey stages. The gap is that none of this content is structured or positioned in a way that signals product authority to AI systems, leaving the entire solution-aware and decision-stage audience unreachable through AIO.
-  </blockquote>
-</section>
-
-<section class="card">
-  <h2>Citation Sources</h2>
-  <p>These are the external domains appearing alongside AcuityMD in observed AI Overview responses, drawn from search-intelligence data. The mix reveals that AcuityMD's AIO footprint is anchored in editorial and blog content, not product authority.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Domain</th>
-        <th>Context in AIO</th>
-        <th>Pages Cited</th>
-        <th>Responses</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>evidence.care</td>
-        <td>DRG coding explainer content</td>
-        <td>1</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>www.forbes.com</td>
-        <td>Next Billion-Dollar Startups list</td>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>repmove.app</td>
-        <td>Medical sales software list, direct peer citation</td>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>www.reddit.com</td>
-        <td>Medical coding and medical sales career discussions</td>
-        <td>2</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>www.aapc.com</td>
-        <td>Medical coding reference authority</td>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>www.linkedin.com</td>
-        <td>Job listings and entry-level career content</td>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>www.indeed.com</td>
-        <td>Healthcare care-setting career content</td>
-        <td>1</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>www.rasmussen.edu</td>
-        <td>Nursing and care setting definitions</td>
-        <td>1</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>www.startengine.com</td>
-        <td>Startup investment context</td>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>www.bostonscientific.com</td>
-        <td>Health tech employer list</td>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <blockquote>
-    No software review platforms, analyst domains, or peer-recognition sites appear anywhere in the observed AIO citation landscape. The absence of those domain types is a direct suppressor of product-level citation credibility.
-  </blockquote>
-
-  <h3>Off-Site Actions to Improve Citation Authority</h3>
-  <ul>
-    <li><strong>Pursue software review platform listings.</strong> Structured profiles on peer-review and software directory sites give AI systems a credible, citable third-party source for product claims. These domain types are entirely absent from AcuityMD's current AIO citation set.</li>
-    <li><strong>Activate the Forbes mention as a credibility anchor.</strong> The Forbes Next Billion-Dollar Startups citation already appears in AIO. Creating product content that references and links to this recognition can extend its citation halo to platform-level queries.</li>
-    <li><strong>Earn analyst or research domain coverage.</strong> A single citation from a recognized health-technology research domain would introduce a new, high-authority domain type into the AIO source mix. Briefing independent analysts on AcuityAI and real-world data capabilities is the fastest path.</li>
-    <li><strong>Develop co-citation opportunities with MedTech industry publications.</strong> AIO currently pulls from generic career and coding domains. Placing bylined content or data studies in MedTech trade publications would shift the domain mix toward category-relevant authority.</li>
-    <li><strong>Encourage customer case study syndication.</strong> AcuityMD serves 400-plus MedTech companies. Customer-authored content published on external domains would introduce new citing pages outside the brand's own domain, diversifying the citation footprint.</li>
-    <li><strong>Replace coding and career domain co-citations with commercial intelligence sources.</strong> The current peer domains (medical coding sites, nursing education pages) actively reinforce the wrong brand category. Displacing them requires building AIO-citable content that directly addresses physician targeting, market sizing, and MedTech forecasting topics.</li>
-  </ul>
-</section>
-
-<section class="card">
-  <h2>AIO-Revealed Peers</h2>
-  <p>These competitors surfaced directly from AI Overview responses where AcuityMD was cited alongside or displaced by another brand. Each peer's AIO framing reveals how the model currently clusters the category.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Peer</th>
-        <th>Domain</th>
-        <th>AIO Cluster</th>
-        <th>AIO Framing</th>
-        <th>Competitive Threat</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>RepMove</td>
-        <td>repmove.app</td>
-        <td>Medical sales software</td>
-        <td>Cited directly alongside AcuityMD as a peer tool in the same list-style AIO answer for medical sales software queries.</td>
-        <td>Direct overlap on medical sales software category queries. RepMove earns a cited page in the same AIO response.</td>
-      </tr>
-      <tr>
-        <td>Salesforce Health Cloud</td>
-        <td>salesforce.com</td>
-        <td>Medical sales software</td>
-        <td>Named in the same medical sales software AIO response. AIO frames both as equivalent options for MedTech sales teams.</td>
-        <td>Broad CRM incumbent. Being grouped with Salesforce flattens AcuityMD's differentiation as a MedTech-native platform.</td>
-      </tr>
-      <tr>
-        <td>Tempus AI</td>
-        <td>tempus.com</td>
-        <td>AI-driven health data</td>
-        <td>Named ahead of AcuityMD in health tech employer responses. AIO frames Tempus as the leading AI health data company in this cluster.</td>
-        <td>Not a direct product competitor, but Tempus occupies a stronger AI and health data identity in AIO, making AcuityMD's own data positioning harder to claim.</td>
-      </tr>
-      <tr>
-        <td>Medtronic</td>
-        <td>medtronic.com</td>
-        <td>MedTech employer and device OEM</td>
-        <td>Listed alongside AcuityMD as a top health tech employer. AIO treats both as MedTech industry participants rather than distinguishing software from device maker.</td>
-        <td>Category association with a device OEM weakens AcuityMD's positioning as a commercial intelligence platform rather than a MedTech company in general.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <blockquote>
-    <strong>Note the framing.</strong> AIO groups AcuityMD with a generic CRM incumbent, a field sales app, an AI data company, and a device manufacturer, placing it in four separate clusters with no single authoritative category. This fragmented peer association is a direct consequence of missing product-level content. Until AcuityMD owns a defined AIO cluster for MedTech commercial intelligence, the model will continue to assign it whatever nearby cluster fits the query context.
-  </blockquote>
-</section>
-
-<section class="card">
-  <h2>30-Day Priority Moves</h2>
-  <p>These five actions address the highest-impact gaps identified in this audit. Each can be initiated and showing early results within 30 days.</p>
-
-  <h3>1. Publish a GEO-Optimized Platform Overview Page</h3>
-  <p>The platform page at acuitymd.com/platform drives only 58 sessions and is cited in zero AIO responses. Rewrite it to explicitly define AcuityMD as a MedTech intelligence platform, name all modules (Care Journeys, Contracts, Forecasting, Markets, Targeting), and include structured entity definitions AIO can lift directly.</p>
-  <p>This single page addresses the identity gap where AIO currently describes the brand as a generic medical sales CRM instead of a full-stack commercial intelligence platform.</p>
-
-  <h3>2. Create a Dedicated AcuityAI Feature Page</h3>
-  <p>AcuityAI is a core product differentiator that is completely invisible in every observed AIO response. A standalone page with clear definitions, use cases, and outcome statements gives AIO a citable source for AI-related MedTech queries.</p>
-  <p>Target queries such as "AI for medical device sales" and "MedTech AI insights platform" where AIO triggers exist but no AcuityMD content currently competes.</p>
-
-  <h3>3. Add GEO Markup to the Top Three Organically Ranking Blog Posts</h3>
-  <p>Posts on medical device marketing strategy (position 3) and how to get into medical device sales (position 7) already rank well but receive zero AIO citations. Adding concise definition blocks, summary answer paragraphs, and explicit brand attribution to each post converts existing organic authority into AIO citation potential.</p>
-  <p>This is the fastest path to increasing the AIO citation rate from its current 9.7 percent because the rankings and traffic are already in place.</p>
-
-  <h3>4. Secure One New Analyst or Peer-Review Domain Citation</h3>
-  <p>The entire external citation landscape observed in this audit contains no analyst coverage and no software peer-review domain. A single listing or feature placement on a recognized software review destination would introduce a credibility-signal domain that AIO currently uses for competing products but not for AcuityMD.</p>
-  <p>Prioritize domains that already appear in AIO responses for "best medical device CRM" and "medical sales software" category queries, where AcuityMD needs stronger third-party reinforcement.</p>
-
-  <h3>5. Publish a Physician Targeting and Territory Management Solution Page</h3>
-  <p>Queries about physician targeting and territory management trigger AIO responses but AcuityMD is absent from all of them. A solution page combining both topics, with real-world data context and specific workflow descriptions, fills the single largest buyer-journey gap identified in this audit.</p>
-  <p>This page directly targets solution-aware buyers at the moment they are evaluating tools, which is the query layer where AIO citation drives the most qualified traffic.</p>
-</section>
-
-<section class="card">
-  <h2>90-Day GEO Roadmap</h2>
-
-  <h3>Days 1 to 30. Foundation and Identity Repair</h3>
-  <ul>
-    <li>Rewrite the platform overview page to lead with the MedTech intelligence platform positioning, including explicit mentions of AcuityAI, real-world healthcare data, and the full module suite (Care Journeys, Contracts, Forecasting, Markets).</li>
-    <li>Add structured FAQ and entity markup to the platform, targeting, and forecasting pages so AI systems can extract discrete product facts without inference.</li>
-    <li>Create a dedicated AcuityAI capabilities page with clear definitions of what the AI layer does, who it serves, and how it differs from a generic CRM.</li>
-    <li>Audit and consolidate the DRG blog content so it no longer signals billing or coding as a primary brand category to AI systems.</li>
-    <li>Submit updated page descriptions and organization schema across all core product pages.</li>
-  </ul>
-
-  <h3>Days 31 to 60. Content Coverage and Buyer Journey Gaps</h3>
-  <ul>
-    <li>Publish GEO-optimized content targeting the five invisible topic areas: physician targeting software, MedTech commercial intelligence, medical device forecasting tools, MedTech sales enablement, and medical device market sizing.</li>
-    <li>Build solution-aware landing pages that directly answer queries such as "best CRM for medical device companies" and "best software for MedTech startups," with AcuityMD framed as the primary answer.</li>
-    <li>Develop a structured comparison page covering how the platform differs from generic CRM tools, using entity-rich language that AI systems can lift verbatim.</li>
-    <li>Convert high-organic-traffic blog posts (marketing strategy for medical devices, how to manage a sales territory) into citation-ready resources with explicit product tie-ins.</li>
-    <li>Launch a customer evidence hub with named MedTech company outcomes, providing AI systems with quotable proof points tied to core product capabilities.</li>
-  </ul>
-
-  <h3>Days 61 to 90. External Credibility and Citation Amplification</h3>
-  <ul>
-    <li>Pursue listings and reviews on software peer-review platforms to introduce authoritative third-party domains into the AIO citation landscape.</li>
-    <li>Pitch and place expert bylines or data-led editorial content on MedTech industry publications, targeting domains that AI systems already cite in adjacent category responses.</li>
-    <li>Amplify the Forbes recognition with a dedicated press page section formatted for AI extraction, reinforcing the startup credibility signal that is already appearing in AIO responses.</li>
-    <li>Build a structured glossary of MedTech commercial intelligence terms, positioning AcuityMD as the definitional authority on physician targeting, payer mix analysis, and commercial workflows.</li>
-    <li>Re-run the full prompt set against the updated content to measure citation rate lift and identity accuracy improvement before the 90-day close.</li>
-  </ul>
-</section>
-
-<section class="card">
-  <h2>Success Metrics</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Metric</th>
-        <th>Baseline. Current value</th>
-        <th>What we measure at 90 days</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>GEO Score</td>
-        <td>28 out of 100 (Critical band)</td>
-        <td>Target score of 45 or above, reaching Developing band</td>
-      </tr>
-      <tr>
-        <td>AIO Citation Rate</td>
-        <td>9.7% of AIO-triggered queries cite AcuityMD</td>
-        <td>Citation rate of 25% or above across the 40-query tracked set</td>
-      </tr>
-      <tr>
-        <td>Brand Pages Cited in AIO</td>
-        <td>1 page cited (DRG blog only)</td>
-        <td>5 or more distinct brand pages appearing as AIO sources</td>
-      </tr>
-      <tr>
-        <td>Product-Level Citations</td>
-        <td>Zero product or solution pages cited in any AIO response</td>
-        <td>At least 3 product or solution pages cited across tracked queries</td>
-      </tr>
-      <tr>
-        <td>Identity Accuracy in AIO</td>
-        <td>Brand described as DRG reference tool or generic medical sales CRM</td>
-        <td>AIO responses describe AcuityMD as a MedTech intelligence platform in the majority of citations</td>
-      </tr>
-      <tr>
-        <td>Invisible Topic Coverage</td>
-        <td>0 of 10 core invisible topics surfacing AcuityMD in AIO</td>
-        <td>4 or more previously invisible topics now triggering an AcuityMD citation</td>
-      </tr>
-      <tr>
-        <td>External Credibility Domains in AIO</td>
-        <td>1 external credibility domain (Forbes) cited alongside AcuityMD</td>
-        <td>3 or more credibility domains (software review platforms, industry publications) cited alongside AcuityMD</td>
-      </tr>
-      <tr>
-        <td>Buyer Journey Coverage. Solution-Aware Queries</td>
-        <td>AcuityMD absent from all observed solution-aware AIO responses</td>
-        <td>AcuityMD cited in at least 2 solution-aware queries (best CRM, best software for MedTech)</td>
-      </tr>
-      <tr>
-        <td>AcuityAI Entity Visibility</td>
-        <td>AcuityAI not mentioned in any observed AIO response</td>
-        <td>AcuityAI named as a distinct entity in at least 1 AIO response</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<section class="card">
-  <h2>Methodology Appendix</h2>
-
-  <h3>Data Sources</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th>What It Contributed</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Search-intelligence data export</td>
-        <td>Keyword rankings, traffic estimates, AIO trigger flags, and cited-page counts across 40 tracked queries</td>
-      </tr>
-      <tr>
-        <td>Live AIO response sampling</td>
-        <td>Verbatim AI Overview text captured for 5 representative queries to document brand framing, citation position, and peer co-mentions</td>
-      </tr>
-      <tr>
-        <td>Brand site crawl</td>
-        <td>Homepage and about page content fetched directly to establish brand self-description and product taxonomy</td>
-      </tr>
-      <tr>
-        <td>External citation review</td>
-        <td>Domains appearing alongside AcuityMD in AIO source lists were catalogued to assess citation landscape quality</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Audit Method</h3>
-  <p>Forty keywords were selected across three layers: brand-name queries, category queries, and alternatives queries. Each keyword was assessed for AIO trigger presence, brand citation presence, and citation page identity.</p>
-  <p>GEO Score components were weighted and scored against observed data, then combined into a single 0 to 100 index. The final score of 28 includes a minor upward adjustment for the Forbes recognition signal and the brand's strong organic traffic base.</p>
-
-  <h3>Scoring Weights</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Component</th>
-        <th>Weight</th>
-        <th>Raw Score</th>
-        <th>Weighted Score</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>AIO Trigger Rate</td>
-        <td>15%</td>
-        <td>78</td>
-        <td>11.7</td>
-      </tr>
-      <tr>
-        <td>AIO Citation Rate</td>
-        <td>25%</td>
-        <td>10</td>
-        <td>2.5</td>
-      </tr>
-      <tr>
-        <td>Identity Accuracy</td>
-        <td>20%</td>
-        <td>20</td>
-        <td>4.0</td>
-      </tr>
-      <tr>
-        <td>Content and Entity Coverage</td>
-        <td>20%</td>
-        <td>15</td>
-        <td>3.0</td>
-      </tr>
-      <tr>
-        <td>Citation Page Quality</td>
-        <td>10%</td>
-        <td>10</td>
-        <td>1.0</td>
-      </tr>
-      <tr>
-        <td>External Credibility Signals</td>
-        <td>10%</td>
-        <td>40</td>
-        <td>4.0</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3>Limitations</h3>
-  <p>AIO responses are personalised and non-deterministic. The same query may produce different source lists across sessions, browsers, or geographies.</p>
-  <p>The 40-keyword set is a structured sample, not an exhaustive crawl. Low-volume or long-tail queries outside this set may produce different citation outcomes.</p>
-  <p>Traffic estimates from search-intelligence data are modelled figures. They reflect relative magnitude, not precise click counts.</p>
-  <p>Citation counts reflect observations at a single point in time. AIO inclusion can shift within days following content or algorithm changes.</p>
-
-  <h3>What This Audit Does Not Do</h3>
-  <blockquote>
-    <p>This audit does not measure paid search performance, social media visibility, or direct referral traffic. It does not assess brand sentiment in news media or long-form editorial content beyond what appears in AIO source lists.</p>
-    <p>This audit does not constitute an SEO technical audit. Page speed, crawlability, structured data completeness, and backlink profile analysis are outside its scope. Those factors may influence GEO outcomes but are not scored here.</p>
-    <p>This audit does not track AIO performance on platforms other than Google Search. Emerging AI answer surfaces are not included in this scoring model.</p>
-  </blockquote>
-
-  <h3>Audit Details</h3>
-  <p>Audit date. 2026-06-16. Domain assessed. acuitymd.com. Total keywords tracked. 40. AIO responses sampled. 5 verbatim captures.</p>
-</section></article>
-      
-    </main>
-  </body>
-</html>
+<footer><div class="container">
+  <div class="word">acuitymd.</div>
+  <div class="meta-row">
+    <div class="left">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY &nbsp;·&nbsp; JUNE 16, 2026</div>
+    <div class="right">PREPARED BY AUQ &nbsp;·&nbsp; ANALYTICS@AUQ.IO</div>
+  </div>
+</div></footer></body></html>
