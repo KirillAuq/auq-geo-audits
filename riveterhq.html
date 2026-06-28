@@ -37,8 +37,15 @@
   .brand { font-family: var(--f-display); font-weight: 500; font-size: 18px; letter-spacing: -0.18px; display: flex; align-items: center; gap: 10px; }
   .brand .dot { width: 10px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); }
   nav.topnav .right { display: flex; align-items: center; gap: 24px; }
-  nav.topnav .right a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; }
+  nav.topnav .right a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; white-space: nowrap; }
   nav.topnav .right a:hover { opacity: 0.6; }
+  nav.topnav .brand { text-decoration: none; color: var(--c-text); }
+  nav.topnav .right a.has-sub { display: inline-flex; flex-direction: column; line-height: 1.1; }
+  nav.topnav .right a.has-sub .navsub { font-size: 9.5px; letter-spacing: 0.02em; text-transform: none; color: var(--c-muted-light); margin-top: 3px; }
+  nav.topnav .right a.has-sub:hover { opacity: 1; }
+  nav.topnav .right a.has-sub:hover .navsub { color: var(--c-magenta); }
+  nav.topnav .right a.btn-cta { color: var(--c-text-dark); }
+  @media (max-width: 820px) { nav.topnav .right a:not(.btn-cta) { display: none; } }
   .btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--c-dark); color: var(--c-text-dark); padding: 10px 18px; border-radius: var(--r-sharp); font-size: 14px; letter-spacing: -0.14px; font-weight: 500; text-decoration: none; transition: transform 0.15s ease; }
   .btn-cta:hover { transform: translateY(-1px); }
   .hero { position: relative; overflow: hidden; padding: 88px 0 96px; }
@@ -177,7 +184,7 @@
     .stat-card .num { font-size: 44px; letter-spacing: -1.32px; }
     .score-block .big { font-size: 88px; letter-spacing: -2.6px; }
   }
-</style></head><body><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCFX8NJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) --><nav class="topnav"><div class="container"><div class="brand">AUQ</div><div class="right mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</div></div></nav>
+</style></head><body><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCFX8NJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) --><nav class="topnav"><div class="container"><a class="brand" href="https://auq.io">AUQ</a><div class="right mono-label"><a href="https://auq.io/geo-llm-optimization/">AUQ GEO</a><a href="https://auq.io/geo-analytics/">GEO Analytics</a><a class="has-sub" href="https://auq.io/pricing/" title="Month to month, no long-term contracts">Pricing<span class="navsub">Month-to-month, no contracts</span></a><a href="https://auq.io/team/">Our Team</a><a class="btn-cta" href="https://auq.io/contact-us/">Contact Us</a></div></div></nav>
 
 <section class="hero"><div class="container">
   <div class="eyebrow"><span class="pill"></span><span class="mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</span></div>
