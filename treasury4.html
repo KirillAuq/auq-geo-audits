@@ -33,12 +33,15 @@
   .section:first-of-type { border-top: none; }
   .section-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px; max-width: 820px; }
   nav.topnav { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); background: rgba(255,255,255,0.75); border-bottom: 1px solid var(--c-border-light); }
-  nav.topnav .container { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
+  nav.topnav .container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-top: 16px; padding-bottom: 16px; }
   .brand { font-family: var(--f-display); font-weight: 500; font-size: 18px; letter-spacing: -0.18px; display: flex; align-items: center; gap: 10px; }
   .brand .dot { width: 10px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, var(--c-magenta), var(--c-lavender)); }
-  nav.topnav .right { display: flex; align-items: center; gap: 24px; }
-  nav.topnav .right a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; }
-  nav.topnav .right a:hover { opacity: 0.6; }
+  nav.topnav .brand { justify-self: start; text-decoration: none; color: var(--c-text); }
+  nav.topnav .navmid { justify-self: center; display: flex; align-items: center; gap: 40px; }
+  nav.topnav .navmid a { color: var(--c-text); text-decoration: none; font-size: 14px; letter-spacing: -0.14px; white-space: nowrap; }
+  nav.topnav .navmid a:hover { opacity: 0.6; }
+  nav.topnav .btn-cta { justify-self: end; }
+  @media (max-width: 820px) { nav.topnav .navmid { display: none; } }
   .btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--c-dark); color: var(--c-text-dark); padding: 10px 18px; border-radius: var(--r-sharp); font-size: 14px; letter-spacing: -0.14px; font-weight: 500; text-decoration: none; transition: transform 0.15s ease; }
   .btn-cta:hover { transform: translateY(-1px); }
   .hero { position: relative; overflow: hidden; padding: 88px 0 96px; }
@@ -172,12 +175,12 @@
     .section { padding: 64px 0; }
     .stats-bar { grid-template-columns: 1fr; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-    nav.topnav .right a:not(.btn-cta) { display: none; }
+    nav.topnav .navmid { display: none; }
     .container { padding: 0 20px; }
     .stat-card .num { font-size: 44px; letter-spacing: -1.32px; }
     .score-block .big { font-size: 88px; letter-spacing: -2.6px; }
   }
-</style></head><body><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCFX8NJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) --><nav class="topnav"><div class="container"><div class="brand">AUQ</div><div class="right mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</div></div></nav>
+</style></head><body><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCFX8NJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) --><nav class="topnav"><div class="container"><a class="brand" href="https://auq.io">AUQ</a><div class="navmid mono-label"><a href="https://auq.io/geo-llm-optimization/">AUQ GEO</a><a href="https://auq.io/geo-analytics/">GEO Analytics</a><a href="https://auq.io/pricing/">Pricing</a><a href="https://auq.io/team/">Our Team</a></div><a class="btn-cta" href="https://auq.io/contact-us/">Contact Us</a></div></nav>
 
 <section class="hero"><div class="container">
   <div class="eyebrow"><span class="pill"></span><span class="mono-label">GEO AUDIT &nbsp;·&nbsp; BRAND-ONLY</span></div>
