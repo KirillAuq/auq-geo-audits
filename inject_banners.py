@@ -106,11 +106,18 @@ def inject(path):
     close += len("</section>")
     src = src[:close] + BANNER_A + src[close:]
 
-    # B: before the footer
-    foot = src.rfind("<footer")
-    if foot == -1:
-        return "ERROR: no <footer>"
-    src = src[:foot] + BANNER_B.replace("{BRAND}", brand) + src[foot:]
+    # B: before the "Queries we tested" section; fall back to just after
+    # "AI OVERVIEW PERFORMANCE" (older pages without that section)
+    anchor = src.find('<section class="section" id="tested-queries">')
+    if anchor == -1:
+        lbl = src.find("AI OVERVIEW PERFORMANCE")
+        if lbl == -1:
+            return "ERROR: no anchor for case-studies section"
+        anchor = src.find("</section>", lbl)
+        if anchor == -1:
+            return "ERROR: no </section> after AI OVERVIEW PERFORMANCE"
+        anchor += len("</section>")
+    src = src[:anchor] + BANNER_B.replace("{BRAND}", brand) + src[anchor:]
 
     open(path, "w", encoding="utf-8").write(src)
     return f"ok (brand: {brand})"
