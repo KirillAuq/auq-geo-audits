@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>urlbox.com — AI answer visibility, qualitative read</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101E38;
+    --ink-deep:#08122A;
+    --ink-line:#25365A;
+    --paper:#EDF0F4;
+    --card:#FFFFFF;
+    --rule:#C7D0DB;
+    --rule-soft:#DEE4EB;
+    --text:#1B2534;
+    --muted:#5B6A7D;
+    --muted-dark:#8D9DB2;
+    --absent:#B03A2E;
+    --partial:#B07318;
+    --present:#2C6E63;
+    --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:var(--serif);
+    font-size:17px;
+    line-height:1.62;
+  }
+
+  .wrap{max-width:940px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- masthead ---------- */
+
+  .masthead{
+    background:var(--ink);
+    color:#EAF0F8;
+    padding:64px 0 0;
+    border-bottom:6px solid var(--ink-deep);
+  }
+
+  .kicker{
+    font-family:var(--sans);
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:.02em;
+    color:var(--muted-dark);
+    margin:0 0 14px;
+  }
+
+  .domain{
+    font-family:var(--sans);
+    font-weight:800;
+    font-size:clamp(40px,8vw,76px);
+    line-height:.98;
+    letter-spacing:-.035em;
+    margin:0;
+    color:#fff;
+  }
+
+  .lede{
+    max-width:60ch;
+    margin:20px 0 0;
+    color:#C3D0E2;
+    font-size:18px;
+  }
+
+  .lede b{color:#fff;font-weight:600;}
+
+  /* ---------- verdict triptych ---------- */
+
+  .verdicts{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--ink-line);
+    border:1px solid var(--ink-line);
+    margin:48px 0 0;
+    transform:translateY(1px);
+  }
+
+  .verdict{background:var(--ink-deep);padding:24px 22px 26px;}
+
+  .verdict .scope{
+    font-family:var(--sans);
+    font-size:13.5px;
+    font-weight:500;
+    color:var(--muted-dark);
+    margin:0 0 18px;
+    min-height:2.9em;
+  }
+
+  .ticks{display:flex;gap:5px;margin:0 0 14px;}
+
+  .tick{width:26px;height:7px;border:1px solid currentColor;}
+
+  .tick.on{background:currentColor;}
+
+  .verdict .state{
+    font-family:var(--sans);
+    font-weight:800;
+    font-size:24px;
+    letter-spacing:-.02em;
+    line-height:1.1;
+    margin:0;
+  }
+
+  .verdict .qual{
+    font-family:var(--sans);
+    font-weight:400;
+    font-size:14px;
+    color:var(--muted-dark);
+    margin:6px 0 0;
+    line-height:1.4;
+  }
+
+  .v-absent{color:#E8776A;}
+  .v-partial{color:#E2A445;}
+  .v-present{color:#5FBFA9;}
+
+  /* ---------- body sections ---------- */
+
+  main{padding:56px 0 0;}
+
+  section{margin:0 0 62px;}
+
+  h2{
+    font-family:var(--sans);
+    font-weight:800;
+    font-size:26px;
+    letter-spacing:-.02em;
+    line-height:1.2;
+    margin:0 0 6px;
+    color:var(--ink);
+  }
+
+  .sub{
+    max-width:66ch;
+    color:var(--muted);
+    margin:0 0 26px;
+    font-size:16.5px;
+  }
+
+  p{max-width:70ch;}
+
+  /* ---------- query table ---------- */
+
+  .qtable{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:15px;}
+
+  .qtable thead th{
+    text-align:left;
+    font-weight:600;
+    font-size:13px;
+    color:var(--muted);
+    padding:0 14px 10px 0;
+    border-bottom:2px solid var(--ink);
+  }
+
+  .qtable thead th:last-child{padding-right:0;}
+
+  .qtable td{
+    vertical-align:top;
+    padding:20px 14px 20px 0;
+    border-bottom:1px solid var(--rule);
+    line-height:1.5;
+  }
+
+  .qtable td:last-child{padding-right:0;}
+
+  .q-text{font-family:var(--serif);font-size:17px;color:var(--ink);width:30%;}
+
+  .q-surface{width:14%;color:var(--muted);}
+
+  .q-read{width:17%;}
+
+  .q-instead{width:39%;color:var(--muted);}
+
+  .q-instead strong{color:var(--text);font-weight:600;}
+
+  .badge{
+    display:inline-block;
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:13px;
+    line-height:1.25;
+    padding:5px 9px;
+    border:1.5px solid currentColor;
+  }
+
+  .b-absent{color:var(--absent);}
+  .b-partial{color:var(--partial);}
+  .b-present{color:var(--present);}
+
+  .badge span{display:block;font-weight:400;font-size:11.5px;opacity:.85;}
+
+  .aside{
+    margin:30px 0 0;
+    padding:20px 24px;
+    background:var(--card);
+    border-left:4px solid var(--ink);
+    max-width:72ch;
+    font-size:16.5px;
+  }
+
+  .aside p{margin:0;max-width:none;}
+
+  /* ---------- specimens ---------- */
+
+  .specimens{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:32px 0 0;}
+
+  .spec{background:var(--card);padding:22px 22px 24px;border-top:4px solid;}
+
+  .spec-win{border-color:var(--present);}
+  .spec-half{border-color:var(--partial);}
+  .spec-miss{border-color:var(--absent);}
+
+  .spec .outcome{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:13px;
+    margin:0 0 6px;
+  }
+
+  .spec-win .outcome{color:var(--present);}
+  .spec-half .outcome{color:var(--partial);}
+  .spec-miss .outcome{color:var(--absent);}
+
+  .spec .count{
+    font-family:var(--sans);
+    font-weight:800;
+    font-size:30px;
+    letter-spacing:-.02em;
+    color:var(--ink);
+    margin:0 0 10px;
+    line-height:1;
+  }
+
+  .spec p{margin:0 0 10px;font-size:15.5px;max-width:none;}
+
+  .spec p:last-child{margin-bottom:0;}
+
+  .spec code{
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:14px;
+    background:var(--paper);
+    padding:1px 5px;
+    word-break:break-all;
+  }
+
+  /* ---------- ledger ---------- */
+
+  .ledger{
+    margin:28px 0 0;
+    columns:2;
+    column-gap:34px;
+    font-family:var(--sans);
+    font-size:15px;
+    list-style:none;
+    padding:0;
+  }
+
+  .ledger li{
+    break-inside:avoid;
+    padding:11px 0 11px 24px;
+    border-bottom:1px solid var(--rule-soft);
+    position:relative;
+    color:var(--muted);
+  }
+
+  .ledger li b{color:var(--text);font-weight:600;}
+
+  .ledger li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:18px;
+    width:9px;
+    height:9px;
+    border:1.5px solid var(--muted-dark);
+    border-radius:50%;
+  }
+
+  .ledger li.own::before{border-color:var(--absent);}
+
+  .ledger-note{
+    font-family:var(--sans);
+    font-size:14px;
+    color:var(--muted);
+    margin:18px 0 0;
+    max-width:70ch;
+  }
+
+  /* ---------- footer ---------- */
+
+  footer{
+    background:var(--ink);
+    color:#AFC0D6;
+    margin:70px 0 0;
+    padding:44px 0 52px;
+    font-size:15.5px;
+  }
+
+  footer h2{color:#fff;font-size:19px;margin-bottom:14px;}
+
+  footer p{max-width:74ch;margin:0 0 14px;}
+
+  footer p:last-child{margin-bottom:0;}
+
+  footer code{
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:14px;
+    color:#fff;
+    background:var(--ink-deep);
+    padding:2px 6px;
+  }
+
+  .stamp{
+    font-family:var(--sans);
+    font-size:13px;
+    color:#7D90AB;
+    margin:26px 0 0;
+    padding-top:18px;
+    border-top:1px solid var(--ink-line);
+  }
+
+  /* ---------- load reveal ---------- */
+
+  @media (prefers-reduced-motion:no-preference){
+    .tick{transform:scaleX(0);transform-origin:left;animation:tick .5s cubic-bezier(.2,.7,.3,1) forwards;}
+    .verdict:nth-child(1) .tick{animation-delay:.25s;}
+    .verdict:nth-child(2) .tick{animation-delay:.4s;}
+    .verdict:nth-child(3) .tick{animation-delay:.55s;}
+  }
+
+  @keyframes tick{to{transform:scaleX(1);}}
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width:880px){
+    .specimens{grid-template-columns:1fr;}
+  }
+
+  @media (max-width:760px){
+    body{font-size:16px;}
+    .wrap{padding:0 20px;}
+    .masthead{padding-top:44px;}
+    .verdicts{grid-template-columns:1fr;margin-top:36px;}
+    .verdict .scope{min-height:0;}
+    .qtable,.qtable tbody,.qtable tr,.qtable td{display:block;width:auto;}
+    .qtable thead{display:none;}
+    .qtable tr{border-bottom:1px solid var(--rule);padding:22px 0;}
+    .qtable td{border:0;padding:0 0 10px;}
+    .qtable td:last-child{padding-bottom:0;}
+    .qtable .q-text{font-size:18px;font-weight:600;}
+    .qtable .q-surface::before{content:"Surface: ";color:var(--muted-dark);}
+    .qtable .q-instead::before{content:"Cited instead: ";color:var(--muted-dark);}
+    .ledger{columns:1;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">AI answer visibility — qualitative read, 7 September 2026</p>
+    <h1 class="domain">urlbox.com</h1>
+    <p class="lede">Screenshot and rendering API for developers, positioned on accuracy and forensic-grade evidence. Tested across ChatGPT with web search, Perplexity (sonar-pro), Google's SERP, and DataForSEO's historic ChatGPT mentions corpus. <b>Urlbox is in the conversation — but it is consistently the runner-up, and it loses on the one query where its own positioning should win outright.</b></p>
+
+    <div class="verdicts">
+      <div class="verdict">
+        <p class="scope">Category and comparison queries</p>
+        <div class="ticks v-present">
+          <i class="tick on"></i><i class="tick on"></i><i class="tick"></i>
+        </div>
+        <p class="state v-present">Present, second</p>
+        <p class="qual">Always cited, always behind ScreenshotOne</p>
+      </div>
+      <div class="verdict">
+        <p class="scope">Compliance and legal-evidence queries</p>
+        <div class="ticks v-absent">
+          <i class="tick"></i><i class="tick"></i><i class="tick"></i>
+        </div>
+        <p class="state v-absent">Not recommended</p>
+        <p class="qual">Retrieved into the source set, then ignored</p>
+      </div>
+      <div class="verdict">
+        <p class="scope">Queries that already name the brand</p>
+        <div class="ticks v-partial">
+          <i class="tick on"></i><i class="tick on"></i><i class="tick"></i>
+        </div>
+        <p class="state v-partial">Documented, unproven</p>
+        <p class="qual">Nine own-page citations, zero named customers</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>What each query returned</h2>
+    <p class="sub">Five prompts, spanning category shopping, a migration-intent buying question, a differentiator-phrased question, a brand question, and the Google surface.</p>
+
+    <table class="qtable">
+      <thead>
+        <tr>
+          <th class="q-text">Query tested</th>
+          <th class="q-surface">Surface</th>
+          <th class="q-read">Read</th>
+          <th class="q-instead">Who gets cited, and where Urlbox lands</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="q-text">“best website screenshot API for developers”</td>
+          <td class="q-surface">ChatGPT + web search</td>
+          <td class="q-read"><span class="badge b-present">Present<span>ranked second</span></span></td>
+          <td class="q-instead"><strong>ScreenshotOne</strong> takes best overall — supported by its own pricing page <em>and its own “Best Screenshot APIs in 2026” blog post, cited as though it were a neutral source.</em> Urlbox is second, “best for difficult sites”, cited from its screenshot-api, features and pricing pages. Browserless and Firecrawl follow.</td>
+        </tr>
+        <tr>
+          <td class="q-text">“we're self-hosting Puppeteer and it keeps breaking at scale — what managed alternatives should we use?”</td>
+          <td class="q-surface">Perplexity, sonar-pro</td>
+          <td class="q-read"><span class="badge b-present">Present<span>ranked third</span></span></td>
+          <td class="q-instead"><strong>ScreenshotOne</strong> is the “safe default”, <strong>CaptureKit</strong> the cheap pick; Urlbox is the “if you need fine-grained control” option. All 20 sources were third-party roundups — scrapfly.io, screenshotapi.to, derrick-app.com, olostep.com, thunderbit.com. Urlbox's own comparison pages did not surface.</td>
+        </tr>
+        <tr>
+          <td class="q-text">“automated screenshots that hold up as evidence — timestamped, tamper-evident, forensically defensible”</td>
+          <td class="q-surface">Perplexity, sonar-pro</td>
+          <td class="q-read"><span class="badge b-absent">Retrieved<span>not recommended</span></span></td>
+          <td class="q-instead"><strong>Snapshot Archive</strong> wins outright on SHA-256 hash certificates and UTC watermarks, with <strong>PageFreezer</strong> and <strong>ScreenshotCenter</strong> named after it. The Urlbox homepage sat in the retrieved source list and contributed nothing to the answer — zero mentions in the response body.</td>
+        </tr>
+        <tr>
+          <td class="q-text">“what is Urlbox, is it worth the price vs ScreenshotOne and ApiFlash, and who actually uses it?”</td>
+          <td class="q-surface">ChatGPT + web search</td>
+          <td class="q-read"><span class="badge b-partial">Strong<span>unfavourable</span></span></td>
+          <td class="q-instead">Nine citations to urlbox.com — products/screenshot-api, pricing, docs. But the verdict is “probably overkill”, with ApiFlash and ScreenshotOne recommended first on price. <strong>No named customers were found</strong>, so the model invented a list of likely user types instead.</td>
+        </tr>
+        <tr>
+          <td class="q-text">“best screenshot API” (organic and AI Overview)</td>
+          <td class="q-surface">Google SERP</td>
+          <td class="q-read"><span class="badge b-absent">Absent<span>from organic</span></span></td>
+          <td class="q-instead">An AI Overview fires. The top ten are <strong>derrick-app.com, screenshotapi.net, screenshotone.com, Reddit, scrapingdog.com, scrapfly.io, apiflash.com and olostep.com</strong>. Urlbox appears only inside Olostep's roundup — it does not rank in its own right.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="aside">
+      <p>The recurring shape: rivals rank their own domains for the category term while Urlbox is represented only through other people's pages. ScreenshotOne is doing both — ranking its homepage <em>and</em> supplying the comparison post that models quote when deciding who wins.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The pattern underneath</h2>
+    <p class="sub">Urlbox has seven recorded mentions in DataForSEO's historic ChatGPT corpus, with a combined AI search volume of 48 — real presence, unlike a brand that has never surfaced. But only two of those seven converted into a citation.</p>
+
+    <div class="specimens">
+      <div class="spec spec-win">
+        <p class="outcome">Cited outright</p>
+        <p class="count">2</p>
+        <p><code>/monitor-website-changes</code> carried the answer to “how to set up an alert for changes on a website?”, alongside Distill and Visualping.</p>
+        <p><code>/html-to-pdf-api</code> was cited as the API option in “how to convert html to pdf code?”</p>
+      </div>
+      <div class="spec spec-half">
+        <p class="outcome">Named, credit went elsewhere</p>
+        <p class="count">2</p>
+        <p>In “is there a way to automate screenshots?” the answer named Urlbox in the prose — and footnoted <strong>differ.blog</strong>.</p>
+        <p>In “what is the alternative to phantomjs?” it named Urlbox and footnoted <strong>zenrows.com</strong>, while <code>/alternative-to/phantomjs</code> sat in the retrieved set, uncited.</p>
+      </div>
+      <div class="spec spec-miss">
+        <p class="outcome">Retrieved, then dropped</p>
+        <p class="count">3</p>
+        <p>Pages surfaced but were never used on “screenshot tool that lets you scroll”, “how to get a proxy url” and “how to generate image url for html”.</p>
+        <p>Consumer tools, MDN and php.cn took those answers instead.</p>
+      </div>
+    </div>
+
+    <div class="aside">
+      <p>Five of seven historic appearances were retrieval without citation credit, and in two of them a competitor's page was footnoted for a sentence that named Urlbox by name. That is a different failure from invisibility: the content is being found and read, then passed over at the moment attribution is assigned. The live tests repeat it — most sharply on the compliance query, where a homepage built entirely around forensic defensibility was retrieved and then beaten by vendors most buyers have never heard of.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Who arbitrates the category</h2>
+    <p class="sub">These are the sources models actually quoted across the tested answers. The first is the one worth dwelling on.</p>
+
+    <ul class="ledger">
+      <li class="own"><b>screenshotone.com/blog/best-screenshot-apis</b> — a competitor's own roundup, cited as a neutral authority in two separate answers</li>
+      <li><b>scrapfly.io</b> — supports the Urlbox reliability claim</li>
+      <li><b>screenshotapi.to</b> — supports the Urlbox feature-depth claim</li>
+      <li><b>olostep.com</b> — includes Urlbox, ranks page one for the category term</li>
+      <li><b>derrick-app.com</b> — ranks first organically, leads with CaptureKit</li>
+      <li><b>thunderbit.com</b> — tested-ten-APIs format</li>
+      <li><b>getscreenshotapi.com</b> — used for the Urlbox price point</li>
+      <li><b>differ.blog</b> — took the citation for a sentence naming Urlbox</li>
+      <li><b>zenrows.com</b> — took the citation on the PhantomJS answer</li>
+      <li><b>snapshotarchive.com</b>, <b>pagefreezer.com</b>, <b>screenshotcenter.com</b> — own the compliance-evidence answer entirely</li>
+    </ul>
+
+    <p class="ledger-note">Urlbox is present in several of these, which is why it keeps placing second rather than vanishing. What it does not have is an equivalent asset of its own earning citations — no owned comparison page surfaced in any of the five tests, while a direct competitor's did, twice.</p>
+  </section>
+
+  <section>
+    <h2>Two things that look fixable</h2>
+    <p class="sub">Stated as observations from the data, not as a strategy recommendation.</p>
+
+    <div class="aside">
+      <p>First, the customer evidence. Asked point-blank who uses Urlbox, the model found the 1,700-customer and 800M-screenshot figures but no named accounts, and filled the gap with guesses. The customers page and testimonials exist on the site; they were not retrieved. Competitors surfaced concrete counts and at least one named account in the same answer.</p>
+    </div>
+
+    <div class="aside">
+      <p>Second, the compliance gap. Forensic defensibility is the homepage headline, and it is the one query class where Urlbox scored worst. The winning answers were built from pages that name the specific mechanism — hash certificates, UTC watermarks, court-admissible records. The Urlbox homepage asserts defensibility without a retrievable page that spells out how it is achieved.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Read this as a signal, not a score</h2>
+    <p>This is a single-run qualitative sample. Each prompt was issued once, and answers from these models vary between runs, so treat the direction as reliable and any individual citation as a snapshot. The Google AI Overview returned asynchronously and its text was not captured — that surface was inferred from the organic results around it.</p>
+    <p>No GEO score or band has been produced here, and none should be quoted from this document. The scored, verified output is still pending <code>geo-audit-full.zip</code> and <code>team-config.env</code>; once the engine runs, its numbers supersede everything above.</p>
+    <p class="stamp">Prepared for AUQ Analytics &amp; Growth Consulting — 7 September 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
