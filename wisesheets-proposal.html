@@ -1,0 +1,79 @@
+<title>AI SEO Audit Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/"><link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#F4F5F9;--paper:#FFFFFF;--ink:#141833;--muted:#5A6180;--line:#DDE0EB;--accent:#3B4CCA;--accent-soft:#E8EAFA;--band:#0D1029;--band-ink:#EEF0FF;--band-muted:#A3A9CF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B0D1F;--paper:#12152C;--ink:#E9EBF7;--muted:#9EA4C4;--line:#262B4A;--accent:#8C98FF;--accent-soft:#1D2250;--band:#070919;--band-ink:#EEF0FF;--band-muted:#9097C2;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B0D1F;--paper:#12152C;--ink:#E9EBF7;--muted:#9EA4C4;--line:#262B4A;--accent:#8C98FF;--accent-soft:#1D2250;--band:#070919;--band-ink:#EEF0FF;--band-muted:#9097C2;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.7}
+a{color:var(--accent)} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:880px;margin:0 auto;padding-inline:20px}
+header.band{background:var(--band);color:var(--band-ink);padding-block:28px 56px;position:relative;overflow:hidden}
+header.band canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+header .wrap{position:relative}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--band-muted)}
+.logo{font-weight:800;font-size:20px;letter-spacing:.02em;color:var(--band-ink);text-transform:none}
+.logo b{color:#8C98FF}
+.eyebrow{margin-top:56px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--band-muted)}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.15;font-weight:700;margin:10px 0 18px;text-wrap:balance;letter-spacing:-.01em}
+.intro{max-width:62ch;color:var(--band-ink);opacity:.86;margin:0}
+nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-top:-28px;position:relative;padding:18px 22px}
+nav.toc h3{margin:0 0 10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+nav.toc ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px 18px}
+nav.toc a{text-decoration:none;color:var(--ink);font-weight:500;font-size:14px;display:flex;gap:8px}
+nav.toc a span{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
+nav.toc a:hover{color:var(--accent)}
+main{padding-block:24px 40px}
+.del{display:grid;grid-template-columns:64px 1fr;gap:8px;padding-block:36px;border-bottom:1px solid var(--line)}
+.num{font-weight:800;font-size:26px;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.2}
+h2{margin:0 0 10px;font-size:22px;font-weight:700;letter-spacing:-.005em;text-wrap:balance}
+.lede{margin:0 0 20px;max-width:66ch}
+dl{margin:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.sub{display:grid;grid-template-columns:minmax(150px,210px) 1fr;gap:6px 24px;padding-block:14px;border-bottom:1px solid var(--line)}
+dt{font-weight:600;font-size:14px}
+dd{margin:0;color:var(--muted);font-size:14.5px}
+.invest{margin-top:44px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:28px}
+.invest .eyebrow{margin:0;color:var(--accent)}
+.invest h2{margin-top:6px}
+.invest .stat strong{color:var(--accent)}
+.case{margin-top:44px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:28px}
+.case .eyebrow{margin:0;color:var(--accent)}
+.case h2{margin-top:6px}
+.stat{display:flex;gap:28px;flex-wrap:wrap;margin:18px 0 20px}
+.stat div{min-width:140px}
+.stat strong{display:block;font-size:30px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--muted)}
+.exs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.exg h4{margin:0 0 6px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.exg ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.exg a{font-size:14px;font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+.exg a:hover{border-bottom-color:var(--accent)}
+footer{padding-block:28px 40px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (max-width:560px){.del{grid-template-columns:1fr} .sub{grid-template-columns:1fr} .num{font-size:20px}}
+</style>
+<header class="band"><canvas id="stars" aria-hidden="true"></canvas><div class="wrap">
+<div class="top"><span class="logo">AUQ<b>.</b>io</span><span>Organic growth for technical SaaS</span></div>
+<div class="eyebrow">Proposal</div>
+<h1>AI SEO Audit Engagement</h1>
+<p class="intro">This proposal covers a five-part AI SEO audit engagement. The work reviews how your site is crawled and understood by search engines and LLMs, what to do with your existing content, and how your page templates support citations and conversions. It also includes a set of Claude content flows your team can keep using after the engagement ends, plus a measurement setup for AI visibility.</p>
+</div></header>
+<div class="wrap">
+<nav class="toc" aria-label="Deliverables"><h3>Deliverables</h3><ul><li><a href="#d1"><span>01</span>Technical AI SEO Audit</a></li><li><a href="#d2"><span>02</span>Content Audit</a></li><li><a href="#d3"><span>03</span>AI Flows</a></li><li><a href="#d4"><span>04</span>Design Audit</a></li><li><a href="#d5"><span>05</span>Analytics</a></li></ul></nav>
+<main><section class="del" id="d1"><div class="num">01</div><div class="body"><h2>Technical AI SEO Audit</h2><p class="lede">We will review how search engines and AI crawlers access, render and interpret your site. The audit covers crawlability, indexation, site structure and the structured signals that help LLMs understand what your product does and who it serves. Each finding comes with a recommended fix and a priority level.</p><dl><div class="sub"><dt>Schema opportunities</dt><dd>We will identify the templates and pages where structured data such as Organization, Product, Article and FAQ schema can be added or improved, and provide the markup for each.</dd></div><div class="sub"><dt>LLM intro text for robots.txt</dt><dd>We will write a short, plain-language introduction to your company and products for your robots.txt file, so AI crawlers have accurate context about your business before they read the rest of the site.</dd></div></dl></div></section><section class="del" id="d2"><div class="num">02</div><div class="body"><h2>Content Audit</h2><p class="lede">We will review the existing content on your blog and resource sections against rankings, traffic, AI citations and topical overlap. The goal is a focused content library where each page has a clear purpose and a single target query. The output is a page-by-page action list your team can work through in order of impact.</p><dl><div class="sub"><dt>Optimize, delete or merge</dt><dd>Every URL in scope will receive a recommendation to optimize, delete or merge, along with the reasoning, the target keyword and the redirect destination where one applies.</dd></div><div class="sub"><dt>Author review and feedback</dt><dd>We will review your current authors and bylines for subject-matter credibility and give feedback on author bios, expertise signals and writing quality.</dd></div></dl></div></section><section class="del" id="d3"><div class="num">03</div><div class="body"><h2>AI Flows</h2><p class="lede">We will build Claude flows your team can use to create new content in a consistent format. Each flow includes the research steps, prompts, brand guidelines and output structure needed to produce a complete draft. Your team remains responsible for final review and posting, and internal linking is outside the scope of these flows.</p><dl><div class="sub"><dt>Listicle flow</dt><dd>A flow for ranked and comparison articles such as “best X tools,” the content type that has produced the highest conversion rates in our client work.</dd></div><div class="sub"><dt>Use Case / Landing Page flow</dt><dd>A flow for use case and solution pages that connect a specific problem or workflow to your product.</dd></div><div class="sub"><dt>Glossary flow</dt><dd>A flow for short definitional pages that target top-of-funnel terms and give LLMs a clear source to cite.</dd></div></dl></div></section><section class="del" id="d4"><div class="num">04</div><div class="body"><h2>Design Audit</h2><p class="lede">We will review the templates you use today and create wireframes designed to improve citations, rankings and conversions from your content. The wireframes cover page structure, heading hierarchy, answer placement, calls to action and supporting elements such as comparison tables and FAQs. Your design team can build from them directly or use them as a brief.</p><dl><div class="sub"><dt>Blog</dt><dd>A wireframe for long-form articles that places a direct answer near the top, supports scannable sections and includes contextual product calls to action.</dd></div><div class="sub"><dt>Use Case</dt><dd>A wireframe that ties a specific problem to your product, with space for proof points, product visuals and a clear conversion path.</dd></div><div class="sub"><dt>Listicle</dt><dd>A wireframe for ranked and comparison lists with consistent entry blocks, a summary table and a defined position for your own product.</dd></div><div class="sub"><dt>Glossary</dt><dd>A wireframe for definition pages with a concise answer at the top, supporting detail below and links to related terms and product pages.</dd></div></dl></div></section><section class="del" id="d5"><div class="num">05</div><div class="body"><h2>Analytics</h2><p class="lede">We recommend setting up a PromptWatch account to measure how often your brand is mentioned and cited in AI answers. PromptWatch tracks visibility across ChatGPT, Perplexity, Google AI Overviews and other models, and shows which of your pages and which third-party sources are being cited.</p><dl><div class="sub"><dt>Account setup</dt><dd>We can set up and configure the account for you, including your brand, your main competitors and your site.</dd></div><div class="sub"><dt>Top 50 prompts</dt><dd>We will identify the 50 prompts most relevant to your buyers and add them to tracking, so you have a baseline before new content goes live.</dd></div></dl></div></section>
+
+<section class="invest" id="investment"><p class="eyebrow">Investment</p><h2>Fee and timeline</h2>
+<div class="stat"><div><strong>$5,000</strong><span>fixed fee for the engagement</span></div><div><strong>2 months</strong><span>from kickoff to final delivery</span></div></div>
+<p class="lede" style="margin:0">The fee is fixed and covers all five deliverables described above, delivered over two months from kickoff.</p>
+</section>
+
+<section class="case"><p class="eyebrow">Case study</p><h2>LlamaIndex</h2>
+<div class="stat"><div><strong>10,000+</strong><span>new monthly visits from new content</span></div><div><strong>6 months</strong><span>from first publish</span></div><div><strong>Listicles</strong><span>highest converting content type</span></div></div>
+<p class="lede" style="margin:0">In six months, the new content we created for LlamaIndex grew to more than 10,000 new monthly visits. Listicles produced the highest conversion rate of any content type we published. The same content also increased LlamaIndex’s visibility in LLM answers.</p>
+<div class="exs"><div class="exg"><h4>Glossary</h4><ul><li><a href="https://www.llamaindex.ai/glossary" target="_blank" rel="noopener">llamaindex.ai/glossary</a></li><li><a href="https://www.llamaindex.ai/glossary/accounts-payable-automation" target="_blank" rel="noopener">Accounts payable automation</a></li></ul></div><div class="exg"><h4>Landing pages</h4><ul><li><a href="https://www.llamaindex.ai/services" target="_blank" rel="noopener">llamaindex.ai/services</a></li><li><a href="https://www.llamaindex.ai/services/wire-transfer-form-ocr" target="_blank" rel="noopener">Wire transfer form OCR</a></li></ul></div><div class="exg"><h4>Listicles</h4><ul><li><a href="https://www.llamaindex.ai/insights" target="_blank" rel="noopener">llamaindex.ai/insights</a></li><li><a href="https://www.llamaindex.ai/insights/7-best-open-source-ocr-tools" target="_blank" rel="noopener">7 best open source OCR tools</a></li></ul></div></div></section>
+</main>
+<footer><span>AUQ.io · New York City</span><span>auq.io</span></footer>
+</div>
+<script>
+(function(){var c=document.getElementById('stars');if(!c)return;var x=c.getContext('2d');function d(){var r=c.getBoundingClientRect(),p=window.devicePixelRatio||1;c.width=r.width*p;c.height=r.height*p;x.scale(p,p);var s=7;for(var i=0;i<140;i++){s=(s*9301+49297)%233280;var a=s/233280;s=(s*9301+49297)%233280;var b=s/233280;s=(s*9301+49297)%233280;var z=s/233280;x.fillStyle='rgba(200,206,255,'+(0.15+z*0.55)+')';x.beginPath();x.arc(a*r.width,b*r.height,z*1.3+0.2,0,6.283);x.fill();}}d();window.addEventListener('resize',function(){x.setTransform(1,0,0,1,0,0);d();});})();
+</script>
