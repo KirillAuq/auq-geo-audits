@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>High-Quality Developer Content from a Small Marketing Team — AUQ</title>
+<meta name="description" content="How a small marketing team produces technical content developers trust and AI assistants cite: one developer-author, templates for the long tail, interviews with engineers and sales, five channels per piece. How we did it at DeepInfra and LlamaIndex.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2D; --ink-2:#2A3650; --slate:#5B6678; --line:#D9DEE7;
+    --paper:#F7F8FA; --white:#FFFFFF; --cobalt:#2F5BFF; --cobalt-soft:#E8EDFF;
+    --amber:#FFB020; --amber-ink:#4A3100;
+    --w:760px; --radius:6px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.6}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
+  h1{font-size:clamp(1.8rem,3.8vw,2.6rem)}
+  h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.6rem}
+  h3{font-size:1.15rem;margin:1.6rem 0 .4rem}
+  p{margin:0 0 1rem}
+  a{color:var(--cobalt)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.92em;background:var(--cobalt-soft);padding:.05em .35em;border-radius:3px}
+  .wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+  .wide{max-width:1040px}
+
+  /* top bar */
+  .bar{background:var(--ink);color:#fff}
+  .bar .wrap{display:flex;justify-content:space-between;align-items:center;height:56px;max-width:1040px}
+  .bar a{color:#fff;text-decoration:none;font-weight:600}
+  .bar .logo{font-family:"Space Grotesk",sans-serif;font-size:1.25rem;letter-spacing:.04em}
+  .bar nav a{font-weight:500;margin-left:22px;font-size:.95rem;opacity:.9}
+  .bar nav a.btn{background:var(--amber);color:var(--amber-ink);padding:8px 14px;border-radius:var(--radius);opacity:1}
+
+  /* hero */
+  .hero{background:var(--ink);color:#fff;padding:64px 0 0;overflow:hidden}
+  .hero .wrap{max-width:1040px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+  .hero p.sub{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1.25rem;color:var(--amber);margin:1rem 0 1.8rem}
+  .hero p.lede{font-size:1.1rem;color:#C7CFDE;max-width:42ch;margin:.9rem 0 1.6rem}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}
+  .btn{display:inline-block;padding:13px 20px;border-radius:var(--radius);font-weight:600;text-decoration:none;border:2px solid transparent}
+  .btn-amber{background:var(--amber);color:var(--amber-ink)}
+  .btn-ghost{border-color:#fff;color:#fff}
+  .btn-ghost.dark{border-color:var(--ink);color:var(--ink)}
+  .btn-cobalt{background:var(--cobalt);color:#fff}
+  .hero svg{width:100%;height:auto;display:block}
+  .hero .kicker{color:var(--amber);font-weight:600;margin-bottom:.5rem}
+
+  /* sections */
+  section.step{padding:56px 0 24px;border-top:1px solid var(--line)}
+  section.step .num{font-family:"Space Grotesk",sans-serif;color:var(--cobalt);font-weight:700;font-size:.95rem;margin-bottom:.35rem}
+  .intro{padding:56px 0 24px}
+  .intro p.big{font-size:1.25rem;line-height:1.5}
+  ul,ol{padding-left:1.3rem;margin:0 0 1rem}
+  li{margin-bottom:.45rem}
+  table{border-collapse:collapse;width:100%;margin:1rem 0 1.4rem;font-size:.95rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--white);font-weight:600}
+  tr:nth-child(even) td{background:var(--white)}
+
+  /* real-account callout */
+  .real{background:var(--white);border-left:4px solid var(--cobalt);padding:18px 22px;margin:1.4rem 0 .8rem;border-radius:0 var(--radius) var(--radius) 0}
+  .real .lbl{font-weight:600;color:var(--cobalt);margin-bottom:.35rem}
+  .real p:last-child{margin:0}
+  .real .stats{display:flex;gap:22px;flex-wrap:wrap;margin:.6rem 0 .8rem}
+  .real .stat b{display:block;font-family:"Space Grotesk",sans-serif;font-size:1.6rem;line-height:1.1;color:var(--ink)}
+  .real .stat span{font-size:.85rem;color:var(--slate)}
+
+  /* figures */
+  figure{margin:1.4rem 0 1.6rem;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  figure svg{width:100%;height:auto;display:block}
+  figcaption{font-size:.88rem;color:var(--slate);margin-top:10px}
+
+  /* cta bands */
+  .band{background:var(--cobalt);color:#fff;padding:44px 0;margin:48px 0 0}
+  .band .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .band h2{margin:0 0 .3rem}
+  .band p{margin:0;color:#DCE4FF;max-width:48ch}
+  .band .btn-amber{white-space:nowrap}
+
+  /* case grid */
+  .cases{padding:56px 0 16px;border-top:1px solid var(--line)}
+  .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:1.2rem}
+  .case{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column}
+  .case h3{margin:0 0 .25rem;font-size:1.1rem}
+  .case .what{color:var(--slate);font-size:.92rem;margin-bottom:.8rem}
+  .case .big{font-family:"Space Grotesk",sans-serif;font-size:1.9rem;font-weight:700;color:var(--cobalt);line-height:1.05}
+  .case .big small{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:.85rem;font-weight:500;color:var(--slate);margin-top:2px}
+  .case p{font-size:.95rem;margin:.8rem 0}
+  .case a.more{margin-top:auto;font-weight:600;text-decoration:none}
+
+  /* compare */
+  .compare{padding:56px 0 64px;border-top:1px solid var(--line)}
+  .compare table td:first-child{font-weight:600;width:28%}
+  .compare table td:nth-child(3){background:var(--cobalt-soft)}
+  .compare table th:nth-child(3){background:var(--cobalt);color:#fff}
+
+  /* final */
+  .final{background:var(--ink);color:#fff;padding:64px 0}
+  .final p{color:#C7CFDE;max-width:52ch}
+  .final .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.4rem}
+  footer{background:#0A1220;color:#8E99AD;font-size:.85rem;padding:22px 0}
+  footer a{color:#C7CFDE}
+
+  @media (max-width:820px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    td,th{min-width:120px}
+    .hero .wrap{grid-template-columns:1fr}
+    .hero{padding-top:44px}
+    .bar nav a:not(.btn){display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="logo" href="https://auq.io/">AUQ</a>
+    <nav>
+      <a href="#steps">The guide</a>
+      <a href="#cases">Case studies</a>
+      <a href="#hire">Work with us</a>
+      <a class="btn" href="https://auq.io/contact-us/">Book an audit</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kicker">For marketing leaders at developer-tools companies</div>
+      <h1>How to get high‑quality developer content from a small marketing team</h1>
+      <p class="sub">How we did it at DeepInfra and LlamaIndex.</p>
+      <div class="ctas">
+        <a class="btn btn-amber" href="#steps">Read the guide</a>
+        <a class="btn btn-ghost" href="https://auq.io/case-studies/">See the case studies</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 520 440" role="img" aria-label="The guide in five parts: make the product legible; one writer, a team's output; decide what to write; show up where developers decide; measure from day one">
+      <defs>
+        <linearGradient id="rail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F5BFF"/><stop offset="1" stop-color="#FFB020"/></linearGradient>
+      </defs>
+      <line x1="60" y1="44" x2="60" y2="396" stroke="url(#rail)" stroke-width="4" stroke-linecap="round"/>
+      <g font-family="IBM Plex Sans, sans-serif" fill="#fff">
+        <g transform="translate(0,44)"><circle cx="60" r="18" fill="#2F5BFF"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">1</text><text x="96" y="-8" font-size="18" font-weight="600">Make the product legible</text><text x="96" y="14" font-size="13" fill="#C7CFDE">A category statement that doubles as the recruiting pitch; explicit pages</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 1, 6</text></g>
+        <g transform="translate(0,132)"><circle cx="60" r="18" fill="#4669F0"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">2</text><text x="96" y="-8" font-size="18" font-weight="600">One writer, a team's output</text><text x="96" y="14" font-size="13" fill="#C7CFDE">One developer-author; templates and AI pipelines multiply them</text><text x="96" y="34" font-size="12" fill="#9FB0FF">The model, Steps 2–3</text></g>
+        <g transform="translate(0,220)"><circle cx="60" r="18" fill="#6A7CD6"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">3</text><text x="96" y="-8" font-size="18" font-weight="600">Decide what to write</text><text x="96" y="14" font-size="13" fill="#C7CFDE">Room for the news; expert pieces, original data, interviews</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 4–5</text></g>
+        <g transform="translate(0,308)"><circle cx="60" r="18" fill="#A8949A"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">4</text><text x="96" y="-8" font-size="18" font-weight="600">Show up where developers decide</text><text x="96" y="14" font-size="13" fill="#C7CFDE">Reddit build guides; site, Reddit, LinkedIn, X, events</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 7, 9</text></g>
+        <g transform="translate(0,396)"><circle cx="60" r="18" fill="#FFB020"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk" fill="#4A3100">5</text><text x="96" y="-8" font-size="18" font-weight="600">Measure from day one</text><text x="96" y="14" font-size="13" fill="#C7CFDE">GA4 conversions, a free trial, AI visibility</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Step 8</text></g>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<main>
+<section class="intro wrap" id="steps">
+  <p class="big">Developer tools are the hardest category to market with content. The buyer rejects anything generic, the keywords barely register in a research tool, and the first marketing hire is usually expected to build the whole function alone while writing every technical piece personally.</p>
+  <p>This is the playbook we run for clients like <a href="https://auq.io/case-studies/convex/">Convex</a>, <a href="https://auq.io/case-studies/deepinfra/">DeepInfra</a>, <a href="https://auq.io/case-studies/microblink/">Microblink</a> and <a href="https://auq.io/case-studies/fraud-net-content-automation-for-geo/">fraud.net</a>, written so you can run it yourself. The order matters: each step builds on the one before it, and most end with what it looked like on a live account. It is built for a team of one writer, because that is what most dev-tools companies have.</p>
+</section>
+
+<!-- LEVERAGE -->
+<section class="step wrap" id="leverage">
+  <div class="num">The model</div>
+  <h2>One writer, a team's worth of content</h2>
+  <p>You do not need a content team. You need one developer-author whose hours go only where judgment is required, and four things around them that multiply every hour. Everything in this guide is one of those four multipliers or the measurement that proves they work.</p>
+  <figure>
+    <svg viewBox="0 0 720 300" role="img" aria-label="One developer-author in the centre, multiplied by four things: templates and AI pipelines that produce the long-tail pages; engineers who supply the raw material through interviews; a repurposing routine that ships every piece to five channels; and a DevRel and generalist marketer who carry the finished work to events and social">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="240" y="112" width="240" height="76" rx="8" fill="#0F1B2D"/>
+        <text x="360" y="143" text-anchor="middle" fill="#fff" font-weight="600" font-size="15">One developer-author</text>
+        <text x="360" y="165" text-anchor="middle" fill="#9FB0FF" font-size="12">judgment, code, templates, review</text>
+        <g fill="#E8EDFF" stroke="#2F5BFF">
+          <rect x="4" y="20" width="236" height="74" rx="6"/>
+          <rect x="480" y="20" width="236" height="74" rx="6"/>
+          <rect x="4" y="206" width="236" height="74" rx="6"/>
+          <rect x="480" y="206" width="236" height="74" rx="6"/>
+        </g>
+        <g fill="#0F1B2D" text-anchor="middle">
+          <text x="122" y="45" font-weight="600">Templates and AI pipelines</text><text x="122" y="64" font-size="12" fill="#5B6678">they write 4 pages; the pipeline, 400</text><text x="122" y="82" font-size="12" fill="#2F5BFF">Step 3</text>
+          <text x="598" y="45" font-weight="600">Your engineers</text><text x="598" y="64" font-size="12" fill="#5B6678">a 20-minute interview becomes a piece</text><text x="598" y="82" font-size="12" fill="#2F5BFF">Steps 2, 5</text>
+          <text x="122" y="231" font-weight="600">Five channels per piece</text><text x="122" y="250" font-size="12" fill="#5B6678">site, Reddit, LinkedIn, X, events</text><text x="122" y="268" font-size="12" fill="#2F5BFF">Step 9</text>
+          <text x="598" y="231" font-weight="600">DevRel and marketing carry it</text><text x="598" y="250" font-size="12" fill="#5B6678">talks, community, distribution</text><text x="598" y="268" font-size="12" fill="#2F5BFF">Step 4</text>
+        </g>
+        <g fill="none" stroke="#5B6678" stroke-width="2">
+          <path d="M160 94 L 300 112"/>
+          <path d="M560 94 L 420 112"/>
+          <path d="M160 206 L 300 188"/>
+          <path d="M560 206 L 420 188"/>
+        </g>
+      </g>
+    </svg>
+    <figcaption>The author's time is the scarce input. Each multiplier turns one of their hours into something that would otherwise take a hire: the template replaces a junior writer, the interview replaces an SME, the channels replace a social manager, and DevRel and marketing replace a distribution team.</figcaption>
+  </figure>
+  <p>The budget that follows: one author at $250 to $800 an article, two expert pieces a month, plus templates that produce dozens to hundreds of pages a month at the cost of a PM's inputs and a day a week of the author's review. The second author is hired when the first is saturated, not before.</p>
+</section>
+
+<!-- STEP 1 -->
+<section class="step wrap">
+  <div class="num">Step 1</div>
+  <h2>Make the company easy to understand</h2>
+  <p>Positioning comes first because everything downstream repeats it: every page, article, Reddit comment and launch post, and the trial brief you hand an author in Step 2. It is also your recruiting pitch. The developer-authors you want choose products they can explain in a sentence and argue about; a vague category statement loses them before the trial task. Developers decide in seconds whether a tool is for them; LLMs decide from whatever sentence describes you most often across the web.</p>
+  <p>Write three artifacts before any content ships:</p>
+  <ol>
+    <li><strong>A one-sentence category statement</strong> in the form "X is a [category] for [who] that [does what], an alternative to [the two names they already know]." Convex's reads: an open-source reactive backend for writing server functions in pure TypeScript, an alternative to Firebase and Supabase for TypeScript and React teams. The comparison anchors matter more than the adjectives.</li>
+    <li><strong>A use-case list by audience</strong>, not by feature. DeepInfra's buyers split into ML engineers, startup CTOs and indie developers; each searches for a different problem (GPU pricing, model benchmarks, OpenAI-compatible endpoints).</li>
+    <li><strong>A competitor set you will name out loud.</strong> Together AI, Replicate and Groq were already in the Reddit recommendations when DeepInfra started. You cannot become the default in a category while refusing to mention the incumbents.</li>
+  </ol>
+  <p>Put the category statement on the homepage, the docs landing page, the GitHub README and the founder's LinkedIn headline, word for word. Consistency across sources is what makes an LLM confident enough to repeat it.</p>
+  <h3>When the product has outgrown its category</h3>
+  <p>The harder version is repositioning: a docs tool that is now a knowledge platform, an inference API that is now a model platform. Every surface on the web still describes the old thing, and AI assistants repeat whatever is most common, so the old description wins until you outnumber it. The sequence that works:</p>
+  <ol>
+    <li>Write the new category statement, with the new comparison anchors (the competitors in the category you are moving into, not the one you are leaving).</li>
+    <li>Change it everywhere on the same day: homepage, docs landing page, README, pricing page, every team member's LinkedIn headline, your listings on G2, Product Hunt and the directories that LLMs read.</li>
+    <li>Publish a "what we are now" piece from the founder, with the reasoning, and make it the piece everyone links to for a quarter.</li>
+    <li>Ship the comparison pages for the new category (Step 6) before the old-category ones are retired; the new pages need to exist before you stop feeding the old ones.</li>
+    <li>Track the prompt "what is [product]?" in PromptWatch (Step 8) and watch for the week the answers switch. It usually takes two to three months of consistency.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 720 230" role="img" aria-label="One category statement is repeated word for word on the homepage, docs landing page, GitHub README and founder's LinkedIn; developers place the product in seconds and LLMs repeat the sentence with confidence">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="10" y="55" width="240" height="120" rx="6" fill="#0F1B2D"/>
+        <text x="130" y="82" text-anchor="middle" fill="#fff" font-weight="600" font-size="14">One category statement</text>
+        <text x="130" y="106" text-anchor="middle" fill="#C7CFDE">X is a <tspan fill="#FFB020">[category]</tspan> for <tspan fill="#FFB020">[who]</tspan></text>
+        <text x="130" y="126" text-anchor="middle" fill="#C7CFDE">that <tspan fill="#FFB020">[does what]</tspan>,</text>
+        <text x="130" y="146" text-anchor="middle" fill="#C7CFDE">an alternative to <tspan fill="#FFB020">[A]</tspan> and <tspan fill="#FFB020">[B]</tspan></text>
+        <text x="130" y="166" text-anchor="middle" fill="#9FB0FF" font-size="11">same words, every surface</text>
+        <g fill="#E8EDFF" stroke="#2F5BFF">
+          <rect x="330" y="18" width="160" height="36" rx="6"/>
+          <rect x="330" y="70" width="160" height="36" rx="6"/>
+          <rect x="330" y="122" width="160" height="36" rx="6"/>
+          <rect x="330" y="174" width="160" height="36" rx="6"/>
+        </g>
+        <g fill="#0F1B2D" text-anchor="middle">
+          <text x="410" y="41">Homepage</text>
+          <text x="410" y="93">Docs landing page</text>
+          <text x="410" y="145">GitHub README</text>
+          <text x="410" y="197">Founder's LinkedIn</text>
+        </g>
+        <g fill="none" stroke="#5B6678" stroke-width="2">
+          <path d="M250 115 C 290 115, 290 36, 330 36"/>
+          <path d="M250 115 C 290 115, 290 88, 330 88"/>
+          <path d="M250 115 C 290 115, 290 140, 330 140"/>
+          <path d="M250 115 C 290 115, 290 192, 330 192"/>
+          <path d="M490 36 C 525 36, 525 70, 560 70"/>
+          <path d="M490 88 C 525 88, 525 70, 560 70"/>
+          <path d="M490 140 C 525 140, 525 158, 560 158"/>
+          <path d="M490 192 C 525 192, 525 158, 560 158"/>
+        </g>
+        <rect x="560" y="42" width="150" height="56" rx="6" fill="#2F5BFF"/>
+        <text x="635" y="66" text-anchor="middle" fill="#fff" font-weight="600">Developers</text>
+        <text x="635" y="84" text-anchor="middle" fill="#DCE4FF" font-size="11">place you in seconds</text>
+        <rect x="560" y="130" width="150" height="56" rx="6" fill="#FFB020"/>
+        <text x="635" y="154" text-anchor="middle" fill="#4A3100" font-weight="600">LLMs</text>
+        <text x="635" y="172" text-anchor="middle" fill="#4A3100" font-size="11">repeat it with confidence</text>
+      </g>
+    </svg>
+    <figcaption>Positioning is a distribution problem. The sentence is easy to write; the work is putting the identical sentence on every surface a developer or a crawler reads first, so both arrive at the same answer about what you are.</figcaption>
+  </figure>
+  <div class="real">
+    <div class="lbl">On a real account: Microblink</div>
+    <p>Three products, three audiences (developers, compliance officers, enterprise security buyers). The keyword research split developer-intent from compliance-intent queries, and each intent got its own <code>/services/</code> page in that audience's vocabulary: <a href="https://microblink.com/services/kyc-api-for-developers/">KYC API for developers</a> (SDK size, latency, response payload) next to <a href="https://microblink.com/services/automated-kyc-microblink-ai-for-regulatory-compliance/">automated KYC for compliance</a>; <a href="https://microblink.com/services/ai-liveness-detection-stop-fraud-verify-identities/">liveness detection</a> and <a href="https://microblink.com/services/selfie-verification-software/">selfie verification</a> as one capability under two buyer searches; <a href="https://microblink.com/services/frictionless-banking-onboarding-software/">banking onboarding</a> as the industry entry point. Same product, different first sentence per reader. <a href="https://auq.io/case-studies/microblink/">Case study</a></p>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step wrap">
+  <div class="num">Step 2</div>
+  <h2>Start with one developer-author, in week one</h2>
+  <p>Start recruiting the week the category statement is written, because finding the right author is trial and error and takes two to three months, and every later step needs them. Writing the technical material yourself works for the first ten articles and then becomes the bottleneck for everything else. One good author, with the multipliers above, is the whole content function for the first year; hire the second when the first is saturated.</p>
+  <h3>Where to look</h3>
+  <p>The best technical writers are full-time developers who moonlight as writers. They have shipped the thing they are writing about, they often run their own blog, and they come with ideas. Search <a href="https://dev.to">dev.to</a> and <a href="https://medium.com">Medium</a> by your stack's tags, sort by reactions, and shortlist people whose GitHub matches their posts. Do not post a generic "technical writer" job; you will get content marketers who need you to explain the product.</p>
+  <h3>How to test</h3>
+  <p>Pay for a trial task. Give the author the category statement from Step 1, a sandbox account and one broad topic, and let them propose the outline and write the article themselves. You are grading three things:</p>
+  <ol>
+    <li><strong>Idea generation.</strong> Did the outline find an angle you had not thought of? An author who needs a brief for every piece costs you the time you were trying to buy back.</li>
+    <li><strong>Expertise.</strong> Are the code samples runnable? Did they hit a real limitation of the product and say so? Developers read for the caveats.</li>
+    <li><strong>Writing quality.</strong> Can a reader skim it? Are the claims verifiable?</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 720 240" role="img" aria-label="Author hiring funnel: source on dev.to, Medium and personal blogs; shortlist where GitHub matches the posts; paid trial with the author's own outline and article; graded on ideas, expertise and writing; keep one in three to five">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="10" y="20" width="160" height="170" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/>
+        <rect x="185" y="45" width="160" height="120" rx="6" fill="#B9C7FF" stroke="#2F5BFF"/>
+        <rect x="360" y="65" width="160" height="80" rx="6" fill="#2F5BFF"/>
+        <rect x="535" y="85" width="170" height="40" rx="6" fill="#FFB020"/>
+        <g fill="#0F1B2D" text-anchor="middle">
+          <text x="90" y="48" font-weight="600">Source</text>
+          <text x="90" y="72" font-size="12">dev.to and Medium,</text>
+          <text x="90" y="90" font-size="12">sorted by your stack's tags</text>
+          <text x="90" y="114" font-size="12">Developers who moonlight</text>
+          <text x="90" y="132" font-size="12">as writers; own blog;</text>
+          <text x="90" y="150" font-size="12">shipped the thing</text>
+          <text x="265" y="73" font-weight="600">Shortlist</text>
+          <text x="265" y="97" font-size="12">GitHub matches the posts</text>
+          <text x="265" y="115" font-size="12">Skip "technical writer"</text>
+          <text x="265" y="133" font-size="12">job boards</text>
+        </g>
+        <g fill="#fff" text-anchor="middle">
+          <text x="440" y="90" font-weight="600">Paid trial</text>
+          <text x="440" y="110" font-size="12">their outline, their article,</text>
+          <text x="440" y="128" font-size="12">a sandbox, one broad topic</text>
+        </g>
+        <text x="620" y="110" text-anchor="middle" fill="#4A3100" font-weight="600">Keep 1 in 3–5</text>
+        <g stroke="#5B6678" stroke-width="2" fill="none">
+          <path d="M170 105 L 185 105"/><path d="M345 105 L 360 105"/><path d="M520 105 L 535 105"/>
+        </g>
+        <path d="M440 145 L 440 170" stroke="#2F5BFF" stroke-width="2"/>
+        <rect x="260" y="170" width="360" height="56" rx="6" fill="#fff" stroke="#2F5BFF"/>
+        <text x="440" y="192" text-anchor="middle" fill="#0F1B2D" font-weight="600" font-size="12">Graded on three things</text>
+        <text x="440" y="212" text-anchor="middle" fill="#5B6678" font-size="12">idea generation, expertise (runnable code, real caveats), writing</text>
+      </g>
+    </svg>
+    <figcaption>The funnel narrows fast, which is why it starts in week one. Most of the cost is in the paid trials, and most of the value is in the one author who comes out the other end and stays for years.</figcaption>
+  </figure>
+  <p>Expect to trial three to five authors for every one you keep, and budget for it. Give kept authors a standing sandbox, a Slack channel with an engineer, and access to sales call recordings. The articles that convert are the ones where the author understood the product well enough to disagree with the marketing.</p>
+  <h3>What a good author looks like</h3>
+  <p>The trial task tells you whether they can write. Three other things tell you whether they will still be useful in month six:</p>
+  <ul>
+    <li><strong>They bring their own expertise.</strong> They have opinions about the category before they know yours, and the article is better for it. An author who only reflects your docs back at you is a copywriter with a GitHub account.</li>
+    <li><strong>They are willing to interview your team.</strong> The best pieces come from a 30-minute call with the engineer who built the feature. Authors who want that call, and come with questions, produce content nobody else can.</li>
+    <li><strong>They will join editorial meetings.</strong> A standing call where authors hear what sales is hearing, what shipped, and what is coming. Authors who treat it as part of the job become a second set of eyes on the whole content program.</li>
+  </ul>
+  <h3>If you already have a writer</h3>
+  <p>Most marketing leaders inherit one. Do not hire around them; reorganize around them. Audit what they publish now against the content-types table in Step 5 and move them onto the expert track, off anything a template could produce. Give them the seat in the editorial call. Then give them the most leveraged job on this list: writing the golden pages and the templates for the AI pipelines in Step 3. The person who already knows the voice and the product is the only one who can set that quality bar; a new author cannot, and a PM should not. Add a second author only in the gap their expertise leaves (the ML-infra benchmark they cannot write, the security piece that needs a practitioner).</p>
+  <h3>What it costs</h3>
+  <p>Expect $250 to $800 per article for a developer-author, depending on depth and how scarce the expertise is. The low end buys a solid tutorial from someone early in their writing career; the high end buys a benchmark piece or an architecture opinion from a senior engineer in a narrow field (ML infrastructure, security, distributed systems). A 1,500-word article with runnable code from someone who has shipped the thing usually lands in the middle. Pay trial tasks at the same rate as a finished article; a discounted trial attracts the authors you do not want.</p>
+  <div class="real">
+    <div class="lbl">On a real account: LlamaIndex</div>
+    <p>The document-parsing content needed authors with real OCR experience, so we went looking for them rather than for writers. We interviewed developers and developer-relations people, starting from a list of 30. Three made it through the trial and stayed. That ratio is normal, and it is why this is the first step.</p>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step wrap">
+  <div class="num">Step 3</div>
+  <h2>Put AI in the flow for templated content</h2>
+  <p>Use AI for the content that has a fixed shape and a long tail, and keep humans on the content that needs an opinion. Lists, niche landing pages and glossaries are templated by nature; a thought-leadership piece is not.</p>
+  <figure>
+    <svg viewBox="0 0 720 200" role="img" aria-label="Two content tracks: expert authors write opinionated pieces; AI pipelines owned by product managers produce landing pages, listicles and glossary, each reviewed by an author before publishing">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="14">
+        <text x="10" y="30" font-weight="600" fill="#0F1B2D">Expert track</text>
+        <rect x="10" y="42" width="330" height="54" rx="6" fill="#0F1B2D"/><text x="175" y="66" text-anchor="middle" fill="#fff">Developer-authors</text><text x="175" y="85" text-anchor="middle" fill="#9FB0FF" font-size="12">release write-ups, benchmarks, opinion, build guides</text>
+        <text x="10" y="130" font-weight="600" fill="#0F1B2D">Templated track</text>
+        <rect x="10" y="142" width="100" height="48" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="60" y="170" text-anchor="middle" fill="#0F1B2D" font-size="13">Landing pages</text>
+        <rect x="120" y="142" width="100" height="48" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="170" y="170" text-anchor="middle" fill="#0F1B2D" font-size="13">"Best of" lists</text>
+        <rect x="230" y="142" width="110" height="48" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="285" y="170" text-anchor="middle" fill="#0F1B2D" font-size="13">Glossary</text>
+        <text x="340" y="128" text-anchor="end" fill="#5B6678" font-size="12">author's templates, PM's inputs</text>
+        <path d="M340 69 L 420 69" stroke="#5B6678" stroke-width="2"/>
+        <path d="M340 166 C 380 166, 380 69, 420 69" stroke="#5B6678" stroke-width="2" fill="none"/>
+        <rect x="420" y="40" width="130" height="58" rx="6" fill="#FFB020"/><text x="485" y="64" text-anchor="middle" fill="#4A3100" font-weight="600">Author review</text><text x="485" y="84" text-anchor="middle" fill="#4A3100" font-size="12">every page, before publish</text>
+        <path d="M550 69 L 600 69" stroke="#5B6678" stroke-width="2"/><polygon points="600,63 612,69 600,75" fill="#5B6678"/>
+        <rect x="612" y="40" width="98" height="58" rx="6" fill="#2F5BFF"/><text x="661" y="74" text-anchor="middle" fill="#fff" font-weight="600">Publish</text>
+      </g>
+    </svg>
+    <figcaption>Two tracks, one review gate. The author writes the template and sets the quality bar; product managers feed the pipeline the facts; the author reviews what comes out and every correction goes back into the template.</figcaption>
+  </figure>
+  <h3>How the two tracks work</h3>
+  <p><strong>The expert track</strong> is your developer-authors from Step 2. They write the pieces that need a point of view: release write-ups, benchmarks, opinion pieces, build guides. Nothing on this track is generated; the value is the author's judgment and the fact that they ran the code.</p>
+  <p><strong>The templated track</strong> is three pipelines that produce pages with a fixed shape. The author owns the template and the quality bar; a product manager owns the inputs, because the PM knows the feature set, the limits and what is true about the product today. The pipeline turns structured inputs into a draft page; it does not invent facts.</p>
+  <table>
+    <thead><tr><th>Pipeline</th><th>Page shape</th><th>Inputs the PM supplies</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Niche landing pages</td><td>"[product] for [framework]", "[task] with [tool]"</td><td>Feature set, limits, a working snippet, the integration's auth steps</td><td>"Document parsing for Next.js apps", "Parse PDFs from SharePoint"</td></tr>
+      <tr><td>"Best of" lists</td><td>Comparison table with entity definitions and real numbers; your product as one honest entry</td><td>Competitor set, comparison criteria, verified prices and limits</td><td>"Best inference APIs for Llama 3 in 2026"</td></tr>
+      <tr><td>Glossary</td><td>Short definitional article, one term each</td><td>Term list, how the product relates to the term, a link to the relevant doc</td><td>"What is liveness detection?"</td></tr>
+    </tbody>
+  </table>
+  <h3>The author builds the pipeline before the pipeline writes anything</h3>
+  <p>The output quality of a pipeline is set by whoever writes the template, which is why this is the author's job and not the PM's. The sequence, per pipeline:</p>
+  <ol>
+    <li><strong>Write four golden pages by hand, against the ICP research.</strong> Real pages, published, written for one specific reader (the engineer evaluating at 2am, the compliance officer, the CTO comparing vendors). They become the exemplars the model copies: structure, length, where the code goes, how a limitation is stated, what a comparison row contains.</li>
+    <li><strong>Extract the template.</strong> From the four pages: the brief the model gets, the fields the PM fills, and a review checklist of what fails a page (a snippet that does not run, a number with no source, a claim the docs do not support).</li>
+    <li><strong>Hand it to the PM.</strong> The PM fills the inputs for the first batch; the pipeline drafts; the author reads every one of the first four generated pages in full and fixes the template, not the pages.</li>
+    <li><strong>Review by visibility, not by volume.</strong> After the first four, the checklist does the gating and the author reviews only the pages that earn impressions, clicks or AI citations. A page nobody sees does not need an editor's hour; a page that starts ranking gets a full read the week it does. A failure on a reviewed page pulls its batch back through the checklist.</li>
+  </ol>
+  <p>Budget two weeks of the author's time per pipeline to build, then about a day a week across all three for the visibility-driven review. The rest of their time goes back to the expert track.</p>
+  <h3>Tools: use a builder, not an editor</h3>
+  <p>Build the pipelines in a content production tool you control: <a href="https://www.airops.com">AirOps</a>, Claude, or whichever AI builder your team already uses. What you want is a place where the author's template and the PM's inputs go in, a draft comes out, and every step in between is visible and editable. The tool is plumbing. The template is the product.</p>
+  <p>Be careful with the other category: tools that offer to "optimize" or update your existing content for AI search, rewriting live pages on your behalf. They flatten the voice, insert claims nobody checked, and they are the fastest way to publish something an engineer at your company would not sign. Analytics tools like <a href="https://promptwatch.io">PromptWatch</a> belong in the stack for a different reason: they tell you where you appear in AI answers and which pages get cited, which is the input to your editorial decisions. They cannot write the content for you, and nothing on a page should change unless the author or the PM changed it.</p>
+  <p><strong>Templates are manual work.</strong> Every template starts from ICP research, not from a tool's default prompt: who exactly reads this page type, what they searched to arrive, what they need to see in the first screen, what makes them leave, which limitation they will find anyway so you had better state it first. The golden pages are written against that reader, and the template encodes those answers as section order, named fields and the kind of snippet each page carries. A template built from a generic prompt produces generic pages at scale, which is worse than producing none.</p>
+  <p>The split in practice: one or two expert pieces a month, dozens to hundreds of templated pages, and one person's review time pointed only at the pages that matter.</p>
+  <p>Guardrails: generated pages must carry something a model cannot invent (a real benchmark, a real snippet, a real limit); never publish a page that only restates the docs; <code>noindex</code> anything that fails review rather than deleting it, so the URL stays stable.</p>
+  <div class="real">
+    <div class="lbl">On a real account: fraud.net</div>
+    <p>Three pipelines (niche landing pages, listicles with comparison tables, a category glossary), every page read by an editor before publishing: 400+ pieces in six months, 1,230 AI Overview citations from a baseline of zero. <a href="https://auq.io/case-studies/fraud-net-content-automation-for-geo/">Case study</a></p>
+  </div>
+  <div class="real">
+    <div class="lbl">On a real account: LlamaIndex</div>
+    <p>This is what the templated track looks like when it works. The <code>/insights</code> listicles and <code>/glossary</code> went from no traffic to 21% of the domain's Google clicks in a year, the listicles are 11 of the 15 most-cited llamaindex.ai pages in AI answers, and those sessions produced 1,097 sign-ups in Q3. Templated pages convert when they land a developer on something they can run.</p>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step wrap">
+  <div class="num">Step 4</div>
+  <h2>Build a content calendar that leaves room for the news</h2>
+  <p>Plan evergreen content a quarter out and thought leadership two weeks out. In dev tools, and in anything touching AI, the news cycle moves in days: a model release, a pricing change, a framework deprecation, a viral benchmark. The pieces that earn the most attention react to that week's event with a real opinion, and a calendar booked solid three months ahead has no slot for them.</p>
+  <table>
+    <thead><tr><th>Lane</th><th>Planned how far out</th><th>What goes in it</th></tr></thead>
+    <tbody>
+      <tr><td>Evergreen</td><td>A quarter</td><td>Build guides, use cases with code, integration pages, glossary. Sourced from the Step 5 backlog; stable demand, no rush.</td></tr>
+      <tr><td>Launches</td><td>Tied to the release schedule</td><td>Release write-ups and the launch pages from Step 9. The engineering roadmap sets the dates, not marketing.</td></tr>
+      <tr><td>Reactive</td><td>Held open, filled weekly</td><td>Opinion pieces, benchmarks and comparisons on whatever happened this week. One or two slots a month that stay empty until the news fills them.</td></tr>
+    </tbody>
+  </table>
+  <p>Run a short weekly editorial call with your authors in the room (Step 2). Review what changed in the category that week, decide whether any of it deserves a reactive piece, and assign it to the author who already has a view. A reactive piece published within 48 hours of the event gets cited in the threads and AI answers that form around it; the same piece two weeks later is a recap.</p>
+  <p>Two habits keep the calendar honest. Track the date you planned a piece against the date it published; if evergreen pieces are consistently late, the calendar is too full. And when a reactive slot goes unused for a month, that is fine. The slot exists so it is there when the news arrives.</p>
+  <h3>Who owns what</h3>
+  <p>The calendar only holds if every role knows which part is theirs. For a typical first marketing team at a dev-tools company (a marketing leader, one author, a generalist marketer, a DevRel, and the PMs who already exist):</p>
+  <table>
+    <thead><tr><th>Role</th><th>Owns</th><th>Does not own</th></tr></thead>
+    <tbody>
+      <tr><td>Marketing leader</td><td>Positioning, the calendar, the launch checklist, what gets measured</td><td>Writing the technical pieces</td></tr>
+      <tr><td>Developer-author</td><td>Expert pieces; the golden pages and templates for the AI pipelines; review of templated output</td><td>Distribution, reporting, product truth</td></tr>
+      <tr><td>Product managers</td><td>The inputs to each pipeline: feature sets, limits, snippets, competitor facts, what is true today</td><td>The template, the voice, publishing</td></tr>
+      <tr><td>DevRel</td><td>Engineering access for the author (interviews, sandbox, code review of samples); taking finished pieces to talks, community and the Discord; the Reddit persona accounts</td><td>Writing the long-form pieces themselves</td></tr>
+      <tr><td>Generalist marketer</td><td>Distribution of every piece across the five channels (Step 9), the linkbuilding sprints, the dashboard</td><td>Technical content, Reddit posting</td></tr>
+    </tbody>
+  </table>
+  <p>The point of the split is that the author writes and the new hires carry. A DevRel who spends their week drafting tutorials is a writer with a worse title; a DevRel who spends it on stage with the author's benchmark in their deck is a multiplier.</p>
+</section>
+
+<!-- STEP 5 -->
+<section class="step wrap">
+  <div class="num">Step 5</div>
+  <h2>Choose content types that earn thought leadership</h2>
+  <p>The test for every piece is the same: is it opinionated, and has an expert verified it? Pass both and the format barely matters. Fail either and no format saves it.</p>
+  <table>
+    <thead><tr><th>Format</th><th>What it is</th><th>Why it works</th></tr></thead>
+    <tbody>
+      <tr><td>Technical release write-ups</td><td>What shipped, why, benchmarks, migration notes</td><td>Timed to real demand spikes</td></tr>
+      <tr><td>Use cases with working code</td><td>"How we built X with [product]", repo linked</td><td>Developers arrive with the product already installed</td></tr>
+      <tr><td>Build guides</td><td>Step-by-step tutorials for a job your buyers do</td><td>Captures intent-driven searches</td></tr>
+      <tr><td>Benchmarks and comparisons</td><td>Your tool vs named alternatives, with numbers</td><td>The format AI assistants cite most</td></tr>
+      <tr><td>Opinion pieces</td><td>A position on how the category should work</td><td>How you become the default; travels on Reddit and HN</td></tr>
+      <tr><td>Original data</td><td>Anonymized usage data from your platform, or tests you ran yourself</td><td>Nobody else can publish it; the most shareable format on Reddit because it reads as education</td></tr>
+    </tbody>
+  </table>
+  <h3>Original data is the format nobody can copy</h3>
+  <p>You are sitting on data no competitor has: what your users actually do, which models or frameworks they pick, where requests fail, what pricing looks like at real volumes. Anonymize and aggregate it ("across 40M requests last quarter, 62% of teams using X also used Y") and you have a piece that gets quoted. If you do not have the volume yet, run the test yourself: benchmark five providers on the same workload, time ten SDKs on the same device, and publish the method with the result. Both travel further on Reddit than anything else you will write, because they teach something and the brand is incidental to the finding.</p>
+  <p>No data of your own yet? Borrow a public dataset and do the explaining. Benchmarking sites publish raw comparison data that almost nobody reads in full: for DeepInfra we took <a href="https://artificialanalysis.ai">artificialanalysis.ai</a>'s model comparison data (speed, price, quality scores across dozens of models and providers) and wrote it up for developers choosing a model, with the trade-offs spelled out and the source credited. The data was public; the interpretation was the content.</p>
+  <h3>Your engineers and your sales team are the sources nobody else has</h3>
+  <p>The highest-quality material for the expert track is already inside the building; it just is not in writing yet. Engineers know what was built and why. Sales hears, every day, what real buyers struggle with, what they compare you to and the words they use for the problem. A 25-minute interview with either produces a better piece than a week of desk research, and the author's job is to ask the questions and run the code. The sources, and what each becomes:</p>
+  <table>
+    <thead><tr><th>Engineering source</th><th>Becomes</th></tr></thead>
+    <tbody>
+      <tr><td>Changelog entry or release PR</td><td>Release write-up with the "why", benchmarks and migration notes</td></tr>
+      <tr><td>RFC or design doc</td><td>Architecture opinion piece: the trade-off you chose and what you gave up</td></tr>
+      <tr><td>Incident or post-mortem</td><td>The most-shared engineering content there is, if the company allows it</td></tr>
+      <tr><td>Internal benchmark or load test</td><td>Original-data piece with the method published</td></tr>
+      <tr><td>Support tickets and Discord questions</td><td>Build guides and glossary terms; the questions asked three times are the backlog</td></tr>
+      <tr><td>Engineer's conference talk</td><td>The article is the talk's long-tail; the talk is the article's distribution (Step 9)</td></tr>
+      <tr><td>Sales call recordings</td><td>The question asked in every call is a build guide; the comparison prospects raise is a "[product] vs [competitor]" piece in the buyer's own words</td></tr>
+      <tr><td>Lost-deal notes</td><td>The honest "when not to use us" piece, which is the most trusted thing you will publish</td></tr>
+      <tr><td>Onboarding and support calls</td><td>First-week friction becomes the tutorials developers actually search for</td></tr>
+    </tbody>
+  </table>
+  <h3>How to run the interview</h3>
+  <p>The author runs it, 25 minutes, recorded, transcript back to the author the same day. Schedule one engineer a month and sales every two weeks through the editorial call (Step 4). The questions differ by room:</p>
+  <table>
+    <thead><tr><th>Ask an engineer</th><th>Ask sales</th></tr></thead>
+    <tbody>
+      <tr><td>What did you build, and what did you consider instead?</td><td>What question comes up in every call?</td></tr>
+      <tr><td>What broke or surprised you along the way?</td><td>What do prospects compare us to, and what do they say about those tools?</td></tr>
+      <tr><td>What number would you put on a slide about this?</td><td>Which objection do we lose to, and what do we say back?</td></tr>
+      <tr><td>What would you tell someone integrating this at 2am?</td><td>What did the last three deals we closed have in common?</td></tr>
+      <tr><td>What limitation do you wish was documented?</td><td>What words do buyers use for the problem that we do not use on the site?</td></tr>
+    </tbody>
+  </table>
+  <p>Walk out with four things or the interview was not finished: one claim with a number attached, one limitation stated plainly, one quote worth printing, and the buyer's words for the problem. Those four go at the top of the brief; the rest of the article is written around them.</p>
+  <p>DevRel owns getting the author into the engineering rooms, the marketing leader opens the sales ones (Step 4). Nothing here requires anyone to write; it requires 25 minutes and a willingness to be quoted.</p>
+  <h3>The keyword volume problem, and where to find topics instead</h3>
+  <p>Developer-specific keywords have low search volume. "TypeScript backend real-time sync" may show 40 searches a month; a keyword tool will tell you to skip it, and it would be wrong, because those 40 searches are your buyers and the long tail of similar queries is enormous. Use keyword tools to size clusters, not to find ideas. Your best sources are:</p>
+  <figure>
+    <svg viewBox="0 0 720 230" role="img" aria-label="Four topic sources feed one content backlog: sales and support transcripts, Reddit and forums, docs search and tickets, competitor changelogs and issues">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="14">
+        <rect x="10" y="20" width="200" height="44" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="110" y="47" text-anchor="middle" fill="#0F1B2D">Sales &amp; support transcripts</text>
+        <rect x="10" y="74" width="200" height="44" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="110" y="101" text-anchor="middle" fill="#0F1B2D">Reddit, HN, Discord threads</text>
+        <rect x="10" y="128" width="200" height="44" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="110" y="155" text-anchor="middle" fill="#0F1B2D">Docs search with zero results</text>
+        <rect x="10" y="182" width="200" height="44" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="110" y="209" text-anchor="middle" fill="#0F1B2D">Competitor changelogs &amp; issues</text>
+        <path d="M210 42 C 280 42, 280 123, 350 123" fill="none" stroke="#5B6678" stroke-width="2"/>
+        <path d="M210 96 C 280 96, 280 123, 350 123" fill="none" stroke="#5B6678" stroke-width="2"/>
+        <path d="M210 150 C 280 150, 280 123, 350 123" fill="none" stroke="#5B6678" stroke-width="2"/>
+        <path d="M210 204 C 280 204, 280 123, 350 123" fill="none" stroke="#5B6678" stroke-width="2"/>
+        <rect x="350" y="93" width="150" height="60" rx="6" fill="#0F1B2D"/><text x="425" y="118" text-anchor="middle" fill="#fff" font-weight="600">Weekly backlog</text><text x="425" y="138" text-anchor="middle" fill="#9FB0FF" font-size="12">tagged by intent</text>
+        <path d="M500 123 L 550 123" stroke="#5B6678" stroke-width="2"/><polygon points="550,117 562,123 550,129" fill="#5B6678"/>
+        <rect x="562" y="93" width="148" height="60" rx="6" fill="#FFB020"/><text x="636" y="118" text-anchor="middle" fill="#4A3100" font-weight="600">Expert author</text><text x="636" y="138" text-anchor="middle" fill="#4A3100" font-size="12">writes while it's live</text>
+      </g>
+    </svg>
+    <figcaption>Topic sourcing for low-volume developer categories. We built an internal Reddit scraper that watches our clients' communities and flags hot threads by velocity, so the author is writing while the topic is live rather than three weeks later.</figcaption>
+  </figure>
+  <p>Set a cadence you can hold: two expert pieces a month beats eight generic ones. Fill the volume gap with the templated content in Step 3.</p>
+  <div class="real">
+    <div class="lbl">On a real account: LlamaIndex</div>
+    <p>The OCR and document-parsing cluster looked too thin to bother with per query. Built out as a cluster, clicks on queries containing "ocr" went from 303 to 5,454 in a year and impressions from 4.8K to 551K. Judge the cluster, not the keyword.</p>
+  </div>
+  <div class="real">
+    <div class="lbl">On a real account: Convex and Microblink</div>
+    <p>Convex's help center maps the whole TypeScript question space by intent, from language basics to backend patterns; the brand appears only where it is the honest answer. Microblink maps three formats to three intents: landing pages for use cases, articles for comparisons, glossary for definitions. Technical-term organic traffic rose 127%. <a href="https://auq.io/case-studies/convex/">Convex</a>, <a href="https://auq.io/case-studies/microblink/">Microblink</a></p>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap wide">
+    <div>
+      <h2>Not sure what's missing on your site?</h2>
+      <p>Run our free GEO audit: it checks whether ChatGPT, Perplexity and Google AI Overviews can find and describe your product, and what to fix first.</p>
+    </div>
+    <a class="btn btn-amber" href="https://auq.io/tools/geo-audit-free/">Run the free GEO audit</a>
+  </div>
+</div>
+
+<!-- STEP 6 -->
+<section class="step wrap">
+  <div class="num">Step 6</div>
+  <h2>Build explicit product, solution and feature pages</h2>
+  <p>If a page does not exist, Google and LLMs assume the capability does not exist. Most dev-tool sites are a homepage, docs and pricing, and the team believes the rest is obvious. It is obvious to you. ChatGPT has only indexed what you published, and it will recommend the competitor whose site spells it out.</p>
+  <figure>
+    <svg viewBox="0 0 720 270" role="img" aria-label="Page architecture: each product page branches into feature pages, integration pages, solution pages, comparison pages and a pricing page; every page has a stable URL and one template per type">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="40" y="14" width="200" height="44" rx="6" fill="#F7F8FA" stroke="#D9DEE7" stroke-dasharray="4 3"/>
+        <text x="140" y="33" text-anchor="middle" fill="#5B6678" font-size="12">What most dev-tool sites have</text>
+        <text x="140" y="49" text-anchor="middle" fill="#5B6678" font-size="12">homepage + docs + pricing</text>
+        <rect x="260" y="14" width="200" height="44" rx="6" fill="#0F1B2D"/>
+        <text x="360" y="33" text-anchor="middle" fill="#fff" font-weight="600">Product page</text>
+        <text x="360" y="49" text-anchor="middle" fill="#9FB0FF" font-size="11">one per product</text>
+        <path d="M360 58 L 360 86" stroke="#5B6678" stroke-width="2"/>
+        <path d="M80 86 L 640 86" stroke="#5B6678" stroke-width="2"/>
+        <g stroke="#5B6678" stroke-width="2">
+          <path d="M80 86 L 80 104"/><path d="M220 86 L 220 104"/><path d="M360 86 L 360 104"/><path d="M500 86 L 500 104"/><path d="M640 86 L 640 104"/>
+        </g>
+        <g fill="#E8EDFF" stroke="#2F5BFF">
+          <rect x="16" y="104" width="128" height="72" rx="6"/>
+          <rect x="156" y="104" width="128" height="72" rx="6"/>
+          <rect x="296" y="104" width="128" height="72" rx="6"/>
+          <rect x="436" y="104" width="128" height="72" rx="6"/>
+          <rect x="576" y="104" width="128" height="72" rx="6"/>
+        </g>
+        <g fill="#0F1B2D" text-anchor="middle">
+          <text x="80" y="128" font-weight="600">Feature pages</text><text x="80" y="146" font-size="11" fill="#5B6678">"Does it do X?"</text><text x="80" y="162" font-size="11" fill="#5B6678">one per capability</text>
+          <text x="220" y="128" font-weight="600">Integration pages</text><text x="220" y="146" font-size="11" fill="#5B6678">"[task] with [tool]"</text><text x="220" y="162" font-size="11" fill="#5B6678">one per connected tool</text>
+          <text x="360" y="128" font-weight="600">Solution pages</text><text x="360" y="146" font-size="11" fill="#5B6678">"[product] for [job]"</text><text x="360" y="162" font-size="11" fill="#5B6678">one per use case</text>
+          <text x="500" y="128" font-weight="600">Comparison pages</text><text x="500" y="146" font-size="11" fill="#5B6678">"vs [competitor]"</text><text x="500" y="162" font-size="11" fill="#5B6678">one per named rival</text>
+          <text x="640" y="128" font-weight="600">Pricing</text><text x="640" y="146" font-size="11" fill="#5B6678">real numbers</text><text x="640" y="162" font-size="11" fill="#5B6678">never "contact us" only</text>
+        </g>
+        <rect x="16" y="200" width="688" height="44" rx="6" fill="#FFB020"/>
+        <text x="360" y="219" text-anchor="middle" fill="#4A3100" font-weight="600">Every page: a stable URL, one template per type, plain crawlable HTML</text>
+        <text x="360" y="236" text-anchor="middle" fill="#4A3100" font-size="11">so launches can link into them and PMs can ship a new one without a designer</text>
+      </g>
+    </svg>
+    <figcaption>The page map Google and an LLM need in order to describe you correctly. Most of the lower row does not exist on a typical dev-tool site, and the homepage cannot carry it.</figcaption>
+  </figure>
+  <table>
+    <thead><tr><th>Page type</th><th>What it answers</th><th>Example from client work</th></tr></thead>
+    <tbody>
+      <tr><td>Product page per product</td><td>"What is [product]?"</td><td>Microblink: separate pages for BlinkID, BlinkID Verify, BlinkCard</td></tr>
+      <tr><td>Feature page per capability</td><td>"Does [product] do X?"</td><td>DeepInfra: OpenAI-compatible API, dedicated GPU capacity</td></tr>
+      <tr><td>Model or integration page per item</td><td>"Does [product] support [thing]?"</td><td>DeepInfra: a page per model (Llama, DeepSeek, Mistral, Qwen) plus model-family pages</td></tr>
+      <tr><td>Solution page per use case</td><td>"[Product] for [job]"</td><td>Microblink: age verification for gaming, KYC automation for fintech, document scanning for travel</td></tr>
+      <tr><td>Comparison page per competitor</td><td>"[Product] vs [competitor]"</td><td>Convex vs Firebase, Convex vs Supabase</td></tr>
+      <tr><td>Integration page per connected tool</td><td>"[Task] with [popular tool]"</td><td>A document-parsing API: "parse PDFs from SharePoint", "index Google Drive files", "load Notion pages"</td></tr>
+      <tr><td>Pricing page with real numbers</td><td>"What does it cost?"</td><td>"Contact us" pricing gets left out of AI recommendations</td></tr>
+    </tbody>
+  </table>
+  <h3>Integrations: ride the popularity of the tools you connect to</h3>
+  <p>If your product connects to other software, every connection is a page. Developers do not search for your product; they search for the job plus the tool they already use: "parse PDFs from SharePoint", "sync Postgres to a vector store", "Slack alerts from Datadog". The popular brand carries search volume your own name does not have yet, and an LLM asked "how do I do [task] with [brand]" will cite whichever integration page explains it with working code.</p>
+  <p>Build one page per integration, titled with the task and the brand, with a code sample, the auth steps, the limits, and a link into the docs. Order the backlog by the partner tool's popularity, not by how proud you are of the integration. A hundred of these pages is normal for a data or workflow product and is exactly the templated work Step 3 is for.</p>
+  <p>Two rules that save months later: give every page a stable URL now, because launches link into them and redirects leak authority; and design one template per page type so product managers can ship a new feature or integration page without a designer.</p>
+  <div class="real">
+    <div class="lbl">On a real account: DeepInfra</div>
+    <p>A new model page has to be indexed within hours of the release or the demand goes to whoever was. The fix was infrastructure, not writing: crawl budget, internal links from high-traffic pages, sitemap pings on publish, and a page template the catalog fills automatically. <a href="https://auq.io/case-studies/deepinfra/">Case study</a></p>
+  </div>
+</section>
+
+<!-- STEP 7 -->
+<section class="step wrap">
+  <div class="num">Step 7</div>
+  <h2>Show up in Reddit communities</h2>
+  <p>Reddit is where developers research tools before they ever reach your site, and it is a primary source for Google's AI Overviews, ChatGPT and Perplexity when they answer "which API should I use". One channel reaches the buyer directly and shapes what the models say about you. Nothing else on this list does both.</p>
+  <p>The communities that matter (r/LocalLLaMA, r/LLMDevs, r/MachineLearning, r/typescript, r/webdev and the niche subreddit for your stack) are the most hostile to marketing on the internet: strict moderation, astroturf detection, and users who call out a promotional post in a thread that then ranks on Google for years. A generic Reddit playbook gets you banned in a week.</p>
+  <ol>
+    <li><strong>Map the subreddits and the threads.</strong> List where your buyers ask questions, pull the recurring problems and competitor mentions, and set up monitoring so you see a high-intent thread within hours, not when it has 200 comments.</li>
+    <li><strong>Earn trust before mentioning the product.</strong> Answer technically and completely; mention your product only where it is the honest answer, and name alternatives when they fit better. Publish inside the subreddit too: build guides, benchmark threads, model deep-dives that earn upvotes on merit (more on what works below).</li>
+    <li><strong>Engineer the search placements.</strong> Target low-competition threads you can rank with, and go for the top comment on threads that already rank; Google pulls top comments into the SERP description. Reddit's own search is the third surface, roughly 80 million searches a month.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 720 250" role="img" aria-label="One technically complete Reddit comment reaches three surfaces: Google results, where top comments are pulled into the snippet; AI answers from AI Overviews, ChatGPT and Perplexity; and Reddit's own search">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="10" y="20" width="700" height="44" rx="6" fill="#F7F8FA" stroke="#D9DEE7"/>
+        <g fill="#0F1B2D" text-anchor="middle" font-size="12">
+          <text x="120" y="38" font-weight="600">1. Map</text><text x="120" y="54" fill="#5B6678">subreddits, threads, competitors</text>
+          <text x="360" y="38" font-weight="600">2. Earn trust</text><text x="360" y="54" fill="#5B6678">value first, brand second, name alternatives</text>
+          <text x="600" y="38" font-weight="600">3. Engineer placements</text><text x="600" y="54" fill="#5B6678">rankable threads, top comments</text>
+        </g>
+        <rect x="10" y="110" width="220" height="90" rx="6" fill="#0F1B2D"/>
+        <text x="120" y="140" text-anchor="middle" fill="#fff" font-weight="600">One complete answer</text>
+        <text x="120" y="160" text-anchor="middle" fill="#C7CFDE" font-size="12">in the thread where buyers ask,</text>
+        <text x="120" y="178" text-anchor="middle" fill="#C7CFDE" font-size="12">with the product in context</text>
+        <g fill="none" stroke="#5B6678" stroke-width="2">
+          <path d="M230 155 C 280 155, 280 100, 330 100"/>
+          <path d="M230 155 L 330 155"/>
+          <path d="M230 155 C 280 155, 280 210, 330 210"/>
+        </g>
+        <g fill="#E8EDFF" stroke="#2F5BFF">
+          <rect x="330" y="76" width="380" height="48" rx="6"/>
+          <rect x="330" y="131" width="380" height="48" rx="6"/>
+          <rect x="330" y="186" width="380" height="48" rx="6"/>
+        </g>
+        <g fill="#0F1B2D">
+          <text x="344" y="96" font-weight="600">Google results</text><text x="344" y="113" font-size="12" fill="#5B6678">top comments get pulled into the snippet; threads rank for years</text>
+          <text x="344" y="151" font-weight="600">AI answers</text><text x="344" y="168" font-size="12" fill="#5B6678">AI Overviews, ChatGPT and Perplexity cite threads in answers</text>
+          <text x="344" y="206" font-weight="600">Reddit search</text><text x="344" y="223" font-size="12" fill="#5B6678">roughly 80M searches a month, with its own AI overviews</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>Three phases, three surfaces. The same comment that answers one developer today is what Google quotes, what the models cite, and what Reddit search returns for the next two years.</figcaption>
+  </figure>
+  <h3>What got our accounts banned, and what worked instead</h3>
+  <p>We learned this the expensive way: early on, many of our accounts were banned for content that was, in hindsight, promotional. A banned account takes its posting history and every placement it earned with it.</p>
+  <table>
+    <thead><tr><th>Got accounts banned</th><th>Stayed up and earned upvotes</th></tr></thead>
+    <tbody>
+      <tr><td>A helpful comment that steered to the client's product</td><td>A complete answer that names the client and the alternatives</td></tr>
+      <tr><td>A comparison post that ranked the client first</td><td>A benchmark with a method and a result; the client is one of five rows (original data, Step 5)</td></tr>
+      <tr><td>A "has anyone tried X?" thread with a planted answer</td><td>A build guide where the client is one tool in a working stack</td></tr>
+    </tbody>
+  </table>
+  <p>The build guides worked best. The shape is a complete, working build with the client as one named tool among several, with the code and the trade-offs:</p>
+  <ul>
+    <li>"How I built a document-parsing pipeline with Postgres, S3 and [client]"</li>
+    <li>"Running Llama on a budget: a full setup with [client] for inference"</li>
+    <li>"A production checklist for KYC onboarding, with [client] for document capture"</li>
+  </ul>
+  <p>Developers upvote them because they can copy them, moderators leave them up because they are education, and the mention survives because the build earned it.</p>
+  <p>Run this with a small number of persona accounts with real posting history and one rule: no account ever posts something an engineer at your company would not sign.</p>
+  <div class="real">
+    <div class="lbl">On a real account: DeepInfra on Reddit</div>
+    <p>42 subreddits mapped, a handful of persona accounts with real history, continuous thread monitoring. 300K+ impressions and 411 brand mentions in communities where Together AI, Replicate and Groq were the default answer, with zero callouts or flags. <a href="https://auq.io/case-studies/reddit-organic-ai-inference-saas/">Case study</a></p>
+  </div>
+</section>
+
+<!-- STEP 8 -->
+<section class="step wrap">
+  <div class="num">Step 8</div>
+  <h2>Set up analytics before the first article ships</h2>
+  <p>Set this up in the first month, before content exists, so every piece has a baseline. If you are being asked for pipeline, this is how you show it.</p>
+  <h3>Web analytics</h3>
+  <p>We run everything on GA4 through Google Tag Manager, reported in Looker Studio. Track a small set of conversion events and nothing else until these are reliable:</p>
+  <table>
+    <thead><tr><th>Conversion point</th><th>What it tells you</th></tr></thead>
+    <tbody>
+      <tr><td>Pricing page visit</td><td>Buyer intent; the first signal content is reaching the right person</td></tr>
+      <tr><td>API key created or SDK downloaded</td><td>Activation; the number that correlates with revenue for most dev tools</td></tr>
+      <tr><td>Free trial or self-serve signup</td><td>The main conversion</td></tr>
+      <tr><td>Contact or demo form</td><td>Enterprise pipeline</td></tr>
+      <tr><td>Docs engagement from organic</td><td>Whether content pulls developers into the product, not just the blog</td></tr>
+    </tbody>
+  </table>
+  <figure>
+    <svg viewBox="0 0 740 250" role="img" aria-label="Analytics stack: the site and docs send events through Google Tag Manager into GA4, which feeds a Looker Studio dashboard; GA4 tracks pricing visits, API key or SDK downloads, free-trial signups and demo forms; PromptWatch adds AI visibility to the same dashboard">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="10" y="30" width="140" height="50" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="80" y="60" text-anchor="middle" fill="#0F1B2D" font-weight="600">Site + docs</text>
+        <rect x="200" y="30" width="120" height="50" rx="6" fill="#E8EDFF" stroke="#2F5BFF"/><text x="260" y="52" text-anchor="middle" fill="#0F1B2D" font-weight="600">Tag Manager</text><text x="260" y="68" text-anchor="middle" fill="#5B6678" font-size="11">one tag, all events</text>
+        <rect x="370" y="30" width="120" height="50" rx="6" fill="#2F5BFF"/><text x="430" y="52" text-anchor="middle" fill="#fff" font-weight="600">GA4</text><text x="430" y="68" text-anchor="middle" fill="#DCE4FF" font-size="11">events + source</text>
+        <rect x="540" y="30" width="170" height="50" rx="6" fill="#0F1B2D"/><text x="625" y="52" text-anchor="middle" fill="#fff" font-weight="600">Looker Studio</text><text x="625" y="68" text-anchor="middle" fill="#9FB0FF" font-size="11">signups by page × source</text>
+        <g stroke="#5B6678" stroke-width="2" fill="none">
+          <path d="M150 55 L 200 55"/><path d="M320 55 L 370 55"/><path d="M490 55 L 540 55"/>
+          <path d="M430 80 L 430 110"/><path d="M200 110 L 660 110"/>
+          <path d="M240 110 L 240 124"/><path d="M380 110 L 380 124"/><path d="M520 110 L 520 124"/><path d="M660 110 L 660 124"/>
+        </g>
+        <g fill="#fff" stroke="#2F5BFF">
+          <rect x="175" y="124" width="130" height="46" rx="6"/>
+          <rect x="315" y="124" width="130" height="46" rx="6"/>
+          <rect x="455" y="124" width="130" height="46" rx="6"/>
+          <rect x="595" y="124" width="115" height="46" rx="6"/>
+        </g>
+        <g fill="#0F1B2D" text-anchor="middle" font-size="12">
+          <text x="240" y="143" font-weight="600">Pricing visit</text><text x="240" y="159" fill="#5B6678" font-size="11">buyer intent</text>
+          <text x="380" y="143" font-weight="600">API key / SDK</text><text x="380" y="159" fill="#5B6678" font-size="11">activation</text>
+          <text x="520" y="143" font-weight="600">Free-trial signup</text><text x="520" y="159" fill="#5B6678" font-size="11">the main conversion</text>
+          <text x="652" y="143" font-weight="600">Demo form</text><text x="652" y="159" fill="#5B6678" font-size="11">enterprise</text>
+        </g>
+        <rect x="370" y="196" width="120" height="44" rx="6" fill="#FFB020"/><text x="430" y="215" text-anchor="middle" fill="#4A3100" font-weight="600">PromptWatch</text><text x="430" y="231" text-anchor="middle" fill="#4A3100" font-size="11">AI share of voice</text>
+        <path d="M490 218 H 722 Q 730 218 730 210 V 63 Q 730 55 722 55 H 710" stroke="#5B6678" stroke-width="2" fill="none"/>
+        <text x="20" y="214" fill="#5B6678" font-size="12">Prompt tracking: whether you appear in ChatGPT,</text>
+        <text x="20" y="231" fill="#5B6678" font-size="12">Perplexity and AI Mode, who gets cited instead</text>
+      </g>
+    </svg>
+    <figcaption>The stack we install on every account. Four conversion events, one dashboard, and AI visibility reported next to signups so the two are read together.</figcaption>
+  </figure>
+  <p>Connect these to the landing page and the organic source so you can answer "which articles produce signups" in one chart. That chart is what you show the CEO. It is also the chart that catches the case where sign-ups outrun traffic: on DeepInfra, organic sign-ups per session went from 2.9% to 8.6% in a year while clicks rose 88%, because the new pages land developers who are about to try the product.</p>
+  <h3>Make the conversion a free trial</h3>
+  <p>Developers expect to try before they talk to anyone. Free tokens, a free week, a generous free tier, a sandbox; the form matters less than the fact that a developer can run a request in five minutes. If your only CTA is "book a demo", content will produce traffic and no pipeline, and you will blame the content.</p>
+  <h3>AI analytics</h3>
+  <p>Set up prompt tracking with a tool like <a href="https://promptwatch.io">PromptWatch</a> on day one: the questions buyers ask ChatGPT, Perplexity and Google AI Mode in your category, whether you appear, who gets cited instead, and your share of voice against named competitors. The baseline is usually zero, which is the point of measuring it early. Track referral sessions from the assistants in GA4 as well; they are small but growing fast (DeepInfra's Gemini sessions went from 135 to 1,744 in a year).</p>
+  <div class="real">
+    <div class="lbl">On real accounts</div>
+    <p>The same stack runs on every account; only the activation event changes (API activations for DeepInfra, SDK trials and demo requests for Microblink, parse jobs for LlamaIndex). fraud.net's prompt tracking benchmarks share of voice against Sift, Forter, Riskified and Signifyd: 5.6% and 1,230+ citations by April 2026, from zero.</p>
+  </div>
+</section>
+
+<!-- STEP 9 -->
+<section class="step wrap">
+  <div class="num">Step 9</div>
+  <h2>Turn launches into a repeatable playbook</h2>
+  <p>Dev tools ship constantly, and each release is a demand spike you either catch or miss. A launch is not a blog post on release day; it is a checklist that starts a week before and ends with the new page linked from everything that already ranks.</p>
+  <table>
+    <thead><tr><th>When</th><th>What</th></tr></thead>
+    <tbody>
+      <tr><td>A week before</td><td>Keyword research on what people will search once it ships: model and feature names, "[competitor] alternative", migration queries. Pick the primary term for the page title and URL.</td></tr>
+      <tr><td>The days before</td><td>Templated pages from Step 3 drafted; an author (Step 2) writes the release piece with benchmarks and a code sample; comparison and "best of" pages updated to include the new thing.</td></tr>
+      <tr><td>Launch day</td><td>Publish, submit the URL in Search Console, post where your buyers are, and stay in the thread to answer questions.</td></tr>
+      <tr><td>The first two days</td><td>Internal links from your highest-traffic pages and the docs to the new page. The highest-leverage step, and the one most teams skip.</td></tr>
+      <tr><td>The first two weeks</td><td>Outreach to the roundups and comparison articles that already rank for the category, asking to be added.</td></tr>
+      <tr><td>Day 30</td><td>Impressions and clicks on the primary term, sign-ups attributed to the launch pages, AI citations for the new entity (Step 8).</td></tr>
+    </tbody>
+  </table>
+  <p>Write the checklist once, assign an owner per row, and run it on every release. The marketing leader's job is to run it, not to do every step.</p>
+  <h3>Every piece ships everywhere developers are</h3>
+  <p>An article on its own is one URL waiting to be found. The same piece, posted in several forms in the same week, gets found, discussed and cited, and each form feeds the others: the Reddit thread links the article, the LinkedIn and X posts send the author's network to both, the talk puts it in front of a room, and AI assistants that see the same finding described in five places treat it as established. This is the generalist marketer's job (Step 4); the author writes it once.</p>
+  <table>
+    <thead><tr><th>Channel</th><th>Form</th><th>Who posts</th><th>What changes</th></tr></thead>
+    <tbody>
+      <tr><td>Your site</td><td>The full article: benchmark, build guide or opinion, with the code</td><td>The author, under their name</td><td>Publishes first, so there is a stable URL to cite</td></tr>
+      <tr><td>Reddit</td><td>A build guide or a data finding in the subreddit where the question lives, with your product as one tool in the stack</td><td>A persona account with real history, or the author's own</td><td>Rewritten for the thread, not pasted; answers the question that is actually being asked there</td></tr>
+      <tr><td>LinkedIn</td><td>One specific takeaway in the author's or founder's voice, 150 words, the chart or snippet inline</td><td>The author, the founder, the engineer who built it</td><td>Personal accounts, never the company page; the link goes in the first comment</td></tr>
+      <tr><td>X</td><td>A short thread: the finding, the chart, the code, the link last</td><td>The engineer or founder; developers follow people, not brands</td><td>Launch day for releases; the same day as the article for everything else</td></tr>
+      <tr><td>Events</td><td>The article is the talk's outline; the demo repo serves both; the talk is the article's distribution</td><td>DevRel or the engineer</td><td>Recorded talk gets posted back to the article; the article gets the slides</td></tr>
+      <tr><td>Hacker News</td><td>Only benchmarks and original data, submitted plainly, with the author in the comments</td><td>The author</td><td>Never launches or opinion pieces; one callout there costs more than it earns</td></tr>
+    </tbody>
+  </table>
+  <p>Run this on every expert piece and every launch. The article makes it citable, Reddit makes it discussed, LinkedIn and X make it seen by the people who buy, the talk makes it remembered. One brief, five posts, same week.</p>
+  <div class="real">
+    <div class="lbl">On a real account: DeepInfra</div>
+    <p>Every model release fills the same three slots from one brief: <strong>"[Model] pricing guide"</strong> (per-token cost against other providers, context, throughput), <strong>"Best API provider for [model]"</strong> (an honest comparison with DeepInfra as one entry), and <strong>"[Model] integration guide"</strong> (endpoint, working sample, common errors). Blog clicks from Google went from 1,347 to 18,551 year over year, sign-ups from organic sessions landing on the blog from 9 to 464, and 10 of the 12 DeepInfra pages Gemini cites most are model-release posts. <a href="https://auq.io/case-studies/deepinfra/">Case study</a></p>
+  </div>
+</section>
+
+<section class="cases" id="cases">
+  <div class="wrap wide">
+    <h2>The playbook on six accounts</h2>
+    <p>Every step above has run on a live account. The pattern across all of them: foundation and measurement first, expert authors on the opinionated content, automation on the long tail, community and linkbuilding feeding the sources LLMs cite.</p>
+    <div class="case-grid">
+      <article class="case">
+        <h3>Convex</h3>
+        <div class="what">Open-source TypeScript backend, a Firebase/Supabase alternative</div>
+        <div class="big">TypeScript help center<small>built from no content infrastructure</small></div>
+        <p>Expert author sourcing, intent-clustered keyword map, LLM-format pages, GA4 to signups and activations.</p>
+        <a class="more" href="https://auq.io/case-studies/convex/">Read the Convex case study</a>
+      </article>
+      <article class="case">
+        <h3>DeepInfra: content</h3>
+        <div class="what">Serverless AI inference, 100+ models, OpenAI-compatible API</div>
+        <div class="big">Per-release launch engine<small>pages discoverable within hours of a model drop</small></div>
+        <p>Crawl infrastructure rebuild, ML-infra authors, automated model pages, timed linkbuilding sprints.</p>
+        <a class="more" href="https://auq.io/case-studies/deepinfra/">Read the DeepInfra case study</a>
+      </article>
+      <article class="case">
+        <h3>DeepInfra: Reddit</h3>
+        <div class="what">Community authority in the subreddits where inference buyers decide</div>
+        <div class="big">411+ mentions<small>300K+ impressions · 42 subreddits · zero flags</small></div>
+        <p>Subreddit mapping, multi-persona architecture, top-comment placements on ranking threads.</p>
+        <a class="more" href="https://auq.io/case-studies/reddit-organic-ai-inference-saas/">Read the Reddit case study</a>
+      </article>
+      <article class="case">
+        <h3>Microblink</h3>
+        <div class="what">Identity verification SDKs, 65M+ monthly verifications</div>
+        <div class="big">+173% traffic<small>+87% keywords · $33,000/month organic value</small></div>
+        <p>Intent-split architecture, three content formats, glossary and listicles for LLMs, SDK-trial tracking.</p>
+        <a class="more" href="https://auq.io/case-studies/microblink/">Read the Microblink case study</a>
+      </article>
+      <article class="case">
+        <h3>LlamaIndex</h3>
+        <div class="what">Document parsing and agent framework for developers</div>
+        <div class="big">18x OCR clicks<small>1,097 sign-ups from new content sections in Q3 · #1 cited domain in AI Overviews</small></div>
+        <p>Low-volume cluster build-out, /insights listicles structured for citations, glossary, sign-up and parse-job tracking.</p>
+        <a class="more" href="https://auq.io/contact-us/">Ask us about the LlamaIndex work</a>
+      </article>
+      <article class="case">
+        <h3>fraud.net</h3>
+        <div class="what">Enterprise fraud detection platform</div>
+        <div class="big">1,230+ AI citations<small>400+ pieces in 6 months · +85% ranking keywords</small></div>
+        <p>Redesign protection, three AI content pipelines with human review, AI share-of-voice reporting.</p>
+        <a class="more" href="https://auq.io/case-studies/fraud-net-content-automation-for-geo/">Read the fraud.net case study</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare" id="hire">
+  <div class="wrap">
+    <h2>Run it yourself, or run it with us</h2>
+    <p>Everything above is doable by one strong marketing leader. The constraint is time: the nine steps are nine jobs, and the slow ones (finding authors, building page templates, the first Reddit months) are slow because they are trial and error. We have already made most of those mistakes on other dev-tools accounts.</p>
+    <table>
+      <thead><tr><th></th><th>In-house</th><th>With AUQ</th></tr></thead>
+      <tbody>
+        <tr><td>Expert authors</td><td>You source, trial and manage them</td><td>We bring authors we have already worked with in your stack</td></tr>
+        <tr><td>Pages and templates</td><td>Your designer and engineers</td><td>Designed and built by our team</td></tr>
+        <tr><td>Templates and Reddit</td><td>Your writer builds the templates, a PM feeds them, someone runs the accounts</td><td>Pipelines we have already built on five accounts, adapted to your product; our Reddit team, with your review</td></tr>
+        <tr><td>Analytics</td><td>Set up from scratch</td><td>The GA4, Looker and PromptWatch stack from our other accounts</td></tr>
+      </tbody>
+    </table>
+    <p>Either way, the positioning and the opinions stay yours.</p>
+  </div>
+</section>
+</main>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Start with a 30-minute audit of what you have now</h2>
+    <p>We work with developer-tools, fintech and martech companies where generalist content fails, and we hire a subject-matter author for every account rather than a generalist. Bring your site; we'll tell you which of the nine steps are missing and what order to fix them in.</p>
+    <div class="ctas">
+      <a class="btn btn-amber" href="https://auq.io/contact-us/">Book an audit with AUQ</a>
+      <a class="btn btn-ghost" href="https://auq.io/tools/geo-audit-free/">Run the free GEO audit</a>
+      <a class="btn btn-ghost" href="https://auq.io/case-studies/">More case studies</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">AUQ is an organic growth agency in New York City. <a href="https://auq.io/">auq.io</a> · <a href="https://auq.io/pricing/">Pricing</a> · <a href="https://clutch.co/profile/auq#summary">Verified reviews on Clutch</a></div>
+</footer>
+
+</body>
+</html>
