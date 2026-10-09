@@ -383,9 +383,15 @@
     <li><strong>Review by visibility, not by volume.</strong> After the first four, the checklist does the gating and the author reviews only the pages that earn impressions, clicks or AI citations. A page nobody sees does not need an editor's hour; a page that starts ranking gets a full read the week it does. A failure on a reviewed page pulls its batch back through the checklist.</li>
   </ol>
   <p>Budget two weeks of the author's time per pipeline to build, then about a day a week across all three for the visibility-driven review. The rest of their time goes back to the expert track.</p>
-  <h3>Tools: use a builder, not an editor</h3>
-  <p>Build the pipelines in a content production tool you control: <a href="https://www.airops.com">AirOps</a>, Claude, or whichever AI builder your team already uses. What you want is a place where the author's template and the PM's inputs go in, a draft comes out, and every step in between is visible and editable. The tool is plumbing. The template is the product.</p>
-  <p>Be careful with the other category: tools that offer to "optimize" or update your existing content for AI search, rewriting live pages on your behalf. They flatten the voice, insert claims nobody checked, and they are the fastest way to publish something an engineer at your company would not sign. Analytics tools like <a href="https://promptwatch.io">PromptWatch</a> belong in the stack for a different reason: they tell you where you appear in AI answers and which pages get cited, which is the input to your editorial decisions. They cannot write the content for you, and nothing on a page should change unless the author or the PM changed it.</p>
+  <h3>Tools</h3>
+  <p>OK, we'll skip the basics of project management — I'm sure you have that figured out.</p>
+  <p>The interesting stuff is what you'll use to automate your templates and measure your results.</p>
+  <p>Number one: don't rely on AI to build your templates — they should be based on your author's original work. <strong>Pro tip:</strong> test a few different article structures to see which one ranks better, then use that as your template.</p>
+  <p>Tools like Profound and Surfer SEO will promise they can write your article for you… I don't trust them.</p>
+  <p>So for us it's usually a debate between two content production tools:</p>
+  <p><strong><a href="https://www.airops.com">AirOps</a>:</strong> we build our own detailed flow charts that clearly spell out intro, body 1, body 2, comparison chart, HTML table and so on. It lets us use different models for writing, control costs, add page scrapers and reference knowledge bases. It's tedious, but gives you a lot of control.</p>
+  <p><strong><a href="https://claude.com/claude-code">Claude Code</a>:</strong> we'll build a similar flow in Claude, but it's less controlled and Claude hides some of the magic under its hood.</p>
+  <p>If you want detail and control, go with AirOps. If you want speed, use Claude.</p>
   <p>Guardrails: generated pages must carry something a model cannot invent (a real benchmark, a real snippet, a real limit); never publish a page that only restates the docs; <code>noindex</code> anything that fails review rather than deleting it, so the URL stays stable.</p>
   <div class="real">
     <div class="lbl">On a real account: fraud.net</div>
