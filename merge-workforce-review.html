@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NCFX8NJ');</script><!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merge for Workforce: Content Review — AUQ</title>
+<meta name="description" content="Merge has strong historical growth, but almost entirely in the consumer and builder sector. On five enterprise prompts about AI cost, SOC 2, AI security, governed model access and company context, Google AI Overviews recommended 50+ vendors and merge.dev in none of them. The content gaps and industry pages that would change that.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2D; --ink-2:#2A3650; --slate:#5B6678; --line:#D9DEE7;
+    --paper:#F7F8FA; --white:#FFFFFF; --cobalt:#2F5BFF; --cobalt-soft:#E8EDFF;
+    --amber:#FFB020; --amber-ink:#4A3100;
+    --red:#B42318; --red-soft:#FEF0EF;
+    --w:760px; --wide:1100px; --radius:6px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.6}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
+  h1{font-size:clamp(1.8rem,3.8vw,2.6rem)}
+  h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.6rem}
+  h3{font-size:1.15rem;margin:1.8rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--cobalt)}
+  a:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.92em;background:var(--cobalt-soft);padding:.05em .35em;border-radius:3px}
+  .wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+  .wide{max-width:var(--wide)}
+
+  /* top bar */
+  .bar{background:var(--ink);color:#fff}
+  .bar .wrap{display:flex;justify-content:space-between;align-items:center;height:56px;max-width:var(--wide)}
+  .bar a{color:#fff;text-decoration:none;font-weight:600}
+  .bar .logo{font-family:"Space Grotesk",sans-serif;font-size:1.25rem;letter-spacing:.04em}
+  .bar nav a{font-weight:500;margin-left:22px;font-size:.95rem;opacity:.9}
+  .bar nav a.btn{background:var(--amber);color:var(--amber-ink);padding:8px 14px;border-radius:var(--radius);opacity:1}
+
+  /* hero */
+  .hero{background:var(--ink);color:#fff;padding:60px 0 0;overflow:hidden}
+  .hero .wrap{max-width:var(--wide);display:grid;grid-template-columns:1.02fr 1fr;gap:48px;align-items:center}
+  .hero .kicker{color:var(--amber);font-weight:600;margin-bottom:.5rem;font-size:.95rem;letter-spacing:.02em}
+  .hero p.sub{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1.2rem;color:var(--amber);margin:1rem 0 1rem}
+  .hero p.lede{font-size:1.05rem;color:#C7CFDE;max-width:46ch;margin:.6rem 0 1.6rem}
+  .hero ol.contents{counter-reset:c;list-style:none;padding:0;margin:0 0 56px;max-width:46ch}
+  .hero ol.contents li{counter-increment:c;position:relative;padding-left:34px;margin-bottom:.6rem;color:#C7CFDE;font-size:.98rem}
+  .hero ol.contents li::before{content:counter(c);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--cobalt);color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center}
+  .hero svg{width:100%;height:auto;display:block}
+
+  /* sections */
+  section.sec{padding:56px 0 20px;border-top:1px solid var(--line)}
+  section.sec .num{font-family:"Space Grotesk",sans-serif;color:var(--cobalt);font-weight:700;font-size:.95rem;margin-bottom:.35rem;letter-spacing:.02em}
+  .intro{padding:52px 0 20px}
+  .intro p.big{font-size:1.2rem;line-height:1.5}
+  ul,ol{padding-left:1.3rem;margin:0 0 1rem}
+  li{margin-bottom:.4rem}
+
+  /* tables */
+  table{border-collapse:collapse;width:100%;margin:1.1rem 0 1.4rem;font-size:.92rem}
+  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--ink);color:#fff;font-weight:600;font-size:.84rem;letter-spacing:.02em;font-family:"Space Grotesk",sans-serif}
+  tbody tr:nth-child(odd) td{background:var(--white)}
+  td.cluster{font-weight:600;white-space:nowrap}
+  td.prompt{color:var(--ink-2)}
+  td.vendors{color:var(--slate);font-size:.86rem;line-height:1.45}
+  td.score{text-align:center;white-space:nowrap}
+  .zero{display:inline-block;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.05rem;color:var(--red);background:var(--red-soft);border:1px solid #F3C3BE;border-radius:var(--radius);padding:4px 10px}
+  td ul{padding-left:1.05rem;margin:0}
+  td ul li{margin-bottom:.3rem}
+  .tag{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--cobalt-soft);color:var(--cobalt);margin-bottom:.35rem}
+  .tag.none{background:var(--red-soft);color:var(--red)}
+  .tag.some{background:#FFF4E0;color:var(--amber-ink)}
+
+  /* callouts */
+  .real{background:var(--white);border-left:4px solid var(--cobalt);padding:18px 22px;margin:1.4rem 0 .8rem;border-radius:0 var(--radius) var(--radius) 0}
+  .real .lbl{font-weight:600;color:var(--cobalt);margin-bottom:.35rem;font-size:.95rem}
+  .real p:last-child{margin:0}
+  .keystat{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:1.4rem 0}
+  .keystat .n{font-family:"Space Grotesk",sans-serif;font-size:2.1rem;font-weight:700;color:var(--cobalt);line-height:1.05}
+  .keystat .n small{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:.88rem;font-weight:500;color:var(--slate);margin-top:4px}
+  .keystat p{margin:.7rem 0 0;font-size:.97rem}
+
+  /* bands */
+  .band{background:var(--cobalt);color:#fff;padding:42px 0;margin:46px 0 0}
+  .band .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;max-width:var(--wide)}
+  .band h2{margin:0 0 .3rem}
+  .band p{margin:0;color:#DCE4FF;max-width:52ch}
+  .btn{display:inline-block;padding:13px 20px;border-radius:var(--radius);font-weight:600;text-decoration:none;border:2px solid transparent}
+  .btn-amber{background:var(--amber);color:var(--amber-ink);white-space:nowrap}
+  .btn-ghost{border-color:#fff;color:#fff}
+
+  .final{background:var(--ink);color:#fff;padding:60px 0}
+  .final p{color:#C7CFDE;max-width:54ch}
+  .final .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.4rem}
+  footer{background:#0A1220;color:#8E99AD;font-size:.85rem;padding:22px 0}
+  footer a{color:#C7CFDE}
+
+  @media (max-width:980px){
+    .hero .wrap{grid-template-columns:1fr}
+    .hero{padding-top:44px}
+    .hero ol.contents{margin-bottom:36px}
+  }
+  @media (max-width:860px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    td,th{min-width:150px}
+    td.cluster{white-space:normal}
+    .bar nav a:not(.btn){display:none}
+  }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCFX8NJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+
+<div class="bar">
+  <div class="wrap">
+    <a class="logo" href="https://auq.io/">AUQ</a>
+    <nav>
+      <a href="#prompts">Missing prompts</a>
+      <a href="#gaps">Content gaps</a>
+      <a href="#industries">Industry pages</a>
+      <a class="btn" href="https://auq.io/contact-us/">Talk to AUQ</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kicker">AUQ Review · Merge for Workforce</div>
+      <h1>Merge for Workforce: content review</h1>
+      <p class="sub">Strong for builders, missing for enterprise.</p>
+      <p class="lede">Merge has strong historical growth, but almost all of it sits in the consumer and builder sector. This review covers how to target the enterprise prompts and buyers instead.</p>
+      <ol class="contents">
+        <li>A sample of the &ldquo;workforce&rdquo; prompts Merge is missing from in AI Overviews</li>
+        <li>The &ldquo;workforce&rdquo; content gaps and topics to cover for an enterprise audience</li>
+        <li>Industry pages that target enterprise use cases for workforce</li>
+      </ol>
+    </div>
+    <svg viewBox="0 0 520 400" role="img" aria-label="Five enterprise prompt clusters. On each one, Google AI Overviews recommended between eight and fourteen vendors across three runs, and merge.dev in zero of three.">
+      <g font-family="IBM Plex Sans, sans-serif">
+        <text x="16" y="24" fill="#9FB0FF" font-size="12" font-weight="600" letter-spacing="0.04em">VENDORS RECOMMENDED, 3 RUNS EACH</text>
+        <g font-size="13">
+          <!-- rows: label, bar of rival vendors, merge 0/3 -->
+          <g transform="translate(0,56)">
+            <text x="16" y="0" fill="#fff" font-weight="600">Cost for teams</text>
+            <rect x="16" y="12" width="250" height="16" rx="3" fill="#2F5BFF"/>
+            <text x="276" y="25" fill="#C7CFDE" font-size="12">10 vendors</text>
+            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
+          </g>
+          <g transform="translate(0,122)">
+            <text x="16" y="0" fill="#fff" font-weight="600">SOC 2 &amp; compliance</text>
+            <rect x="16" y="12" width="300" height="16" rx="3" fill="#2F5BFF"/>
+            <text x="326" y="25" fill="#C7CFDE" font-size="12">12</text>
+            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
+          </g>
+          <g transform="translate(0,188)">
+            <text x="16" y="0" fill="#fff" font-weight="600">AI security across teams</text>
+            <rect x="16" y="12" width="300" height="16" rx="3" fill="#2F5BFF"/>
+            <text x="326" y="25" fill="#C7CFDE" font-size="12">12</text>
+            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
+          </g>
+          <g transform="translate(0,254)">
+            <text x="16" y="0" fill="#fff" font-weight="600">Governed model access</text>
+            <rect x="16" y="12" width="350" height="16" rx="3" fill="#2F5BFF"/>
+            <text x="376" y="25" fill="#C7CFDE" font-size="12">14</text>
+            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
+          </g>
+          <g transform="translate(0,320)">
+            <text x="16" y="0" fill="#fff" font-weight="600">Company context</text>
+            <rect x="16" y="12" width="200" height="16" rx="3" fill="#FFB020"/>
+            <text x="226" y="25" fill="#C7CFDE" font-size="12">8, Glean every run</text>
+            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<main>
+<section class="intro wrap">
+  <p class="big">Merge is recommended on the developer questions it has always owned. On the enterprise questions a workforce buyer actually asks, it does not appear at all.</p>
+  <p>We ran five prompts that describe the Workforce product in a buyer&rsquo;s own words, three times each, and recorded every vendor Google&rsquo;s AI Overviews recommended. Merge was named in none of the fifteen runs. The vendors that were named are the ones a CIO will shortlist instead.</p>
+</section>
+
+<!-- SECTION 1 -->
+<section class="sec" id="prompts">
+  <div class="wrap wide">
+    <div class="num">Section 1</div>
+    <h2>Missing &ldquo;workforce&rdquo; prompts in AI Overviews</h2>
+    <p>Each prompt begins &ldquo;Recommend software that&hellip;&rdquo; and was run three times. The right-hand column is how often merge.dev was recommended.</p>
+    <table>
+      <thead>
+        <tr><th>Cluster</th><th>The prompt</th><th>Vendors recommended across the 3 runs</th><th>Merge</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cluster">Cost for teams</td>
+          <td class="prompt">&hellip;controls AI spend by team and auto-routes employees&rsquo; routine requests to cheaper models</td>
+          <td class="vendors">LiteLLM, Portkey, Martian, Not Diamond, Bifrost, Kong AI Gateway, Cloudflare AI Gateway, AWS Bedrock, Dust, TypingMind</td>
+          <td class="score"><span class="zero">0 / 3</span></td>
+        </tr>
+        <tr>
+          <td class="cluster">SOC 2 &amp; compliance</td>
+          <td class="prompt">&hellip;gives IT audit logs and access controls over employees&rsquo; ChatGPT, Claude and Copilot use for a SOC 2 audit</td>
+          <td class="vendors">Netskope, Zscaler, Cloudflare One, Palo Alto Prisma, Nightfall, Harmonic, Strac, Island, Prompt Security, Lakera, Microsoft Purview, native OpenAI and Anthropic controls</td>
+          <td class="score"><span class="zero">0 / 3</span></td>
+        </tr>
+        <tr>
+          <td class="cluster">AI security across teams</td>
+          <td class="prompt">&hellip;discovers and blocks unapproved MCP servers and AI tools employees install, with DLP on agent actions</td>
+          <td class="vendors">Zenity, Nightfall, Strac, Cyberhaven, Cyera, Harmonic, Lumia, Arcade.dev, MintMCP, Palo Alto Prisma AIRS, Netskope, Microsoft Defender and Purview</td>
+          <td class="score"><span class="zero">0 / 3</span></td>
+        </tr>
+        <tr>
+          <td class="cluster">Governed model access</td>
+          <td class="prompt">&hellip;lets IT control which AI models each team can use and enforces it on employees&rsquo; devices</td>
+          <td class="vendors">LiteLLM, Portkey, Kong, Cloudflare One, TrueFoundry, Zscaler, Netskope, Palo Alto, LayerX, Island, Talon, Dust, Amazon Q, Copilot Studio</td>
+          <td class="score"><span class="zero">0 / 3</span></td>
+        </tr>
+        <tr>
+          <td class="cluster">Company context</td>
+          <td class="prompt">&hellip;connects ChatGPT, Claude and Copilot to Drive, Jira and the HRIS with each employee&rsquo;s permissions enforced</td>
+          <td class="vendors">Glean (every run), Microsoft Graph connectors and Copilot Studio, Onyx, Moveworks, Dust, Dashworks, Coveo, Atlassian Rovo</td>
+          <td class="score"><span class="zero">0 / 3</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="keystat">
+      <div class="n">847<small>US keywords where Google AI Overviews cite merge.dev today</small></div>
+      <p>Almost all of them are developer MCP and API topics: &ldquo;mcp vs api&rdquo;, &ldquo;rag vs mcp&rdquo;, API-key how-tos. The visibility is real, and it is pointed at builders rather than at the people who buy Workforce.</p>
+    </div>
+
+    <div class="real">
+      <div class="lbl">What the answers draw on</div>
+      <p>Merge needs a direct-answer page per industry and use case, plus placement in off-site roundups and off-domain channels such as Reddit. The vendors above are being named because that material already exists about them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="sec" id="gaps">
+  <div class="wrap wide">
+    <div class="num">Section 2</div>
+    <h2>&ldquo;Merge for Workforce&rdquo; new content segments</h2>
+    <p>Six clusters, each with the Workforce capability it maps to, the bottom-of-funnel topics that would answer the prompts above, and what exists on the blog today.</p>
+    <table>
+      <thead>
+        <tr><th>Cluster</th><th>Workforce feature or use case</th><th>BOFU topics to cover</th><th>On the blog today</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cluster">1. LLM cost optimization for teams</td>
+          <td class="prompt">Route routine work to cheaper models by group; per-team budgets; spend by team, tool and model</td>
+          <td><ul>
+            <li>AI spend by department</li>
+            <li>LLM cost allocation and chargeback</li>
+            <li>&ldquo;Cut ChatGPT Enterprise / Copilot costs&rdquo;</li>
+            <li>Which model for which team</li>
+          </ul></td>
+          <td><span class="tag some">thin</span>Two posts: a generic &ldquo;optimize LLM costs&rdquo; (Mar 26) and the Workforce launch claim. Nothing team-level.</td>
+        </tr>
+        <tr>
+          <td class="cluster">2. Managing AI compliance</td>
+          <td class="prompt">Policies enforced on-device; per-employee action logs; approved-model and MCP lists</td>
+          <td><ul>
+            <li>Company AI usage policy template, AI acceptable-use policy</li>
+            <li>AI audit logs</li>
+            <li>Rolling out approved AI tools to a department</li>
+          </ul></td>
+          <td><span class="tag some">partial</span>AI governance platforms and AI audit logs, both Jun to Jul 26. No policy or audit-evidence content.</td>
+        </tr>
+        <tr>
+          <td class="cluster">3. SOC 2 &amp; enterprise-grade compliance</td>
+          <td class="prompt">Audit trail, permission inheritance, DLP, approved subprocessors across models and MCPs</td>
+          <td><ul>
+            <li>SOC 2 and employee AI tools</li>
+            <li>Security questionnaire answers for AI</li>
+            <li>HIPAA, ISO 27001 and NIST AI RMF controls for AI use</li>
+          </ul></td>
+          <td><span class="tag none">nothing</span>Zero. SOC 2, ISO and NIST are never mentioned on the blog.</td>
+        </tr>
+        <tr>
+          <td class="cluster">4. AI security across teams</td>
+          <td class="prompt">Discover and block unapproved MCP servers and skills; DLP on agent tool calls; sessions under the user&rsquo;s identity</td>
+          <td><ul>
+            <li>Shadow AI and shadow MCP discovery</li>
+            <li>MCP server security for IT</li>
+            <li>Stop employees&rsquo; agents leaking data</li>
+            <li>Agent DLP</li>
+          </ul></td>
+          <td><span class="tag some">wrong audience</span>MCP security posts exist from 2025, but written for developers rather than IT. No &ldquo;shadow&rdquo; or &ldquo;discovery&rdquo; content.</td>
+        </tr>
+        <tr>
+          <td class="cluster">5. Governed model access</td>
+          <td class="prompt">Model entitlements by group; temporary access requests; push approved models, MCPs and skills to teams&rsquo; AI tools</td>
+          <td><ul>
+            <li>Control which AI models employees can use</li>
+            <li>Model access by role</li>
+            <li>Standardizing on Claude or ChatGPT across teams</li>
+          </ul></td>
+          <td><span class="tag some">thin</span>One product post, plus three branded &ldquo;bring X to work&rdquo; posts.</td>
+        </tr>
+        <tr>
+          <td class="cluster">6. Company context for every AI tool</td>
+          <td class="prompt">Universal Context Layer: pre-indexed Drive, ticketing and HRIS, searched under each person&rsquo;s permissions</td>
+          <td><ul>
+            <li>Connect ChatGPT, Claude or Copilot to company data</li>
+            <li>Permission-aware enterprise AI search</li>
+            <li>Context engineering for teams</li>
+          </ul></td>
+          <td><span class="tag some">launch-led</span>Two posts, both launch-led, Sep to Oct 26.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap wide">
+    <div>
+      <h2>Want to see where your product sits in the AI answers?</h2>
+      <p>Run our free GEO audit: it checks whether ChatGPT, Perplexity and Google AI Overviews can find and describe your product, and which of your pages they cite.</p>
+    </div>
+    <a class="btn btn-amber" href="https://auq.io/tools/geo-audit-free/">Run the free GEO audit</a>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<section class="sec" id="industries">
+  <div class="wrap wide">
+    <div class="num">Section 3</div>
+    <h2>Industry pages that target enterprise use cases</h2>
+    <p>The enterprise buyer does not search the category, they search their own compliance problem. Three industries where Workforce has a specific answer and no page to give it.</p>
+    <table>
+      <thead>
+        <tr><th>Industry</th><th>Prompt and search ideas</th><th>Content to build</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cluster">HR teams and HRIS-heavy orgs</td>
+          <td class="prompt"><ul>
+            <li>&ldquo;Software that lets HR use AI on employee data without exposing comp or PII&rdquo;</li>
+            <li>&ldquo;AI assistant for HR that respects Workday permissions&rdquo;</li>
+            <li>&ldquo;Can Copilot access our HRIS safely?&rdquo;</li>
+            <li>&ldquo;AI governance for HR data&rdquo;</li>
+          </ul></td>
+          <td><ul>
+            <li>Workforce for HR landing page</li>
+            <li>AI on HRIS data: permissions and privacy guide</li>
+            <li>HR AI usage policy template</li>
+            <li>&ldquo;Copilot and Workday: what HR AI can see&rdquo;</li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td class="cluster">Fintech</td>
+          <td class="prompt"><ul>
+            <li>&ldquo;SOC 2 controls for employee AI use at a fintech&rdquo;</li>
+            <li>&ldquo;Can support teams paste customer data into ChatGPT under PCI?&rdquo;</li>
+            <li>&ldquo;AI usage policy template for fintech&rdquo;</li>
+            <li>&ldquo;Answering a bank partner&rsquo;s AI security questionnaire&rdquo;</li>
+          </ul></td>
+          <td><ul>
+            <li>Workforce for fintech landing page</li>
+            <li>SOC 2 and PCI control matrix for employee AI</li>
+            <li>Bank-partner AI questionnaire guide</li>
+            <li>Fintech AI usage policy template</li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td class="cluster">Financial analysis firms</td>
+          <td class="prompt"><ul>
+            <li>&ldquo;FINRA-compliant way for analysts to use ChatGPT in research&rdquo;</li>
+            <li>&ldquo;AI assistant that reads FactSet and filings with an audit trail&rdquo;</li>
+            <li>&ldquo;Information barriers for AI tools at an asset manager&rdquo;</li>
+            <li>&ldquo;Books-and-records for AI-generated research&rdquo;</li>
+          </ul></td>
+          <td><ul>
+            <li>Workforce for asset managers landing page</li>
+            <li>SEC and FINRA records guide for AI-assisted research</li>
+            <li>Information barriers and AI tools</li>
+            <li>Governed FactSet and Quartr access for analysts</li>
+          </ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</main>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Where we would start</h2>
+    <p>The five prompts in Section 1 are the shortlist questions an enterprise buyer asks before they ever type the product name. None of them has a page on merge.dev today. The fastest path is one direct-answer page per cluster, then the three industry landing pages, then the off-site placement that gets Merge named in the roundups the assistants already read.</p>
+    <div class="ctas">
+      <a class="btn btn-amber" href="https://auq.io/contact-us/">Talk to AUQ</a>
+      <a class="btn btn-ghost" href="https://auq.io/cases/">See the case studies</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">AUQ is an organic growth agency in New York City. <a href="https://auq.io/">auq.io</a> &middot; <a href="https://auq.io/pricing/">Pricing</a> &middot; <a href="https://clutch.co/profile/auq#summary">Verified reviews on Clutch</a></div>
+</footer>
+
+</body>
+</html>
