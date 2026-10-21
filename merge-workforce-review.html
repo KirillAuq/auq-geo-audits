@@ -40,19 +40,26 @@
   .bar nav a.btn{background:var(--amber);color:var(--amber-ink);padding:8px 14px;border-radius:var(--radius);opacity:1}
 
   /* hero */
-  .hero{background:var(--ink);color:#fff;padding:60px 0 0;overflow:hidden}
-  .hero .wrap{max-width:var(--wide);display:grid;grid-template-columns:1.02fr 1fr;gap:48px;align-items:center}
+  .hero{background:var(--ink);color:#fff;padding:60px 0 0}
+  .hero .wrap{max-width:var(--wide)}
   .hero .kicker{color:var(--amber);font-weight:600;margin-bottom:.5rem;font-size:.95rem;letter-spacing:.02em}
-  .hero p.sub{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1.2rem;color:var(--amber);margin:1rem 0 1rem}
-  .hero p.lede{font-size:1.05rem;color:#C7CFDE;max-width:46ch;margin:.6rem 0 1.6rem}
-  .hero ol.contents{counter-reset:c;list-style:none;padding:0;margin:0 0 56px;max-width:46ch}
-  .hero ol.contents li{counter-increment:c;position:relative;padding-left:34px;margin-bottom:.6rem;color:#C7CFDE;font-size:.98rem}
-  .hero ol.contents li::before{content:counter(c);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--cobalt);color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center}
-  .hero svg{width:100%;height:auto;display:block}
+  .hero h1{max-width:28ch}
+  .hero p.sub{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1.25rem;color:var(--amber);margin:1rem 0 1rem}
+  .hero p.lede{font-size:1.08rem;color:#C7CFDE;max-width:64ch;margin:.6rem 0 2.4rem}
+
+  /* hero: the three sections as numbered cards, doubling as nav */
+  .hero-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding-bottom:58px}
+  .hcard{display:block;text-decoration:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-left:4px solid var(--cobalt);border-radius:var(--radius);padding:22px 22px 24px;transition:background .15s ease,border-left-color .15s ease}
+  .hcard:hover,.hcard:focus-visible{background:rgba(255,255,255,.1);border-left-color:var(--amber)}
+  .hcard .n{display:block;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:2.6rem;line-height:1;color:var(--amber);margin-bottom:.45rem}
+  .hcard strong{display:block;color:#fff;font-family:"Space Grotesk",sans-serif;font-size:1.08rem;margin-bottom:.4rem;letter-spacing:-.01em}
+  .hcard .d{display:block;color:#C7CFDE;font-size:.92rem;line-height:1.45}
 
   /* sections */
-  section.sec{padding:56px 0 20px;border-top:1px solid var(--line)}
-  section.sec .num{font-family:"Space Grotesk",sans-serif;color:var(--cobalt);font-weight:700;font-size:.95rem;margin-bottom:.35rem;letter-spacing:.02em}
+  section.sec{padding:52px 0 20px;border-top:1px solid var(--line)}
+  .sechead{display:flex;align-items:center;gap:18px;margin-bottom:1rem}
+  .secnum{flex:0 0 auto;width:56px;height:56px;border-radius:50%;background:var(--cobalt);color:#fff;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.75rem;line-height:1;display:flex;align-items:center;justify-content:center}
+  .sechead h2{margin:0}
   .intro{padding:52px 0 20px}
   .intro p.big{font-size:1.2rem;line-height:1.5}
   ul,ol{padding-left:1.3rem;margin:0 0 1rem}
@@ -99,9 +106,11 @@
   footer a{color:#C7CFDE}
 
   @media (max-width:980px){
-    .hero .wrap{grid-template-columns:1fr}
     .hero{padding-top:44px}
-    .hero ol.contents{margin-bottom:36px}
+    .hero-cards{grid-template-columns:1fr;gap:14px;padding-bottom:42px}
+    .hcard{padding:18px 18px 20px}
+    .hcard .n{font-size:2.1rem}
+    .secnum{width:46px;height:46px;font-size:1.45rem}
   }
   @media (max-width:860px){
     table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -128,55 +137,27 @@
 
 <header class="hero">
   <div class="wrap">
-    <div>
-      <div class="kicker">AUQ Review · Merge for Workforce</div>
-      <h1>Merge for Workforce: content review</h1>
-      <p class="sub">Strong for builders, missing for enterprise.</p>
-      <p class="lede">Merge has strong historical growth, but almost all of it sits in the consumer and builder sector. This review covers how to target the enterprise prompts and buyers instead.</p>
-      <ol class="contents">
-        <li>A sample of the &ldquo;workforce&rdquo; prompts Merge is missing from in AI Overviews</li>
-        <li>The &ldquo;workforce&rdquo; content gaps and topics to cover for an enterprise audience</li>
-        <li>Industry pages that target enterprise use cases for workforce</li>
-      </ol>
+    <div class="kicker">AUQ Review · Merge for Workforce</div>
+    <h1>Merge for Workforce: content review</h1>
+    <p class="sub">Strong for builders, missing for enterprise.</p>
+    <p class="lede">Merge has strong historical growth, but almost all of it sits in the consumer and builder sector. This review covers how to target the enterprise prompts and buyers instead.</p>
+    <div class="hero-cards">
+      <a class="hcard" href="#prompts">
+        <span class="n">1</span>
+        <strong>Missing prompts</strong>
+        <span class="d">A sample of the &ldquo;workforce&rdquo; prompts Merge is missing from in AI Overviews</span>
+      </a>
+      <a class="hcard" href="#gaps">
+        <span class="n">2</span>
+        <strong>Content gaps</strong>
+        <span class="d">The &ldquo;workforce&rdquo; topics to cover for an enterprise audience, and what exists today</span>
+      </a>
+      <a class="hcard" href="#industries">
+        <span class="n">3</span>
+        <strong>Industry pages</strong>
+        <span class="d">Pages that target enterprise use cases for workforce, by industry</span>
+      </a>
     </div>
-    <svg viewBox="0 0 520 400" role="img" aria-label="Five enterprise prompt clusters. On each one, Google AI Overviews recommended between eight and fourteen vendors across three runs, and merge.dev in zero of three.">
-      <g font-family="IBM Plex Sans, sans-serif">
-        <text x="16" y="24" fill="#9FB0FF" font-size="12" font-weight="600" letter-spacing="0.04em">VENDORS RECOMMENDED, 3 RUNS EACH</text>
-        <g font-size="13">
-          <!-- rows: label, bar of rival vendors, merge 0/3 -->
-          <g transform="translate(0,56)">
-            <text x="16" y="0" fill="#fff" font-weight="600">Cost for teams</text>
-            <rect x="16" y="12" width="250" height="16" rx="3" fill="#2F5BFF"/>
-            <text x="276" y="25" fill="#C7CFDE" font-size="12">10 vendors</text>
-            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
-          </g>
-          <g transform="translate(0,122)">
-            <text x="16" y="0" fill="#fff" font-weight="600">SOC 2 &amp; compliance</text>
-            <rect x="16" y="12" width="300" height="16" rx="3" fill="#2F5BFF"/>
-            <text x="326" y="25" fill="#C7CFDE" font-size="12">12</text>
-            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
-          </g>
-          <g transform="translate(0,188)">
-            <text x="16" y="0" fill="#fff" font-weight="600">AI security across teams</text>
-            <rect x="16" y="12" width="300" height="16" rx="3" fill="#2F5BFF"/>
-            <text x="326" y="25" fill="#C7CFDE" font-size="12">12</text>
-            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
-          </g>
-          <g transform="translate(0,254)">
-            <text x="16" y="0" fill="#fff" font-weight="600">Governed model access</text>
-            <rect x="16" y="12" width="350" height="16" rx="3" fill="#2F5BFF"/>
-            <text x="376" y="25" fill="#C7CFDE" font-size="12">14</text>
-            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
-          </g>
-          <g transform="translate(0,320)">
-            <text x="16" y="0" fill="#fff" font-weight="600">Company context</text>
-            <rect x="16" y="12" width="200" height="16" rx="3" fill="#FFB020"/>
-            <text x="226" y="25" fill="#C7CFDE" font-size="12">8, Glean every run</text>
-            <text x="416" y="25" fill="#FF8A80" font-size="12" font-weight="700" font-family="Space Grotesk">Merge 0/3</text>
-          </g>
-        </g>
-      </g>
-    </svg>
   </div>
 </header>
 
@@ -189,8 +170,10 @@
 <!-- SECTION 1 -->
 <section class="sec" id="prompts">
   <div class="wrap wide">
-    <div class="num">Section 1</div>
-    <h2>Missing &ldquo;workforce&rdquo; prompts in AI Overviews</h2>
+    <div class="sechead">
+      <span class="secnum">1</span>
+      <h2>Missing &ldquo;workforce&rdquo; prompts in AI Overviews</h2>
+    </div>
     <p>Each prompt begins &ldquo;Recommend software that&hellip;&rdquo; and was run three times. The right-hand column is how often merge.dev was recommended.</p>
     <table>
       <thead>
@@ -245,8 +228,10 @@
 <!-- SECTION 2 -->
 <section class="sec" id="gaps">
   <div class="wrap wide">
-    <div class="num">Section 2</div>
-    <h2>&ldquo;Merge for Workforce&rdquo; new content segments</h2>
+    <div class="sechead">
+      <span class="secnum">2</span>
+      <h2>&ldquo;Merge for Workforce&rdquo; new content segments</h2>
+    </div>
     <p>Six clusters, each with the Workforce capability it maps to, the bottom-of-funnel topics that would answer the prompts above, and what exists on the blog today.</p>
     <table>
       <thead>
@@ -333,8 +318,10 @@
 <!-- SECTION 3 -->
 <section class="sec" id="industries">
   <div class="wrap wide">
-    <div class="num">Section 3</div>
-    <h2>Industry pages that target enterprise use cases</h2>
+    <div class="sechead">
+      <span class="secnum">3</span>
+      <h2>Industry pages that target enterprise use cases</h2>
+    </div>
     <p>The enterprise buyer does not search the category, they search their own compliance problem. Three industries where Workforce has a specific answer and no page to give it.</p>
     <table>
       <thead>
