@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NCFX8NJ');</script><!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Launch to Pipeline Playbook for Dev Tools — AUQ</title>
+<meta name="description" content="A launch process dev-tools teams can run before the first marketing hire: write down what you are, decide which releases deserve what, build the feature page before the post, pick the AI prompts the launch has to win, write the announcement from a brief, template the releases that repeat, post under real names, show up on Reddit without getting banned, then spend two weeks on links and mentions. How we did it at DeepInfra, where a new model ships every week.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2D; --ink-2:#2A3650; --slate:#5B6678; --line:#D9DEE7;
+    --paper:#F7F8FA; --white:#FFFFFF; --cobalt:#2F5BFF; --cobalt-soft:#E8EDFF;
+    --amber:#FFB020; --amber-ink:#4A3100;
+    --w:760px; --radius:6px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.6}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
+  h1{font-size:clamp(1.8rem,3.8vw,2.6rem)}
+  h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.6rem}
+  h3{font-size:1.15rem;margin:1.6rem 0 .4rem}
+  p{margin:0 0 1rem}
+  a{color:var(--cobalt)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.92em;background:var(--cobalt-soft);padding:.05em .35em;border-radius:3px}
+  .wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+  .wide{max-width:1040px}
+
+  /* top bar */
+  .bar{background:var(--ink);color:#fff}
+  .bar .wrap{display:flex;justify-content:space-between;align-items:center;height:56px;max-width:1040px}
+  .bar a{color:#fff;text-decoration:none;font-weight:600}
+  .bar .logo{font-family:"Space Grotesk",sans-serif;font-size:1.25rem;letter-spacing:.04em}
+  .bar nav a{font-weight:500;margin-left:22px;font-size:.95rem;opacity:.9}
+  .bar nav a.btn{background:var(--amber);color:var(--amber-ink);padding:8px 14px;border-radius:var(--radius);opacity:1}
+
+  /* hero */
+  .hero{background:var(--ink);color:#fff;padding:64px 0 0;overflow:hidden}
+  .hero .wrap{max-width:1040px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+  .hero p.sub{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1.25rem;color:var(--amber);margin:1rem 0 1.8rem}
+  .hero p.lede{font-size:1.1rem;color:#C7CFDE;max-width:42ch;margin:.9rem 0 1.6rem}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}
+  .btn{display:inline-block;padding:13px 20px;border-radius:var(--radius);font-weight:600;text-decoration:none;border:2px solid transparent}
+  .btn-amber{background:var(--amber);color:var(--amber-ink)}
+  .btn-ghost{border-color:#fff;color:#fff}
+  .btn-ghost.dark{border-color:var(--ink);color:var(--ink)}
+  .btn-cobalt{background:var(--cobalt);color:#fff}
+  .hero svg{width:100%;height:auto;display:block}
+  .hero .kicker{color:var(--amber);font-weight:600;margin-bottom:.5rem}
+
+  /* sections */
+  section.step{padding:56px 0 24px;border-top:1px solid var(--line)}
+  section.step .num{font-family:"Space Grotesk",sans-serif;color:var(--cobalt);font-weight:700;font-size:.95rem;margin-bottom:.35rem}
+  .intro{padding:56px 0 24px}
+  .intro p.big{font-size:1.25rem;line-height:1.5}
+  ul,ol{padding-left:1.3rem;margin:0 0 1rem}
+  li{margin-bottom:.45rem}
+  table{border-collapse:collapse;width:100%;margin:1rem 0 1.4rem;font-size:.95rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--white);font-weight:600}
+  tr:nth-child(even) td{background:var(--white)}
+
+  /* real-account callout */
+  .real{background:var(--white);border-left:4px solid var(--cobalt);padding:18px 22px;margin:1.4rem 0 .8rem;border-radius:0 var(--radius) var(--radius) 0}
+  .real .lbl{font-weight:600;color:var(--cobalt);margin-bottom:.35rem}
+  .real p:last-child{margin:0}
+  .real .stats{display:flex;gap:22px;flex-wrap:wrap;margin:.6rem 0 .8rem}
+  .real .stat b{display:block;font-family:"Space Grotesk",sans-serif;font-size:1.6rem;line-height:1.1;color:var(--ink)}
+  .real .stat span{font-size:.85rem;color:var(--slate)}
+
+  /* figures */
+  figure{margin:1.4rem 0 1.6rem;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  figure svg{width:100%;height:auto;display:block}
+  figcaption{font-size:.88rem;color:var(--slate);margin-top:10px}
+
+  /* cta bands */
+  .band{background:var(--cobalt);color:#fff;padding:44px 0;margin:48px 0 0}
+  .band .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .band h2{margin:0 0 .3rem}
+  .band p{margin:0;color:#DCE4FF;max-width:48ch}
+  .band .btn-amber{white-space:nowrap}
+
+  /* case grid */
+  .cases{padding:56px 0 16px;border-top:1px solid var(--line)}
+  .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:1.2rem}
+  .case{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column}
+  .case h3{margin:0 0 .25rem;font-size:1.1rem}
+  .case .what{color:var(--slate);font-size:.92rem;margin-bottom:.8rem}
+  .case .big{font-family:"Space Grotesk",sans-serif;font-size:1.9rem;font-weight:700;color:var(--cobalt);line-height:1.05}
+  .case .big small{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:.85rem;font-weight:500;color:var(--slate);margin-top:2px}
+  .case p{font-size:.95rem;margin:.8rem 0}
+  .case a.more{margin-top:auto;font-weight:600;text-decoration:none}
+
+  /* compare */
+  .compare{padding:56px 0 64px;border-top:1px solid var(--line)}
+  .compare table td:first-child{font-weight:600;width:28%}
+  .compare table td:nth-child(3){background:var(--cobalt-soft)}
+  .compare table th:nth-child(3){background:var(--cobalt);color:#fff}
+
+  /* final */
+  .final{background:var(--ink);color:#fff;padding:64px 0}
+  .final p{color:#C7CFDE;max-width:52ch}
+  .final .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.4rem}
+  footer{background:#0A1220;color:#8E99AD;font-size:.85rem;padding:22px 0}
+  footer a{color:#C7CFDE}
+
+  @media (max-width:820px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    td,th{min-width:120px}
+    .hero .wrap{grid-template-columns:1fr}
+    .hero{padding-top:44px}
+    .bar nav a:not(.btn){display:none}
+  }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCFX8NJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+
+<div class="bar">
+  <div class="wrap">
+    <a class="logo" href="https://auq.io/">AUQ</a>
+    <nav>
+      <a href="#steps">The guide</a>
+      <a href="#cases">Case studies</a>
+      <a href="#hire">Work with us</a>
+      <a class="btn" href="https://auq.io/contact-us/">Book an audit</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kicker">The launch to pipeline playbook for dev tools</div>
+      <h1>The content strategy to turn your feature releases into AI citations and signups</h1>
+      <p class="sub">Based on our work with a weekly release schedule</p>
+      <div class="ctas">
+        <a class="btn btn-amber" href="#steps">Read the guide</a>
+        <a class="btn btn-ghost" href="https://auq.io/cases/">See the case studies</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 520 440" role="img" aria-label="The guide in five parts: settle what you are, then what kind of release this is; get the pages and the announcement ready; launch week, where it goes, and Reddit; after launch day, and when it is a race; score it, own it, hand it over">
+      <defs>
+        <linearGradient id="rail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F5BFF"/><stop offset="1" stop-color="#FFB020"/></linearGradient>
+      </defs>
+      <line x1="60" y1="44" x2="60" y2="396" stroke="url(#rail)" stroke-width="4" stroke-linecap="round"/>
+      <g font-family="IBM Plex Sans, sans-serif" fill="#fff">
+        <g transform="translate(0,44)"><circle cx="60" r="18" fill="#2F5BFF"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">1</text><text x="96" y="-8" font-size="18" font-weight="600">Settle what you are, then the release</text><text x="96" y="14" font-size="13" fill="#C7CFDE">A category statement; full launch, post, or changelog only</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 1–2</text></g>
+        <g transform="translate(0,132)"><circle cx="60" r="18" fill="#4669F0"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">2</text><text x="96" y="-8" font-size="18" font-weight="600">Get the pages and the announcement ready</text><text x="96" y="14" font-size="13" fill="#C7CFDE">The page first; the prompts; a brief; formats; templates</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 3–7</text></g>
+        <g transform="translate(0,220)"><circle cx="60" r="18" fill="#6A7CD6"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">3</text><text x="96" y="-8" font-size="18" font-weight="600">Launch week, where it goes, and Reddit</text><text x="96" y="14" font-size="13" fill="#C7CFDE">An owner per row; real names; answers that don't get banned</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 8–10</text></g>
+        <g transform="translate(0,308)"><circle cx="60" r="18" fill="#A8949A"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk">4</text><text x="96" y="-8" font-size="18" font-weight="600">After launch day, and when it's a race</text><text x="96" y="14" font-size="13" fill="#C7CFDE">Links and mentions; how DeepInfra launches a model a week</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 11–12</text></g>
+        <g transform="translate(0,396)"><circle cx="60" r="18" fill="#FFB020"/><text x="60" y="6" text-anchor="middle" font-weight="700" font-size="16" font-family="Space Grotesk" fill="#4A3100">5</text><text x="96" y="-8" font-size="18" font-weight="600">Score it, own it, hand it over</text><text x="96" y="14" font-size="13" fill="#C7CFDE">One scorecard per launch; one named owner; when to hire</text><text x="96" y="34" font-size="12" fill="#9FB0FF">Steps 13–14</text></g>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<main>
+<section class="intro wrap" id="steps">
+  <p class="big">Most feature launches get a lot of hype inside the company, but struggle to reach their intended audience.</p>
+  <p>We think product and feature launches can also be used as marketing tools to attract new customers. Being calculated and loud about your features and releases can help you show up in feeds, in Google and influence LLM searches.</p>
+  <p>This guide goes into the methodology we use to identify opportunities and execute content around feature releases. The working example is our work with <a href="https://auq.io/case-studies/deepinfra/">deepinfra.com</a>. They are in an extremely competitive industry, since their product releases are based around open-source AI models, and every time they get a model so do all of their competitors. We need to be efficient, quick and produce content that is high quality to win in search and get eyeballs.</p>
+  <h3>TL;DR</h3>
+  <ul>
+    <li><strong>Write down what you are before you launch anything.</strong> One category statement, word for word on every surface; every launch repeats it.</li>
+    <li><strong>Decide which releases deserve what</strong> before anyone writes a word. Three kinds of release, three kits.</li>
+    <li><strong>The page comes before the post.</strong> If the feature does not have a page, search and AI assistants do not know you have it.</li>
+    <li><strong>Pick the prompts the launch has to win</strong>, and build a page for each one.</li>
+    <li><strong>Write the announcement from a brief, not from the pull request.</strong> A 25-minute interview and six fields.</li>
+    <li><strong>Turn each launch into more than one piece.</strong> The same brief makes a use case, an opinion piece or an original-data post; pick the ones that are opinionated and expert-checked.</li>
+    <li><strong>Template the releases that repeat</strong>, so the fifth integration launch costs an hour instead of a week.</li>
+    <li><strong>On Reddit, answer; don't announce.</strong> Complete answers and build guides with the alternatives named survive; promotion gets accounts banned.</li>
+    <li><strong>Spend the two weeks after launch on mentions.</strong> Communities and distribution platforms for the fast ones, outreach for the slow ones. That is what AI assistants cite, and it is the step most teams skip.</li>
+    <li><strong>Score every launch on one sheet.</strong> It is the only way to know which kind of release deserves a full launch next time.</li>
+  </ul>
+</section>
+
+<!-- STEP 1 -->
+<section class="step wrap">
+  <div class="num">Step 1</div>
+  <h2>Make the company easy to understand</h2>
+  <p>Positioning comes first because everything downstream repeats it: every page, article, Reddit comment and launch post, and the brief you fill for every release in Step 5. Developers decide in seconds whether a tool is for them; LLMs decide from whatever sentence describes you most often across the web.</p>
+  <p>Write three artifacts before any content ships:</p>
+  <ol>
+    <li><strong>A one-sentence category statement</strong> in the form "X is a [category] for [who] that [does what], an alternative to [the two names they already know]." Convex's reads: an open-source reactive backend for writing server functions in pure TypeScript, an alternative to Firebase and Supabase for TypeScript and React teams. The comparison anchors matter more than the adjectives.</li>
+    <li><strong>A use-case list by audience</strong>, not by feature. DeepInfra's buyers split into ML engineers, startup CTOs and indie developers; each searches for a different problem (GPU pricing, model benchmarks, OpenAI-compatible endpoints).</li>
+    <li><strong>A competitor set you will name out loud.</strong> Build your competitor set based on your real competitors as well as your search-engine competitors — they may not compete for your customers, but they likely cover the same content topics and compete for the same SERP real estate.</li>
+  </ol>
+  <p>Put the category statement on the homepage, the docs landing page, the GitHub README and the founder's LinkedIn headline, word for word. Consistency across sources is what makes an LLM confident enough to repeat it.</p>
+  <p>This might already exist in your head, but writing it down is extremely helpful for writers, audiences and — most importantly — LLMs.</p>
+  <p>We keep all three on one page, the positioning page, and every later step checks against it: the feature page's one-sentence description (Step 3), the brief and the announcement (Step 5), and the launch-week check (Step 8).</p>
+  <figure>
+    <svg viewBox="0 0 720 230" role="img" aria-label="One category statement is repeated word for word on the homepage, docs landing page, GitHub README and founder's LinkedIn; developers place the product in seconds and LLMs repeat the sentence with confidence">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="10" y="55" width="240" height="120" rx="6" fill="#0F1B2D"/>
+        <text x="130" y="82" text-anchor="middle" fill="#fff" font-weight="600" font-size="14">One category statement</text>
+        <text x="130" y="106" text-anchor="middle" fill="#C7CFDE">X is a <tspan fill="#FFB020">[category]</tspan> for <tspan fill="#FFB020">[who]</tspan></text>
+        <text x="130" y="126" text-anchor="middle" fill="#C7CFDE">that <tspan fill="#FFB020">[does what]</tspan>,</text>
+        <text x="130" y="146" text-anchor="middle" fill="#C7CFDE">an alternative to <tspan fill="#FFB020">[A]</tspan> and <tspan fill="#FFB020">[B]</tspan></text>
+        <text x="130" y="166" text-anchor="middle" fill="#9FB0FF" font-size="11">same words, every surface</text>
+        <g fill="#E8EDFF" stroke="#2F5BFF">
+          <rect x="330" y="18" width="160" height="36" rx="6"/>
+          <rect x="330" y="70" width="160" height="36" rx="6"/>
+          <rect x="330" y="122" width="160" height="36" rx="6"/>
+          <rect x="330" y="174" width="160" height="36" rx="6"/>
+        </g>
+        <g fill="#0F1B2D" text-anchor="middle">
+          <text x="410" y="41">Homepage</text>
+          <text x="410" y="93">Docs landing page</text>
+          <text x="410" y="145">GitHub README</text>
+          <text x="410" y="197">Founder's LinkedIn</text>
+        </g>
+        <g fill="none" stroke="#5B6678" stroke-width="2">
+          <path d="M250 115 C 290 115, 290 36, 330 36"/>
+          <path d="M250 115 C 290 115, 290 88, 330 88"/>
+          <path d="M250 115 C 290 115, 290 140, 330 140"/>
+          <path d="M250 115 C 290 115, 290 192, 330 192"/>
+          <path d="M490 36 C 525 36, 525 70, 560 70"/>
+          <path d="M490 88 C 525 88, 525 70, 560 70"/>
+          <path d="M490 140 C 525 140, 525 158, 560 158"/>
+          <path d="M490 192 C 525 192, 525 158, 560 158"/>
+        </g>
+        <rect x="560" y="42" width="150" height="56" rx="6" fill="#2F5BFF"/>
+        <text x="635" y="66" text-anchor="middle" fill="#fff" font-weight="600">Developers</text>
+        <text x="635" y="84" text-anchor="middle" fill="#DCE4FF" font-size="11">place you in seconds</text>
+        <rect x="560" y="130" width="150" height="56" rx="6" fill="#FFB020"/>
+        <text x="635" y="154" text-anchor="middle" fill="#4A3100" font-weight="600">LLMs</text>
+        <text x="635" y="172" text-anchor="middle" fill="#4A3100" font-size="11">repeat it with confidence</text>
+      </g>
+    </svg>
+    <figcaption>Positioning is a distribution problem. The sentence is easy to write; the work is putting the identical sentence on every surface a developer or a crawler reads first, so both arrive at the same answer about what you are.</figcaption>
+  </figure>
+</section>
+
+<!-- STEP 2 -->
+<section class="step wrap">
+  <div class="num">Step 2</div>
+  <h2>Decide what kind of release this is</h2>
+  <p>The first thing we decide on every release is which kind it is, and we decide it before anyone opens a doc. We use three kinds, with a test for each:</p>
+  <table>
+    <thead><tr><th>Release</th><th>The test</th><th>What goes out</th></tr></thead>
+    <tbody>
+      <tr><td>Full launch</td><td>It changes who the product is for, or what a developer can do with it in a day</td><td>The full kit: a feature page, an announcement, docs and changelog, a demo, posts where developers gather, an email to users (Steps 3 to 9)</td></tr>
+      <tr><td>Changelog plus post</td><td>Existing users would want to know; new users would not switch for it</td><td>Changelog entry, docs updated, a short post on X and in Discord</td></tr>
+      <tr><td>Changelog only</td><td>A fix, a flag, a version bump nobody will search for</td><td>Changelog entry and docs. Nothing else, on purpose.</td></tr>
+    </tbody>
+  </table>
+  <p>Then we write the release calendar from the engineering roadmap, a quarter out, with the kind marked on each row. Marketing follows engineering dates here, not the other way round, and the calendar is what lets us prepare pages (Step 3) before the feature exists rather than after the announcement has gone out.</p>
+  <p>We add one more test in some categories: will a competitor ship the same thing this week? If yes, the release is a race, and the deadline collapses from "when it is ready" to "the same day as the announcement." I cover that case in Step 12, because it is where our strongest evidence comes from. For most launches, most of the time, the three rows above are enough.</p>
+  <p><strong>Pro tip:</strong> in our experience founders over-count full launches and engineers under-count them. We break the tie with the test in the first row. If a developer could not do something new in a day because of it, it is not a full launch, however long it took to build.</p>
+</section>
+
+<!-- STEP 3 -->
+<section class="step wrap">
+  <div class="num">Step 3</div>
+  <h2>Prepare your content before your public release</h2>
+  <p>If a page does not exist, search and AI assistants assume the feature does not. Launch posts are time-stamped and sink; a feature page on a stable URL is what gets found and cited six months later. So we build the page first, and the announcement points at it, not the other way round.</p>
+  <figure>
+    <svg viewBox="0 0 720 300" role="img" aria-label="Launch page set: one brief feeds the main feature page and a set of supporting pages, a pricing or plan page, a comparison or best-of page, an integration guide, a benchmark or data piece, and a what-changed or migration page; internal links from the five highest-traffic pages point at the main page">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="10" y="118" width="130" height="64" rx="8" fill="#FFB020"/>
+        <text x="75" y="145" text-anchor="middle" fill="#4A3100" font-weight="600">One brief</text>
+        <text x="75" y="163" text-anchor="middle" fill="#4A3100" font-size="11">from the engineer</text>
+        <rect x="220" y="110" width="200" height="80" rx="8" fill="#0F1B2D"/>
+        <text x="320" y="142" text-anchor="middle" fill="#fff" font-weight="600" font-size="14">Feature page</text>
+        <text x="320" y="162" text-anchor="middle" fill="#9FB0FF" font-size="11">stable URL, live before the post</text>
+        <path d="M140 150 L 220 150" stroke="#5B6678" stroke-width="2"/>
+        <polygon points="212,144 222,150 212,156" fill="#5B6678"/>
+        <g fill="#E8EDFF" stroke="#2F5BFF">
+          <rect x="500" y="14" width="210" height="40" rx="6"/>
+          <rect x="500" y="70" width="210" height="40" rx="6"/>
+          <rect x="500" y="126" width="210" height="40" rx="6"/>
+          <rect x="500" y="182" width="210" height="40" rx="6"/>
+          <rect x="500" y="238" width="210" height="40" rx="6"/>
+        </g>
+        <g fill="#0F1B2D">
+          <text x="514" y="39" font-weight="600">Pricing or plan page</text>
+          <text x="514" y="95" font-weight="600">Comparison or best-of page</text>
+          <text x="514" y="151" font-weight="600">Integration guide</text>
+          <text x="514" y="207" font-weight="600">Benchmark or data piece</text>
+          <text x="514" y="263" font-weight="600">What changed, migration</text>
+        </g>
+        <g fill="none" stroke="#5B6678" stroke-width="2">
+          <path d="M420 150 C 460 150, 460 34, 500 34"/>
+          <path d="M420 150 C 460 150, 460 90, 500 90"/>
+          <path d="M420 150 L 500 150"/>
+          <path d="M420 150 C 460 150, 460 202, 500 202"/>
+          <path d="M420 150 C 460 150, 460 258, 500 258"/>
+        </g>
+        <rect x="220" y="226" width="200" height="52" rx="6" fill="#fff" stroke="#2F5BFF" stroke-dasharray="4 3"/>
+        <text x="320" y="248" text-anchor="middle" fill="#0F1B2D" font-size="12" font-weight="600">Internal links, launch day</text>
+        <text x="320" y="265" text-anchor="middle" fill="#5B6678" font-size="11">from the 5 highest-traffic pages</text>
+        <path d="M320 226 L 320 190" stroke="#2F5BFF" stroke-width="2" stroke-dasharray="4 3"/>
+      </g>
+    </svg>
+    <figcaption>The full-launch page set we build. The feature page catches the feature's name; each supporting page catches a question the feature page cannot, and all of them link back to it. A changelog-plus-post release gets the feature page and nothing else.</figcaption>
+  </figure>
+  <h3>What the feature page carries</h3>
+  <p>In the order a developer reads it. Developers skip the marketing paragraph and read the table and the code; so does the assistant about to summarize you. We write those first.</p>
+  <table>
+    <thead><tr><th>Element</th><th>The rule</th></tr></thead>
+    <tbody>
+      <tr><td>The feature's name</td><td>In the title, URL and first sentence, spelled the way people will search for it</td></tr>
+      <tr><td>What it does</td><td>One sentence, from the positioning page</td></tr>
+      <tr><td>The specifics</td><td>Limits, pricing, supported languages or frameworks, the endpoint; in a table</td></tr>
+      <tr><td>A working snippet</td><td>Tested by someone who did not build the feature</td></tr>
+      <tr><td>What changed</td><td>Against the previous version, for the migration intent</td></tr>
+      <tr><td>One limitation</td><td>Stated plainly; it is what makes the rest credible</td></tr>
+      <tr><td>The next step</td><td>Something a developer can do in five minutes: run it, the playground, free credits</td></tr>
+    </tbody>
+  </table>
+  <h3>Which supporting pages, and when</h3>
+  <p>We do not build all five for every launch. We pick the ones that match the questions developers and the assistants are asking (Step 4 is how we find out).</p>
+  <table>
+    <thead><tr><th>Page</th><th>Build it when</th><th>Query it catches</th></tr></thead>
+    <tbody>
+      <tr><td>Pricing or plan page</td><td>The feature changes what things cost</td><td>"[feature] pricing"</td></tr>
+      <tr><td>Comparison or "best of" page</td><td>Developers will shortlist you against alternatives for this; the format AI assistants cite</td><td>"[product] vs [competitor] [feature]", "best [category] with [feature]"</td></tr>
+      <tr><td>Integration guide</td><td>There is code to copy</td><td>"[feature] with [language or framework]"</td></tr>
+      <tr><td>Benchmark or data piece</td><td>You have a number nobody else has</td><td>"[feature] speed", "[product] vs [competitor] benchmark"</td></tr>
+      <tr><td>What changed, migration</td><td>Existing users have to migrate</td><td>"[competitor] alternative with [feature]", "migrate from [previous]"</td></tr>
+    </tbody>
+  </table>
+  <p>We do the keyword research a week out, from the queries in the right-hand column with the product's names filled in.</p>
+</section>
+
+<!-- STEP 4 -->
+<section class="step wrap">
+  <div class="num">Step 4</div>
+  <h2>AI visibility: pick the prompts this launch has to win</h2>
+  <p>Keyword research tells us what people type into Google. It tells us nothing about what they ask ChatGPT, Perplexity or Gemini, and for a developer-tools launch that is now the question that matters. When a developer asks an assistant whether your product does X, or where they should run a model, the answer is a yes, a no, or a competitor's name, and the launch content decides which. So before we build the pages in Step 3, we decide which prompts this release has to win and build the pages against that list.</p>
+  <h3>Three types of prompt, and a page for each</h3>
+  <p>We recommend three types of prompt per launch, and we create a new page for each core prompt rather than hoping the announcement covers it. The announcement never does; it is dated and it sinks.</p>
+  <table>
+    <thead><tr><th>Prompt type</th><th>What a developer asks</th><th>The page we build to answer it</th></tr></thead>
+    <tbody>
+      <tr><td>The yes/no</td><td>"Does [product] support X?" "Can I run [model] on [product]?"</td><td>The feature or model page (Step 3), with the feature's name spelled the way the prompt spells it, in the title and first sentence</td></tr>
+      <tr><td>The shortlist</td><td>"Best [category] tool with X." "Where should I run [model]?" "Cheapest [model] API."</td><td>A comparison or "best of" page with your product as one honest entry next to the competitors. This is the prompt that produces recommendations, and the page type assistants cite most.</td></tr>
+      <tr><td>The how-to</td><td>"How do I do X with [product]?" "[Model] with Python."</td><td>The integration guide, with the snippet the assistant can quote</td></tr>
+    </tbody>
+  </table>
+  <p>We weight the shortlist prompts highest. A yes/no prompt gets you confirmed; a shortlist prompt gets you recommended, and that is where a launch turns into a new customer.</p>
+  <h3>How we find the prompts</h3>
+  <ul>
+    <li><strong>Start with the people who asked for the feature.</strong> The sales calls and tickets that requested it are phrased the way buyers phrase it, and the assistants get asked in the same words. "Can it read a passport MRZ" is a prompt; "document data extraction capability" is not.</li>
+    <li><strong>Reuse the shape from the last three launches.</strong> The prompts for a new model look like the prompts for the previous model with the name changed. We keep the list and fill in the blanks.</li>
+    <li><strong>Ask the assistants what they get asked.</strong> Put the feature name into ChatGPT and Perplexity and read the follow-up suggestions; they are a cheap view of the real question set.</li>
+    <li><strong>Keep it to five to ten.</strong> Fifty prompts per release is a dashboard nobody reads. Five to ten, weighted toward shortlists, is a list someone acts on.</li>
+  </ul>
+  <div class="real">
+    <div class="lbl">On a real account: DeepInfra</div>
+    <p>We run about 50 prompts for DeepInfra across the inference category ("fastest Kimi K3 API provider," "cheapest way to run DeepSeek V4," "best Llama hosting"). The week a model drops, the five or six prompts for that model are the only numbers anyone looks at, and the answer usually flips within two weeks of the main page and the "best providers" page going live. By the time we are tracking the next model, deepinfra.com is in the previous one's answer. <a href="https://auq.io/case-studies/deepinfra/">Case study</a></p>
+  </div>
+</section>
+
+<!-- STEP 5 -->
+<section class="step wrap">
+  <div class="num">Step 5</div>
+  <h2>Write the announcement from a brief, not from the pull request</h2>
+  <p>Launch posts drift furthest from the positioning, because they get written last, by the person who built the feature, from the PR description. Our fix is a six-field brief, filled from a 25-minute interview with that engineer, and an announcement we write from the brief in the positioning language. The engineer does not write; they answer questions and check the code.</p>
+  <table>
+    <thead><tr><th>Field</th><th>Where it comes from</th></tr></thead>
+    <tbody>
+      <tr><td>What is new, in one sentence a developer would repeat</td><td>The engineer, then rewritten against the positioning page</td></tr>
+      <tr><td>Who it is for, and the moment they need it</td><td>The sales calls and tickets that asked for it; the positioning page's audience line</td></tr>
+      <tr><td>What they can do now that they could not yesterday</td><td>The engineer: "what does this let someone build?"</td></tr>
+      <tr><td>How to try it in five minutes</td><td>The snippet, the flag, the playground link; tested by someone who did not build it</td></tr>
+      <tr><td>One number</td><td>A benchmark, a limit, a latency, a price. The engineer: "what would you put on a slide?"</td></tr>
+      <tr><td>One limitation, stated plainly</td><td>The engineer: "what do you wish was documented?" The caveat is what makes the rest credible.</td></tr>
+    </tbody>
+  </table>
+  <p>The announcement is those six fields in that order, with the demo embedded. We record the demo once, with whoever can do it in one take, and cut it to 60 seconds for X. Nothing else about the post is clever. "What you can do now" beats "what we shipped" every time, and the limitation paragraph is the one developers quote back approvingly.</p>
+  <p><strong>Pro tip:</strong> we have someone who did not build the feature run the "how to try it" step before publishing. If it takes them more than five minutes, the post says "in five minutes" and is wrong, and the first comment will say so.</p>
+</section>
+
+<!-- STEP 6 -->
+<section class="step wrap">
+  <div class="num">Step 6</div>
+  <h2>Choose content types that earn thought leadership</h2>
+  <p>The brief from Step 5 is raw material for more than the announcement. A full launch can become several pieces, and the formats you pick decide whether it gets read, shared and cited, or sinks with the post.</p>
+  <p>The test for every piece is the same: is it opinionated, and has an expert verified it? Pass both and the format barely matters. Fail either and no format saves it.</p>
+  <table>
+    <thead><tr><th>Format</th><th>What it is</th><th>Why it works</th></tr></thead>
+    <tbody>
+      <tr><td>Technical release write-ups</td><td>What shipped, why, benchmarks, migration notes; the announcement in Step 5</td><td>Timed to real demand spikes</td></tr>
+      <tr><td>Use cases with working code</td><td>"How we built X with [product]", repo linked</td><td>Developers arrive with the product already installed</td></tr>
+      <tr><td>Build guides</td><td>Step-by-step tutorials for a job your buyers do; the integration guide in Step 3, the Reddit build guide in Step 10</td><td>Captures intent-driven searches</td></tr>
+      <tr><td>Benchmarks and comparisons</td><td>Your tool vs named alternatives, with numbers; the comparison and benchmark pages in Step 3</td><td>The format AI assistants cite most</td></tr>
+      <tr><td>Opinion pieces</td><td>A position on how the category should work</td><td>How you become the default; travels on Reddit and HN</td></tr>
+      <tr><td>Original data</td><td>Anonymized usage data from your platform, or tests you ran yourself</td><td>Nobody else can publish it; the most shareable format on Reddit because it reads as education</td></tr>
+    </tbody>
+  </table>
+  <h3>Original data is the format nobody can copy</h3>
+  <p>You are sitting on data no competitor has: what your users actually do, which models or frameworks they pick, where requests fail, what pricing looks like at real volumes. Anonymize and aggregate it ("across 40M requests last quarter, 62% of teams using X also used Y") and you have a piece that gets quoted. If you do not have the volume yet, run the test yourself: benchmark five providers on the same workload, time ten SDKs on the same device, and publish the method with the result. Both travel further on Reddit than anything else you will write, because they teach something and the brand is incidental to the finding.</p>
+  <p>No data of your own yet? Borrow a public dataset and do the explaining. Benchmarking sites publish raw comparison data that almost nobody reads in full: for DeepInfra we took <a href="https://artificialanalysis.ai">artificialanalysis.ai</a>'s model comparison data (speed, price, quality scores across dozens of models and providers) and wrote it up for developers choosing a model, with the trade-offs spelled out and the source credited. The data was public; the interpretation was the content.</p>
+</section>
+
+<!-- STEP 7 -->
+<section class="step wrap">
+  <div class="num">Step 7</div>
+  <h2>Build a template for the releases that repeat</h2>
+  <p>Some launches are one-offs. Most are not: the tenth integration, the fourth SDK, the new model of the week. For anything we will launch more than four times, we hand-write the first four and extract a template from them; from the fifth on, the brief plus the template produce the draft. The engineer fills the fields, the template holds the structure and the voice, and one of us reads the output before it goes live.</p>
+  <table>
+    <thead><tr><th>Launch content</th><th>Templatable?</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Integration pages, model pages, SDK pages</td><td>Yes</td><td>Same shape every time: what it is, the specifics, the snippet, the limit, the next step</td></tr>
+      <tr><td>Supporting pricing, comparison and "what changed" pages</td><td>Yes</td><td>The structure never changes; the facts do, and the facts are in the brief</td></tr>
+      <tr><td>Changelog-plus-post releases</td><td>Yes</td><td>Six fields, 150 words, the same every week</td></tr>
+      <tr><td>The announcement for a full launch</td><td>No</td><td>It is the one piece that has to sound like a person who cares. We write it by hand, from the brief.</td></tr>
+    </tbody>
+  </table>
+  <p>We build the template in a tool we control. We use <a href="https://www.airops.com">AirOps</a> for templated volume and Claude for one-off drafts; whichever AI builder your team already has works, as long as the brief and the fields go in and a draft comes out with every step visible. Then our editing pass, which is not optional: we strip the model's meta commentary ("in this article we will…"), verify every number against the brief, three rounds, because the model will round, convert or helpfully update a figure it was not given, rewrite the passive voice, and break any sentence over 40 words. It takes us under an hour for a set of pages, and skipping it is how a wrong price ends up on the page developers compare you on.</p>
+  <div class="real">
+    <div class="lbl">On a real account: DeepInfra</div>
+    <p>DeepInfra adds a new model most weeks, so every release fills the same slots from one brief through an AirOps template we built once: the main model page, a pricing guide, a "best API providers for [model]" comparison with DeepInfra as one honest entry, an integration guide, a benchmarks piece and a version overview. The engineer supplies the price, context window, throughput and snippet; the editing pass takes an hour; the whole set is live the same day. Ten of the twelve DeepInfra pages Gemini cites most are these model-release pages. <a href="https://auq.io/case-studies/deepinfra/">Case study</a></p>
+  </div>
+</section>
+
+<!-- STEP 8 -->
+<section class="step wrap">
+  <div class="num">Step 8</div>
+  <h2>The launch week, with an owner per row</h2>
+  <p>We run a launch as a checklist that starts a week before the release and ends two weeks after it. We wrote it once, put a name on every row, and run it on every full launch without re-deciding anything.</p>
+  <table>
+    <thead><tr><th>When</th><th>What</th><th>Who</th></tr></thead>
+    <tbody>
+      <tr><td>A week before</td><td>Keyword research for the feature's name and the questions around it. The feature page and supporting pages drafted from the template (Step 7). The brief filled from the engineer interview (Step 5). The launch prompts picked (Step 4).</td><td>Whoever writes most; the engineer for 25 minutes</td></tr>
+      <tr><td>Two days before</td><td>Announcement written from the brief and checked against the positioning page. Demo recorded. The "try it in five minutes" step tested by someone who did not build it.</td><td>The writer; the checker; a volunteer</td></tr>
+      <tr><td>The day before</td><td>Docs and changelog live. Feature page live on its stable URL, submitted in Search Console. User email queued.</td><td>DevRel or PM</td></tr>
+      <tr><td>Launch day</td><td>Announcement published, linking to the feature page. Internal links to the feature page from the five highest-traffic pages on the site. Posts where developers gather, within the hour, under real names (Step 9). Stay in the threads and answer.</td><td>The launch owner; founder; DevRel</td></tr>
+      <tr><td>Days 2 to 14</td><td>Mentions (Step 11): republish on dev.to and Medium, answer the Reddit threads, start the roundup outreach. Comparison and "best of" pages updated to include the new thing.</td><td>Outreach owner; DevRel</td></tr>
+      <tr><td>Day 30</td><td>The scorecard row (Step 13).</td><td>The launch owner</td></tr>
+    </tbody>
+  </table>
+  <p>The row most teams skip is the internal linking, and in my experience it is the highest-leverage ten minutes in the table. A new page nobody links to is invisible to the crawler and to the assistants; five links from pages Google already visits daily is the difference between indexed this afternoon and indexed next week.</p>
+</section>
+
+<!-- STEP 9 -->
+<section class="step wrap">
+  <div class="num">Step 9</div>
+  <h2>Where it goes, under whose name</h2>
+  <p>The announcement is one URL waiting to be found until it is posted where developers are. We put the same launch out in five forms on the same day, because that is how it gets found, discussed and cited, and each form feeds the others: the Reddit thread links the page, the X thread sends the founder's followers to both, and an assistant that sees the feature described in five places treats it as established.</p>
+  <table>
+    <thead><tr><th>Channel</th><th>Form</th><th>Who posts</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td>Your site</td><td>The announcement, linking to the feature page</td><td>The writer, under their name</td><td>First, so there is a URL to cite</td></tr>
+      <tr><td>X</td><td>A short thread: what you can do now, the demo, the snippet, the link last</td><td>The founder or the engineer; developers follow people, not brands</td><td>Within the hour</td></tr>
+      <tr><td>Reddit</td><td>Not the announcement. A build guide where the feature is one tool in a working stack, or a complete answer in the thread where someone asked for exactly this</td><td>DevRel, under a real name</td><td>Day 1 to 3</td></tr>
+      <tr><td>Discord or Slack community</td><td>The announcement, plus "ask me anything about it this week"</td><td>The engineer</td><td>Launch day</td></tr>
+      <tr><td>Hacker News</td><td>Only for full launches that would interest people who have never heard of you, submitted plainly, with the engineer in the comments</td><td>The founder</td><td>Launch day, morning US time</td></tr>
+      <tr><td>Email to users</td><td>What changed, how to try it, two paragraphs</td><td>Whoever owns the product</td><td>Launch day</td></tr>
+      <tr><td>LinkedIn</td><td>One takeaway in the author's voice, the demo inline, link in the first comment</td><td>Personal accounts, never the company page alone</td><td>Launch day</td></tr>
+    </tbody>
+  </table>
+  <p>Our rule across all of them: real names. Developers trust the engineer who built it and the founder who bet on it, and they can tell a company account from a person in one line. Reddit has stricter rules than the rest; Step 10 covers them.</p>
+</section>
+
+<!-- STEP 10 -->
+<section class="step wrap">
+  <div class="num">Step 10</div>
+  <h2>Show up in Reddit communities</h2>
+  <p>Reddit is where developers research tools before they ever reach your site, and it is a primary source for Google's AI Overviews, ChatGPT and Perplexity when they answer "which API should I use". One channel reaches the buyer directly and shapes what the models say about you. No other channel in Step 9 does both.</p>
+  <p>The communities that matter (r/LocalLLaMA, r/LLMDevs, r/MachineLearning, r/typescript, r/webdev and the niche subreddit for your stack) are the most hostile to marketing on the internet: strict moderation, astroturf detection, and users who call out a promotional post in a thread that then ranks on Google for years. A generic Reddit playbook gets you banned in a week.</p>
+  <ol>
+    <li><strong>Map the subreddits and the threads.</strong> List where your buyers ask questions, pull the recurring problems and competitor mentions, and set up monitoring so you see a high-intent thread within hours, not when it has 200 comments.</li>
+    <li><strong>Earn trust before mentioning the product.</strong> Answer technically and completely; mention your product only where it is the honest answer, and name alternatives when they fit better. Publish inside the subreddit too: build guides, benchmark threads, model deep-dives that earn upvotes on merit (more on what works below).</li>
+    <li><strong>Engineer the search placements.</strong> Target low-competition threads you can rank with, and go for the top comment on threads that already rank; Google pulls top comments into the SERP description. Reddit's own search is the third surface, roughly 80 million searches a month.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 720 250" role="img" aria-label="One technically complete Reddit comment reaches three surfaces: Google results, where top comments are pulled into the snippet; AI answers from AI Overviews, ChatGPT and Perplexity; and Reddit's own search">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="13">
+        <rect x="10" y="20" width="700" height="44" rx="6" fill="#F7F8FA" stroke="#D9DEE7"/>
+        <g fill="#0F1B2D" text-anchor="middle" font-size="12">
+          <text x="120" y="38" font-weight="600">1. Map</text><text x="120" y="54" fill="#5B6678">subreddits, threads, competitors</text>
+          <text x="360" y="38" font-weight="600">2. Earn trust</text><text x="360" y="54" fill="#5B6678">value first, brand second, name alternatives</text>
+          <text x="600" y="38" font-weight="600">3. Engineer placements</text><text x="600" y="54" fill="#5B6678">rankable threads, top comments</text>
+        </g>
+        <rect x="10" y="110" width="220" height="90" rx="6" fill="#0F1B2D"/>
+        <text x="120" y="140" text-anchor="middle" fill="#fff" font-weight="600">One complete answer</text>
+        <text x="120" y="160" text-anchor="middle" fill="#C7CFDE" font-size="12">in the thread where buyers ask,</text>
+        <text x="120" y="178" text-anchor="middle" fill="#C7CFDE" font-size="12">with the product in context</text>
+        <g fill="none" stroke="#5B6678" stroke-width="2">
+          <path d="M230 155 C 280 155, 280 100, 330 100"/>
+          <path d="M230 155 L 330 155"/>
+          <path d="M230 155 C 280 155, 280 210, 330 210"/>
+        </g>
+        <g fill="#E8EDFF" stroke="#2F5BFF">
+          <rect x="330" y="76" width="380" height="48" rx="6"/>
+          <rect x="330" y="131" width="380" height="48" rx="6"/>
+          <rect x="330" y="186" width="380" height="48" rx="6"/>
+        </g>
+        <g fill="#0F1B2D">
+          <text x="344" y="96" font-weight="600">Google results</text><text x="344" y="113" font-size="12" fill="#5B6678">top comments get pulled into the snippet; threads rank for years</text>
+          <text x="344" y="151" font-weight="600">AI answers</text><text x="344" y="168" font-size="12" fill="#5B6678">AI Overviews, ChatGPT and Perplexity cite threads in answers</text>
+          <text x="344" y="206" font-weight="600">Reddit search</text><text x="344" y="223" font-size="12" fill="#5B6678">roughly 80M searches a month, with its own AI overviews</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>Three phases, three surfaces. The same comment that answers one developer today is what Google quotes, what the models cite, and what Reddit search returns for the next two years.</figcaption>
+  </figure>
+  <h3>What got our accounts banned, and what worked instead</h3>
+  <p>We learned this the expensive way: early on, many of our accounts were banned for content that was, in hindsight, promotional. A banned account takes its posting history and every placement it earned with it.</p>
+  <table>
+    <thead><tr><th>Got accounts banned</th><th>Stayed up and earned upvotes</th></tr></thead>
+    <tbody>
+      <tr><td>A helpful comment that steered to the client's product</td><td>A complete answer that names the client and the alternatives</td></tr>
+      <tr><td>A comparison post that ranked the client first</td><td>A benchmark with a method and a result; the client is one of five rows (original data, Step 6)</td></tr>
+      <tr><td>A "has anyone tried X?" thread with a planted answer</td><td>A build guide where the client is one tool in a working stack</td></tr>
+    </tbody>
+  </table>
+  <p>The build guides worked best. The shape is a complete, working build with the client as one named tool among several, with the code and the trade-offs:</p>
+  <ul>
+    <li>"How I built a document-parsing pipeline with Postgres, S3 and [client]"</li>
+    <li>"Running Llama on a budget: a full setup with [client] for inference"</li>
+    <li>"A production checklist for KYC onboarding, with [client] for document capture"</li>
+  </ul>
+  <p>Developers upvote them because they can copy them, moderators leave them up because they are education, and the mention survives because the build earned it.</p>
+  <p>Run this under real names: DevRel, the engineer who built it, the founder, from accounts with real posting history in the community. Say who you work for when you mention the product. One rule: no account ever posts something an engineer at your company would not sign.</p>
+  <div class="real">
+    <div class="lbl">On a real account: DeepInfra on Reddit</div>
+    <p>42 subreddits mapped, continuous thread monitoring. 300K+ impressions and 411 brand mentions in communities where Together AI, Replicate and Groq were the default answer, with zero callouts or flags. <a href="https://auq.io/case-studies/reddit-organic-ai-inference-saas/">Case study</a></p>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap wide">
+    <div>
+      <h2>Not sure whether AI assistants know you shipped it?</h2>
+      <p>Run our free GEO audit: it checks whether ChatGPT, Perplexity and Google AI Overviews can find and describe your product, and which of your pages they cite.</p>
+    </div>
+    <a class="btn btn-amber" href="https://auq.io/tools/geo-audit-free/">Run the free GEO audit</a>
+  </div>
+</div>
+
+<!-- STEP 11 -->
+<section class="step wrap">
+  <div class="num">Step 11</div>
+  <h2>After launch day: links, mentions, and keeping it alive</h2>
+  <p><strong>Mentions beat links.</strong> When a developer asks an assistant whether your product does X, the answer is assembled from the comparison lists, roundups and threads the assistant trusts; your own feature page is the least of it. In our tracking, a plain-text mention in a "best tools for X" article that already ranks is worth more than a backlink from a site nobody reads.</p>
+  <p>The honest caveat: earning those mentions is slow. Getting added to a roundup that already ranks means finding the author, writing the ask, and waiting weeks for an editor who may never reply, and a launch does not have weeks. So we run two tracks in parallel: the slow outreach that pays off over a quarter, and the fast channels that put the launch in front of developers and in the assistants' source set within days.</p>
+  <h3>The fast track: communities and distribution platforms</h3>
+  <p>We recommend working with communities like Reddit and distribution platforms like Medium, dev.to and Substack to get reach and quick mentions in the first week. Each one is a place developers already read, each one is crawled and cited by the assistants, and none of them needs anyone's permission.</p>
+  <table>
+    <thead><tr><th>Channel</th><th>What goes there</th><th>Why it works fast</th></tr></thead>
+    <tbody>
+      <tr><td>Reddit</td><td>A complete answer in the threads where someone asked for exactly this, and a build guide where the feature is one tool in a working stack, under a real name (Step 10)</td><td>Threads rank for years and are a primary source for AI Overviews; a top comment shows up in Google's result snippet</td></tr>
+      <tr><td>dev.to</td><td>The integration guide or build guide, republished with a canonical link back to your page</td><td>Indexed within hours, high domain authority, a developer audience that reads tutorials</td></tr>
+      <tr><td>Medium</td><td>The benchmark or opinion piece, in a relevant publication if you can get into one</td><td>Reach beyond your own list; assistants cite Medium for comparisons and explainers</td></tr>
+      <tr><td>Substack or your newsletter</td><td>The launch note to people who already know you, with the demo</td><td>Existing users are the first to try it, and the first to mention it elsewhere</td></tr>
+    </tbody>
+  </table>
+  <p>Republishing is the point, not a shortcut. The same integration guide on your site, on dev.to with a canonical, and summarized in a Reddit answer is three mentions of the feature in three places the assistants read, in one week, from one piece of writing. We set the canonical tag so the search credit stays with your page.</p>
+  <h3>The slow track: the lists that already rank</h3>
+  <ul>
+    <li><strong>We reach out to the roundups and comparison articles that already rank</strong> for the category, asking to be added as one entry with the real price and the real limitation. We keep the list from launch to launch; the same ten articles rank every time, and the editors who added you once will add you again.</li>
+    <li><strong>We update your own comparison and "best of" pages</strong> the week it ships. A "best X providers" page on your own site that does not mention this week's feature is telling the assistant you do not have it.</li>
+    <li><strong>Consistency across surfaces.</strong> We check that the feature's name, price and limit read the same on the page, in the docs, in the changelog, in the README, in the dev.to copy and in the Reddit answer. Assistants gain confidence from agreement across sources and lose it from a stale price in one of them. It is the Step 1 rule for the category statement, applied to one feature.</li>
+    <li><strong>A quarterly "what changed" round-up</strong>, one line per release, linking to each feature page. It is the page that catches "what does [product] support," and it is the cheapest page we build.</li>
+  </ul>
+  <p>We track the launch prompts from Step 4 in <a href="https://promptwatch.io">PromptWatch</a> until the product is in the answer, and after, because the next release moves the answer again.</p>
+</section>
+
+<!-- STEP 12 -->
+<section class="step wrap">
+  <div class="num">Step 12</div>
+  <h2>When it's a race: how DeepInfra launches a model a week</h2>
+  <p>Everything above assumes you set the pace. Some categories do not let you. DeepInfra hosts 100+ models and adds a new one most weeks, and so do Together AI, Fireworks, Groq, Replicate and Novita, usually within hours of the same model lab's announcement. The feature is a commodity before the announcement thread has cooled. What separates the providers is which one developers find, and which one the assistants name when someone asks where to run it. That is a race, and we run it on content.</p>
+  <figure>
+    <svg viewBox="0 0 720 260" role="img" aria-label="Demand curve for a model release over 21 days: search interest spikes on day one and decays; the window where rankings and AI answers form is days zero to seven; a fast team is indexed on day zero, a slow team on day ten, after the window has closed">
+      <g font-family="IBM Plex Sans, sans-serif" font-size="12">
+        <rect x="60" y="20" width="230" height="190" fill="#E8EDFF" opacity="0.8"/>
+        <text x="175" y="40" text-anchor="middle" fill="#2F5BFF" font-weight="600">The window: days 0 to 7</text>
+        <text x="175" y="56" text-anchor="middle" fill="#2F5BFF" font-size="11">rankings, threads and AI answers form here</text>
+        <line x1="60" y1="210" x2="700" y2="210" stroke="#5B6678" stroke-width="2"/>
+        <line x1="60" y1="210" x2="60" y2="20" stroke="#5B6678" stroke-width="2"/>
+        <path d="M60 205 C 75 205, 85 70, 110 70 C 150 70, 200 150, 290 180 C 400 205, 550 205, 700 207" fill="none" stroke="#0F1B2D" stroke-width="3"/>
+        <text x="30" y="115" text-anchor="middle" fill="#5B6678" transform="rotate(-90 30 115)">searches for the model name</text>
+        <g fill="#5B6678" text-anchor="middle">
+          <text x="60" y="232">day 0</text><text x="175" y="232">day 3</text><text x="290" y="232">day 7</text><text x="450" y="232">day 14</text><text x="700" y="232">day 21</text>
+          <text x="380" y="252" fill="#0F1B2D">day 0 is the announcement. Blue: a fast team's page is indexed on day 0. Amber: a slow team's, on day 10.</text>
+        </g>
+        <line x1="66" y1="210" x2="66" y2="95" stroke="#2F5BFF" stroke-width="3"/>
+        <circle cx="66" cy="95" r="6" fill="#2F5BFF"/>
+        <line x1="380" y1="210" x2="380" y2="140" stroke="#FFB020" stroke-width="3"/>
+        <circle cx="380" cy="140" r="6" fill="#FFB020"/>
+        <text x="390" y="137" fill="#4A3100" font-weight="600">indexed on day 10</text>
+        <text x="390" y="153" fill="#5B6678" font-size="11">the lists are written, the threads are answered</text>
+      </g>
+    </svg>
+    <figcaption>What a model release looks like in search. The curve is the same for every provider; the only variable we control is where on it the page shows up.</figcaption>
+  </figure>
+  <p>When we started, a new DeepInfra model page took days to get indexed. By the time Google saw it, the comparison lists and the Reddit threads had formed around Together AI and Replicate, and the AI answers followed them. The content was fine; the pipeline was slow, and in a race slow loses regardless of what you wrote. What we changed is the same process as the rest of this guide, compressed to a day:</p>
+  <ul>
+    <li><strong>We do everything that can be done before the model exists, before.</strong> We rebuilt the crawl infrastructure so a page published at 10am is indexed by the afternoon; we keep templates with the fields blank; we pick keywords the moment a model is rumoured, from the pattern of the last ten releases; the outreach list is ready.</li>
+    <li><strong>On launch day we fill fields.</strong> The main model page and the supporting bundle (Step 7) go live the same day as the announcement, from one brief, with internal links from the five highest-traffic pages.</li>
+    <li><strong>Then two weeks of mentions.</strong> We answer the "where can I run [model]" threads in r/LocalLLaMA, r/LLMDevs, r/DeepSeek and r/openrouter completely, every provider named, within hours. We reach out to the "best providers for [model]" roundups that already rank. We post the benchmarks piece where the model is being discussed.</li>
+  </ul>
+  <p>It is the strongest evidence we have for the whole process, because the pace leaves nowhere to hide. If your category works this way, the deadline for every row in Step 8 moves to the same day, and the preparation in Steps 3 and 4 becomes the job.</p>
+  <div class="real">
+    <div class="lbl">On a real account: DeepInfra</div>
+    <p>With the pipeline, the bundle and the mentions running on every release: blog clicks from Google went from 1,347 to 18,551 year over year, signups from organic sessions landing on the blog from 9 to 464, and organic sign-ups per session from 2.9% to 8.6%. In Gemini, deepinfra.com is now the most-cited domain for the inference prompts we track, with 563 citations in four weeks against 382 for artificialanalysis.ai and 353 for OpenRouter; the single most-cited page is a model-release analysis with 112 citations. <a href="https://auq.io/case-studies/deepinfra/">Content case study</a> · <a href="https://auq.io/case-studies/reddit-organic-ai-inference-saas/">Reddit case study</a></p>
+  </div>
+</section>
+
+<!-- STEP 13 -->
+<section class="step wrap">
+  <div class="num">Step 13</div>
+  <h2>Score every launch the same way</h2>
+  <p>One sheet, one row per release, the same columns every time. We score a launch on three things, in the order they happen: did search see it, did people visit it, and did the assistants pick it up. Then whether any of those visits turned into a conversion. The point is not the numbers on any one launch; it is seeing launches side by side, which is what tells you which kind of release deserves a full launch next time and which part of the kit is slipping.</p>
+  <h3>Three sources, one row</h3>
+  <table>
+    <thead><tr><th>Source</th><th>What we pull</th><th>What it tells you</th></tr></thead>
+    <tbody>
+      <tr><td>Google Search Console</td><td>Impressions and clicks for the feature page and its supporting pages, and for the queries containing the feature's name, at day 7 and day 30</td><td>Whether search saw the pages at all (impressions), whether anyone is looking for this (query impressions), and whether they chose you (clicks). Impressions with no clicks is a title problem; no impressions is an indexing problem.</td></tr>
+      <tr><td>GA4</td><td>Sessions landing on the launch pages, by source: organic, direct, Reddit, dev.to, Medium, the newsletter, the assistants' referrals</td><td>Where the visitors came from, which is the only way to know whether the fast-track channels (Step 11) or search did the work. A launch that got 2,000 sessions from the newsletter and 40 from organic is a different lesson from the reverse.</td></tr>
+      <tr><td>PromptWatch</td><td>Presence on the launch prompts from Step 4, and citations for the feature page, at day 14 and day 30</td><td>Whether the assistants know you have it, and whether they credit your page or someone's roundup for it</td></tr>
+    </tbody>
+  </table>
+  <h3>Then the conversions</h3>
+  <p>Visits are the input; the row is not finished until it says what the visits did. We tie every launch page to the conversion events from the companion guide (signup, API key, SDK install or download, with landing page and source), and add one column for the launch itself: first use of the new feature by a new account, which is the API call with the new model string or the flag turned on. The ratio that matters is conversions per 100 sessions on the launch pages. It is usually higher than the site average, because a developer who searched for the feature by name arrived ready to try it, and when it is lower than the site average the page is missing its next step.</p>
+  <table>
+    <thead><tr><th>Column</th><th>When</th><th>What it tells you</th></tr></thead>
+    <tbody>
+      <tr><td>Search Console impressions, feature pages and feature-name queries</td><td>Day 7, day 30</td><td>Search saw it; people are looking</td></tr>
+      <tr><td>Search Console clicks</td><td>Day 7, day 30</td><td>They chose you</td></tr>
+      <tr><td>GA4 sessions on the launch pages, by source</td><td>Day 7, day 30</td><td>Who sent them</td></tr>
+      <tr><td>PromptWatch presence on the launch prompts; citations for the feature page</td><td>Day 14, day 30</td><td>The assistants know</td></tr>
+      <tr><td>Conversions from launch-page sessions, and per 100 sessions</td><td>Day 30</td><td>Whether any of it mattered</td></tr>
+      <tr><td>First use of the feature by a new account</td><td>Day 30</td><td>Whether they used the thing you launched</td></tr>
+    </tbody>
+  </table>
+  <p>The sheet also settles arguments for us. When a launch underperforms, the row shows whether search never saw the page, visitors came and did not convert, or the assistants never picked it up. Those have different fixes, and without the row I have watched teams pick the fix that is most fun.</p>
+</section>
+
+<!-- STEP 14 -->
+<section class="step wrap">
+  <div class="num">Step 14</div>
+  <h2>Who owns what, and when to hire</h2>
+  <p>A launch process survives on names, not goodwill. We give every release one named owner, and split the rest so that nobody's part takes more than an hour or two once the templates exist.</p>
+  <table>
+    <thead><tr><th>Who</th><th>Owns</th><th>Time per full launch</th></tr></thead>
+    <tbody>
+      <tr><td>Launch owner (rotates; never nobody)</td><td>The calendar, the kind-of-release call, the checklist, the scorecard row</td><td>2 hours</td></tr>
+      <tr><td>Engineer</td><td>The 25-minute interview; a 20-minute review of the page's numbers and code, not its wording; the Discord AMA</td><td>1 hour</td></tr>
+      <tr><td>Whoever writes most (DevRel, or your author)</td><td>The brief, the announcement, the feature page and supporting pages from the template, the editing pass, the internal links</td><td>Half a day</td></tr>
+      <tr><td>DevRel</td><td>The demo; the Reddit build guide and thread answers, under a real name</td><td>3 hours over two weeks</td></tr>
+      <tr><td>Outreach owner (the founder, until there is marketing)</td><td>The roundup asks, from the standing list</td><td>1 hour</td></tr>
+      <tr><td>Founder</td><td>The X thread; Hacker News when it qualifies</td><td>30 minutes</td></tr>
+      <tr><td>The checker</td><td>Reads the announcement and the feature page against the positioning page before anything goes live</td><td>30 minutes</td></tr>
+    </tbody>
+  </table>
+  <p>The first full launch takes three times that, because the templates and the outreach list do not exist yet. By the fourth it is routine. When it stops being routine, that is the signal we tell clients to hire on: releases coming faster than one owner can run them alongside their actual job, rows in the scorecard going empty, or the sheet showing that launch pages are now a main source of conversions and the mention work is what moves the AI column, so it deserves more than the hour it gets.</p>
+  <p>The first marketing hire then inherits something we rarely see a first hire get: a release calendar with the kind marked on every row, a template set, an outreach list with live contacts, a Reddit presence under real names, and a scorecard with a row for every launch. Their first quarter is adding to it, not building it.</p>
+</section>
+
+<!-- CASES -->
+<section class="cases" id="cases">
+  <div class="wrap wide">
+    <h2>The playbook on real accounts</h2>
+    <p>The same process, run by us at three paces.</p>
+    <div class="case-grid">
+      <article class="case">
+        <h3>DeepInfra: launches</h3>
+        <div class="what">Serverless AI inference; a new model most weeks, and every competitor has it the same week</div>
+        <div class="big">9 → 464<small>signups from organic blog sessions · blog clicks 13.8x · most-cited domain in Gemini for inference prompts</small></div>
+        <p>Crawl infrastructure rebuilt for speed, a fixed bundle per model release from one AirOps template, internal links the same day, outreach from a standing list.</p>
+        <a class="more" href="https://auq.io/case-studies/deepinfra/">Read the DeepInfra case study</a>
+      </article>
+      <article class="case">
+        <h3>DeepInfra: Reddit</h3>
+        <div class="what">The "where should I run this" threads, answered within hours</div>
+        <div class="big">411 mentions<small>300K+ impressions · 42 subreddits · zero flags</small></div>
+        <p>Complete answers with every provider named, build guides where the product is one tool in the stack, top-comment placements on threads that already rank.</p>
+        <a class="more" href="https://auq.io/case-studies/reddit-organic-ai-inference-saas/">Read the Reddit case study</a>
+      </article>
+      <article class="case">
+        <h3>LlamaIndex</h3>
+        <div class="what">Document parsing; the shortlist pages that get cited</div>
+        <div class="big">11 of 15<small>most-cited llamaindex.ai pages in AI answers are templated comparison listicles</small></div>
+        <p>The "best of" format from Step 3, applied to a category rather than a single launch: listicles produce most of LlamaIndex's AI mentions, and 1,097 signups from those sections in a quarter.</p>
+        <a class="more" href="https://auq.io/contact-us/">Ask us about the LlamaIndex work</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section class="compare" id="hire">
+  <div class="wrap">
+    <h2>Run it yourselves, or have us run it until you hire</h2>
+    <p>Everything above is doable by a founder, a DevRel and an engineer with a free afternoon per launch. The afternoon is the problem, and it is the first thing that goes when the sprint slips. Here is what we see each path look like over the first ten launches.</p>
+    <table>
+      <thead><tr><th></th><th>In-house</th><th>With AUQ</th></tr></thead>
+      <tbody>
+        <tr><td>The pages and templates</td><td>Built on launch one, by whoever has time, refined when something breaks</td><td>Built in the first two weeks from the bundles we already run; refined every launch</td></tr>
+        <tr><td>Launch week</td><td>Pages by day two or three, mentions if someone remembers</td><td>Feature page and supporting pages live before the post; Reddit answers and outreach from day one, from our team, under real names</td></tr>
+        <tr><td>The scorecard and the handover</td><td>A spreadsheet someone meant to keep</td><td>Every launch scored; the hire inherits the calendar, the templates, the outreach list and the history</td></tr>
+      </tbody>
+    </table>
+    <p>What stays yours either way: the product, the pricing, and the engineer who knows why the feature matters. We never invent any of those.</p>
+  </div>
+</section>
+</main>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Start with your last three launches</h2>
+    <p>We work with developer-tools companies where generalist content fails, and we hire a subject-matter author for every account rather than a generalist. Send us your last three releases; we will come back with where each one landed in search and AI answers, how long the pages took to index, and what the supporting page set for your category should be.</p>
+    <div class="ctas">
+      <a class="btn btn-amber" href="https://auq.io/contact-us/">Book an audit with AUQ</a>
+      <a class="btn btn-ghost" href="https://auq.io/tools/geo-audit-free/">Run the free GEO audit</a>
+      <a class="btn btn-ghost" href="https://auq.io/cases/">More case studies</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">AUQ is an organic growth agency in New York City. <a href="https://auq.io/">auq.io</a> · <a href="https://auq.io/pricing/">Pricing</a> · <a href="https://clutch.co/profile/auq#summary">Verified reviews on Clutch</a></div>
+</footer>
+
+</body>
+</html>
