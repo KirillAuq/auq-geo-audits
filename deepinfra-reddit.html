@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>DeepInfra on Reddit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a field log of threads. Summary strip, then one column of post entries keyed by subreddit, filterable by status. */
+:root {
+  --bg: #F6F5F1; --surface: #FDFCF9; --fg: #161A33; --muted: #545A72; --line: #E1DFD6;
+  --accent: #B84A14; --accent-soft: #F7E6DA; --ink: #2E3A9E; --ink-soft: #E7E9F8;
+  --display: 'Bricolage Grotesque', 'Segoe UI', Arial, sans-serif;
+  --body: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0F1226; --surface: #161A36; --fg: #ECEBE6; --muted: #A8ADC8; --line: #2A2F52;
+  --accent: #F2924A; --accent-soft: #3A2A24; --ink: #AEB8FF; --ink-soft: #232A5A; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0F1226; --surface: #161A36; --fg: #ECEBE6; --muted: #A8ADC8; --line: #2A2F52;
+  --accent: #F2924A; --accent-soft: #3A2A24; --ink: #AEB8FF; --ink-soft: #232A5A; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 48px 72px; display: flex; flex-direction: column; gap: 40px; }
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; margin: 8px 0 12px; text-wrap: balance; letter-spacing: -0.01em }
+.lede { color: var(--muted); max-width: 62ch; margin: 0; font-size: 19px }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stat { padding: 20px 16px; display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--line) }
+.stat:first-child { border-left: none; padding-left: 0 }
+.stat b { font-family: var(--display); font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums }
+.stat span { color: var(--muted); font-size: 15px }
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px }
+.principles h2 { font-family: var(--display); font-size: 19px; margin: 0 0 6px; font-weight: 700 }
+.principles p { margin: 0; color: var(--muted); font-size: 16px }
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px }
+.bar h2 { font-family: var(--display); font-size: 28px; margin: 0 }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap }
+.tabs button { font: 600 15px var(--body); color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer }
+.tabs button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg) }
+.tabs button:focus-visible, a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+.list { display: flex; flex-direction: column; border-top: 1px solid var(--line) }
+.post { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 8px 28px; padding: 24px 0; border-bottom: 1px solid var(--line) }
+.meta { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 0 }
+.sub { font-family: var(--mono); font-size: 14px; color: var(--ink); word-break: break-word }
+.status { font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px }
+.status.pub { background: var(--ink-soft); color: var(--ink) }
+.status.appr { background: var(--accent-soft); color: var(--accent) }
+.body { min-width: 0; display: flex; flex-direction: column; gap: 8px }
+.post h3 { font-family: var(--display); font-weight: 500; font-size: 22px; line-height: 1.25; margin: 0; text-wrap: balance }
+.post h3 a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 4px }
+.post h3 a:hover { text-decoration-color: var(--accent) }
+.format { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted) }
+.post p { margin: 0; max-width: 68ch }
+.di { color: var(--muted); font-size: 16px; border-left: 2px solid var(--accent); padding-left: 12px }
+.di strong { color: var(--fg); font-weight: 600 }
+.sec-h { font-family: var(--display); font-size: 28px; margin: 0 }
+.sec-note { color: var(--muted); margin: 0; font-size: 16px }
+.best { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); counter-reset: b }
+.best li { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 4px 20px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line); counter-increment: b }
+.best li::before { content: counter(b, decimal-leading-zero); font-family: var(--mono); font-size: 14px; color: var(--accent) }
+.best a { font-family: var(--display); font-weight: 500; font-size: 20px; line-height: 1.3; color: inherit; text-decoration-color: var(--line); text-underline-offset: 4px }
+.best a:hover { text-decoration-color: var(--accent) }
+.best .where { grid-column: 2; font-family: var(--mono); font-size: 13px; color: var(--ink) }
+.best .nums { grid-column: 3; grid-row: 1 / span 2; display: flex; gap: 16px; font-variant-numeric: tabular-nums; white-space: nowrap }
+.best .nums span { display: flex; flex-direction: column; align-items: flex-end; font-weight: 600; font-size: 18px }
+.best .nums small { font-weight: 400; font-size: 12px; color: var(--muted); font-family: var(--mono); text-transform: uppercase; letter-spacing: .05em }
+.best .nums .na { color: var(--muted); font-weight: 400 }
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px }
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .stat:nth-child(3) { border-left: none; padding-left: 0 }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line) }
+  .principles { grid-template-columns: 1fr }
+  .best li { grid-template-columns: 36px minmax(0, 1fr) }
+  .best .nums { grid-column: 2; grid-row: auto; gap: 20px }
+  .best .nums span { align-items: flex-start }
+  .post { grid-template-columns: 1fr }
+  .meta { flex-direction: row; align-items: center; flex-wrap: wrap }
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">AUQ × DeepInfra · Reddit program · 2026</p>
+    <h1>DeepInfra on Reddit</h1>
+    <p class="lede">Technical posts and comments written for the developer communities where people choose an inference provider. Each one answers a real question with data, and DeepInfra shows up where it genuinely fits the answer.</p>
+  </header>
+
+  <section class="stats" aria-label="Program totals">
+    <div class="stat"><b>212</b><span>DeepInfra mentions in 2026</span></div>
+    <div class="stat"><b>~21</b><span>a month, Jan to Oct</span></div>
+    <div class="stat"><b>54</b><span>subreddits reached</span></div>
+    <div class="stat"><b>170K+</b><span>views logged*</span></div>
+  </section>
+
+  <section class="principles" aria-label="How the posts are written">
+    <div><h2>Lead with the data</h2><p>Comparison tables, cost math and step-by-step checks the thread can use on its own.</p></div>
+    <div><h2>Name DeepInfra in context</h2><p>Mentioned beside other providers, always with a concrete detail: a price, a setting, a doc.</p></div>
+    <div><h2>Match the subreddit</h2><p>Written in each community’s voice and around the topics it is already debating that week.</p></div>
+  </section>
+
+
+  <section style="display:flex;flex-direction:column;gap:16px" aria-labelledby="best-h">
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <h2 class="sec-h" id="best-h">Best performers this year</h2>
+      <p class="sec-note">58 posts and 154 comments so far in 2026. These drew the most votes, comments and views.</p>
+    </div>
+    <ol class="best">
+      <li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1tfhl0q/deepseek_v4s_1m_context_window_the_breaking_point/" target="_blank" rel="noopener">DeepSeek V4’s 1M context window: the breaking point</a><span class="where">r/LocalLLaMA · May 17</span><span class="nums"><span>61<small>votes</small></span><span>42<small>comments</small></span><span>40K<small>views</small></span></span></li>
+      <li><a href="https://www.reddit.com/r/webdev/comments/1q9vsyz/is_wordpress_an_appropriate_cms_for_heavy_sites/" target="_blank" rel="noopener">Is WordPress an appropriate CMS for heavy sites?</a><span class="where">r/webdev · Jan 11</span><span class="nums"><span>16<small>votes</small></span><span>52<small>comments</small></span><span>29K<small>views</small></span></span></li>
+      <li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1s7m06o/cheaper_llm_api_providers_compared_to_openai/" target="_blank" rel="noopener">Cheaper LLM API providers compared to OpenAI, Anthropic and Google</a><span class="where">r/ArtificialInteligence · Mar 30</span><span class="nums"><span>16<small>votes</small></span><span>40<small>comments</small></span><span class="na">–<small>views</small></span></span></li>
+      <li><a href="https://www.reddit.com/r/kimi/comments/1sz4rta/is_anyone_using_kimi_k26_api_from_third_party/" target="_blank" rel="noopener">Is anyone using the Kimi K2.6 API from third-party providers?</a><span class="where">r/kimi · Apr 29</span><span class="nums"><span>9<small>votes</small></span><span>24<small>comments</small></span><span class="na">–<small>views</small></span></span></li>
+      <li><a href="https://www.reddit.com/r/LLMDevs/comments/1t6ii8m/actual_observations_on_deepseek_v4_pro/" target="_blank" rel="noopener">Actual observations on DeepSeek V4 Pro</a><span class="where">r/LLMDevs · May 7</span><span class="nums"><span>9<small>votes</small></span><span>4<small>comments</small></span><span>12K<small>views</small></span></span></li>
+      <li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1rhb1xb/fine_tuning_on_proprietary_data_is_way_harder_to/" target="_blank" rel="noopener">Fine-tuning on proprietary data is way harder to deploy</a><span class="where">r/LocalLLaMA · Feb 28</span><span class="nums"><span>14<small>votes</small></span><span>10<small>comments</small></span><span>7.2K<small>views</small></span></span></li>
+      <li><a href="https://www.reddit.com/r/DeepSeek/comments/1vyur82/stop_saying_bye_bye_deepseek_or_asking_for/" target="_blank" rel="noopener">Stop saying bye bye DeepSeek</a><span class="where">r/DeepSeek · Aug 26</span><span class="nums"><span>23<small>votes</small></span><span class="na">–<small>comments</small></span><span class="na">–<small>views</small></span></span></li>
+    </ol>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <div class="bar">
+      <h2>Latest threads, October</h2>
+      <div class="tabs" role="group" aria-label="Filter by status">
+        <button type="button" id="f-all" data-f="all" aria-pressed="true">All 17</button>
+        <button type="button" id="f-pub" data-f="pub" aria-pressed="false">Published 10</button>
+        <button type="button" id="f-appr" data-f="appr" aria-pressed="false">Approved 7</button>
+      </div>
+    </div>
+
+    <div class="list" id="list">
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/opencodeCLI</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Provider comparison table</span>
+          <h3><a href="https://www.reddit.com/r/opencodeCLI/comments/1wzwcm7/llama_33_70b_across_7_inference_providers_price/" target="_blank" rel="noopener">Llama 3.3 70B across 7 inference providers: price, speed and TTFT compared</a></h3>
+          <p>Holds one model constant across seven hosts and works out the monthly bill for a 10k-requests-a-day support agent. Cost per request spreads about 6x and throughput about 17x.</p>
+          <p class="di"><strong>DeepInfra:</strong> lowest monthly cost in the workload table ($52.80) and the H100 hourly rate shown beside Baseten, Novita, Scaleway and Together.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/DeepSeek</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Explainer + 5-step test</span>
+          <h3><a href="https://www.reddit.com/r/DeepSeek/comments/1x87ysr/what_precision_deepseek_v41_glm_53_and_kimi_k3/" target="_blank" rel="noopener">What precision DeepSeek V4.1, GLM 5.3 and Kimi K3 actually ship in, and why an FP8 or FP4 label isn’t automatically a downgrade</a></h3>
+          <p>Shows which precision each lab released, what else differs between endpoints of the same weights, and a cheap way to test an endpoint against the official API.</p>
+          <p class="di"><strong>DeepInfra:</strong> cited as a host that lists the serving precision on each model page.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/LLMDevs</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Reference table</span>
+          <h3><a href="https://www.reddit.com/r/LLMDevs/comments/1x93ovr/turning_off_thinking_on_open_models_over_api_what/" target="_blank" rel="noopener">Turning off “thinking” on open models over API: what each one accepts as of October 2026</a></h3>
+          <p>Which open models still let you switch reasoning off, the parameter each server expects, and three quick ways to confirm it is really off.</p>
+          <p class="di"><strong>DeepInfra:</strong> used as the worked example of how a hosted provider exposes the switch.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/LocalLLM</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Model notes</span>
+          <h3><a href="https://www.reddit.com/r/LocalLLM/comments/1xexfxy/nemotron_35_super_vlfor_screenshot_and_document/" target="_blank" rel="noopener">Nemotron 3.5 Super VL for screenshot and document agents, thinking on or off?</a></h3>
+          <p>Covers the vision side of the new Nemotron release and when the thinking toggle is worth its output tokens for extraction work.</p>
+          <p class="di"><strong>DeepInfra:</strong> suggested as a way to try the model on your own pages before buying hardware.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/ClaudeCode</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Cost per task</span>
+          <h3><a href="https://www.reddit.com/r/ClaudeCode/comments/1xeunt7/deepseek_1017_in_claude_code_same_token_price_but/" target="_blank" rel="noopener">DeepSeek 1017 in Claude Code: same token price, but the cost per task dropped</a></h3>
+          <p>Explains why cost per finished task fell, how to check which build your route is on, and the new web-search charge starting Oct 31.</p>
+          <p class="di"><strong>DeepInfra:</strong> named among hosts that take the exact model slug, with a tip to check older settings files.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/AI_Agents</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Cost math</span>
+          <h3><a href="https://www.reddit.com/r/AI_Agents/comments/1xevoiu/try_cheap_first_and_escalate_came_out_cheapest_in/" target="_blank" rel="noopener">Try cheap first and escalate came out cheapest in that Qwen + Sonnet table</a></h3>
+          <p>Reworks a community benchmark per finished task and shows a cheap-first, escalate-on-failure setup coming out cheapest, plus what erodes the savings.</p>
+          <p class="di"><strong>DeepInfra:</strong> listed among API hosts for Qwen 3.8 27B, with cached-input pricing to compare.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/AgentsOfAI</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Architecture advice</span>
+          <h3><a href="https://www.reddit.com/r/AgentsOfAI/s/d1KTpfZixj" target="_blank" rel="noopener">Batch APIs for agents only really help the turns that don’t depend on each other</a></h3>
+          <p>Splits agent work into independent turns that can be batched and dependent turns that must run live, and how caching interacts with batch discounts.</p>
+          <p class="di"><strong>DeepInfra:</strong> one of two places to run DeepSeek Flash for the cheap, live turns.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/LLMDevs</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Break-even math</span>
+          <h3><a href="https://www.reddit.com/r/LLMDevs/comments/1xg1spk/5090_for_qwen_38_27b_vs_just_paying_the_api_the/" target="_blank" rel="noopener">5090 for Qwen 3.8 27B vs just paying the API, the math</a></h3>
+          <p>Prices a real week of agent usage on API and on a local card, and shows how long the card takes to pay for itself at different volumes.</p>
+          <p class="di"><strong>DeepInfra:</strong> its per-token rates are the low-cost API benchmark in the comparison.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/MistralAI</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Caching strategy</span>
+          <h3><a href="https://www.reddit.com/r/MistralAI/comments/1xgx33h/mistral_cache_drops_after_a_few_min_of_quiet_what/" target="_blank" rel="noopener">Mistral cache drops after a few minutes of quiet, what are other users doing about it?</a></h3>
+          <p>When keep-alive pings help, when they waste calls, and when paying for a longer cache window is the cheaper route.</p>
+          <p class="di"><strong>DeepInfra:</strong> cited for selling 5-minute or 1-hour cache retention on select models.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="pub">
+        <div class="meta"><span class="sub">r/LLMDevs</span><span class="status pub">Published</span></div>
+        <div class="body">
+          <span class="format">Privacy explainer</span>
+          <h3><a href="https://www.reddit.com/r/LLMDevs/comments/1xii8ko/zdr_is_per_layer_but_what_each_one_actually_says/" target="_blank" rel="noopener">ZDR is per layer: what each one actually says in writing</a></h3>
+          <p>Separates no-training, no-storage and no-access promises across labs, hosts, routers and harnesses, and where each policy has exceptions.</p>
+          <p class="di"><strong>DeepInfra:</strong> its data privacy doc is the example of what a clear host policy looks like.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="appr">
+        <div class="meta"><span class="sub">r/vibecoding</span><span class="status appr">Approved</span></div>
+        <div class="body">
+          <span class="format">Context and cost</span>
+          <h3>1M context is on every new open model now, how much of it do you actually use in a session?</h3>
+          <p>What a fully loaded 1M turn costs, why caching keeps big sessions affordable, and why the served window can differ from the announced one.</p>
+          <p class="di"><strong>DeepInfra:</strong> shows the served context on each model page, so readers can check before trusting a launch post.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="appr">
+        <div class="meta"><span class="sub">r/rag</span><span class="status appr">Approved</span></div>
+        <div class="body">
+          <span class="format">Benchmark read</span>
+          <h3>Embedding the page image instead of OCR text for PDF RAG, does it pay off yet?</h3>
+          <p>Reads NVIDIA’s own retrieval numbers for Nemotron 3.5 Embed and suggests when page images are worth their extra tokens.</p>
+          <p class="di"><strong>DeepInfra:</strong> serves both embed sizes and the 8B reranker, so testing on your own documents is cheap.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="appr">
+        <div class="meta"><span class="sub">r/LangChain</span><span class="status appr">Approved</span></div>
+        <div class="body">
+          <span class="format">Agent routing</span>
+          <h3>Decision 3.0 is Apache and returns a probability per branch, good fit for agent routing?</h3>
+          <p>How a decision model maps onto a LangGraph conditional edge, where it falls short, and a sensible confidence cutoff.</p>
+          <p class="di"><strong>DeepInfra:</strong> named among pay-per-token hosts for the cheaper lanes behind the router.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="appr">
+        <div class="meta"><span class="sub">r/LocalLLaMA</span><span class="status appr">Approved</span></div>
+        <div class="body">
+          <span class="format">License check</span>
+          <h3>Read the Muse Spark Open license before wiring it into anything, the attribution part is wider than it seems</h3>
+          <p>Compares the attribution and revenue clauses of the latest open releases, including how they apply to distilled models.</p>
+          <p class="di"><strong>DeepInfra:</strong> an example of a host serving the same weights for readers without the hardware.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="appr">
+        <div class="meta"><span class="sub">r/hermesagent</span><span class="status appr">Approved</span></div>
+        <div class="body">
+          <span class="format">Cost per job</span>
+          <h3>Hermes monthly cost per job on GLM 5.3 vs DeepSeek Flash</h3>
+          <p>Prices an always-on Hermes day, then shows the savings from moving cron and compression jobs to a flash model.</p>
+          <p class="di"><strong>DeepInfra:</strong> one of the places to run DeepSeek V4.1 Flash for the side jobs.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="appr">
+        <div class="meta"><span class="sub">r/DeepSeek</span><span class="status appr">Approved</span></div>
+        <div class="body">
+          <span class="format">Debugging guide</span>
+          <h3>Why some harnesses get 99% cache hits on DeepSeek and others get 1.5%</h3>
+          <p>What breaks prompt caching in agent harnesses, how much it costs, and where to read cache hits in each API’s usage field.</p>
+          <p class="di"><strong>DeepInfra:</strong> referenced for where its OpenAI-style endpoint reports cached tokens.</p>
+        </div>
+      </article>
+
+      <article class="post" data-s="appr">
+        <div class="meta"><span class="sub">r/opencodeCLI</span><span class="status appr">Approved</span></div>
+        <div class="body">
+          <span class="format">Plan comparison</span>
+          <h3>Coding plan quotas turned into tokens per dollar for DeepSeek Flash and GLM</h3>
+          <p>Converts subscription quotas into list-price value per model and shows when pay-per-token comes out ahead.</p>
+          <p class="di"><strong>DeepInfra:</strong> noted for flat all-day pricing on the open weights, so peak hours don’t change the bill.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <footer>Written and posted by AUQ for DeepInfra. Approved posts are scheduled and link out once live. *Views were logged for January, February and May only, so the full-year figure is higher. Totals cover Jan 1–Oct 29, 2026.</footer>
+</div>
+
+<script>
+(function () {
+  var buttons = document.querySelectorAll('.tabs button');
+  var posts = document.querySelectorAll('.post');
+  function apply(f) {
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === f)); });
+    posts.forEach(function (p) { p.hidden = !(f === 'all' || p.dataset.s === f); });
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.f); }); });
+})();
+</script>
+
+</body>
+</html>
