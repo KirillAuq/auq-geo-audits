@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NCFX8NJ');</script><!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Release to Build Guide Playbook for Dev Tools — AUQ</title>
+<meta name="description" content="How to turn a release into a build guide developers can follow: pick the release, pick the job, pick the type, then eight parts in order, with a template to copy. Drawn from the build guides of dev tool companies growing their search traffic.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B2D; --ink-2:#2A3650; --slate:#5B6678; --line:#D9DEE7;
+    --paper:#F7F8FA; --white:#FFFFFF; --cobalt:#2F5BFF; --cobalt-soft:#E8EDFF;
+    --amber:#FFB020; --amber-ink:#4A3100;
+    --w:760px; --radius:6px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:17px;line-height:1.6}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
+  h1{font-size:clamp(1.8rem,3.8vw,2.6rem)}
+  h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.6rem}
+  h3{font-size:1.15rem;margin:1.6rem 0 .4rem}
+  p{margin:0 0 1rem}
+  a{color:var(--cobalt)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  code{font-family:"IBM Plex Mono",monospace;font-size:.92em;background:var(--cobalt-soft);padding:.05em .35em;border-radius:3px}
+  .wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+  .wide{max-width:1040px}
+
+  /* top bar */
+  .bar{background:var(--ink);color:#fff}
+  .bar .wrap{display:flex;justify-content:space-between;align-items:center;height:56px;max-width:1040px}
+  .bar a{color:#fff;text-decoration:none;font-weight:600}
+  .bar .logo{font-family:"Space Grotesk",sans-serif;font-size:1.25rem;letter-spacing:.04em}
+  .bar nav a{font-weight:500;margin-left:22px;font-size:.95rem;opacity:.9}
+  .bar nav a.btn{background:var(--amber);color:var(--amber-ink);padding:8px 14px;border-radius:var(--radius);opacity:1}
+
+  /* hero */
+  .hero{background:var(--ink);color:#fff;padding:64px 0 0;overflow:hidden}
+  .hero .wrap{max-width:1040px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+  .hero p.sub{font-family:"Space Grotesk",sans-serif;font-weight:500;font-size:1.25rem;color:var(--amber);margin:1rem 0 1.8rem}
+  .hero p.lede{font-size:1.1rem;color:#C7CFDE;max-width:42ch;margin:.9rem 0 1.6rem}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}
+  .btn{display:inline-block;padding:13px 20px;border-radius:var(--radius);font-weight:600;text-decoration:none;border:2px solid transparent}
+  .btn-amber{background:var(--amber);color:var(--amber-ink)}
+  .btn-ghost{border-color:#fff;color:#fff}
+  .btn-ghost.dark{border-color:var(--ink);color:var(--ink)}
+  .btn-cobalt{background:var(--cobalt);color:#fff}
+  .hero svg{width:100%;height:auto;display:block}
+  .hero .kicker{color:var(--amber);font-weight:600;margin-bottom:.5rem}
+
+  /* sections */
+  section.step{padding:56px 0 24px;border-top:1px solid var(--line)}
+  section.step .num{font-family:"Space Grotesk",sans-serif;color:var(--cobalt);font-weight:700;font-size:.95rem;margin-bottom:.35rem}
+  .intro{padding:56px 0 24px}
+  .intro p.big{font-size:1.25rem;line-height:1.5}
+  ul,ol{padding-left:1.3rem;margin:0 0 1rem}
+  li{margin-bottom:.45rem}
+  table{border-collapse:collapse;width:100%;margin:1rem 0 1.4rem;font-size:.95rem}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--white);font-weight:600}
+  tr:nth-child(even) td{background:var(--white)}
+
+  /* real-account callout */
+  .real{background:var(--white);border-left:4px solid var(--cobalt);padding:18px 22px;margin:1.4rem 0 .8rem;border-radius:0 var(--radius) var(--radius) 0}
+  .real .lbl{font-weight:600;color:var(--cobalt);margin-bottom:.35rem}
+  .real p:last-child{margin:0}
+  .real .stats{display:flex;gap:22px;flex-wrap:wrap;margin:.6rem 0 .8rem}
+  .real .stat b{display:block;font-family:"Space Grotesk",sans-serif;font-size:1.6rem;line-height:1.1;color:var(--ink)}
+  .real .stat span{font-size:.85rem;color:var(--slate)}
+
+  /* figures */
+  figure{margin:1.4rem 0 1.6rem;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  figure svg{width:100%;height:auto;display:block}
+  figcaption{font-size:.88rem;color:var(--slate);margin-top:10px}
+
+  /* cta bands */
+  .band{background:var(--cobalt);color:#fff;padding:44px 0;margin:48px 0 0}
+  .band .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .band h2{margin:0 0 .3rem}
+  .band p{margin:0;color:#DCE4FF;max-width:48ch}
+  .band .btn-amber{white-space:nowrap}
+
+  /* case grid */
+  .cases{padding:56px 0 16px;border-top:1px solid var(--line)}
+  .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:1.2rem}
+  .case{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column}
+  .case h3{margin:0 0 .25rem;font-size:1.1rem}
+  .case .what{color:var(--slate);font-size:.92rem;margin-bottom:.8rem}
+  .case .big{font-family:"Space Grotesk",sans-serif;font-size:1.9rem;font-weight:700;color:var(--cobalt);line-height:1.05}
+  .case .big small{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:.85rem;font-weight:500;color:var(--slate);margin-top:2px}
+  .case p{font-size:.95rem;margin:.8rem 0}
+  .case a.more{margin-top:auto;font-weight:600;text-decoration:none}
+
+  /* compare */
+  .compare{padding:56px 0 64px;border-top:1px solid var(--line)}
+  .compare table td:first-child{font-weight:600;width:28%}
+  .compare table td:nth-child(3){background:var(--cobalt-soft)}
+  .compare table th:nth-child(3){background:var(--cobalt);color:#fff}
+
+  /* final */
+  .final{background:var(--ink);color:#fff;padding:64px 0}
+  .final p{color:#C7CFDE;max-width:52ch}
+  .final .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.4rem}
+  footer{background:#0A1220;color:#8E99AD;font-size:.85rem;padding:22px 0}
+  footer a{color:#C7CFDE}
+
+  @media (max-width:820px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    td,th{min-width:120px}
+    .hero .wrap{grid-template-columns:1fr}
+    .hero{padding-top:44px}
+    .bar nav a:not(.btn){display:none}
+  }
+
+  pre{background:var(--ink);color:#E6EAF2;font-family:"IBM Plex Mono",monospace;font-size:.88rem;line-height:1.55;padding:18px 20px;border-radius:var(--radius);overflow-x:auto;margin:1rem 0 1.4rem;white-space:pre}
+  pre code{background:none;padding:0;color:inherit;font-size:inherit}
+  .notbg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:1rem 0 1.4rem}
+  .notbg div{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;font-size:.95rem}
+  .notbg b{display:block;font-family:"Space Grotesk",sans-serif;margin-bottom:.2rem}
+  .test{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;font-weight:500;border-left:4px solid var(--amber);padding:6px 0 6px 16px;margin:1.2rem 0}
+  .part{margin-top:1.8rem}
+  .part h3{margin-top:0}
+  .part .n{font-family:"IBM Plex Mono",monospace;color:var(--cobalt);font-size:.85rem;margin-bottom:.15rem}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCFX8NJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+
+<div class="bar">
+  <div class="wrap">
+    <a class="logo" href="https://auq.io/">AUQ</a>
+    <nav>
+      <a href="#steps">The guide</a>
+      <a href="#template">Template</a>
+      <a href="#hire">Work with us</a>
+      <a class="btn" href="https://auq.io/contact-us/">Book an audit</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="kicker">The release to build guide playbook for dev tools</div>
+      <h1>How to turn a release into a build guide</h1>
+      <p class="sub">The format behind the build guides of dev tool companies growing their traffic</p>
+      <div class="ctas">
+        <a class="btn btn-amber" href="#steps">Read the guide</a>
+        <a class="btn btn-ghost" href="#template">Copy the template</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 460 300" role="img" aria-label="Companies growing their traffic turn about four times as many releases into build guides as companies whose traffic fell">
+  <g font-family="IBM Plex Sans, sans-serif">
+    <text x="20" y="22" fill="#C7CFDE" font-size="14">Releases turned into build guides</text>
+    <line x1="20" y1="250" x2="440" y2="250" stroke="#2A3650" stroke-width="2"/>
+    <rect x="70" y="70" width="120" height="180" rx="4" fill="#FFB020"/>
+    <text x="130" y="276" fill="#C7CFDE" font-size="14" text-anchor="middle">Traffic growing</text>
+    <rect x="270" y="205" width="120" height="45" rx="4" fill="#2F5BFF"/>
+    <text x="330" y="276" fill="#C7CFDE" font-size="14" text-anchor="middle">Traffic falling</text>
+    <text x="130" y="128" fill="#4A3100" font-family="Space Grotesk, sans-serif" font-size="44" font-weight="700" text-anchor="middle">4&#215;</text>
+    <text x="130" y="152" fill="#4A3100" font-size="14" font-weight="600" text-anchor="middle">more</text>
+  </g>
+</svg>
+  </div>
+</header>
+
+<main>
+<section class="intro wrap" id="steps">
+  <p class="big">Most dev tool companies ship far more than they ever explain. A release goes out with a changelog line, and nobody shows a developer how to build something with it.</p>
+  <p>We looked at the dev tool companies whose search traffic grew over the last year, read their build guides from start to finish, and compared them with everyone else&rsquo;s.</p>
+  <h3>TL;DR</h3>
+  <ul>
+    <li><strong>How often matters more than how.</strong> Companies growing their traffic turn about four times as many of their releases into build guides as companies whose traffic fell.</li>
+    <li><strong>Their guides share a shape.</strong> They start from a job the reader wants done, run about six steps with code in each, link to the docs, and end with a short FAQ and a free signup.</li>
+  </ul>
+</section>
+
+<section class="step wrap">
+  <div class="num">First</div>
+  <h2>What counts as a build guide</h2>
+  <p>A build guide takes one release and walks a developer through using it to get something real working.</p>
+  <p class="test">Could a reader follow it from start to finish and end up with something that works?</p>
+  <p>About a quarter of the posts that look like build guides fail that test on a full read. These are the usual suspects:</p>
+  <div class="notbg">
+    <div><b>Webinar recaps</b>The building only happens in the recording</div>
+    <div><b>Prompting tips</b>Checklists and advice, nothing to build</div>
+    <div><b>Tools roundups</b>A list, not a walkthrough</div>
+    <div><b>Problem explainers</b>One code sample, no steps</div>
+  </div>
+  <p>They&rsquo;re all useful posts. They&rsquo;re just not build guides.</p>
+</section>
+
+<section class="step wrap">
+  <div class="num">Step 1</div>
+  <h2>Pick the release</h2>
+  <p>Choose a release that lets someone build or do something new. Start with launches, since each one is more likely to be worth a guide, then add features that open up something new to build. Growing companies turn more of both into guides.</p>
+  <p>If all a guide could say is &ldquo;turn this setting on&rdquo;, it&rsquo;s a docs line, not a guide.</p>
+</section>
+
+<section class="step wrap">
+  <div class="num">Step 2</div>
+  <h2>Pick the job, not the feature</h2>
+  <p>Decide what the reader is trying to get done: &ldquo;route alerts to the right team&rdquo;, not &ldquo;our new Rules Engine&rdquo;.</p>
+  <div class="real">
+    <div class="lbl">What we found</div>
+    <div class="stats">
+      <div class="stat"><b>94%</b><span>of guides at companies with growing traffic start from a job</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="step wrap">
+  <div class="num">Step 3</div>
+  <h2>Pick the type that fits</h2>
+  <p>Growing and flat companies use the same mix of types, so no type wins. Choose by fit.</p>
+  <table>
+    <thead><tr><th>Type</th><th>What the reader does</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Feature setup</strong></td><td>Uses the new feature inside your product</td></tr>
+      <tr><td><strong>Integration</strong></td><td>Connects it to a tool they already use</td></tr>
+      <tr><td><strong>Project build</strong></td><td>Builds a small working thing from start to finish</td></tr>
+      <tr><td><strong>Migration</strong></td><td>Moves from the old way to the new one</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="step wrap">
+  <div class="num">Step 4</div>
+  <h2>Write the guide, part by part</h2>
+  <p>Eight parts, in this order. The numbers compare guides at growing companies with guides at flat ones.</p>
+
+  <div class="part"><div class="n">1 / Title</div><h3>Name the job and the result</h3>
+  <ul>
+    <li>Shape: &ldquo;How to [do the job] with [release or product]&rdquo;.</li>
+    <li>Name the result the reader gets. About three in four titles do, in every group.</li>
+    <li>Lead with the job, not a list of tools. Growing companies name another tool in the title less often (45% against 68%).</li>
+  </ul></div>
+
+  <div class="part"><div class="n">2 / Opening, about 150 words</div><h3>Start with their problem</h3>
+  <ul>
+    <li>The reader&rsquo;s problem first, in their words.</li>
+    <li>One sentence on what they&rsquo;ll have working by the end.</li>
+    <li>The release or version it covers.</li>
+  </ul></div>
+
+  <div class="part"><div class="n">3 / What you need first</div><h3>A short list, before step one</h3>
+  <p>Accounts, versions, API keys and anything to install. Short and bulleted.</p></div>
+
+  <div class="part"><div class="n">4 / The steps, about six</div><h3>Code in every step</h3>
+  <p>Each step gets a heading that says what it does (&ldquo;Step 3: Create the triage rule&rdquo;), one or two sentences on what and why, a code block or command, the expected output where it helps, and a link to the matching docs page.</p></div>
+
+  <div class="part"><div class="n">5 / Show the result</div><h3>Prove it works</h3>
+  <p>An output, a screenshot or a short demo of the finished thing.</p></div>
+
+  <div class="part"><div class="n">6 / Where people get stuck</div><h3>Be honest about the limits</h3>
+  <p>The two or three places readers trip up and how to get past them, plus what the release doesn&rsquo;t do yet.</p></div>
+
+  <div class="part"><div class="n">7 / FAQ, three to five questions</div><h3>Questions about the job</h3>
+  <p>Questions people really ask about the job, not about your company. Two or three sentences each.</p></div>
+
+  <div class="part"><div class="n">8 / Close</div><h3>What next, and a way in</h3>
+  <p>One line on what to build next, a free signup or trial if you&rsquo;re self-serve (sales if you&rsquo;re not), and a link to the full docs.</p></div>
+
+  <figure>
+    <table>
+      <thead><tr><th>In the guide</th><th>Growing companies</th><th>Flat companies</th></tr></thead>
+      <tbody>
+        <tr><td>Starts from a job</td><td>94%</td><td>65%</td></tr>
+        <tr><td>Steps (median)</td><td>6</td><td>4</td></tr>
+        <tr><td>Code blocks (median)</td><td>5</td><td>1</td></tr>
+        <tr><td>Links to the docs</td><td>85%</td><td>42%</td></tr>
+        <tr><td>Ends with an FAQ</td><td>73%</td><td>16%</td></tr>
+        <tr><td>Ends with a free signup or trial</td><td>67%</td><td>16%</td></tr>
+        <tr><td>Length (median words)</td><td>about 2,300</td><td>about 2,300</td></tr>
+      </tbody>
+    </table>
+    <figcaption>Code in the steps is the clearest difference. Length is the same in every group, so it doesn&rsquo;t explain the gap.</figcaption>
+  </figure>
+</section>
+
+<section class="step wrap" id="template">
+  <div class="num">Step 5</div>
+  <h2>Copy the template</h2>
+<pre><code>How to [job] with [release]
+
+[Opening: the reader&rsquo;s problem in their words. What they&rsquo;ll have
+working by the end. The release or version this covers.]
+
+What you need
+- [account / plan]
+- [version]
+- [API key or install]
+
+Step 1: [what this step does]
+[One or two sentences on what and why.]
+[code]
+[expected output]
+[link to the docs page]
+
+Step 2 to Step 6: same shape
+
+What you&rsquo;ve built
+[output, screenshot or short demo]
+
+If you get stuck
+- [common problem] &rarr; [fix]
+- [common problem] &rarr; [fix]
+- What this doesn&rsquo;t do yet: [limit]
+
+FAQ
+- [question people ask about the job]? [two or three sentences]
+  (three to five questions)
+
+Next
+[what to build next] &middot; [free signup or trial] &middot; [full docs]</code></pre>
+</section>
+
+<section class="step wrap">
+  <div class="num">Then</div>
+  <h2>Write them often</h2>
+  <p>A good format published once a year won&rsquo;t close the gap. The biggest difference between growing companies and the rest is how often they write them.</p>
+  <div class="real">
+    <div class="lbl">What we found</div>
+    <div class="stats">
+      <div class="stat"><b>4&times;</b><span>as many releases turned into build guides at companies growing their traffic</span></div>
+      <div class="stat"><b>Nearly half</b><span>of the companies whose traffic fell never turned a single release into a deeper post</span></div>
+    </div>
+  </div>
+  <p>If you ship every week, one guide a month from your biggest release puts you ahead of most dev tool companies.</p>
+</section>
+
+<section class="step wrap">
+  <div class="num">And</div>
+  <h2>It has to be a build guide</h2>
+  <p>When companies whose traffic fell do write a deeper post, it&rsquo;s rarely a build guide. They write comparisons just as often as growing companies, and far more use cases with code: a release shown in a single example, with no walkthrough. Growing companies write the build guide.</p>
+  <figure>
+    <svg viewBox="0 0 720 322" role="img" aria-label="Companies growing their traffic write about four times as many build guides per release; comparisons are the same in both groups; companies whose traffic fell write about five times as many use cases with code">
+      <g font-family="IBM Plex Sans, sans-serif">
+        <rect x="0" y="8" width="14" height="14" rx="3" fill="#2F5BFF"/><text x="22" y="20" font-size="14" fill="#2A3650">Traffic growing</text>
+        <rect x="150" y="8" width="14" height="14" rx="3" fill="#E8663D"/><text x="172" y="20" font-size="14" fill="#2A3650">Traffic falling</text>
+        <text x="0" y="98" font-size="15" font-weight="600" fill="#0F1B2D">Build guide</text><rect x="200" y="70" width="289" height="22" rx="3" fill="#2F5BFF"/><rect x="200" y="98" width="68" height="22" rx="3" fill="#E8663D"/><text x="530" y="94" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700" fill="#0F1B2D">About 4&#215; more</text><text x="530" y="114" font-size="13" fill="#5B6678">at growing companies</text><text x="0" y="182" font-size="15" font-weight="600" fill="#0F1B2D">Comparison or benchmark</text><rect x="200" y="154" width="255" height="22" rx="3" fill="#2F5BFF"/><rect x="200" y="182" width="255" height="22" rx="3" fill="#E8663D"/><text x="530" y="178" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700" fill="#0F1B2D">The same</text><text x="530" y="198" font-size="13" fill="#5B6678">in both</text><text x="0" y="266" font-size="15" font-weight="600" fill="#0F1B2D">Use case with code</text><rect x="200" y="238" width="51" height="22" rx="3" fill="#2F5BFF"/><rect x="200" y="266" width="237" height="22" rx="3" fill="#E8663D"/><text x="530" y="262" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700" fill="#0F1B2D">About 5&#215; more</text><text x="530" y="282" font-size="13" fill="#5B6678">at falling companies</text>
+      </g>
+    </svg>
+    <figcaption>Deeper posts per release, by type. A use case with code shows the release working once. A build guide walks the reader through building something with it, step by step.</figcaption>
+  </figure>
+  <p>So a code sample or a comparison won&rsquo;t stand in for the guide. If a reader can&rsquo;t follow it from start to finish and end up with something working, it&rsquo;s a different kind of post.</p>
+</section>
+
+</main>
+
+<section class="final" id="hire">
+  <div class="wrap">
+    <h2>Want the first one written for you?</h2>
+    <p>We&rsquo;re a technical storytelling team for dev tool companies. Send us your last three releases. We&rsquo;ll pick the one with the best job in it, send you an outline, and write the guide.</p>
+    <div class="ctas">
+      <a class="btn btn-amber" href="https://auq.io/contact-us/">Send us your releases</a>
+      <a class="btn btn-ghost" href="https://auq.io/audits/launch-to-pipeline-playbook.html">Read the launch playbook</a>
+      <a class="btn btn-ghost" href="https://auq.io/cases/">See the case studies</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap wide">AUQ is an organic growth agency in New York City. <a href="https://auq.io/">auq.io</a> &middot; <a href="https://auq.io/pricing/">Pricing</a> &middot; <a href="https://clutch.co/profile/auq#summary">Verified reviews on Clutch</a></div>
+</footer>
+
+</body>
+</html>
