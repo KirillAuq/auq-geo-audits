@@ -1,0 +1,100 @@
+{
+  "test": "identity_llm_what_does_brand_do",
+  "brand": "ChartHop",
+  "prompt": "What does ChartHop do?",
+  "aio_score_unchanged": 34,
+  "transport": "DataForSEO AI Optimization LLM Responses Live",
+  "providers_with_ok_sample": [
+    "chatgpt",
+    "claude",
+    "gemini",
+    "perplexity"
+  ],
+  "successful_provider_count": 4,
+  "successful_snapshots": 8,
+  "total_api_cost_usd_sum_reported": 0.2296,
+  "calls": [
+    {
+      "provider": "chatgpt",
+      "sample": 1,
+      "ok": true,
+      "api_cost_usd": 0.018156,
+      "model": "gpt-5.4-mini-2026-03-17",
+      "web_search": true,
+      "file": "raw/chatgpt_s1.json"
+    },
+    {
+      "provider": "chatgpt",
+      "sample": 2,
+      "ok": true,
+      "api_cost_usd": 0.018544,
+      "model": "gpt-5.4-mini-2026-03-17",
+      "web_search": true,
+      "file": "raw/chatgpt_s2.json"
+    },
+    {
+      "provider": "claude",
+      "sample": 1,
+      "ok": true,
+      "api_cost_usd": 0.049576,
+      "model": "claude-sonnet-4-5-20250929",
+      "web_search": true,
+      "file": "raw/claude_s1.json"
+    },
+    {
+      "provider": "claude",
+      "sample": 2,
+      "ok": true,
+      "api_cost_usd": 0.049606,
+      "model": "claude-sonnet-4-5-20250929",
+      "web_search": true,
+      "file": "raw/claude_s2.json"
+    },
+    {
+      "provider": "gemini",
+      "sample": 1,
+      "ok": true,
+      "api_cost_usd": 0.036842,
+      "model": "gemini-2.5-flash",
+      "web_search": true,
+      "file": "raw/gemini_s1.json"
+    },
+    {
+      "provider": "gemini",
+      "sample": 2,
+      "ok": true,
+      "api_cost_usd": 0.036593,
+      "model": "gemini-2.5-flash",
+      "web_search": true,
+      "file": "raw/gemini_s2.json"
+    },
+    {
+      "provider": "perplexity",
+      "sample": 1,
+      "ok": true,
+      "api_cost_usd": 0.010059,
+      "model": "sonar-pro",
+      "web_search": true,
+      "file": "raw/perplexity_s1.json"
+    },
+    {
+      "provider": "perplexity",
+      "sample": 2,
+      "ok": true,
+      "api_cost_usd": 0.010224,
+      "model": "sonar-pro",
+      "web_search": true,
+      "file": "raw/perplexity_s2.json"
+    }
+  ],
+  "promptwatch": "get_more_tools returned no additional specialized one-off LLM tools",
+  "gemini_retry_note": "First Gemini attempts failed with Invalid Field web_search_country_iso_code; succeeded with web_search true only",
+  "outputs": [
+    "brand_baseline.json",
+    "raw/*.json",
+    "comparison.md",
+    "comparison.json",
+    "protocol.md",
+    "run_index.json"
+  ]
+}

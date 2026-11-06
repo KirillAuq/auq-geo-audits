@@ -1,0 +1,344 @@
+{
+  "provider_product": "perplexity",
+  "sample_index": 2,
+  "requested_at_utc": "2026-11-06T17:36:26.310599+00:00",
+  "prompt": "What does ChartHop do?",
+  "no_system_message": true,
+  "no_brand_baseline_in_prompt": true,
+  "ok": true,
+  "http_status": 200,
+  "elapsed_sec": 3.416,
+  "endpoint": "https://api.dataforseo.com/v3/ai_optimization/perplexity/llm_responses/live",
+  "request_body_sent": {
+    "user_prompt": "What does ChartHop do?",
+    "model_name": "sonar-pro",
+    "web_search_country_iso_code": "US",
+    "max_output_tokens": 1024,
+    "tag": "charthop-identity-perplexity-s2"
+  },
+  "response": {
+    "version": "0.1.20261103",
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "time": "2.9688 sec.",
+    "cost": 0.010224,
+    "tasks_count": 1,
+    "tasks_error": 0,
+    "tasks": [
+      {
+        "id": "11061736-1226-0612-0000-0a471dffc570",
+        "status_code": 20000,
+        "status_message": "Ok.",
+        "time": "2.9490 sec.",
+        "cost": 0.010224,
+        "result_count": 1,
+        "path": [
+          "v3",
+          "ai_optimization",
+          "perplexity",
+          "llm_responses",
+          "live"
+        ],
+        "data": {
+          "api": "ai_optimization",
+          "function": "llm_responses",
+          "se": "perplexity",
+          "user_prompt": "What does ChartHop do?",
+          "model_name": "sonar-pro",
+          "web_search_country_iso_code": "US",
+          "max_output_tokens": 1024,
+          "tag": "charthop-identity-perplexity-s2"
+        },
+        "result": [
+          {
+            "model_name": "sonar-pro",
+            "input_tokens": 13,
+            "output_tokens": 239,
+            "reasoning_tokens": 0,
+            "web_search": true,
+            "money_spent": 0.009624,
+            "datetime": "2026-11-06 17:36:26 +00:00",
+            "items": [
+              {
+                "type": "message",
+                "sections": [
+                  {
+                    "type": "text",
+                    "text": "ChartHop is a **people-operations and organizational intelligence platform**. It connects HR, workforce, financial, and business data into a live model of an organization so HR, Finance, and leaders can analyze the workforce, plan changes, and act without relying on disconnected spreadsheets.[1][2]\n\nIts main capabilities include:\n\n- **HRIS:** employee records, onboarding, time off, and payroll integrations.[5]\n- **Org visualization and analytics:** interactive org charts, dashboards, and workforce insights.[1]\n- **Headcount planning:** model hiring, reorganizations, and budget changes with real-time cost impact.[4]\n- **Compensation management:** run merit, promotion, and equity cycles with budgets and approvals.[3]\n- **Performance, goals, and engagement:** manage reviews, goals, surveys, and employee sentiment alongside other workforce data.[6][8]\n- **AI assistance:** ask questions about the organization in plain language and generate analyses or workflows based on permitted data.[2]\n\nIn short, ChartHop helps companies manage people data and make workforce decisions\u2014such as who to hire, how to structure teams, and how to allocate compensation\u2014from one connected platform.",
+                    "annotations": [
+                      {
+                        "title": "People analytics software | ChartHop",
+                        "url": "https://www.charthop.com/platform",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "ChartHop | Organizational intelligence for people analytics ...",
+                        "url": "https://www.charthop.com/",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "About ChartHop | The organizational intelligence company",
+                        "url": "https://www.charthop.com/about",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "Workforce & Headcount Planning Software",
+                        "url": "https://www.charthop.com/modules/headcount-planning",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "Human Resources Information System (HRIS)",
+                        "url": "https://www.charthop.com/modules/hris",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "Performance Management Software - ChartHop",
+                        "url": "https://www.charthop.com/modules/performance",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "AI Headcount Planning Software | ChartHop",
+                        "url": "https://www.charthop.com/pages/ai-headcount-planning-software",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "Employee Engagement Software",
+                        "url": "https://www.charthop.com/modules/engagement",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "ChartHop, Inc. | AI-Powered Headcount Planning & Analytics",
+                        "url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      },
+                      {
+                        "title": "ChartHop for ADP Workforce Now | Two-Way Sync Integration",
+                        "url": "https://www.charthop.com/adp",
+                        "start_index": null,
+                        "end_index": null,
+                        "text": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "fan_out_queries": null,
+            "search_results": [
+              {
+                "title": "People analytics software | ChartHop",
+                "url": "https://www.charthop.com/platform",
+                "date": "2026-10-24 00:00:00 +00:00",
+                "snippet": "# See your whole organization, and act on it in the same place.\nThe ChartHop platform connects your people and business data from any source into a living model of your organization.\nRun people analytics on it, model what happens next, and make the change without exporting anything.\nAdd workflow mod..."
+              },
+              {
+                "title": "ChartHop | Organizational intelligence for people analytics ...",
+                "url": "https://www.charthop.com/",
+                "date": "2026-10-28 00:00:00 +00:00",
+                "snippet": "Most HR systems store your data.\nChartHop puts it to work \u2014 connecting your people and business data into a living model of your organization, so you can see what's changing, model what's next, and act on it in the same place.\n...\nHR and Finance teams at small businesses to large enterprises use Cha..."
+              },
+              {
+                "title": "About ChartHop | The organizational intelligence company",
+                "url": "https://www.charthop.com/about",
+                "date": "2026-10-28 00:00:00 +00:00",
+                "snippet": "# Nobody set out to run their organization from a spreadsheet.\nChartHop is the organizational intelligence company.\nOur platform connects your people and business data from any source into a living model of your whole organization, with HCM and planning workflows, visual analytics and agentic AI run..."
+              },
+              {
+                "title": "Workforce & Headcount Planning Software",
+                "url": "https://www.charthop.com/modules/headcount-planning",
+                "date": "2026-11-03 00:00:00 +00:00",
+                "snippet": "ChartHop Headcount Planning models budget impact in real time on headcount, cost and structure from the systems you already run, so you see what a change costs before you commit to it.\n...\nChartHop keeps it beside your live headcount, cost and structure on a living model of your whole organization, ..."
+              },
+              {
+                "title": "Human Resources Information System (HRIS)",
+                "url": "https://www.charthop.com/modules/hris",
+                "date": "2026-11-03 00:00:00 +00:00",
+                "snippet": "ChartHop HRIS handles records, onboarding, time off and payroll integrations on a living model of your organization, with analytics, org visualization and Ask ChartHop, ChartHop's AI assistant, built in.\n...\nYour people data is the first layer.\nChartHop connects it to the business data in your other..."
+              },
+              {
+                "title": "Performance Management Software - ChartHop",
+                "url": "https://www.charthop.com/modules/performance",
+                "date": "2026-11-02 00:00:00 +00:00",
+                "snippet": "ChartHop Performance adapts to any review cycle you run, and puts the results next to compensation, engagement and headcount, so they're still useful after the cycle closes.\n...\nPerformance is one layer of your organization.\nChartHop keeps it beside pay, engagement and structure on a living model of..."
+              },
+              {
+                "title": "AI Headcount Planning Software | ChartHop",
+                "url": "https://www.charthop.com/pages/ai-headcount-planning-software",
+                "date": "2026-10-19 00:00:00 +00:00",
+                "snippet": "ChartHop connects live workforce, financial, and business data so HR and Finance plan from the same source of truth.\nModel scenarios in minutes.\nStay aligned as reality changes.\n...\nChartHop keeps headcount plans connected to live people data so you're never rebuilding what should already be current..."
+              },
+              {
+                "title": "Employee Engagement Software",
+                "url": "https://www.charthop.com/modules/engagement",
+                "date": "2026-11-02 00:00:00 +00:00",
+                "snippet": "ChartHop Engagement stores survey results next to performance, compensation and tenure on a living model of your organization, so you can see what's driving a score, not just what the score is.\n...\nChartHop keeps it beside performance, pay and tenure on a living model of your whole organization, giv..."
+              },
+              {
+                "title": "ChartHop, Inc. | AI-Powered Headcount Planning & Analytics",
+                "url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+                "date": "2026-11-03 00:00:00 +00:00",
+                "snippet": "# One platform to plan, visualize, and optimize your workforce with AI.\nChartHop Headcount Planning brings intelligent, data-driven planning to workforce decisions.\nCreate visual scenarios, model budget impact in real-time, and leverage AI insights to plan growth and organizational changes strategic..."
+              },
+              {
+                "title": "ChartHop for ADP Workforce Now | Two-Way Sync Integration",
+                "url": "https://www.charthop.com/adp",
+                "date": "2026-10-28 00:00:00 +00:00",
+                "snippet": "Real-time, bidirectional sync between ADP Workforce Now and ChartHop.\nChange compensation, contact info, or reporting lines in ChartHop and it writes straight back to payroll.\nPlan, pay, and report on one source of truth your whole company can use.\n...\nChartHop builds your org chart from ADP Workfor..."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "api_status_code": 20000,
+  "api_status_message": "Ok.",
+  "api_cost_usd": 0.010224,
+  "api_time": "2.9688 sec.",
+  "model_name_returned": "sonar-pro",
+  "web_search_in_result": true,
+  "money_spent_usd": 0.009624,
+  "result_datetime_utc": "2026-11-06 17:36:26 +00:00",
+  "task_errors": [],
+  "full_response_text": "ChartHop is a **people-operations and organizational intelligence platform**. It connects HR, workforce, financial, and business data into a live model of an organization so HR, Finance, and leaders can analyze the workforce, plan changes, and act without relying on disconnected spreadsheets.[1][2]\n\nIts main capabilities include:\n\n- **HRIS:** employee records, onboarding, time off, and payroll integrations.[5]\n- **Org visualization and analytics:** interactive org charts, dashboards, and workforce insights.[1]\n- **Headcount planning:** model hiring, reorganizations, and budget changes with real-time cost impact.[4]\n- **Compensation management:** run merit, promotion, and equity cycles with budgets and approvals.[3]\n- **Performance, goals, and engagement:** manage reviews, goals, surveys, and employee sentiment alongside other workforce data.[6][8]\n- **AI assistance:** ask questions about the organization in plain language and generate analyses or workflows based on permitted data.[2]\n\nIn short, ChartHop helps companies manage people data and make workforce decisions\u2014such as who to hire, how to structure teams, and how to allocate compensation\u2014from one connected platform.",
+  "citations": [
+    {
+      "title": "People analytics software | ChartHop",
+      "url": "https://www.charthop.com/platform",
+      "text": null
+    },
+    {
+      "title": "ChartHop | Organizational intelligence for people analytics ...",
+      "url": "https://www.charthop.com/",
+      "text": null
+    },
+    {
+      "title": "About ChartHop | The organizational intelligence company",
+      "url": "https://www.charthop.com/about",
+      "text": null
+    },
+    {
+      "title": "Workforce & Headcount Planning Software",
+      "url": "https://www.charthop.com/modules/headcount-planning",
+      "text": null
+    },
+    {
+      "title": "Human Resources Information System (HRIS)",
+      "url": "https://www.charthop.com/modules/hris",
+      "text": null
+    },
+    {
+      "title": "Performance Management Software - ChartHop",
+      "url": "https://www.charthop.com/modules/performance",
+      "text": null
+    },
+    {
+      "title": "AI Headcount Planning Software | ChartHop",
+      "url": "https://www.charthop.com/pages/ai-headcount-planning-software",
+      "text": null
+    },
+    {
+      "title": "Employee Engagement Software",
+      "url": "https://www.charthop.com/modules/engagement",
+      "text": null
+    },
+    {
+      "title": "ChartHop, Inc. | AI-Powered Headcount Planning & Analytics",
+      "url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+      "text": null
+    },
+    {
+      "title": "ChartHop for ADP Workforce Now | Two-Way Sync Integration",
+      "url": "https://www.charthop.com/adp",
+      "text": null
+    },
+    {
+      "title": "People analytics software | ChartHop",
+      "url": "https://www.charthop.com/platform",
+      "date": "2026-10-24 00:00:00 +00:00",
+      "snippet": "# See your whole organization, and act on it in the same place.\nThe ChartHop platform connects your people and business data from any source into a living model of your organization.\nRun people analytics on it, model what happens next, and make the change without exporting anything.\nAdd workflow mod...",
+      "kind": "search_result"
+    },
+    {
+      "title": "ChartHop | Organizational intelligence for people analytics ...",
+      "url": "https://www.charthop.com/",
+      "date": "2026-10-28 00:00:00 +00:00",
+      "snippet": "Most HR systems store your data.\nChartHop puts it to work \u2014 connecting your people and business data into a living model of your organization, so you can see what's changing, model what's next, and act on it in the same place.\n...\nHR and Finance teams at small businesses to large enterprises use Cha...",
+      "kind": "search_result"
+    },
+    {
+      "title": "About ChartHop | The organizational intelligence company",
+      "url": "https://www.charthop.com/about",
+      "date": "2026-10-28 00:00:00 +00:00",
+      "snippet": "# Nobody set out to run their organization from a spreadsheet.\nChartHop is the organizational intelligence company.\nOur platform connects your people and business data from any source into a living model of your whole organization, with HCM and planning workflows, visual analytics and agentic AI run...",
+      "kind": "search_result"
+    },
+    {
+      "title": "Workforce & Headcount Planning Software",
+      "url": "https://www.charthop.com/modules/headcount-planning",
+      "date": "2026-11-03 00:00:00 +00:00",
+      "snippet": "ChartHop Headcount Planning models budget impact in real time on headcount, cost and structure from the systems you already run, so you see what a change costs before you commit to it.\n...\nChartHop keeps it beside your live headcount, cost and structure on a living model of your whole organization, ...",
+      "kind": "search_result"
+    },
+    {
+      "title": "Human Resources Information System (HRIS)",
+      "url": "https://www.charthop.com/modules/hris",
+      "date": "2026-11-03 00:00:00 +00:00",
+      "snippet": "ChartHop HRIS handles records, onboarding, time off and payroll integrations on a living model of your organization, with analytics, org visualization and Ask ChartHop, ChartHop's AI assistant, built in.\n...\nYour people data is the first layer.\nChartHop connects it to the business data in your other...",
+      "kind": "search_result"
+    },
+    {
+      "title": "Performance Management Software - ChartHop",
+      "url": "https://www.charthop.com/modules/performance",
+      "date": "2026-11-02 00:00:00 +00:00",
+      "snippet": "ChartHop Performance adapts to any review cycle you run, and puts the results next to compensation, engagement and headcount, so they're still useful after the cycle closes.\n...\nPerformance is one layer of your organization.\nChartHop keeps it beside pay, engagement and structure on a living model of...",
+      "kind": "search_result"
+    },
+    {
+      "title": "AI Headcount Planning Software | ChartHop",
+      "url": "https://www.charthop.com/pages/ai-headcount-planning-software",
+      "date": "2026-10-19 00:00:00 +00:00",
+      "snippet": "ChartHop connects live workforce, financial, and business data so HR and Finance plan from the same source of truth.\nModel scenarios in minutes.\nStay aligned as reality changes.\n...\nChartHop keeps headcount plans connected to live people data so you're never rebuilding what should already be current...",
+      "kind": "search_result"
+    },
+    {
+      "title": "Employee Engagement Software",
+      "url": "https://www.charthop.com/modules/engagement",
+      "date": "2026-11-02 00:00:00 +00:00",
+      "snippet": "ChartHop Engagement stores survey results next to performance, compensation and tenure on a living model of your organization, so you can see what's driving a score, not just what the score is.\n...\nChartHop keeps it beside performance, pay and tenure on a living model of your whole organization, giv...",
+      "kind": "search_result"
+    },
+    {
+      "title": "ChartHop, Inc. | AI-Powered Headcount Planning & Analytics",
+      "url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+      "date": "2026-11-03 00:00:00 +00:00",
+      "snippet": "# One platform to plan, visualize, and optimize your workforce with AI.\nChartHop Headcount Planning brings intelligent, data-driven planning to workforce decisions.\nCreate visual scenarios, model budget impact in real-time, and leverage AI insights to plan growth and organizational changes strategic...",
+      "kind": "search_result"
+    },
+    {
+      "title": "ChartHop for ADP Workforce Now | Two-Way Sync Integration",
+      "url": "https://www.charthop.com/adp",
+      "date": "2026-10-28 00:00:00 +00:00",
+      "snippet": "Real-time, bidirectional sync between ADP Workforce Now and ChartHop.\nChange compensation, contact info, or reporting lines in ChartHop and it writes straight back to payroll.\nPlan, pay, and report on one source of truth your whole company can use.\n...\nChartHop builds your org chart from ADP Workfor...",
+      "kind": "search_result"
+    }
+  ]
+}
