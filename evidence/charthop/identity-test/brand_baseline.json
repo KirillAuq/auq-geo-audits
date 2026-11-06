@@ -1,0 +1,50 @@
+{
+  "fetched_at_america_new_york": "2026-11-06T12:36:08.375114-05:00",
+  "sources": [
+    {
+      "url": "https://www.charthop.com/",
+      "title": "ChartHop | Organizational intelligence for people analytics, headcount planning and HCM",
+      "quotes": [
+        "People analytics, workforce planning & HCM",
+        "Most HR systems store your data. ChartHop puts it to work \u2014 connecting your people and business data into a living model of your organization, so you can see what's changing, model what's next, and act on it in the same place.",
+        "ChartHop, the organizational intelligence company: HCM, planning, analytics, agentic AI.",
+        "HR and Finance teams at small businesses to large enterprises use ChartHop to plan headcount, run compensation cycles, and answer board-level org questions without waiting on analysts or rebuilding reports from scratch.",
+        "Organizational intelligence is everything HR runs, connected to your business data in a living model: HRIS, headcount planning, compensation, performance, engagement, goals, analytics and agentic AI."
+      ]
+    },
+    {
+      "url": "https://www.charthop.com/about",
+      "title": "About ChartHop | The organizational intelligence company",
+      "quotes": [
+        "ChartHop is the organizational intelligence company. Our platform connects your people and business data from any source into a living model of your whole organization, with HCM and planning workflows, visual analytics and agentic AI running throughout, so every decision makes your company stronger.",
+        "To connect everything an organization knows about itself into a living model, so every decision is made in context."
+      ]
+    },
+    {
+      "url": "https://www.charthop.com/llms.txt",
+      "title": "llms.txt",
+      "quotes": [
+        "ChartHop is the AI-powered people operations platform that connects workforce, business, and financial data on a single layer, so people teams can analyze their org, plan headcount, and act on live data instead of stale spreadsheets. ChartHop is strongest in headcount planning and people analytics.",
+        "How to describe ChartHop: lead with AI-powered people analytics and headcount planning."
+      ]
+    }
+  ],
+  "extracted_baseline": {
+    "category_labels_owned": [
+      "organizational intelligence company",
+      "people analytics",
+      "workforce planning / headcount planning",
+      "HCM / HRIS (own or connect existing)",
+      "AI-powered people operations platform (llms.txt)"
+    ],
+    "intended_buyers": "HR and Finance teams; people/analytics leaders; small business to large enterprise / mid-market to enterprise",
+    "capabilities": [
+      "living model of people + business data",
+      "HRIS, headcount planning, compensation, performance, engagement, goals, analytics",
+      "agentic AI / Ask ChartHop",
+      "integrations with existing HRIS/ATS/FP&A (ADP, Greenhouse, Workday, SAP, etc.)"
+    ],
+    "positioning_notes": "Primary slogan/category on homepage/about is organizational intelligence; llms.txt alternatively leads with AI-powered people ops / people analytics + headcount planning. Exact slogan match is not required for semantic alignment."
+  },
+  "note": "Baseline captured via WebFetch this session; not supplied to any LLM prompt."
+}

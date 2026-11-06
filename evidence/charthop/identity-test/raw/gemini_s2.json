@@ -1,0 +1,356 @@
+{
+  "provider_product": "gemini",
+  "sample_index": 2,
+  "requested_at_utc": "2026-11-06T17:37:00.847170+00:00",
+  "prompt": "What does ChartHop do?",
+  "no_system_message": true,
+  "no_brand_baseline_in_prompt": true,
+  "retry_or_extra": true,
+  "ok": true,
+  "http_status": 200,
+  "elapsed_sec": 6.729,
+  "endpoint": "https://api.dataforseo.com/v3/ai_optimization/gemini/llm_responses/live",
+  "request_body_sent": {
+    "user_prompt": "What does ChartHop do?",
+    "model_name": "gemini-2.5-flash",
+    "web_search": true,
+    "max_output_tokens": 1024,
+    "tag": "charthop-identity-gemini-retry-s2"
+  },
+  "response": {
+    "version": "0.1.20261103",
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "time": "6.3057 sec.",
+    "cost": 0.036593,
+    "tasks_count": 1,
+    "tasks_error": 0,
+    "tasks": [
+      {
+        "id": "11061736-1226-0612-0000-fe6af69f7b51",
+        "status_code": 20000,
+        "status_message": "Ok.",
+        "time": "6.2969 sec.",
+        "cost": 0.036593,
+        "result_count": 1,
+        "path": [
+          "v3",
+          "ai_optimization",
+          "gemini",
+          "llm_responses",
+          "live"
+        ],
+        "data": {
+          "api": "ai_optimization",
+          "function": "llm_responses",
+          "se": "gemini",
+          "user_prompt": "What does ChartHop do?",
+          "model_name": "gemini-2.5-flash",
+          "web_search": true,
+          "max_output_tokens": 1024,
+          "tag": "charthop-identity-gemini-retry-s2"
+        },
+        "result": [
+          {
+            "model_name": "gemini-2.5-flash",
+            "input_tokens": 53,
+            "output_tokens": 391,
+            "reasoning_tokens": 0,
+            "web_search": true,
+            "money_spent": 0.0359934,
+            "datetime": "2026-11-06 17:37:00 +00:00",
+            "items": [
+              {
+                "type": "message",
+                "sections": [
+                  {
+                    "type": "text",
+                    "text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making. It aims to provide a unified source of truth for all workforce-related information, moving beyond traditional spreadsheets and siloed data.\n\nKey functions and features of ChartHop include:\n*   **People Analytics** It brings together various sources of people data into a dynamic and visual format, allowing HR and managers to gain insights for real-time strategic decisions.\n*   **Organizational Charting** ChartHop automatically updates and visualizes organizational charts, which can include details like employee location and other characteristics. These charts can also show open roles and forecast how new hires will impact the team.\n*   **Headcount Planning** The platform offers AI-powered headcount planning, allowing companies to generate models based on real organizational data, budgets, and growth targets. Users can run \"what-if\" scenarios to compare the cost and impact of proposed headcount and compensation plans.\n*   **Compensation Management** ChartHop helps ensure pay equity and allows for effective budget planning.\n*   **Performance and Engagement** It facilitates performance management by capturing 1:1s, reviews, and goals in one place, and consistently measures and reports on employee engagement.\n*   **DEI Metrics** The platform can visualize Diversity, Equity, and Inclusion (DEI) metrics alongside engagement and compensation information.\n*   **Integrations** ChartHop integrates with numerous HR and tech stack platforms, such as HRIS, applicant tracking systems (ATS), payroll, and more, to pull all people data into one connected platform.\n*   **AI Capabilities** ChartHop utilizes AI for features like its scenario planner for headcount modeling and \"Ask ChartHop,\" a natural language chat interface for insights and report generation.",
+                    "annotations": [
+                      {
+                        "title": "elearningindustry.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+                        "direct_url": "https://elearningindustry.com/directory/elearning-software/charthop",
+                        "start_index": 0,
+                        "end_index": 142,
+                        "text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making."
+                      },
+                      {
+                        "title": "contrary.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+                        "direct_url": "https://research.contrary.com/company/charthop",
+                        "start_index": 0,
+                        "end_index": 142,
+                        "text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making."
+                      },
+                      {
+                        "title": "getapp.com.au",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFfuEXZsoLeBX5ep21QJDzx2zfWa5loS76kiZsEhm8wfNvm0HhNApbhzt-PgoWkJNhusrziQskMlcDCuI5jaHIQ0YorAkRhYpSrGnHKEXNnW0nDqyW6bJcO_ouzviQvGXqSHWJEcc_DOugomfCM8Q==",
+                        "direct_url": "https://www.getapp.com.au/software/2048199/charthop",
+                        "start_index": 0,
+                        "end_index": 142,
+                        "text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making."
+                      },
+                      {
+                        "title": "sap.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+                        "direct_url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+                        "start_index": 143,
+                        "end_index": 282,
+                        "text": "It aims to provide a unified source of truth for all workforce-related information, moving beyond traditional spreadsheets and siloed data."
+                      },
+                      {
+                        "title": "contrary.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+                        "direct_url": "https://research.contrary.com/company/charthop",
+                        "start_index": 143,
+                        "end_index": 282,
+                        "text": "It aims to provide a unified source of truth for all workforce-related information, moving beyond traditional spreadsheets and siloed data."
+                      },
+                      {
+                        "title": "elearningindustry.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+                        "direct_url": "https://elearningindustry.com/directory/elearning-software/charthop",
+                        "start_index": 284,
+                        "end_index": 517,
+                        "text": "Key functions and features of ChartHop include:\n*   **People Analytics** It brings together various sources of people data into a dynamic and visual format, allowing HR and managers to gain insights for real-time strategic decisions."
+                      },
+                      {
+                        "title": "contrary.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+                        "direct_url": "https://research.contrary.com/company/charthop",
+                        "start_index": 284,
+                        "end_index": 517,
+                        "text": "Key functions and features of ChartHop include:\n*   **People Analytics** It brings together various sources of people data into a dynamic and visual format, allowing HR and managers to gain insights for real-time strategic decisions."
+                      },
+                      {
+                        "title": "contrary.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+                        "direct_url": "https://research.contrary.com/company/charthop",
+                        "start_index": 695,
+                        "end_index": 781,
+                        "text": "These charts can also show open roles and forecast how new hires will impact the team."
+                      },
+                      {
+                        "title": "adp.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoiFrKawzzKpw1vddkscQm5P7YH16X0yLmJambL_Q4e9jgH4B07ftnbFENeN0Eneymjz1pC1YmhBO61k3X_TEZZ9cTDjdpFHJCqCKRNK-9LmUUbu8XnD9yHEW-v4sZWDB3",
+                        "direct_url": "https://apps.adp.com/en-US/apps/417329",
+                        "start_index": 695,
+                        "end_index": 781,
+                        "text": "These charts can also show open roles and forecast how new hires will impact the team."
+                      },
+                      {
+                        "title": "sap.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+                        "direct_url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+                        "start_index": 782,
+                        "end_index": 961,
+                        "text": "*   **Headcount Planning** The platform offers AI-powered headcount planning, allowing companies to generate models based on real organizational data, budgets, and growth targets."
+                      },
+                      {
+                        "title": "sap.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+                        "direct_url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+                        "start_index": 962,
+                        "end_index": 1072,
+                        "text": "Users can run \"what-if\" scenarios to compare the cost and impact of proposed headcount and compensation plans."
+                      },
+                      {
+                        "title": "contrary.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+                        "direct_url": "https://research.contrary.com/company/charthop",
+                        "start_index": 962,
+                        "end_index": 1072,
+                        "text": "Users can run \"what-if\" scenarios to compare the cost and impact of proposed headcount and compensation plans."
+                      },
+                      {
+                        "title": "elearningindustry.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+                        "direct_url": "https://elearningindustry.com/directory/elearning-software/charthop",
+                        "start_index": 1073,
+                        "end_index": 1179,
+                        "text": "*   **Compensation Management** ChartHop helps ensure pay equity and allows for effective budget planning."
+                      },
+                      {
+                        "title": "adp.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoiFrKawzzKpw1vddkscQm5P7YH16X0yLmJambL_Q4e9jgH4B07ftnbFENeN0Eneymjz1pC1YmhBO61k3X_TEZZ9cTDjdpFHJCqCKRNK-9LmUUbu8XnD9yHEW-v4sZWDB3",
+                        "direct_url": "https://apps.adp.com/en-US/apps/417329",
+                        "start_index": 1073,
+                        "end_index": 1179,
+                        "text": "*   **Compensation Management** ChartHop helps ensure pay equity and allows for effective budget planning."
+                      },
+                      {
+                        "title": "elearningindustry.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+                        "direct_url": "https://elearningindustry.com/directory/elearning-software/charthop",
+                        "start_index": 1180,
+                        "end_index": 1366,
+                        "text": "*   **Performance and Engagement** It facilitates performance management by capturing 1:1s, reviews, and goals in one place, and consistently measures and reports on employee engagement."
+                      },
+                      {
+                        "title": "adp.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoiFrKawzzKpw1vddkscQm5P7YH16X0yLmJambL_Q4e9jgH4B07ftnbFENeN0Eneymjz1pC1YmhBO61k3X_TEZZ9cTDjdpFHJCqCKRNK-9LmUUbu8XnD9yHEW-v4sZWDB3",
+                        "direct_url": "https://apps.adp.com/en-US/apps/417329",
+                        "start_index": 1180,
+                        "end_index": 1366,
+                        "text": "*   **Performance and Engagement** It facilitates performance management by capturing 1:1s, reviews, and goals in one place, and consistently measures and reports on employee engagement."
+                      },
+                      {
+                        "title": "elearningindustry.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+                        "direct_url": "https://elearningindustry.com/directory/elearning-software/charthop",
+                        "start_index": 1367,
+                        "end_index": 1511,
+                        "text": "*   **DEI Metrics** The platform can visualize Diversity, Equity, and Inclusion (DEI) metrics alongside engagement and compensation information."
+                      },
+                      {
+                        "title": "sap.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+                        "direct_url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+                        "start_index": 1512,
+                        "end_index": 1715,
+                        "text": "*   **Integrations** ChartHop integrates with numerous HR and tech stack platforms, such as HRIS, applicant tracking systems (ATS), payroll, and more, to pull all people data into one connected platform."
+                      },
+                      {
+                        "title": "contrary.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+                        "direct_url": "https://research.contrary.com/company/charthop",
+                        "start_index": 1512,
+                        "end_index": 1715,
+                        "text": "*   **Integrations** ChartHop integrates with numerous HR and tech stack platforms, such as HRIS, applicant tracking systems (ATS), payroll, and more, to pull all people data into one connected platform."
+                      },
+                      {
+                        "title": "sap.com",
+                        "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+                        "direct_url": "https://www.sap.com/products/hcm/partners/charthop-inc-aipowered-headcount-planning-analytics.html",
+                        "start_index": 1716,
+                        "end_index": 1912,
+                        "text": "*   **AI Capabilities** ChartHop utilizes AI for features like its scenario planner for headcount modeling and \"Ask ChartHop,\" a natural language chat interface for insights and report generation."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "fan_out_queries": [
+              "what does ChartHop do?",
+              "ChartHop features and services"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "api_status_code": 20000,
+  "api_status_message": "Ok.",
+  "api_cost_usd": 0.036593,
+  "api_time": "6.3057 sec.",
+  "model_name_returned": "gemini-2.5-flash",
+  "web_search_in_result": true,
+  "money_spent_usd": 0.0359934,
+  "result_datetime_utc": "2026-11-06 17:37:00 +00:00",
+  "task_errors": [],
+  "full_response_text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making. It aims to provide a unified source of truth for all workforce-related information, moving beyond traditional spreadsheets and siloed data.\n\nKey functions and features of ChartHop include:\n*   **People Analytics** It brings together various sources of people data into a dynamic and visual format, allowing HR and managers to gain insights for real-time strategic decisions.\n*   **Organizational Charting** ChartHop automatically updates and visualizes organizational charts, which can include details like employee location and other characteristics. These charts can also show open roles and forecast how new hires will impact the team.\n*   **Headcount Planning** The platform offers AI-powered headcount planning, allowing companies to generate models based on real organizational data, budgets, and growth targets. Users can run \"what-if\" scenarios to compare the cost and impact of proposed headcount and compensation plans.\n*   **Compensation Management** ChartHop helps ensure pay equity and allows for effective budget planning.\n*   **Performance and Engagement** It facilitates performance management by capturing 1:1s, reviews, and goals in one place, and consistently measures and reports on employee engagement.\n*   **DEI Metrics** The platform can visualize Diversity, Equity, and Inclusion (DEI) metrics alongside engagement and compensation information.\n*   **Integrations** ChartHop integrates with numerous HR and tech stack platforms, such as HRIS, applicant tracking systems (ATS), payroll, and more, to pull all people data into one connected platform.\n*   **AI Capabilities** ChartHop utilizes AI for features like its scenario planner for headcount modeling and \"Ask ChartHop,\" a natural language chat interface for insights and report generation.",
+  "citations": [
+    {
+      "title": "elearningindustry.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+      "text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making."
+    },
+    {
+      "title": "contrary.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+      "text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making."
+    },
+    {
+      "title": "getapp.com.au",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFfuEXZsoLeBX5ep21QJDzx2zfWa5loS76kiZsEhm8wfNvm0HhNApbhzt-PgoWkJNhusrziQskMlcDCuI5jaHIQ0YorAkRhYpSrGnHKEXNnW0nDqyW6bJcO_ouzviQvGXqSHWJEcc_DOugomfCM8Q==",
+      "text": "ChartHop is a people operations platform that centralizes and visualizes an organization's people data to help with strategic decision-making."
+    },
+    {
+      "title": "sap.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+      "text": "It aims to provide a unified source of truth for all workforce-related information, moving beyond traditional spreadsheets and siloed data."
+    },
+    {
+      "title": "contrary.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+      "text": "It aims to provide a unified source of truth for all workforce-related information, moving beyond traditional spreadsheets and siloed data."
+    },
+    {
+      "title": "elearningindustry.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+      "text": "Key functions and features of ChartHop include:\n*   **People Analytics** It brings together various sources of people data into a dynamic and visual format, allowing HR and managers to gain insights for real-time strategic decisions."
+    },
+    {
+      "title": "contrary.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+      "text": "Key functions and features of ChartHop include:\n*   **People Analytics** It brings together various sources of people data into a dynamic and visual format, allowing HR and managers to gain insights for real-time strategic decisions."
+    },
+    {
+      "title": "contrary.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+      "text": "These charts can also show open roles and forecast how new hires will impact the team."
+    },
+    {
+      "title": "adp.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoiFrKawzzKpw1vddkscQm5P7YH16X0yLmJambL_Q4e9jgH4B07ftnbFENeN0Eneymjz1pC1YmhBO61k3X_TEZZ9cTDjdpFHJCqCKRNK-9LmUUbu8XnD9yHEW-v4sZWDB3",
+      "text": "These charts can also show open roles and forecast how new hires will impact the team."
+    },
+    {
+      "title": "sap.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+      "text": "*   **Headcount Planning** The platform offers AI-powered headcount planning, allowing companies to generate models based on real organizational data, budgets, and growth targets."
+    },
+    {
+      "title": "sap.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+      "text": "Users can run \"what-if\" scenarios to compare the cost and impact of proposed headcount and compensation plans."
+    },
+    {
+      "title": "contrary.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+      "text": "Users can run \"what-if\" scenarios to compare the cost and impact of proposed headcount and compensation plans."
+    },
+    {
+      "title": "elearningindustry.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+      "text": "*   **Compensation Management** ChartHop helps ensure pay equity and allows for effective budget planning."
+    },
+    {
+      "title": "adp.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoiFrKawzzKpw1vddkscQm5P7YH16X0yLmJambL_Q4e9jgH4B07ftnbFENeN0Eneymjz1pC1YmhBO61k3X_TEZZ9cTDjdpFHJCqCKRNK-9LmUUbu8XnD9yHEW-v4sZWDB3",
+      "text": "*   **Compensation Management** ChartHop helps ensure pay equity and allows for effective budget planning."
+    },
+    {
+      "title": "elearningindustry.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+      "text": "*   **Performance and Engagement** It facilitates performance management by capturing 1:1s, reviews, and goals in one place, and consistently measures and reports on employee engagement."
+    },
+    {
+      "title": "adp.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoiFrKawzzKpw1vddkscQm5P7YH16X0yLmJambL_Q4e9jgH4B07ftnbFENeN0Eneymjz1pC1YmhBO61k3X_TEZZ9cTDjdpFHJCqCKRNK-9LmUUbu8XnD9yHEW-v4sZWDB3",
+      "text": "*   **Performance and Engagement** It facilitates performance management by capturing 1:1s, reviews, and goals in one place, and consistently measures and reports on employee engagement."
+    },
+    {
+      "title": "elearningindustry.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHuf_m7Ch2UD6cIq_Mm7rB61wXIKFHqXk2-3kkgKbms4iP4SfV_imM5qdM6DMiLTpbmW0vYvUL2zt3q4CTO1tCYqukd5zGQKQNSjk9n1kUfMEmmCfkAaJmRU36mh7KBAyW-gxYOBC5zfLYprMtxabrajC_WrXtWrfhH6BAeHEM=",
+      "text": "*   **DEI Metrics** The platform can visualize Diversity, Equity, and Inclusion (DEI) metrics alongside engagement and compensation information."
+    },
+    {
+      "title": "sap.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+      "text": "*   **Integrations** ChartHop integrates with numerous HR and tech stack platforms, such as HRIS, applicant tracking systems (ATS), payroll, and more, to pull all people data into one connected platform."
+    },
+    {
+      "title": "contrary.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFPhgmGRxETZdecykaTPIkIz6XJDbv9b7mHW6c1K4ouORlqgafiZEndV8me31eZG8NDpa-m6iq8VmO46bdWiLZuJGjnzV6Kpy641NdGz8INyScX8vao9Vn1ykmtjxipuGyZe0mafKevJpo=",
+      "text": "*   **Integrations** ChartHop integrates with numerous HR and tech stack platforms, such as HRIS, applicant tracking systems (ATS), payroll, and more, to pull all people data into one connected platform."
+    },
+    {
+      "title": "sap.com",
+      "url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEYUgNcZgsOzzSa8vZvlRvBvRWbw8mFSWv_8okuFRpGkfX2kfYxArKfk0WBM1JHhyPs5m4CPTLyoPDQuzSndfpvZzt-jXiF3urDFHgqtFv09jc9KLTEUIDTJNawe2aBj5HPP7AgMlcRrRq3YTGsYhyV9u7Ldf6D33OHXsCJ-2bTyzwUJAoSLPumutI35gp23_dv8CkAfxQT-RBNCYUm",
+      "text": "*   **AI Capabilities** ChartHop utilizes AI for features like its scenario planner for headcount modeling and \"Ask ChartHop,\" a natural language chat interface for insights and report generation."
+    }
+  ]
+}
